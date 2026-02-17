@@ -428,9 +428,38 @@
   padding-bottom: 15px;
 }
 
-
 .container-instalacao{
-  background-color: var(--color-black);
+  background-color: var(--color-dark);
   width: auto;
-  height: 44vh;
+  height: 53vh;
+  display: flex;
+  flex-direction: row;
+  color: var(--color-white);
+  justify-content: center;
+  align-items: center;
+  gap: 7vw;
+}
+
+.info-instalacao{
+  padding: 80px 50px;
+}
+
+.espacamento{
+  padding-left: 2vw;
+  padding-bottom: 2vh;
+}
+
+.info-instalacao h2{
+  font-weight:inherit;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.container-instalacao img{
+  width: 35vw;
+}
+
+.fundo-azul{
+  background-color: var(--color-blue);
+  color: var(--color-black);
 }
