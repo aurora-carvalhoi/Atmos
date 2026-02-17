@@ -82,6 +82,7 @@
   }
 
   nav {
+    background-color: #ffffff;
     position: fixed;
     width: 100%;
     display: flex;
@@ -115,7 +116,7 @@
 
   .btn a {
     border: 2px solid var(--color-blue);
-    padding: 15px 30px;
+    padding: 15px 60px;
     color: var(--color-blue);
     font-weight: bold;
     transition: 180ms ease-in-out;
@@ -350,4 +351,86 @@
     border-radius: 50px;
     margin-right: 5%;
   }
+}
+
+.container-info {
+  display: flex;
+  width: auto;
+  height: 22vh;
+  background-color: var(--color-blue);
+  justify-content: center;
+
+}
+
+.container-info h1{
+  color: var(--color-white);
+  font-size: 40px;
+
+}
+
+.container-info p {
+  color: var(--color-white);
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0px 100px;
+}
+
+.container-desenvolvimento{
+  background-color: var(--color-white);
+  display: flex;
+  width: auto;
+  height: 80vh;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-desenvolvimento h1{
+  font-size: 45px;
+  padding-bottom: 50px;
+}
+
+.blocos-desenvolvimento{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.info-desenvolvimento{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--color-opaque);
+  width: 25vw;
+  height: 38vh;
+  padding: 60px 30px;
+}
+
+.info-desenvolvimento:hover{
+  border: 2px solid var(--color-blue);
+  transition: 180ms ease-in-out;
+}
+
+.info-desenvolvimento img {
+  width: 50px;
+  height: auto;
+  padding-bottom: 15px;
+}
+
+.info-desenvolvimento h3 {
+  padding-bottom: 15px;
+}
+
+
+.container-instalacao{
+  background-color: var(--color-black);
+  width: auto;
+  height: 44vh;
 }
