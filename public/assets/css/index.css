@@ -504,6 +504,7 @@ body {
   height: 7vh;
   color: var(--color-opaque);
   padding-left: 12px;
+  transition: 180ms ease-in-out;
 }
 
 .input-contato select {

@@ -1,2 +1,111 @@
 @import url('default.css');
 
+.container-login {
+    height: 100vh;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.login-info {
+    height: 100%;
+    width: 50%;
+    background-color: var(--color-blue);
+    display: flex;
+    flex-direction: column;
+    padding-left: 5vw;
+    padding-top: 8vh;
+    gap: 15vh;
+}
+
+.login-info img {
+    width: 12vw;
+    height: auto;
+}
+
+.login-info h1 {
+    color: var(--color-white);
+    font-size: 2.8rem;
+    padding-bottom: 2vh;
+}
+
+.login-info p {
+    color: var(--color-white);
+}
+
+.login-input {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 7vh;
+}
+
+.login-input h1{
+    padding-bottom: 2vh;
+    text-align: left;
+}
+
+.login-input input {
+    border: 2px solid var(--color-divider);
+    background-color: var(--color-ghost);
+    width: 35vw;
+    height: 7vh;
+    color: var(--color-opaque);
+    padding-left: 12px;
+    transition: 180ms ease-in-out;
+}
+
+.paragrafo-login p{
+    font-weight: bold;
+    font-size: 12px;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    text-align: left;
+}
+
+.bloco-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bloco-input a:hover{
+    transition: 180ms ease-in-out;
+    color: var(--color-blue);
+}
+
+.h1-login{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.bloco-input .buttons {
+  margin-top: 20px;
+  display: flex;
+  color: var(--color-black);
+  text-transform: uppercase;
+}
+
+.bloco-input .buttons a {
+  transition: 180ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: inherit;
+  border: 2px solid var(--color-blue);
+  padding: 16px 30px;
+  color: var(--color-white);
+  background-color: var(--color-blue);
+  width: 35vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+}
+
+.bloco-input .buttons a:hover {
+  background-color: var(--color-blue-hover);
+}
