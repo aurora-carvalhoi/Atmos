@@ -362,7 +362,7 @@ body{
 .container-info {
   display: flex;
   width: auto;
-  height: 22vh;
+  height: 30vh;
   background-color: var(--color-blue);
   justify-content: center;
 
@@ -437,7 +437,7 @@ body{
 .container-instalacao{
   background-color: var(--color-dark);
   width: auto;
-  height: 53vh;
+  height: 60vh;
   display: flex;
   flex-direction: row;
   color: var(--color-white);
@@ -479,46 +479,103 @@ body{
   align-items: center;
 }
 
-.contato{
+.contato {
   display: flex;
   border: 1px solid var(--color-opaque);
   width: 80vw;
-  height: 75vh;
-  gap: 200px;
-  padding-left:  60px;
+  height: 80vh;
+  gap: 7vw;
+  padding-left: 60px;
   padding-top: 50px;
 
 }
 
-.contato h1{
+.contato h1 {
   color: var(--color-blue);
   font-size: 55px;
-}
-.input-contato input{
-  border: 2px solid var(--color-divider);
-  background-color: var(--color-ghost);
+  margin-bottom: 2vh;
 }
 
-.container-contato .info-contato p{
+.input-contato input {
+  border: 2px solid var(--color-divider);
+  background-color: var(--color-ghost);
+  width: 35vw;
+  height: 7vh;
+  color: var(--color-opaque);
+  padding-left: 12px;
+}
+
+.input-contato select {
+  border: 2px solid var(--color-divider);
+  background-color: var(--color-ghost);
+  width: 35vw;
+  height: 7vh;
+  color: var(--color-opaque);
+  padding-left: 12px;
+}
+
+.input-contato label input {
+  border: 2px solid var(--color-divider);
+  background-color: var(--color-ghost);
+  width: 35vw;
+  height: 15vh;
+  color: var(--color-opaque);
+}
+
+
+.input-contato h3 {
+  font-size: 0.8rem;
+  padding-bottom: 2vh;
+  padding-top: 2vh;
+}
+
+.container-contato .info-contato p {
   color: var(--color-opaque);
   text-transform: uppercase;
   font-weight: bold;
   font-size: 15px;
   margin: 0px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
-.info-contato{
+.info-contato {
   border-left: 4px solid var(--color-blue);
   margin-bottom: 10px;
   padding-left: 10px;
 }
 
-.texto-contato p{
+.texto-contato p {
   font-size: 20px;
   margin-bottom: 30px;
+  color: var(--color-dark2);
 }
 
-.texto-contato{
-padding: 5px;
+.texto-contato {
+  padding: 5px;
+}
+
+.input-contato .buttons {
+  margin-top: 20px;
+  display: flex;
+  color: var(--color-black);
+  text-transform: uppercase;
+}
+
+.input-contato .buttons a {
+  transition: 180ms ease-in-out;
+  margin-right: 10px;
+  text-transform: uppercase;
+  font-weight:inherit;
+  border: 2px solid var(--color-blue);
+  padding: 16px 30px;
+  color: var(--color-white);
+  background-color: var(--color-blue);
+  width: 35vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-contato .buttons a:hover {
+  background-color: var(--color-blue-hover);
 }
