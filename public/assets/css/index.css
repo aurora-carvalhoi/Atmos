@@ -1,6 +1,10 @@
 /* Default imports */
 @import url("default.css");
 
+body{
+   scroll-behavior: smooth;
+}
+
 /* Mobile <= 480px */
 @media screen and (max-width: 480px) {
 }
@@ -79,6 +83,7 @@
 
   body {
     background: var(--color-white);
+  
   }
 
   nav {
@@ -352,6 +357,7 @@
     margin-right: 5%;
   }
 }
+
 
 .container-info {
   display: flex;
