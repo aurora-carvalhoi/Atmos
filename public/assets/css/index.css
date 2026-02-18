@@ -418,11 +418,17 @@ body {
   width: 25vw;
   height: 38vh;
   padding: 60px 30px;
+  transition: 180ms ease-in-out;
+}
+
+.check{
+  color: var(--color-blue);
+  margin-right: 3px;
 }
 
 .info-desenvolvimento:hover {
   border: 2px solid var(--color-blue);
-  transition: 180ms ease-in-out;
+  box-shadow: 5px 5px 0px var(--color-blue);
 }
 
 .info-desenvolvimento img {
@@ -448,12 +454,7 @@ body {
 }
 
 .info-instalacao {
-  padding: 80px 50px;
-}
-
-.espacamento {
-  padding-left: 2vw;
-  padding-bottom: 2vh;
+  padding: 80px 50px 80px 0px;
 }
 
 .info-instalacao h2 {
@@ -465,12 +466,6 @@ body {
 .container-instalacao img {
   width: 35vw;
 }
-
-.fundo-azul {
-  background-color: var(--color-blue);
-  color: var(--color-black);
-}
-
 
 .container-contato {
   display: flex;
@@ -516,19 +511,27 @@ body {
   padding-left: 12px;
 }
 
-.input-contato label input {
+.input-contato textarea{
   border: 2px solid var(--color-divider);
   background-color: var(--color-ghost);
   width: 35vw;
   height: 15vh;
   color: var(--color-opaque);
+  padding-left: 12px;
+  padding-top: 12px;
+  resize: none;
 }
 
-
-.input-contato h3 {
+.titulo-textarea{
   font-size: 0.8rem;
   padding-bottom: 2vh;
   padding-top: 2vh;
+}
+
+.input-contato h3 {
+  font-size: 0.8rem;
+  padding-bottom: 1vh;
+  padding-top: 1vh;
 }
 
 .container-contato .info-contato p {

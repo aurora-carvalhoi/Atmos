@@ -1,14 +1,40 @@
 @import url('default.css');
 
-.container-login {
+.container-cadastro {
     height: 100vh;
     width: auto;
     display: flex;
     flex-direction: row;
 }
 
-.login-info {
+.cadastro-info {
     height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3vh;
+    background-color: var(--color-white);
+}
+
+.cadastro-input img {
+    width: 12vw;
+    height: auto;
+}
+
+.cadastro-input h1 {
+    color: var(--color-white);
+    font-size: 2.8rem;
+    padding-bottom: 2vh;
+}
+
+.cadastro-input p {
+    color: var(--color-white);
+}
+
+.cadastro-input {
+   height: 100%;
     width: 50%;
     background-color: var(--color-blue);
     display: flex;
@@ -18,37 +44,12 @@
     gap: 15vh;
 }
 
-.login-info img {
-    width: 12vw;
-    height: auto;
-}
-
-.login-info h1 {
-    color: var(--color-white);
-    font-size: 2.8rem;
-    padding-bottom: 2vh;
-}
-
-.login-info p {
-    color: var(--color-white);
-}
-
-.login-input {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 7vh;
-}
-
-.login-input h1{
+.cadastro-info h1{
     padding-bottom: 2vh;
     text-align: left;
 }
 
-.login-input input {
+.cadastro-info input {
     border: 2px solid var(--color-divider);
     background-color: var(--color-ghost);
     width: 35vw;
@@ -58,7 +59,7 @@
     transition: 180ms ease-in-out;
 }
 
-.paragrafo-login p{
+.paragrafo-cadastro p{
     font-weight: bold;
     font-size: 12px;
     padding-top: 2vh;
@@ -82,7 +83,7 @@
     color: var(--color-blue);
 }
 
-.h1-login{
+.h1-cadastro{
     display: flex;
     flex-direction: column;
     text-align: left;
