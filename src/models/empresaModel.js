@@ -7,8 +7,7 @@ function buscarPorId(id) {
 }
 
 function listar() {
-  var instrucaoSql = `SELECT id, razao_social, cnpj, codigo_ativacao FROM empresa`;
-
+  var instrucaoSql = `SELECT idEmpresa FROM empresa`;
   return database.executar(instrucaoSql);
 }
 

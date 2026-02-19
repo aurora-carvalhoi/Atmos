@@ -8,7 +8,7 @@
 
   <title>Atmos | Cadastro</title>
 
-  <script src="./js/sessao.js"></script>
+  <script src="./assets/javascript/sessao.js"></script>
 
   <link rel="stylesheet" href="./assets/css/cadastro.css">
   <link rel="stylesheet" href="./assets/css/index.css" />
@@ -34,15 +34,21 @@
 
         <div class="paragrafo-cadastro">
           <p>NOME</p>
-          <input type="text" id="" placeholder="Fernando">
+          <input type="text" id="nome_input" placeholder="Fernando">
           <p>EMAIL</p>
-          <input type="text" id="" placeholder="email@empresa.com">
+          <input type="text" id="email_input" placeholder="email@empresa.com">
           <p>SENHA</p>
-          <input type="password" id="" placeholder="*******">
+          <input type="password" id="senha_input" placeholder="*******">
           <p>CONFIRME SUA SENHA</p>
-          <input type="password" id="" placeholder="*******">
+          <input type="password" id="confirmacao_senha_input" placeholder="*******">
+          <p>TIPO DE USUÁRIO</p>
+          <select name="" id="select_tipoUsuario">
+            <option value="#" selected disabled>Selecione uma opção</option>
+            <option > Analista de Suporte </option>
+            <option > Gestor de Operações </option>
+          </select>
           <p>LICENÇA DE ATIVAÇÃO</p>
-          <input type="text" id="" placeholder="475FC3">
+          <input type="number" id="codigoAtivacao_input" placeholder="45">
         </div>
 
         <div class="bloco-input">
@@ -51,7 +57,7 @@
             <a href="./login.html">Realize seu login.</a>
           </span>
           <div class="buttons">
-            <a href="">
+            <a href= "#" onclick="cadastrar()">
               Cadastrar-se
             </a>
           </div>
@@ -70,55 +76,19 @@
           <p>Monitore sua infraestrutura meteorológica e gerencie chaves <br>
             de API com segurança de nível industrial</p>
         </div>
-
       </div>
+
+      <div id="div_aguardar" class="loading-div">
+        <img src="./assets/images/loading.gif" alt="">
+      </div>
+
+      <div class="alerta_erro">
+          <div id="cardErro" class="card_erro">
+            <span id="mensagem_erro"> </span>
+          </div>
+      </div>
+
   </main>
-  <!-- header fim -->
-
-  <!-- <div class="login">
-    <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
-      </div>
-    </div>
-    <div class="container">
-      <div class="card card-cadastro">
-        <h2>Bem-vindo!</h2>
-        <div class="formulario">
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
-  <!-- <div class="campo">
-            <span>Código de ativação:</span>
-            <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
-          </div>
-          <div class="campo">
-            <span>Nome:</span>
-            <input id="nome_input" type="text" placeholder="Seu nome" />
-          </div>
-          <div class="campo">
-            <span>E-mail:</span>
-            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-          </div>
-          <div class="campo">
-            <span>Senha:</span>
-            <input id="senha_input" type="password" placeholder="******" />
-          </div>
-          <div class="campo">
-            <span>Confirmação da Senha:</span>
-            <input id="confirmacao_senha_input" type="password" placeholder="******" />
-          </div>
-          <button class="botao" onclick="cadastrar()">Cadastrar</button>
-        </div>
-        <div id="div_aguardar" class="loading-div">
-          <img src="./assets/circle-loading.gif" id="loading-gif" />
-        </div>
-
-        <div id="div_erros_login"></div>
-      </div>
-    </div>
-  </div>  -->
-
 </body>
 
 </html>
@@ -137,8 +107,9 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var codigoVar = codigo_input.value;
-    var idEmpresaVincular
+    var tipoUsuarioVar = select_tipoUsuario.value;
+    var codigoVar = codigoAtivacao_input.value;
+    var idEmpresaVincular = 10;
 
     // Verificando se há algum campo em branco
     if (
@@ -146,6 +117,7 @@
       emailVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == "" ||
+      tipoUsuarioVar == "#" ||
       codigoVar == ""
     ) {
       cardErro.style.display = "block";
@@ -160,8 +132,8 @@
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
     for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].id
+      if (listaEmpresasCadastradas[i].idEmpresa == codigoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].idEmpresa
         console.log("Código de ativação válido.");
         break;
       } else {
@@ -183,6 +155,7 @@
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
+        tipoUsuarioServer: tipoUsuarioVar,
         idEmpresaVincularServer: idEmpresaVincular
       }),
     })
