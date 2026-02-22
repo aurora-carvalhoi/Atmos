@@ -1,5 +1,9 @@
-# A linha abaixo determina que o diretório node_modules não será enviado ao repositório remoto
-node_modules
-package-lock.json
+# Ignorar o diretório node_modules
+node_modules/
 
-.github
+# Ignorar o diretório idea
+.idea/
+
+# Ignorar o .env
+.env
+
