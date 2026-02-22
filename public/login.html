@@ -1,106 +1,109 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--HTML Meta Tags-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
 
+    <!--Title-->
     <title>Atmos | Login</title>
 
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./assets/css/login.css">
+    <!--Stylesheet-->
     <link rel="stylesheet" href="./assets/css/index.css" />
-    <link rel="icon" href="./assets/icons/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <!--Favicon-->
+    <link rel="icon" href="./assets/icons/favicon.ico" />
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" />
 </head>
 
 <body>
 
-    <main>
-        <div class="container-login">
-
-            <div class="login-info">
-                <div class="logo-login">
-                    <a href="./index.html">
-                        <img src="./assets/images/logo-atmos-alternative.svg" alt="Logo Atmos" />
-                    </a>
-                </div>
-                <div class="texto-info">
-                    <h1>Acesso ao Painel de <br>
-                        Controle.</h1>
-                    <p>Monitore sua infraestrutura meteorológica e gerencie chaves <br>
-                        de API com segurança de nível industrial</p>
-                </div>
-            </div>
-
-
-            <div class="login-input">
-
-                <div class="h1-login">
-                    <h1>Login do Operador</h1>
-                    <p>Insira suas credenciais para autenticar</p>
-                </div>
+<!--Container login-->
+<div class="container-login">
+    <div class="login-info">
+        <div class="logo-login">
+            <a href="./index.html">
+                <img src="./assets/images/logo-atmos-alternative.svg" alt="Logo Atmos" />
+            </a>
+        </div>
+        <div class="texto-info">
+            <h1>Acesso ao Painel de <br>
+                Controle.</h1>
+            <p>Monitore sua infraestrutura meteorológica e gerencie chaves <br>
+                de API com segurança de nível industrial</p>
+        </div>
+    </div>
 
 
-                <div class="paragrafo-login">
-                    <p>EMAIL</p>
-                    <input type="text" id="" placeholder="email@empresa.com">
-                    <p>SENHA</p>
-                    <input type="password" id="" placeholder="*******">
-                </div>
+    <div class="login-input">
 
-                <div class="bloco-input">
+        <div class="h1-login">
+            <h1>Login do Operador</h1>
+            <p>Insira suas credenciais para autenticar</p>
+        </div>
+
+
+        <div class="paragrafo-login">
+            <p>EMAIL</p>
+            <input type="text" id="" placeholder="email@empresa.com">
+            <p>SENHA</p>
+            <input type="password" id="" placeholder="*******">
+        </div>
+
+        <div class="bloco-input">
                     <span>
                         Ainda não é cadastrado?  
                         <a href="./cadastro.html"> Clique aqui.</a>
                     </span>
-                    <div class="buttons">
-                        <a href="">
-                            Entrar
-                        </a>
-                    </div>
+            <div class="buttons">
+                <a href="">
+                    Entrar
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="login">
+            <div class="alerta_erro">
+                <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
                 </div>
             </div>
-
-
-            <!-- <div class="login">
-                    <div class="alerta_erro">
-                        <div class="card_erro" id="cardErro">
-                            <span id="mensagem_erro"></span>
+            <div class="container">
+                <div class="card card-login">
+                    <h2>Olá de volta!</h2>
+                    <div class="formulario">
+                        <div class="campo">
+                            <span>E-mail:</span>
+                            <input id="email_input" type="text" placeholder="Login">
                         </div>
-                    </div>
-                    <div class="container">
-                        <div class="card card-login">
-                            <h2>Olá de volta!</h2>
-                            <div class="formulario">
-                                <div class="campo">
-                                    <span>E-mail:</span>
-                                    <input id="email_input" type="text" placeholder="Login">
-                                </div>
-                                <div class="campo">
-                                    <span>Senha:</span>
-                                    <input id="senha_input" type="password" placeholder="******">
-                                </div>
-                                <button class="botao" onclick="entrar()">Entrar</button>
-                            </div>
-
-                            <div id="div_aguardar" class="loading-div">
-                                <img src="./assets/circle-loading.gif" id="loading-gif">
-                            </div>
-
-                            <div id="div_erros_login"></div>
+                        <div class="campo">
+                            <span>Senha:</span>
+                            <input id="senha_input" type="password" placeholder="******">
                         </div>
+                        <button class="botao" onclick="entrar()">Entrar</button>
                     </div>
-                </div> -->
-    </main>
+
+                    <div id="div_aguardar" class="loading-div">
+                        <img src="./assets/circle-loading.gif" id="loading-gif">
+                    </div>
+
+                    <div id="div_erros_login"></div>
+                </div>
+            </div>
+        </div> -->
 
 </body>
 

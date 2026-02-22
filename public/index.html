@@ -1,13 +1,23 @@
 <!doctype html>
 <html lang="pt-br" dir="ltr">
-
 <head>
   <!--HTML Meta Tags-->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="author" content="" />
+  <meta name="author" content="Atmos Monitoring Systems" />
   <meta name="description" content="" />
   <meta name="keywords" content="" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/page" />
+  <meta property="og:title" content="Atmos" />
+  <meta property="og:description" content="Descrição do site" />
+  <meta property="og:image" content="https://example.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Preview da Página" />
+  <meta property="og:site_name" content="Atmos Monitoring Systems" />
 
   <!--Title-->
   <title>Atmos</title>
@@ -16,7 +26,7 @@
   <link rel="stylesheet" href="./assets/css/index.css" />
 
   <!--Favicon-->
-  <link rel="icon" href="./assets/icons/favicon.ico" />
+  <link rel="icon" href="./assets/icons/favicon.ico" type="image/x-icon" />
 
   <!--Google Fonts-->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -25,7 +35,6 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
-
 </head>
 
 <body>
@@ -35,6 +44,7 @@
     <!--Navbar-->
     <nav>
       <div class="logo-links">
+
         <!--Logo-->
         <a href="" class="logo">
           <img src="./assets/images/logo-atmos.svg" alt="Logo Atmos" />
@@ -42,6 +52,7 @@
 
         <!--Links-->
         <div class="links">
+
           <ul>
             <li>
               <a href="#container-desenvolvimento">Funcionalidades</a>
@@ -53,24 +64,26 @@
               <a href="#container-contato">Contato</a>
             </li>
             <li>
-              <!--Só colocar o ID da div aqui (Não confunda ID com nome da DIV).
-                  Não coloquei porque não sei o que esse link vai referenciar-->
-              <a href="">Sobre</a>
+              <a href="sobre.html">Sobre</a>
             </li>
           </ul>
+
         </div>
       </div>
 
+      <!--Login-->
       <div class="btn">
         <a href="login.html">Login</a>
       </div>
 
       <!--Menu mobile-->
       <div class="menu">
+
         <div id="close-menu">
           <div class="line"></div>
           <div class="line"></div>
         </div>
+
         <div class="menu-container">
           <ul>
             <li>
@@ -87,18 +100,30 @@
             </li>
           </ul>
         </div>
+
       </div>
     </nav>
 
     <!--Header Content-->
     <div class="header-content">
+
       <div class="container">
+
+        <svg id="mosaic" width="296" height="300" viewBox="0 0 296 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g transform="matrix(-1 0 0 1 296 0)">
+            <rect width="100" height="100" fill="#EEEEEE" fill-rule="evenodd" transform="translate(196 200)" />
+            <rect width="100" height="100" fill="#EEEEEE" fill-rule="evenodd" transform="translate(0 200)" />
+            <rect width="100" height="100" fill="#EEEEEE" fill-rule="evenodd" transform="translate(100 100)" />
+            <rect width="100" height="100" fill="#EEEEEE" fill-rule="evenodd" transform="translate(196 0)" />
+          </g>
+        </svg>
+
+        <!--Title Header-->
         <h1 class="title">Monitoramento Crítico para <br>
-          <span class="emphasis">Dados Metereológicos</span>
+          <span class="emphasis">Dados Meteorológicos</span>
         </h1>
 
-        <p>Garanta 99.9% de uptime em seus servidores de processamento e APIs climáticas. Observabilidade em tempo real
-          para decisões que não podem esperar. </p>
+        <p>Garanta 99.9% de uptime em seus servidores de processamento e APIs climáticas. Observabilidade em tempo real para decisões que não podem esperar. </p>
 
         <!--Buttons-->
         <div class="buttons">
@@ -109,13 +134,15 @@
 
       <!--Image-->
       <div class="image">
-        <img src="./assets/images/satellite.png" alt="Satelite" />
+        <img src="./assets/images/satellite.png" alt="Satélite" />
       </div>
+
     </div>
   </header>
 
   <!--Main-->
   <main>
+
     <div class="container-info" id="container-info">
 
       <div class="info">
@@ -134,40 +161,51 @@
       </div>
 
       <div class="info">
-        <h1>
-          <2s </h1>
-            <p>Tempo de Alerta</p>
+        <h1><2s</h1>
+        <p>Tempo de Alerta</p>
       </div>
 
     </div>
 
     <div class="container-desenvolvimento" id="container-desenvolvimento">
+
       <div>
-        <h1>Desenvolvido para Operações de alta Disponibilidade</h1>
+        <h1>Desenvolvido para Operações de <span style="color: var(--color-blue)">Alta Disponibilidade</span></h1>
       </div>
 
       <div class="blocos-desenvolvimento">
+
         <div class="info-desenvolvimento">
-          <img src="../public/assets/images/computer.png" alt="Computador">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <g>
+                <path d="M0 0L60 0L60 60L0 60L0 0Z" />
+                <path d="M60 0L60 41.25L37.5 41.25L37.5 46.875C37.5 46.875 43.125 46.875 43.125 46.875C44.1605 46.875 45 47.7145 45 48.75C45 49.7855 44.1605 50.625 43.125 50.625C43.125 50.625 16.875 50.625 16.875 50.625C15.8395 50.625 15 49.7855 15 48.75C15 47.7145 15.8395 46.875 16.875 46.875C16.875 46.875 22.5 46.875 22.5 46.875L22.5 41.25L0 41.25L0 0L60 0ZM33.75 46.875L33.75 41.25L26.25 41.25L26.25 46.875L33.75 46.875ZM56.25 3.75L3.75 3.75L3.75 37.5L56.25 37.5L56.25 3.75Z" fill="#004AAD" transform="translate(0 5.625)" />
+              </g>
+            </g>
+          </svg>
           <h3>Performance de Host</h3>
-          <p>Métricas precisas de CPU, RAM e I/O, <br>
-            garantindo estabilidade máxima para o <br>
-            processamento de seus dados.</p>
+          <p>Métricas precisas de CPU, RAM e I/O, garantindo estabilidade máxima para o processamento de seus dados.</p>
         </div>
+
         <div class="info-desenvolvimento">
-          <img src="../public/assets/images/tools.png" alt="Ferramenta">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <path d="M9.28226 17.2465C12.0813 15.0715 14.4033 16.5715 17.5023 20.1595C17.8503 20.5645 18.3183 20.0905 18.5853 19.8595C18.8493 19.6255 22.9383 15.9445 23.1393 15.7765C23.3373 15.5995 23.5773 15.2695 23.2623 14.9005C22.5035 13.9619 21.7604 13.0107 21.0332 12.0474C15.6092 4.95242 35.8712 0.14042 32.7602 0.0654202C31.1762 0.0234201 24.8222 -0.05158 23.8712 0.0534203C20.0222 0.45842 15.1892 4.05542 12.7562 5.73242C9.57323 7.91042 8.38523 9.18842 8.19023 9.36542C7.29023 10.1514 8.04623 11.9664 6.41423 13.3974C4.68923 14.9064 3.61223 13.7634 2.61323 14.6394C2.11823 15.0774 0.732231 16.1154 0.336231 16.4604C-0.0627689 16.8114 -0.134769 17.4024 0.273231 17.8734C0.273231 17.8734 4.06523 22.0614 4.38323 22.4334C4.69823 22.7994 5.55623 23.1174 6.08423 22.6464C6.61523 22.1784 7.98023 20.9874 8.20823 20.7774C8.44223 20.5794 8.05823 18.1944 9.28223 17.2464C9.28223 17.2464 9.28226 17.2465 9.28226 17.2465ZM26.4063 18.7974C26.0463 18.3804 25.5993 18.3684 25.2153 18.7104C25.2153 18.7104 20.9133 22.4664 20.9133 22.4664C20.5681 22.7797 20.5324 23.3097 20.8323 23.6664C20.8323 23.6664 45.7143 51.9835 45.7143 51.9835C46.2963 52.6525 47.3043 52.7215 47.9673 52.1424C47.9673 52.1424 50.8773 49.7034 50.8773 49.7034C51.5439 49.1164 51.6135 48.102 51.0333 47.4295C51.0333 47.4295 26.4063 18.7974 26.4063 18.7974C26.4063 18.7974 26.4063 18.7974 26.4063 18.7974ZM59.5833 6.74645C59.3613 5.26445 58.5933 5.57345 58.1943 6.20045C57.7953 6.83345 56.0313 9.50645 55.3053 10.7184C54.5853 11.9184 52.8093 14.2914 49.5033 11.9484C46.0593 9.51545 47.2563 7.81745 47.8563 6.67445C48.4593 5.52545 50.3103 2.30344 50.5773 1.90444C50.8443 1.49944 50.5323 0.323444 49.4643 0.815444C48.3933 1.30744 41.8953 3.89045 40.9953 7.59545C40.0743 11.3634 41.7663 14.7324 38.4453 18.0774C38.4453 18.0774 34.4163 22.2774 34.4163 22.2774L38.4633 26.9754C38.4633 26.9754 43.4253 22.2654 43.4253 22.2654C44.6073 21.0774 47.1333 19.9224 49.4193 20.4444C54.3183 21.5514 56.9913 19.7124 58.6023 16.6704C60.0483 13.9524 59.8083 8.22845 59.5833 6.74644C59.5833 6.74644 59.5833 6.74645 59.5833 6.74645ZM8.09421 47.7355C7.46957 48.3648 7.46957 49.3801 8.09421 50.0095C8.09421 50.0095 10.9472 52.7995 10.9472 52.7995C11.5712 53.4265 12.5612 53.1625 13.1852 52.5355C13.1852 52.5355 27.9062 38.0635 27.9062 38.0635L23.3972 32.9215L8.09421 47.7355C8.09421 47.7355 8.09421 47.7355 8.09421 47.7355Z" fill="#004AAD" transform="translate(0.123 3.424)" />
+            </g>
+          </svg>
           <h3>Uptime de Serviços</h3>
-          <p>Monitoramento contínuo dos processos <br>
-            internos do servidor, garantindo que os <br>
-            serviços críticos nunca fiquem offline.</p>
+          <p>Monitoramento contínuo dos processos internos do servidor, garantindo que os serviços críticos nunca fiquem offline.</p>
         </div>
+
         <div class="info-desenvolvimento">
-          <img src="../public/assets/images/alert.png" alt="Alerta">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <path d="M25.6748 16.2603L25.6748 26.2602M25.6599 36.2584L25.6849 36.2584M1.63466 39.0063C0.494135 40.9763 -0.0761147 41.9613 0.00816011 42.7695C0.0816851 43.4748 0.45111 44.1155 1.02451 44.5323C1.68189 45.0103 2.82006 45.0103 5.09636 45.0103C5.09636 45.0103 46.2207 45.0103 46.2207 45.0103C48.4972 45.0103 49.6352 45.0103 50.2927 44.5323C50.8659 44.1155 51.2354 43.4748 51.3089 42.7695C51.3932 41.9613 50.8229 40.9763 49.6824 39.0063C49.6824 39.0063 29.1202 3.48964 29.1202 3.48964C27.9839 1.52674 27.4157 0.545294 26.6744 0.215643C26.0277 -0.0718813 25.2894 -0.0718813 24.6429 0.215643C23.9014 0.545294 23.3332 1.52674 22.1969 3.48964C22.1969 3.48964 1.63466 39.0063 1.63466 39.0063Z" fill="none" stroke-width="5" stroke="#004AAD" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.341 6.24)" />
+            </g>
+          </svg>
           <h3>Alerta de Integridade</h3>
-          <p>Configure thresholds para picos de <br>
-            CPU, superaquecimento ou saturação <br>
-            de disco e receba notificações em <br>
-            tempo real.</p>
+          <p>Configure thresholds para picos de CPU, superaquecimento ou saturação de disco e receba notificações em tempo real.</p>
         </div>
 
       </div>
@@ -176,27 +214,26 @@
     <div class="container-instalacao" id="container-instalacao">
       <div class="info-instalacao">
         <h1>Instalação Simplificada</h1>
-        <h2>O <span style="font-weight: bold;">Agente Atmos</span> é um projeto leve. Monitore seu<br>
-          servidor com apenas um comando no terminal</h2>
-        <span class="check">✔</span> Impacto mínimo na CPU e RAM<br>
-        <span class="check">✔</span> Instalação via Script<br>
-        <span class="check">✔</span> Suporte nativo para Windows e Linux<br>
+        <h2>O <span style="font-weight: bold;">Agente Atmos</span> é um projeto leve. <br>Monitore seu servidor com apenas um comando no terminal</h2>
+        <div class="checks">
+          <p><span class="check">✔</span> Impacto mínimo na CPU e RAM</p>
+          <p><span class="check">✔</span> Instalação via Script</p>
+          <p><span class="check">✔</span> Suporte nativo para Windows e Linux</p>
+        </div>
       </div>
 
       <div class="imagem-instalacao">
-        <img src="../public/assets/images/tutorial.png" alt="Tutorial Instalação">
+        <img src="./assets/images/code.svg" alt="Instalação" />
       </div>
     </div>
 
-    <div class="container-contato" id="container-contato">
-      <div class="contato">
+    <section class="container-contato" id="container-contato">
+
+      <form id="contact_form" class="contato">
         <div class="texto-contato">
-          <h1>ESTABELECER <br>
-            CONEXÃO</h1>
 
-          <p>Inicie uma consulta técnica ou solicite suporte para <br>
-            integração de infraestrutura.</p>
-
+          <h1>ESTABELECER CONEXÃO</h1>
+          <p>Inicie uma consulta técnica ou solicite suporte para integração de infraestrutura.</p>
           <div class="info-contato">
             <p>PROTOCOLO: </p>
             <h3>SMTP / HTTPS</h3>
@@ -214,31 +251,42 @@
 
         </div>
 
-        <div class="input-contato">
-          <h3>NOME COMPLETO:</h3>
-          <input type="text" placeholder="Ex.: Eng. Gabriel Marques">
+        <div class="container-contact">
 
-          <h3>E-MAIL CORPORATIVO:</h3>
-          <input type="text" placeholder="nome@empresa.com.br">
+          <div class="input-box">
+            <label for="input_nome">NOME COMPLETO</label>
+            <input type="text" placeholder="Ex.: Eng. Gabriel Marques" id="input_nome">
+          </div>
 
-          <h3>ASSUNTO / CATEGORIA</h3>
-          <select name="">
-            <option value="" selected disabled>Selecione uma opção</option>
-            <option value="">Suporte à instalação</option>
-            <option value=""></option>
-          </select>
+          <div class="input-box">
+            <label for="input_email">E-MAIL CORPORATIVO</label>
+            <input type="email" placeholder="nome@empresa.com.br" id="input_email">
+          </div>
 
-          <h3>PAYLOAD DA MENSAGEM (DETALHES)<h3>
-          <textarea name="" id="payload" placeholder="Descreva sua necessidade técnica ..."></textarea><br>
+          <div class="input-box">
+            <label for="select_categoria">ASSUNTO / CATEGORIA</label>
+            <select id="select_categoria">
+              <option value="" selected disabled>Selecione uma opção</option>
+              <option value="">Suporte à instalação</option>
+              <option value="">Software de Monitoramento</option>
+              <option value="">Processamento de Dados</option>
+              <option value="">Dúvidas sobre segurança de dados</option>
+              <option value="">Outros</option>
+            </select>
+          </div>
 
-          <div class="buttons">
-            <a href="">
-              ENVIAR REQUISIÇÃO
-            </a>
+          <div class="input-box">
+            <label for="payload">PAYLOAD DA MENSAGEM (DETALHES)</label>
+            <textarea rows="5" id="payload" placeholder="Descreva sua necessidade técnica ..."></textarea>
+          </div>
+
+          <div class="submit">
+            <button type="submit">ENVIAR REQUISIÇÃO</button>
           </div>
         </div>
-      </div>
-    </div>
+      </form>
+
+    </section>
   </main>
 
   <!--Footer-->
@@ -248,40 +296,40 @@
         <a href="">
           <img src="./assets/images/logo-atmos.svg" alt="Logo Atmos" />
         </a>
-        <p>
-          Sua infraestrutura meteorológica sob controle
-        </p>
+        <p>Sua infraestrutura meteorológica sob controle</p>
       </div>
 
       <div class="info-footer">
         <div class="bloco-info">
           <h3>Produto</h3>
-          <p>Segurança</p>
-          <p>Link</p>
-          <p>Link</p>
+          <a href="#">Segurança</a>
+          <a href="#">Link</a>
+          <a href="#">Link</a>
         </div>
 
         <div class="bloco-info">
           <h3>Legal</h3>
-          <p>Privacidade</p>
-          <p>Termos de uso</p>
-          <p>SLA</p>
-          <p>LGPD</p>
+          <a href="#">Privacidade</a>
+          <a href="#">Termos de uso</a>
+          <a href="#">SLA</a>
+          <a href="#">LGPD</a>
         </div>
 
         <div class="bloco-info">
           <h3>Social</h3>
-          <p>Instagram.com/atmos.io</p>
-          <p>Linkedin.com/atmos</p>
-          <p>Github.com/atmos</p>
+          <a href="https://instagram.com/">instagram.com/atmos.io</a>
+          <a href="https://linkedin.com/">linkedin.com/atmos</a>
+          <a href="https://github.com/">github.com/atmos</a>
         </div>
       </div>
     </div>
+
+    <div class="line"></div>
+
     <div class="info-direitos">
-      <p>
-        © 2026 Atmos Monitoring Systems. Todos os direitos reservados.
-      </p>
+      <p>&copy; 2026 Atmos Monitoring Systems. Todos os direitos reservados.</p>
     </div>
+
   </footer>
 
   <!--Chat-->
@@ -289,8 +337,7 @@
     <div class="chat-container" id="conversation">
       <div class="header-chat">
         <div class="header-chat-item">
-          <svg width="25px" height="25px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
+          <svg width="25px" height="25px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
             <title>ai</title>
             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="icon" fill="#fff" transform="translate(64.000000, 64.000000)">
@@ -301,33 +348,38 @@
               </g>
             </g>
           </svg>
-          <span>ATMOS Especialist</span>
+          <span>ATMOS AI</span>
         </div>
-        <div class="avaliable"></div>
+
+        <div class="close-available">
+          <div class="available"></div>
+          <div class="close">
+            <svg id="close-chat" width="5" height="5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="Menu / Close_MD">
+                <path id="Vector" d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: rgb(255, 255, 255);"/>
+              </g>
+            </svg>
+          </div>
+        </div>
       </div>
 
       <!--Chat body-->
       <div class="body-chat">
-        <div class="content-chat">
-          <!--Baloon-->
+        <div class="content-chat" id="chat-conversation">
+          <!--Balloon-->
           <div class="baloon-ai">
             <span>Olá! Como posso te ajudar hoje?</span>
           </div>
           <span class="date-time-ai">22 jan. 23:59</span>
-
-          <div class="baloon-user">
-            <span>Quero falar com o suporte.</span>
-          </div>
-          <span class="date-time-user">24 jan. 00:00</span>
         </div>
 
         <!--Input chat-->
         <div class="input-chat">
           <form id="send-chat">
-            <textarea class="text-chat" placeholder="Digite sua mensagem aqui"></textarea>
-            <button type="button">
-              <svg width="16px" height="16px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
+            <label for="mensagem"></label>
+            <textarea class="text-chat" placeholder="Digite sua mensagem aqui" id="mensagem"></textarea>
+            <button type="button" id="send">
+              <svg width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <title>Send</title>
                 <g id="Send" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <rect id="Container" x="0" y="0" width="24" height="24">
@@ -350,10 +402,12 @@
       </div>
     </div>
 
-    <svg id="chat" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M2 2H22V22H2V2ZM16 8C16.55 8 16.995 8.45 16.995 9L17 18L15 16H8C7.45 16 7 15.55 7 15V9C7 8.45 7.45 8 8 8H16ZM16 15.585V8.99998H8V15H15.415L16 15.585ZM9.77638 11.3333C9.47006 11.3333 9.22221 11.5833 9.22221 11.8889C9.22221 12.1944 9.47006 12.4444 9.77638 12.4444C10.0827 12.4444 10.3333 12.1944 10.3333 11.8889C10.3333 11.5833 10.0827 11.3333 9.77638 11.3333ZM11.4444 11.8889C11.4444 11.5833 11.6923 11.3333 11.9986 11.3333C12.3049 11.3333 12.5556 11.5833 12.5556 11.8889C12.5556 12.1944 12.3049 12.4444 11.9986 12.4444C11.6923 12.4444 11.4444 12.1944 11.4444 11.8889ZM14.2208 11.3333C13.9145 11.3333 13.6667 11.5833 13.6667 11.8889C13.6667 12.1944 13.9145 12.4444 14.2208 12.4444C14.5271 12.4444 14.7778 12.1944 14.7778 11.8889C14.7778 11.5833 14.5271 11.3333 14.2208 11.3333Z"
-        fill="#004AAD" />
+    <svg id="chat" width="50" stroke="#fff" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(4.167 4.167)">
+        <path d="M10.4165 14.5833C10.4165 13.4375 11.354 12.5 12.4998 12.5H29.1665C30.3123 12.5 31.2394 13.4375 31.2394 14.5833V33.3333L27.0832 29.1667H12.4998C11.354 29.1667 10.4165 28.2292 10.4165 27.0833V14.5833Z" fill="white" />
+
+        <path d="M0 0C0 0 41.6667 0 41.6667 0L41.6667 41.6667L0 41.6667C0 41.6667 0 0 0 0ZM29.1665 12.5C30.3123 12.5 31.2394 13.4375 31.2394 14.5833C31.2394 14.5833 31.2498 33.3333 31.2498 33.3333L27.0832 29.1667C27.0832 29.1667 12.4998 29.1667 12.4998 29.1667C11.354 29.1667 10.4165 28.2292 10.4165 27.0833C10.4165 27.0833 10.4165 14.5833 10.4165 14.5833C10.4165 13.4375 11.354 12.5 12.4998 12.5C12.4998 12.5 29.1665 12.5 29.1665 12.5ZM29.1667 28.3021C29.1667 28.3021 29.1667 14.5833 29.1667 14.5833L12.5 14.5833L12.5 27.0833L27.9479 27.0833C27.9479 27.0833 29.1667 28.3021 29.1667 28.3021ZM16.2009 19.4444C15.5627 19.4444 15.0464 19.9652 15.0464 20.6019C15.0464 21.2383 15.5627 21.7592 16.2009 21.7592C16.8391 21.7592 17.3612 21.2383 17.3612 20.6019C17.3612 19.9652 16.8391 19.4444 16.2009 19.4444ZM19.6758 20.6019C19.6758 19.9652 20.1922 19.4444 20.8304 19.4444C21.4685 19.4444 21.9908 19.9652 21.9908 20.6019C21.9908 21.2383 21.4685 21.7592 20.8304 21.7592C20.1922 21.7592 19.6758 21.2383 19.6758 20.6019ZM25.46 19.4444C24.8219 19.4444 24.3057 19.9652 24.3057 20.6019C24.3057 21.2383 24.8219 21.7592 25.46 21.7592C26.0982 21.7592 26.6205 21.2383 26.6205 20.6019C26.6205 19.9652 26.0982 19.4444 25.46 19.4444Z" fill="#004AAD" fill-rule="evenodd" />
+      </g>
     </svg>
   </div>
 
