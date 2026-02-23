@@ -8,18 +8,18 @@ const closeChat = document.getElementById('close-chat');
 // Fecha o chat pelo ícone de X
 closeChat.addEventListener('click', () => {
     chatBox.style.display = 'none';
-})
+});
 
 // Adiciona um ouvinte de clique
 chatIcon.addEventListener('click', () => {
+
+
     if (chatBox.style.display === 'none') {
         chatBox.style.display = 'flex';
     } else {
         chatBox.style.display = 'none';
     }
 });
-
-
 
 // Coleta os dados da mensagem e envia
 sendButton.addEventListener('click', () => {

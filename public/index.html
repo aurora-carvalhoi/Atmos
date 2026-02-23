@@ -22,6 +22,8 @@
   <!--Title-->
   <title>Atmos</title>
 
+  <meta name="theme-color" content="#004aad">
+
   <!--Stylesheet-->
   <link rel="stylesheet" href="./assets/css/index.css" />
 
@@ -76,29 +78,37 @@
         <a href="login.html">Login</a>
       </div>
 
-      <!--Menu mobile-->
-      <div class="menu">
-
-        <div id="close-menu">
-          <div class="line"></div>
-          <div class="line"></div>
+      <!--Menu Icon-->
+      <div class="container-menu">
+        <div class="menu-icon" id="menu-icon">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
+      </div>
 
+      <!--Menu mobile-->
+      <div class="menu" style="display: none" id="menu">
         <div class="menu-container">
           <ul>
             <li>
-              <a href="#">Funcionalidades</a>
+              <a href="#container-desenvolvimento" onclick="fecharMenu()">Funcionalidades</a>
             </li>
             <li>
-              <a href="#">Infraestrutura</a>
+              <a href="#container-instalacao">Infraestrutura</a>
             </li>
             <li>
-              <a href="#">Contato</a>
+              <a href="#container-contato">Contato</a>
             </li>
             <li>
-              <a href="#">Sobre</a>
+              <a href="sobre.html">Sobre</a>
             </li>
           </ul>
+
+          <div class="login-area">
+            <span>Faça login na Atmos</span>
+            <a href="login.html">Login</a>
+          </div>
         </div>
 
       </div>
@@ -169,7 +179,7 @@
 
     <div class="container-desenvolvimento" id="container-desenvolvimento">
 
-      <div>
+      <div class="title">
         <h1>Desenvolvido para Operações de <span style="color: var(--color-blue)">Alta Disponibilidade</span></h1>
       </div>
 
@@ -233,7 +243,9 @@
         <div class="texto-contato">
 
           <h1>ESTABELECER CONEXÃO</h1>
-          <p>Inicie uma consulta técnica ou solicite suporte para integração de infraestrutura.</p>
+
+          <p class="paragraph">Inicie uma consulta técnica ou solicite suporte para integração de infraestrutura.</p>
+
           <div class="info-contato">
             <p>PROTOCOLO: </p>
             <h3>SMTP / HTTPS</h3>
@@ -255,17 +267,17 @@
 
           <div class="input-box">
             <label for="input_nome">NOME COMPLETO</label>
-            <input type="text" placeholder="Ex.: Eng. Gabriel Marques" id="input_nome">
+            <input type="text" placeholder="Ex.: Eng. Gabriel Marques" id="input_nome" required>
           </div>
 
           <div class="input-box">
             <label for="input_email">E-MAIL CORPORATIVO</label>
-            <input type="email" placeholder="nome@empresa.com.br" id="input_email">
+            <input type="email" placeholder="nome@empresa.com.br" id="input_email" required>
           </div>
 
           <div class="input-box">
             <label for="select_categoria">ASSUNTO / CATEGORIA</label>
-            <select id="select_categoria">
+            <select id="select_categoria" required>
               <option value="" selected disabled>Selecione uma opção</option>
               <option value="">Suporte à instalação</option>
               <option value="">Software de Monitoramento</option>
@@ -277,7 +289,7 @@
 
           <div class="input-box">
             <label for="payload">PAYLOAD DA MENSAGEM (DETALHES)</label>
-            <textarea rows="5" id="payload" placeholder="Descreva sua necessidade técnica ..."></textarea>
+            <textarea rows="5" id="payload" placeholder="Descreva sua necessidade técnica ..." required></textarea>
           </div>
 
           <div class="submit">
@@ -300,6 +312,7 @@
       </div>
 
       <div class="info-footer">
+
         <div class="bloco-info">
           <h3>Produto</h3>
           <a href="#">Segurança</a>
@@ -334,7 +347,7 @@
 
   <!--Chat-->
   <div class="chat">
-    <div class="chat-container" id="conversation">
+    <div class="chat-container" id="conversation" style="display: none">
       <div class="header-chat">
         <div class="header-chat-item">
           <svg width="25px" height="25px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -413,6 +426,9 @@
 
   <!--Chat-->
   <script src="./assets/javascript/chat.js"></script>
+
+  <!--Menu Mobile-->
+  <script src="./assets/javascript/menu.js"></script>
 </body>
 
 </html>
