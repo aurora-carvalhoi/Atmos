@@ -4,7 +4,6 @@ const chatBox = document.getElementById('conversation');
 const sendButton = document.getElementById('send');
 const closeChat = document.getElementById('close-chat');
 
-
 // Fecha o chat pelo ícone de X
 closeChat.addEventListener('click', () => {
     chatBox.style.display = 'none';
@@ -12,8 +11,6 @@ closeChat.addEventListener('click', () => {
 
 // Adiciona um ouvinte de clique
 chatIcon.addEventListener('click', () => {
-
-
     if (chatBox.style.display === 'none') {
         chatBox.style.display = 'flex';
     } else {
@@ -51,5 +48,7 @@ sendButton.addEventListener('click', () => {
 })
 
 // Função para enviar a mensagem para a AI (Gemini)
-function sendMessageToAi() {}
+function sendMessageToAi() {
+
+}
 

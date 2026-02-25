@@ -1,5 +1,5 @@
 /*Animations*/
-@import url('animations.css');
+@import url("animations.css");
 
 /*Default Styles*/
 :root {
@@ -17,7 +17,7 @@
   --color-ghost: #eeeeee;
   --color-dark: #0a0a0a;
   --color-dark2: #1a1a1a;
-  --color-success: #00C951;
+  --color-success: #00c951;
 
   /*Default Font*/
   --font-default: "Barlow";
@@ -34,4 +34,3 @@
 body {
   background-color: var(--color-white);
 }
-

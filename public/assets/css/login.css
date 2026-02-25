@@ -43,7 +43,7 @@
     gap: 7vh;
 }
 
-.login-input h1{
+.login-input h1 {
     padding-bottom: 2vh;
     text-align: left;
 }
@@ -58,12 +58,17 @@
     transition: 180ms ease-in-out;
 }
 
-.paragrafo-login p{
+.paragrafo-login label {
     font-weight: bold;
-    font-size: 12px;
+    font-size: 1rem;
     padding-top: 2vh;
     padding-bottom: 2vh;
-    text-align: left;
+    color: var(--color-dark);
+}
+
+.paragrafo-login label {
+    display: flex;
+    flex-direction: column;
 }
 
 .bloco-input{
