@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
+
 <head>
     <!--HTML Meta Tags-->
     <meta charset="UTF-8" />
@@ -12,7 +13,7 @@
     <title>Atmos | Sobre</title>
 
     <!--Stylesheet-->
-    <link rel="stylesheet" href="./assets/css/index.css" />
+    <link rel="stylesheet" href="./assets/css/sobre.css" />
 
     <!--Favicon-->
     <link rel="icon" href="./assets/icons/favicon.ico" />
@@ -22,53 +23,129 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link
-            href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet" />
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
 </head>
+
 <body>
-<style>
-    .menu-icon {
-        width: 30px;
-        height: 25px;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+    <header>
+        <!--Navbar-->
+        <nav>
+            <div class="logo-links">
 
-    .menu-icon span {
-        height: 3px;
-        width: 100%;
-        background-color: black;
-        transition: all 0.3s ease; /* Faz o movimento ser suave */
-    }
+                <!--Logo-->
+                <a href="" class="logo">
+                    <img src="./assets/images/logo-atmos.svg" alt="Logo Atmos" />
+                </a>
 
-    /* Estado de "X" quando a classe 'open' for adicionada */
-    .menu-icon.open span:nth-child(1) {
-        transform: translateY(11px) rotate(45deg);
-    }
+                <!--Links-->
+                <div class="links">
 
-    .menu-icon.open span:nth-child(2) {
-        opacity: 0; /* Esconde a linha do meio */
-    }
+                    <ul>
+                        <li>
+                            <a href="#container-desenvolvimento">Funcionalidades</a>
+                        </li>
+                        <li>
+                            <a href="#container-instalacao">Infraestrutura</a>
+                        </li>
+                        <li>
+                            <a href="#container-contato">Contato</a>
+                        </li>
+                        <li>
+                            <a href="sobre.html">Sobre</a>
+                        </li>
+                    </ul>
 
-    .menu-icon.open span:nth-child(3) {
-        transform: translateY(-11px) rotate(-45deg);
-    }
-</style>
+                </div>
+            </div>
 
-    <div class="container">
-        <div class="menu-icon" onclick="toggleMenu(this)">
-            <span></span>
-            <span></span>
-            <span></span>
+            <!--Login-->
+            <div class="btn">
+                <a href="login.html">Login</a>
+            </div>
+
+            <!--Menu Icon-->
+            <div class="container-menu">
+                <div class="menu-icon" id="menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <!--Menu mobile-->
+            <div class="menu" style="display: none" id="menu">
+                <div class="menu-container">
+                    <ul>
+                        <li>
+                            <a href="#container-desenvolvimento" onclick="fecharMenu()">Funcionalidades</a>
+                        </li>
+                        <li>
+                            <a href="#container-instalacao">Infraestrutura</a>
+                        </li>
+                        <li>
+                            <a href="#container-contato">Contato</a>
+                        </li>
+                        <li>
+                            <a href="sobre.html">Sobre</a>
+                        </li>
+                    </ul>
+
+                    <div class="login-area">
+                        <span>Faça login na Atmos</span>
+                        <a href="login.html">Login</a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <!--Footer-->
+    <footer>
+        <div class="container-footer">
+            <div class="logo-footer">
+                <a href="">
+                    <img src="./assets/images/logo-atmos.svg" alt="Logo Atmos" />
+                </a>
+                <p>Sua infraestrutura meteorológica sob controle</p>
+            </div>
+
+            <div class="info-footer">
+
+                <div class="bloco-info">
+                    <h3>Produto</h3>
+                    <a href="#">Segurança</a>
+                    <a href="#">Link</a>
+                    <a href="#">Link</a>
+                </div>
+
+                <div class="bloco-info">
+                    <h3>Legal</h3>
+                    <a href="#">Privacidade</a>
+                    <a href="#">Termos de uso</a>
+                    <a href="#">SLA</a>
+                    <a href="#">LGPD</a>
+                </div>
+
+                <div class="bloco-info">
+                    <h3>Social</h3>
+                    <a href="https://instagram.com/">instagram.com/atmos.io</a>
+                    <a href="https://linkedin.com/">linkedin.com/atmos</a>
+                    <a href="https://github.com/">github.com/atmos</a>
+                </div>
+            </div>
         </div>
-    </div>
 
-<script>
-    function toggleMenu(x) {
-        x.classList.toggle("open");
-    }
-</script>
+        <div class="line"></div>
+
+        <div class="info-direitos">
+            <p>&copy; 2026 Atmos Monitoring Systems. Todos os direitos reservados.</p>
+        </div>
+
+    </footer>
+
+
 </body>
+
 </html>
