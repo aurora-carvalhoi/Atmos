@@ -11,7 +11,7 @@
   <script src="./assets/javascript/sessao.js"></script>
 
   <link rel="stylesheet" href="./assets/css/cadastro.css">
-  <link rel="stylesheet" href="./assets/css/index.css" />
+  <!-- <link rel="stylesheet" href="./assets/css/index.css" /> -->
   <link rel="icon" href="./assets/icons/favicon.ico" />
   <link rel="preconnect" href="https://fonts.gstatic.com">
 
@@ -24,44 +24,63 @@
 
 <body>
   <main>
+    <!-- inicio cadastro empresa -->
     <div class="container-cadastro">
 
       <div class="cadastro-info">
         <div class="h1-cadastro">
-          <h1>Cadastro do Usuário</h1>
+          <h1>Cadastro da Empresa</h1>
           <p>Insira suas credenciais para realizar o cadastro</p>
         </div>
 
         <div class="paragrafo-cadastro">
-          <p>NOME</p>
-          <input type="text" id="nome_input" placeholder="Fernando">
-          <p>EMAIL</p>
+          <p>NOME RESPONSÁVEL</p>
+          <input type="text" id="nome_responsavel" placeholder="Fernando"> 
+
+          <p>NOME EMPRESA</p>
+          <input type="text" id="nome_empresa" placeholder="Fernando">
+
+          <p>CNPJ</p>
           <input type="text" id="email_input" placeholder="email@empresa.com">
+
+          <!-- cadastro de endereço -->
+          <p>CEP</p>
+          <input type="text" id="cep_input" placeholder="Fernando">
+
+          <p>LOGRADOURO</p>
+          <input type="text" id="logradouro_input" placeholder="Fernando">
+
+          <p>BAIRRO</p>
+          <input type="text" id="bairro_input" placeholder="Fernando">
+
+          <p>CIDADE</p>
+          <input type="text" id="cidade_input" placeholder="Fernando">
+
+          <p>UF</p>
+          <input type="text" id="cidade_input" placeholder="Fernando">
+
           <p>SENHA</p>
           <input type="password" id="senha_input" placeholder="*******">
           <p>CONFIRME SUA SENHA</p>
           <input type="password" id="confirmacao_senha_input" placeholder="*******">
-          <p>TIPO DE USUÁRIO</p>
-          <select name="" id="select_tipoUsuario">
-            <option value="#" selected disabled>Selecione uma opção</option>
-            <option > Analista de Suporte </option>
-            <option > Gestor de Operações </option>
-          </select>
+
           <p>LICENÇA DE ATIVAÇÃO</p>
           <input type="number" id="codigoAtivacao_input" placeholder="45">
-        </div>
 
-        <div class="bloco-input">
-          <span>
+          <div class="bloco-input">
+            <!-- <span>
             Já é cadastrado? 
             <a href="./login.html">Realize seu login.</a>
-          </span>
-          <div class="buttons">
-            <a href= "#" onclick="cadastrar()">
-              Cadastrar-se
-            </a>
+          </span> -->
+            <div class="buttons">
+              <a href="#" onclick="cadastrar()">
+                Cadastrar-se
+              </a>
+            </div>
           </div>
         </div>
+
+
       </div>
 
       <div class="cadastro-input">
@@ -71,23 +90,23 @@
           </a>
         </div>
         <div class="texto-info">
-          <h1>Acesso ao Painel de <br>
-            Controle.</h1>
+          <h1>Acesso ao Painel de Controle.</h1>
           <p>Monitore sua infraestrutura meteorológica e gerencie chaves <br>
             de API com segurança de nível industrial</p>
         </div>
       </div>
 
-      <div id="div_aguardar" class="loading-div">
+      <!-- <div id="div_aguardar" class="loading-div">
         <img src="./assets/images/loading.gif" alt="">
-      </div>
+      </div> -->
 
       <div class="alerta_erro">
-          <div id="cardErro" class="card_erro">
-            <span id="mensagem_erro"> </span>
-          </div>
+        <div id="cardErro" class="card_erro">
+          <span id="mensagem_erro"> </span>
+        </div>
       </div>
-
+    </div>
+    <!-- fim cadastro empresa -->
   </main>
 </body>
 

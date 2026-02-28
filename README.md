@@ -1,3 +1,4 @@
+![Atmos](public/assets/images/github - banner.png)
 # Atmos Monitoring System
 
 Atmos é um Sistema de Monitoramento de Servidores

@@ -1,93 +1,114 @@
 @import url('default.css');
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(90deg, #e2e2e2, #c9d6ff);
+}
+
 .container-cadastro {
-    height: 100vh;
-    width: auto;
-    display: flex;
-    flex-direction: row;
+  width: 150vh;
+  height: 80vh;
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  background-color: #fff;
+  border-radius: 4vh;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .cadastro-info {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: var(--color-white);
-    gap: 2vh;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--color-white);
+  gap: 5vh;
+  overflow-y: auto; 
+  border: 1px solid #ccc;
 }
 
-.cadastro-input img {
-    width: 12vw;
-    height: auto;
-}
-
-.cadastro-input h1 {
-    color: var(--color-white);
-    font-size: 2.8rem;
-    padding-bottom: 2vh;
-}
-
-.cadastro-input p {
-    color: var(--color-white);
+.h1-cadastro {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 7vh;
+  text-align: left;
 }
 
 .cadastro-input {
-   height: 100%;
-    width: 50%;
-    background-color: var(--color-blue);
-    display: flex;
-    flex-direction: column;
-    padding-left: 5vw;
-    padding-top: 8vh;
-    gap: 15vh;
+  height: 100%;
+  width: 50%;
+  background-color: var(--color-blue);
+  display: flex;
+  flex-direction: column;
+  padding-top: 8vh;
+  gap: 15vh;
+  align-items: center;
 }
 
-.cadastro-info h1{
-    padding-bottom: 2vh;
-    text-align: left;
+.cadastro-input .logo-cadastro img {
+  width: 9vw;
+  height: auto;
+  display: flex;
+}
+
+.cadastro-input h1 {
+  color: var(--color-white);
+  font-size: 5vh;
+  padding-bottom: 2vh;
 }
 
 .cadastro-info input {
     border: 2px solid var(--color-divider);
     background-color: var(--color-ghost);
     width: 35vw;
-    height: 6vh;
-    color: var(--color-opaque);
+    height: 5vh;
+    background-color: transparent;
     padding-left: 12px;
     transition: 180ms ease-in-out;
+    border-radius: 2vh;
 }
 
-.paragrafo-cadastro p{
+.cadastro-input p {
+  color: var(--color-white);
+}
+
+.paragrafo-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.paragrafo-cadastro p {
+    margin-bottom: -10px; 
     font-weight: bold;
-    font-size: 12px;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    text-align: left;
 }
 
-.bloco-input{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+
+.bloco-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.bloco-input span{
-    color: var(--color-opaque);
+.bloco-input span {
+  color: var(--color-opaque);
 }
 
-.bloco-input a:hover{
-    transition: 180ms ease-in-out;
-    color: var(--color-blue);
+.bloco-input a:hover {
+  transition: 180ms ease-in-out;
+  color: var(--color-blue);
 }
 
-.h1-cadastro{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
+
 
 .bloco-input .buttons {
   margin-top: 20px;
@@ -104,11 +125,12 @@
   padding: 16px 30px;
   color: var(--color-white);
   background-color: var(--color-blue);
-  width: 35vw;
+  width: 25vw;
+  border-radius: 2vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  margin-bottom: 5vh;
 }
 
 .bloco-input .buttons a:hover {
@@ -124,7 +146,7 @@ select {
   padding-left: 12px;
 }
 
-.alerta_erro{
+.alerta_erro {
   display: flex;
   justify-content: flex-end;
 }
@@ -141,7 +163,7 @@ select {
   margin-right: 10%;
 }
 
-.card_erro #mensagem_erro{
+.card_erro #mensagem_erro {
   font-weight: 500;
   font-size: 20px;
 }
