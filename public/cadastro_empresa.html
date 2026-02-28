@@ -24,95 +24,118 @@
 
 <body>
   <main>
-    <!-- inicio cadastro empresa -->
-    <div class="container-cadastro">
 
-      <div class="cadastro-info">
-        <div class="h1-cadastro">
-          <h1>Cadastro da Empresa</h1>
-          <p>Insira suas credenciais para realizar o cadastro</p>
+    <div class="content-wrapper">
+      <div class="hero_content">
+        <div class="main_text">
+          <h2>Olá! É muito bom ter você por aqui.</h2>
+
+
+          <p>
+            Seu login foi realizado com sucesso! Para começar, precisamos que você <br>
+            Realize o cadastro da Empresa clique no botão
+            abaixo e preencha. Isso nos ajudará a organizar seus componentes de hardware corretamente.
+          </p>
+
+
+          <button class="button_livros" onclick="abrirModal('modal_1')">Cadastrar Empresa</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- inicio cadastro empresa -->
+    <div class="modal" id="modal_1">
+      <div class="container-cadastro">
+
+        <div class="cadastro-info">
+          <div class="h1-cadastro">
+            <h1>Cadastro da Empresa</h1>
+            <p>Insira suas credenciais para realizar o cadastro</p>
+          </div>
+
+          <div class="paragrafo-cadastro">
+            <p>NOME RESPONSÁVEL</p>
+            <input type="text" id="nome_responsavel" placeholder="Fernando">
+
+            <p>NOME EMPRESA</p>
+            <input type="text" id="nome_empresa" placeholder="Nome empresa">
+
+            <p>CNPJ</p>
+            <input type="text" id="email_input" placeholder="email@empresa.com">
+
+            <!-- cadastro de endereço -->
+
+            <p>CEP</p>
+            <input type="text" id="cep_input" placeholder="CEP">
+
+            <p>LOGRADOURO</p>
+            <input type="text" id="logradouro_input" placeholder="Logradouro">
+
+            <p>BAIRRO</p>
+            <input type="text" id="bairro_input" placeholder="Bairro">
+
+            <p>CIDADE</p>
+            <input type="text" id="cidade_input" placeholder="Cidade">
+
+            <p>UF</p>
+            <input type="text" id="uf_input" placeholder="UF">
+
+            <!-- cadastro contatos -->
+
+            <p>TELEFONE FIXO</p>
+            <input type="text" id="telFixo_input" placeholder="Telefone Fixo">
+
+            <p>TELEFONE CELULAR</p>
+            <input type="text" id="telCelular_input" placeholder="Telefone Celular">
+
+            <p>E-MAIL CORPORATIVO</p>
+            <input type="text" id="email_empresa" placeholder="E-mail Corporativo">
+
+            <!-- senha -->
+
+            <p>SENHA</p>
+            <input type="password" id="senha_input" placeholder="*******">
+
+            <p>CONFIRME SUA SENHA</p>
+            <input type="password" id="confirmacao_senha_input" placeholder="*******">
+
+            <p>LICENÇA DE ATIVAÇÃO</p>
+            <input type="number" id="codigoAtivacao_input" placeholder="Licença Ativação">
+
+            <div class="bloco-input">
+              <div class="buttons">
+                <a href="cadastro_funcionario.html" onclick="cadastrar()">
+                  Cadastrar Funcionário Resposável
+                </a>
+              </div>
+            </div>
+          </div>
+
+
         </div>
 
-        <div class="paragrafo-cadastro">
-          <p>NOME RESPONSÁVEL</p>
-          <input type="text" id="nome_responsavel" placeholder="Fernando">
-
-          <p>NOME EMPRESA</p>
-          <input type="text" id="nome_empresa" placeholder="Nome empresa">
-
-          <p>CNPJ</p>
-          <input type="text" id="email_input" placeholder="email@empresa.com">
-
-          <!-- cadastro de endereço -->
-          <p>CEP</p>
-          <input type="text" id="cep_input" placeholder="CEP">
-
-          <p>LOGRADOURO</p>
-          <input type="text" id="logradouro_input" placeholder="Logradouro">
-
-          <p>BAIRRO</p>
-          <input type="text" id="bairro_input" placeholder="Bairro">
-
-          <p>CIDADE</p>
-          <input type="text" id="cidade_input" placeholder="Cidade">
-
-          <p>UF</p>
-          <input type="text" id="uf_input" placeholder="UF">
-
-          <!-- cadastro contatos -->
-
-          <p>TELEFONE FIXO</p>
-          <input type="text" id="telFixo_input" placeholder="Telefone Fixo">
-
-          <p>TELEFONE CELULAR</p>
-          <input type="text" id="telCelular_input" placeholder="Telefone Celular">
-
-          <p>E-MAIL CORPORATIVO</p>
-          <input type="text" id="email_empresa" placeholder="E-mail Corporativo">
-
-          <!-- senha -->
-
-          <p>SENHA</p>
-          <input type="password" id="senha_input" placeholder="*******">
-
-          <p>CONFIRME SUA SENHA</p>
-          <input type="password" id="confirmacao_senha_input" placeholder="*******">
-
-          <p>LICENÇA DE ATIVAÇÃO</p>
-          <input type="number" id="codigoAtivacao_input" placeholder="Licença Ativação">
-
-          <div class="bloco-input">
-            <div class="buttons">
-              <a href="#" onclick="cadastrar()">
-                Cadastrar Empresa
-              </a>
-            </div>
+        <div class="cadastro-input">
+          <div class="logo-cadastro">
+            <a href="./index.html">
+              <img src="./assets/images/logo-atmos-alternative.svg" alt="Logo Atmos" />
+            </a>
+          </div>
+          <div class="texto-info">
+            <h1>Autenticação de Unidade Institucional</h1>
+            <p>Registre as credenciais da sua organização para habilitar o monitoramento estratégico de infraestrutura.
+              Gerencie o tráfego de dados e a telemetria de hardware sob os mais rigorosos protocolos de conformidade
+              técnica</p>
           </div>
         </div>
 
-
-      </div>
-
-      <div class="cadastro-input">
-        <div class="logo-cadastro">
-          <a href="./index.html">
-            <img src="./assets/images/logo-atmos-alternative.svg" alt="Logo Atmos" />
-          </a>
-        </div>
-        <div class="texto-info">
-          <h1>Acesso ao Painel de Controle.</h1>
-          <p>Monitore sua infraestrutura meteorológica e gerencie chaves <br>
-            de API com segurança de nível industrial</p>
-        </div>
-      </div>
-
-      <!-- <div id="div_aguardar" class="loading-div">
+        <!-- <div id="div_aguardar" class="loading-div">
         <img src="./assets/images/loading.gif" alt="">
       </div> -->
 
-      <div class="alerta_erro">
-        <div id="cardErro" class="card_erro">
-          <span id="mensagem_erro"> </span>
+        <div class="alerta_erro">
+          <div id="cardErro" class="card_erro">
+            <span id="mensagem_erro"> </span>
+          </div>
         </div>
       </div>
     </div>
@@ -122,6 +145,16 @@
 </html>
 
 <script>
+
+  function abrirModal(idDoModal) {
+    // pega elemento modal 
+    const modal = document.getElementById(idDoModal);
+
+    // Verifica se o modal existe e muda seu estilo para 'flex' (ou 'block')
+    if (modal) {
+      modal.style.display = 'flex';
+    }
+  }
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   let listaEmpresasCadastradas = [];
