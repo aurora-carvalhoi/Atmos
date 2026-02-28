@@ -64,7 +64,7 @@ body {
   margin-bottom: 30px;
 }
 
-.button_livros {
+.button_empresa {
   font-family: var(--font-default);
   font-size: 2vh;
   justify-self: center;
@@ -78,7 +78,7 @@ body {
   cursor: pointer;
 }
 
-.button_livros a {
+.button_empresa a {
   color: #FFFAF1;
 }
 
