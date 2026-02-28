@@ -16,7 +16,7 @@ body {
   flex-direction: row;
   position: relative;
   background-color: #fff;
-  border-radius: 4vh;
+  border-radius: 20px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
@@ -101,7 +101,7 @@ body {
 }
 
 .button_servidor {
-    font-family: var(--font-default);
+  font-family: var(--font-default);
   font-size: 2vh;
   justify-self: center;
   width: 30%;
@@ -256,6 +256,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 10px;
 }
 
 .bloco-input span {
@@ -290,6 +291,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 5vh;
+  border-radius: 10px;
 }
 
 .bloco-input .buttons a:hover {
