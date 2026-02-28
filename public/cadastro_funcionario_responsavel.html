@@ -24,28 +24,6 @@
 
 <body>
     <main>
-
-        <div class="content-wrapper">
-            <div class="hero_content">
-                <div class="main_text">
-                    <h2>Olá! É muito bom ter você por aqui.</h2>
-
-
-                    <p>
-                        Seu login foi realizado com sucesso! Para começar, precisamos que você <br>
-                        Realize o cadastro do Funcionário ou do Servidor, para isso clique no botão
-                        abaixo e preencha. Isso nos ajudará a organizar seus componentes de hardware corretamente.
-                    </p>
-
-
-                    <button class="button_funcionario" onclick="abrirModal('modal_2')">Cadastrar Funcionário</button>
-                    <a class="button_servidor" href="cadastro_servidor.html">Cadastrar Servidor</a>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="modal" id="modal_2">
             <div class="container-cadastro">
 
                 <div class="cadastro-info">
@@ -108,21 +86,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
 
     </main>
 </body>
 
 </html>
-
-<script>
-    function abrirModal(idDoModal) {
-        // pega elemento modal 
-        const modal = document.getElementById(idDoModal);
-
-        // Verifica se o modal existe e muda seu estilo para 'flex' (ou 'block')
-        if (modal) {
-            modal.style.display = 'flex';
-        }
-    }
-</script>
