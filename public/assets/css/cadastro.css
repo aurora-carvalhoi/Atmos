@@ -82,6 +82,42 @@ body {
   color: #FFFAF1;
 }
 
+.button_funcionario {
+  font-family: var(--font-default);
+  font-size: 2vh;
+  justify-self: center;
+  width: 35%;
+  padding: 2vh;
+  background-color: var(--color-blue);
+  color: #FFFAF1;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.button_funcionario a {
+  color: #FFFAF1;
+}
+
+.button_servidor {
+    font-family: var(--font-default);
+  font-size: 2vh;
+  justify-self: center;
+  width: 30%;
+  padding: 2vh;
+  background-color: var(--color-blue);
+  color: #FFFAF1;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.button_servidor a {
+  color: #FFFAF1;
+}
+
 .modal {
   position: fixed;
   top: 0;
