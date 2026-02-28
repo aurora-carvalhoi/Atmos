@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Atmos | Cadastro Servidor</title>
+
+    <script src="./assets/javascript/sessao.js"></script>
+
+    <link rel="stylesheet" href="./assets/css/cadastro.css">
+    <!-- <link rel="stylesheet" href="./assets/css/index.css" /> -->
+    <link rel="icon" href="./assets/icons/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <div class="container-cadastro">
+
+            <div class="cadastro-info">
+                <div class="h1-cadastro">
+                    <h1>Cadastro Servidor</h1>
+                    <p>Insira as credenciais para realizar o cadastro</p>
+                </div>
+
+                <div class="paragrafo-cadastro">
+                    <p>NOME</p>
+                    <input type="text" id="nome_servidor" placeholder="Nome">
+
+                    <p>NÚMERO DE IDENTIFICAÇÃO (INTERNO) </p>
+                    <input type="number" id="nome_empresa" placeholder="Número de Identificação">
+
+                    <p>SISTEMA OPERACIONAL</p>
+                    <input type="text" id="email_input" placeholder="Sistema Operacional">
+
+                    <p>PROTOCOLO DE INTERNET (ENDEREÇO DE IP) </p>
+                    <input type="number" id="codigoAtivacao_input" placeholder="Protocolo de Internet">
+
+                    <div class="bloco-input">
+                        <div class="buttons">
+                            <a href="#" onclick="cadastrar()">
+                                Cadastrar Servidor
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="cadastro-input">
+                <div class="logo-cadastro">
+                    <a href="./index.html">
+                        <img src="./assets/images/logo-atmos-alternative.svg" alt="Logo Atmos" />
+                    </a>
+                </div>
+                <div class="texto-info">
+                    <h1>Acesso ao Painel de Controle.</h1>
+                    <p>Monitore sua infraestrutura meteorológica e gerencie chaves <br>
+                        de API com segurança de nível industrial</p>
+                </div>
+            </div>
+
+            <!-- <div id="div_aguardar" class="loading-div">
+        <img src="./assets/images/loading.gif" alt="">
+      </div> -->
+
+            <div class="alerta_erro">
+                <div id="cardErro" class="card_erro">
+                    <span id="mensagem_erro"> </span>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

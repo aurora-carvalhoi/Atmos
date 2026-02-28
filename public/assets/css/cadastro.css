@@ -29,7 +29,7 @@ body {
   flex-direction: column;
   background-color: var(--color-white);
   gap: 5vh;
-  overflow-y: auto; 
+  overflow-y: auto;
   border: 1px solid #ccc;
 }
 
@@ -65,14 +65,14 @@ body {
 }
 
 .cadastro-info input {
-    border: 2px solid var(--color-divider);
-    background-color: var(--color-ghost);
-    width: 35vw;
-    height: 5vh;
-    background-color: transparent;
-    padding-left: 12px;
-    transition: 180ms ease-in-out;
-    border-radius: 2vh;
+  border: 2px solid var(--color-divider);
+  background-color: var(--color-ghost);
+  width: 35vw;
+  height: 5vh;
+  background-color: transparent;
+  padding-left: 12px;
+  transition: 180ms ease-in-out;
+  border-radius: 2vh;
 }
 
 .cadastro-input p {
@@ -80,15 +80,49 @@ body {
 }
 
 .paragrafo-cadastro {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 
 .paragrafo-cadastro p {
-    margin-bottom: -10px; 
-    font-weight: bold;
+  margin-bottom: -10px;
+  font-weight: bold;
+}
+
+.cadastro-componentes {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--color-white);
+  gap: 5vh;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 1vh;
+}
+
+.checkbox-item input {
+  width: 3vh;
+  height: 3vh;
+  accent-color: var(--color-blue);
+}
+
+.checkbox-item i {
+  font-size: 0.9rem;
+  color: black;
 }
 
 
@@ -136,6 +170,8 @@ body {
 .bloco-input .buttons a:hover {
   background-color: var(--color-blue-hover);
 }
+
+
 
 select {
   border: 2px solid var(--color-divider);

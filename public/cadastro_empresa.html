@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Atmos | Cadastro</title>
+  <title>Atmos | Cadastro Empresa</title>
 
   <script src="./assets/javascript/sessao.js"></script>
 
@@ -35,46 +35,56 @@
 
         <div class="paragrafo-cadastro">
           <p>NOME RESPONSÁVEL</p>
-          <input type="text" id="nome_responsavel" placeholder="Fernando"> 
+          <input type="text" id="nome_responsavel" placeholder="Fernando">
 
           <p>NOME EMPRESA</p>
-          <input type="text" id="nome_empresa" placeholder="Fernando">
+          <input type="text" id="nome_empresa" placeholder="Nome empresa">
 
           <p>CNPJ</p>
           <input type="text" id="email_input" placeholder="email@empresa.com">
 
           <!-- cadastro de endereço -->
           <p>CEP</p>
-          <input type="text" id="cep_input" placeholder="Fernando">
+          <input type="text" id="cep_input" placeholder="CEP">
 
           <p>LOGRADOURO</p>
-          <input type="text" id="logradouro_input" placeholder="Fernando">
+          <input type="text" id="logradouro_input" placeholder="Logradouro">
 
           <p>BAIRRO</p>
-          <input type="text" id="bairro_input" placeholder="Fernando">
+          <input type="text" id="bairro_input" placeholder="Bairro">
 
           <p>CIDADE</p>
-          <input type="text" id="cidade_input" placeholder="Fernando">
+          <input type="text" id="cidade_input" placeholder="Cidade">
 
           <p>UF</p>
-          <input type="text" id="cidade_input" placeholder="Fernando">
+          <input type="text" id="uf_input" placeholder="UF">
+
+          <!-- cadastro contatos -->
+
+          <p>TELEFONE FIXO</p>
+          <input type="text" id="telFixo_input" placeholder="Telefone Fixo">
+
+          <p>TELEFONE CELULAR</p>
+          <input type="text" id="telCelular_input" placeholder="Telefone Celular">
+
+          <p>E-MAIL CORPORATIVO</p>
+          <input type="text" id="email_empresa" placeholder="E-mail Corporativo">
+
+          <!-- senha -->
 
           <p>SENHA</p>
           <input type="password" id="senha_input" placeholder="*******">
+
           <p>CONFIRME SUA SENHA</p>
           <input type="password" id="confirmacao_senha_input" placeholder="*******">
 
           <p>LICENÇA DE ATIVAÇÃO</p>
-          <input type="number" id="codigoAtivacao_input" placeholder="45">
+          <input type="number" id="codigoAtivacao_input" placeholder="Licença Ativação">
 
           <div class="bloco-input">
-            <!-- <span>
-            Já é cadastrado? 
-            <a href="./login.html">Realize seu login.</a>
-          </span> -->
             <div class="buttons">
               <a href="#" onclick="cadastrar()">
-                Cadastrar-se
+                Cadastrar Empresa
               </a>
             </div>
           </div>
@@ -106,7 +116,6 @@
         </div>
       </div>
     </div>
-    <!-- fim cadastro empresa -->
   </main>
 </body>
 

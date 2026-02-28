@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Atmos | Cadastro Componentes</title>
+
+    <script src="./assets/javascript/sessao.js"></script>
+
+    <link rel="stylesheet" href="./assets/css/cadastro.css">
+    <!-- <link rel="stylesheet" href="./assets/css/index.css" /> -->
+    <link rel="icon" href="./assets/icons/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <main>
+
+        <div class="container-cadastro">
+
+            <div class="cadastro-componentes">
+                <div class="h1-cadastro">
+                    <h1>Cadastro Componente</h1>
+                    <p>Selecione os coponentes que deseja monitorar</p>
+                </div>
+
+                <div class="paragrafo-cadastro">
+
+                    <div class="checkbox-container">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input_cpu">
+                            <i>Processador (CPU)</i>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input_gpu">
+                            <i>Placa de Vídeo (GPU)</i>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input_memoriaRam">
+                            <i>Memória RAM</i>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input_armazenamento">
+                            <i>Armazenamento (HDD/SSD)</i>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input_ventoinha">
+                            <i>Ventoinhas/Coolers (Fans)</i>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input_placaMae">
+                            <i>Placa-mãe (Motherboard)</i>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="input_fonteAlimentacao">
+                            <i>Fonte de Alimentação (Volts)</i>
+                        </label>
+                    </div>
+
+                    <div class="bloco-input">
+                        <div class="buttons">
+                            <a href="#" onclick="cadastrar()">
+                                Cadastrar Componente
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="cadastro-input">
+                <div class="logo-cadastro">
+                    <a href="./index.html">
+                        <img src="./assets/images/logo-atmos-alternative.svg" alt="Logo Atmos" />
+                    </a>
+                </div>
+                <div class="texto-info">
+                    <h1>Acesso ao Painel de Controle.</h1>
+                    <p>Monitore sua infraestrutura meteorológica e gerencie chaves <br>
+                        de API com segurança de nível industrial</p>
+                </div>
+            </div>
+
+            <!-- <div id="div_aguardar" class="loading-div">
+        <img src="./assets/images/loading.gif" alt="">
+      </div> -->
+
+            <div class="alerta_erro">
+                <div id="cardErro" class="card_erro">
+                    <span id="mensagem_erro"> </span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>
+
+<script>
+
+    var input_cpu = input_cpu.checked;
+    var input_gpu = input_gpu.checked;
+    var input_memoriaRam = input_memoriaRam.checked;
+    var input_armazenamento = input_armazenamento.checked;
+    var input_ventoinha = input_ventoinha.checked;
+    var input_placaMae = input_placaMae.checked;
+    var input_fonteAlimentacao = input_fonteAlimentacao.checked;
+
+</script>
