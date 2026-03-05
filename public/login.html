@@ -67,9 +67,9 @@
                         <a href="./cadastro.html"> Clique aqui.</a>
                     </span>
             <div class="buttons">
-                <a href="">
+                <button onclick="entrar()">
                     Entrar
-                </a>
+                </button>
             </div>
         </div>
     </div>
@@ -104,31 +104,31 @@
                 </div>
             </div>
         </div> -->
-
+    
+</div>
 </body>
 
 </html>
 
 <script>
     function entrar() {
-        aguardar();
+    
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+        var emailVar = inputemail.value;
+        var senhaVar = input_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
+           // cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
-            return false;
+            //finalizarAguardar();
+            return;
         }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
+        
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
-
+        console.log("TO AQUI");
+      
         fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
@@ -137,23 +137,28 @@
             body: JSON.stringify({
                 emailServer: emailVar,
                 senhaServer: senhaVar
+     
             })
-        }).then(function (resposta) {
+        })
+        .then(resposta => {
             console.log("ESTOU NO THEN DO entrar()!")
-
+            console.log(resposta)
             if (resposta.ok) {
                 console.log(resposta);
 
-                resposta.json().then(json => {
+                resposta.json().then((json) => {
                     console.log(json);
+                console.log("ur ur");
+
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                  //  sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    window.location = "./cadastro_funcionario.html";
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                       // window.location = "./cadastro_funcionario.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -171,12 +176,10 @@
         }).catch(function (erro) {
             console.log(erro);
         })
-
-        return false;
     }
 
     function sumirMensagem() {
-        cardErro.style.display = "none"
+      //  cardErro.style.display = "none"
     }
 
 </script>
