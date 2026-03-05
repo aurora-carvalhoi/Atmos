@@ -37,7 +37,7 @@
                     <input type="text" id="nome_servidor" placeholder="Nome">
 
                     <p>NÚMERO DE IDENTIFICAÇÃO (INTERNO) </p>
-                    <input type="number" id="nome_empresa" placeholder="Número de Identificação">
+                    <input type="number" id="numero_identificacao" placeholder="Número de Identificação">
 
                     <p>SISTEMA OPERACIONAL</p>
                     <input type="text" id="email_input" placeholder="Sistema Operacional">
@@ -67,12 +67,8 @@
                     <h1>Acesso ao Painel de Controle.</h1>
                     <p>Monitore sua infraestrutura meteorológica e gerencie chaves <br>
                         de API com segurança de nível industrial</p>
-                </div>
+                 </div>
             </div>
-
-            <!-- <div id="div_aguardar" class="loading-div">
-        <img src="./assets/images/loading.gif" alt="">
-      </div> -->
 
             <div class="alerta_erro">
                 <div id="cardErro" class="card_erro">
@@ -84,3 +80,70 @@
 </body>
 
 </html>
+<script>
+    function cadastrarServidor(){
+        nomeServidorVar = nome_servidor.value;
+        nomeEmpresaVar = numero_identificacao.value;
+        emailVar = email_input;
+        codigoAtivacaoVar = codigoAtivacao_input.value;
+
+
+        if(nomeServidorVar == '' || nomeEmpresaVar == '' || emailVar == '' || codigoAtivacaoVar == '' ){
+                alert("Preencha todos os campos para prosseguir")
+        }else{
+
+
+            fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+     
+            })
+        })
+        .then(resposta => {
+            console.log("ESTOU NO THEN DO entrar()!")
+            console.log(resposta)
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then((json) => {
+                    console.log(json);
+                console.log("ur ur");
+
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                  //  sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    window.location = "./cadastro_funcionario.html";
+
+                    setTimeout(function () {
+                       // window.location = "./cadastro_funcionario.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+    }
+
+    function sumirMensagem() {
+      //  cardErro.style.display = "none"
+    }
+    }
+</script>
