@@ -50,7 +50,7 @@
 
                 <div class="cadastro-info">
                     <div class="h1-cadastro">
-                        <h1>Cadastro do Funionário</h1>
+                        <h1>Cadastro do Funcionário</h1>
                         <p>Insira as credenciais para realizar o cadastro</p>
                     </div>
 
@@ -75,12 +75,13 @@
 
                         <div class="bloco-input">
                             <div class="buttons">
-                                <a href="#" onclick="cadastrar()"">
+                                <a href="#" onclick="cadastrar()">
                                 Cadastrar Funcionário
                             </a>
                         </div>
                     </div>
                 </div>
+
 
 
             </div>
@@ -116,6 +117,11 @@
 </html>
 
 <script>
+    function cadastrar(){
+        nomeVar = input_nome.value;
+        emailVar = input_email.value;
+    }
+
     function abrirModal(idDoModal) {
         // pega elemento modal 
         const modal = document.getElementById(idDoModal);
