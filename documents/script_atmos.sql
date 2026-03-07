@@ -17,7 +17,10 @@ CREATE TABLE cadastroEmpresa (
 				REFERENCES cadastroEmpresa(idcadastroEmpresa)
 );
 
-CREATE TABLE usuario (
+select * from usuario;
+desc usuario;
+select * from cadastroEmpresa;
+CREATE TABLE usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     fkEmpresa INT NOT NULL,
     fkSuperior INT NOT NULL,
@@ -42,6 +45,16 @@ CREATE TABLE usuario (
 			FOREIGN KEY (fkSuperior) 
 				REFERENCES usuario(idUsuario)
 );
+
+INSERT INTO cadastroEmpresa 
+(nomeResponsavel, nomeEmpresa, cnpj, codigoAcesso, senha, statusCliente, idMatriz)
+VALUES 
+('Carlos Silva', 'Tech Solutions', '12345678000199', 'ACESSO123', 'senhaEmpresa123', 'Ativo', NULL);
+
+INSERT INTO usuario
+(fkEmpresa, fkSuperior, nome, email, dataNascimento, cpf, senha, statusUsuario, tipoUsuario, documentoIdetificacao)
+VALUES
+(1, 1, 'Carlos Silva', 'carlos@techsolutions.com', '1985-06-15', '12345678901', 'senha123', 'Ativo', 'Gestor', 'RG1234567');
 
 CREATE TABLE contato (
 	idContato INT NOT NULL,
@@ -72,9 +85,10 @@ CREATE TABLE endereco (
 			FOREIGN KEY (fkEmpresa) 
 				REFERENCES cadastroEmpresa(idcadastroEmpresa)
 );
-
+select * from servidor;
+truncate servidor;
 CREATE TABLE servidor (
-	idServidor INT NOT NULL,
+	idServidor INT NOT NULL auto_increment,
     fkEmpresa INT NOT NULL,
 		CONSTRAINT chave_compostaServidor
 			PRIMARY KEY(idServidor, fkEmpresa),
@@ -86,6 +100,21 @@ CREATE TABLE servidor (
 			FOREIGN KEY (fkEmpresa)
 				REFERENCES cadastroEmpresa(idcadastroEmpresa)
 );
+
+drop database atmos;
+ALTER TABLE servidor 
+MODIFY idServidor INT NOT NULL AUTO_INCREMENT;
+ALTER TABLE servidor
+DROP FOREIGN KEY chave_compostaServidor;
+
+
+insert into servidor (fkEmpresa, numeroIdentificacao)values
+(1,1312312312);
+
+SHOW CREATE TABLE servidor;
+delete from servidor where idServidor = 1;
+select * from servidor;
+desc servidor;
 
 CREATE TABLE componentes (
 	idComponente INT PRIMARY KEY AUTO_INCREMENT,
