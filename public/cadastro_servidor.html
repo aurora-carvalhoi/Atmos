@@ -40,16 +40,16 @@
                     <input type="number" id="numero_identificacao" placeholder="Número de Identificação">
 
                     <p>SISTEMA OPERACIONAL</p>
-                    <input type="text" id="email_input" placeholder="Sistema Operacional">
+                    <input type="text" id="sistemaOperacional_input" placeholder="Sistema Operacional">
 
                     <p>PROTOCOLO DE INTERNET (ENDEREÇO DE IP) </p>
-                    <input type="number" id="codigoAtivacao_input" placeholder="Protocolo de Internet">
+                    <input type="number" id="enderecoIP_input" placeholder="Protocolo de Internet">
 
                     <div class="bloco-input">
                         <div class="buttons">
-                            <a href="cadastro_componentes.html" onclick="cadastrar()">
+                            <button onclick="cadastrarServidor()">
                                 Cadastrar Servidor
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -82,25 +82,29 @@
 </html>
 <script>
     function cadastrarServidor(){
-        nomeServidorVar = nome_servidor.value;
-        nomeEmpresaVar = numero_identificacao.value;
-        emailVar = email_input;
-        codigoAtivacaoVar = codigoAtivacao_input.value;
+        nomeServidor = nome_servidor.value;
+        numeroIdentificacao = numero_identificacao.value;
+        sistemaOperacional = sistemaOperacional_input.value;
+        enderecoIP = enderecoIP_input.value;
 
 
-        if(nomeServidorVar == '' || nomeEmpresaVar == '' || emailVar == '' || codigoAtivacaoVar == '' ){
+        if(nomeServidor == '' || numeroIdentificacao == '' || sistemaOperacional == ''|| enderecoIP == ''){
                 alert("Preencha todos os campos para prosseguir")
+               
         }else{
 
 
-            /*fetch("/usuarios/autenticar", {
+            fetch("/servidores/cadastrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
+                nomeServidorVar: nomeServidor,
+                numeroIdentificacaoVar: numeroIdentificacao,
+                sistemaOperacionalVar: sistemaOperacional,
+                enderecoIPVar: enderecoIP,
+                fkEmpresa: sessionStorage.FKEMPRESA
      
             })
         })
@@ -115,14 +119,14 @@
                 console.log("ur ur");
 
                     console.log(JSON.stringify(json));
+                    sessionStorage.ID_SERVIDOR = json.idServidor
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                  //  sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-                    window.location = "./cadastro_funcionario.html";
+                    sessionStorage.FKEMPRESA = json.fkEmpresa;
 
                     setTimeout(function () {
-                       // window.location = "./cadastro_funcionario.html";
+                        alert("")
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -133,7 +137,7 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                   // finalizarAguardar(texto);
                 });
             }
 
@@ -142,8 +146,5 @@
         })
     }
 
-    function sumirMensagem() {
-      //  cardErro.style.display = "none"
-    }*/
-    }}
+    }
 </script>
