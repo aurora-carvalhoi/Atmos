@@ -71,11 +71,11 @@
                         <input type="password" id="senha_funcionario" placeholder="*******">
 
                         <p>CONFIRME SUA SENHA</p>
-                        <input type="password" id="confirmacao_senha_funionario" placeholder="*******">
+                        <input type="password" id="confirmacao_senha_funcionario" placeholder="*******">
 
                         <div class="bloco-input">
                             <div class="buttons">
-                                <a href="#" onclick="cadastrar()">
+                                <a href="#" onclick="cadastrarFuncionario()">
                                 Cadastrar Funcionário
                             </a>
                         </div>
@@ -117,11 +117,6 @@
 </html>
 
 <script>
-    function cadastrar(){
-        nomeVar = input_nome.value;
-        emailVar = input_email.value;
-    }
-
     function abrirModal(idDoModal) {
         // pega elemento modal 
         const modal = document.getElementById(idDoModal);
@@ -130,5 +125,75 @@
         if (modal) {
             modal.style.display = 'flex';
         }
+    }
+
+    function cadastrarFuncionario(){
+        nomeVar = nome_funcionario.value;
+        emailVar = email_funionario.value;
+        dtNascVar = data_nascimento.value;
+        cpfVar = cpf_funcionario.value;
+        senhaVar = senha_funcionario.value;
+        confSenhaVar = confirmacao_senha_funcionario.value;
+
+        if(nomeVar == '' || emailVar == '' || dtNascVar == ''||
+         cpfVar == '' || senhaVar == '' || confSenhaVar == ''){
+                alert("Preencha todos os campos para prosseguir")
+    
+        } else {
+            fetch("/usuarios/cadastrarFuncionario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+             body: JSON.stringify({
+                fkEmpresa: sessionStorage.FKEMPRESA,
+                idSuperiorVar: sessionStorage.ID_USUARIO,
+                nome: nomeVar,
+                email: emailVar,
+                dataNascimento: dtNascVar,
+                cpf: cpfVar,
+                senha: senhaVar
+ 
+            })
+
+        })
+        .then(Resposta => {
+            console.log("ESTOU NO THEN DO cadastrarFuncionario()!")
+            console.log(resposta)
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then((json) => {
+                    console.log(json);
+                    
+                    console.log(JSON.stringify(json));
+                    sessionStorage.FKEMPRESA = json.fkEmpresa;
+                    sessionStorage.FKSUPERIOR = json.fkSuperior
+                    sessionStorage.NOME_USUARIO = json.nome
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.DTNASC_USUARIO = json.dataNascimento;
+                    sessionStorage.CPF_USUARIO = json.cpf;
+                    sessionStorage.SENHA_USUARIO = json.senha;
+                    
+                    
+                    setTimeout(function () {
+                        alert("")
+                    }, 1000); // apenas para exibir o loading
+
+                });
+            } else {
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                   // finalizarAguardar(texto);
+                });
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+    }
+
     }
 </script>

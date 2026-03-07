@@ -10,13 +10,12 @@ function autenticar(email, senha) {
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
-function cadastrar(nome, email, senha, tipoUsuario, fkEmpresa) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, fkEmpresa);
-    
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
+
+function cadastrarFuncionario(fkEmpresa, idSuperior ,nome,email,dataNascimento,cpf,senha){
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkEmpresa, idSuperior, nome,email, dataNascimento,cpf,senha);
+
     var instrucaoSql = `
-        INSERT INTO usuario (nome, tipoDeUsuario, email, senha, fkEmpresaUsuario) VALUES ('${nome}','${tipoUsuario}','${email}', '${senha}', '${fkEmpresa}');
+    INSERT INTO usuario(fkEmpresa, fkSuperior, nome, email, dataNascimento, cpf, senha, statusUsuario, tipoUsuario) VALUES ('${fkEmpresa}','${idSuperior}','${nome}','${email}','${dataNascimento}','${cpf}','${senha}','Ativo','Funcionario');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -24,5 +23,6 @@ function cadastrar(nome, email, senha, tipoUsuario, fkEmpresa) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrarFuncionario
 };
+
