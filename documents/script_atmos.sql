@@ -1,8 +1,9 @@
 CREATE DATABASE atmos;
 USE atmos;
 
+
 CREATE TABLE cadastroEmpresa (
-	idcadastroEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+	idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 	nomeResponsavel VARCHAR(50) NOT NULL,
     nomeEmpresa VARCHAR(50) DEFAULT NULL,
 	cnpj VARCHAR(14) NOT NULL UNIQUE,
@@ -11,15 +12,14 @@ CREATE TABLE cadastroEmpresa (
     dataCadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
     dataAtualizacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     statusCliente VARCHAR(10),
+    CONSTRAINT chkCliente
+			CHECK (statusCliente IN ('Ativo', 'Inativo')),
     idMatriz INT,
 		CONSTRAINT fkempresa_matriz 
 			FOREIGN KEY (idMatriz) 
-				REFERENCES cadastroEmpresa(idcadastroEmpresa)
+				REFERENCES cadastroEmpresa(idEmpresa)
 );
 
-select * from usuario;
-desc usuario;
-select * from cadastroEmpresa;
 CREATE TABLE usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     fkEmpresa INT NOT NULL,
@@ -32,15 +32,15 @@ CREATE TABLE usuario(
     statusUsuario VARCHAR(10),
 	dataCadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
     dataAtualizacao DATETIME DEFAULT CURRENT_TIMESTAMP,
-    tipoUsuario CHAR(8),
+    tipoUsuario CHAR(15),
     documentoIdetificacao VARCHAR(20),
-		CONSTRAINT chkCliente 
+		CONSTRAINT chkUsuario 
 			CHECK (statusUsuario IN ('Ativo', 'Inativo')),
 		CONSTRAINT chk_usuario 
-			CHECK (tipoUsuario IN ('Gestor', 'Supervisor', 'Funcionário')),
+			CHECK (tipoUsuario IN ('Gestor', 'Funcionário')),
 		CONSTRAINT fkCadastroEmpresa 
 			FOREIGN KEY (fkEmpresa) 
-				REFERENCES cadastroEmpresa(idcadastroEmpresa),
+				REFERENCES cadastroEmpresa(idEmpresa),
 		CONSTRAINT fkusuarioSuperior
 			FOREIGN KEY (fkSuperior) 
 				REFERENCES usuario(idUsuario)
@@ -56,20 +56,23 @@ INSERT INTO usuario
 VALUES
 (1, 1, 'Carlos Silva', 'carlos@techsolutions.com', '1985-06-15', '12345678901', 'senha123', 'Ativo', 'Gestor', 'RG1234567');
 
+
 CREATE TABLE contato (
-	idContato INT NOT NULL,
+	idContato INT NOT NULL AUTO_INCREMENT,
     fkEmpresa INT NOT NULL,
 		CONSTRAINT chave_compostaContato
 			PRIMARY KEY(idContato, fkEmpresa),
     DD1 CHAR(3),
     DDD CHAR(3),
-    telefoneFixo CHAR(10) NOT NULL UNIQUE,
+    telefoneFixo CHAR(10) UNIQUE,
     telefoneCelular CHAR(10) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
 		CONSTRAINT fkEmpresa_contato
 			FOREIGN KEY (fkEmpresa) 
-				REFERENCES cadastroEmpresa(idcadastroEmpresa)
+				REFERENCES cadastroEmpresa(idEmpresa)
 );
+
+
 
 CREATE TABLE endereco (
 	idEndereco INT PRIMARY KEY AUTO_INCREMENT,
@@ -83,10 +86,9 @@ CREATE TABLE endereco (
     uf CHAR(2) NOT NULL,
 		CONSTRAINT fkEmpresa_endereco
 			FOREIGN KEY (fkEmpresa) 
-				REFERENCES cadastroEmpresa(idcadastroEmpresa)
+				REFERENCES cadastroEmpresa(idEmpresa)
 );
-select * from servidor;
-truncate servidor;
+
 CREATE TABLE servidor (
 	idServidor INT NOT NULL auto_increment,
     fkEmpresa INT NOT NULL,
@@ -98,23 +100,8 @@ CREATE TABLE servidor (
     enderecoIP VARCHAR(100),
 		CONSTRAINT fkEmpresa_servidor
 			FOREIGN KEY (fkEmpresa)
-				REFERENCES cadastroEmpresa(idcadastroEmpresa)
+				REFERENCES cadastroEmpresa(idEmpresa)
 );
-
-drop database atmos;
-ALTER TABLE servidor 
-MODIFY idServidor INT NOT NULL AUTO_INCREMENT;
-ALTER TABLE servidor
-DROP FOREIGN KEY chave_compostaServidor;
-
-
-insert into servidor (fkEmpresa, numeroIdentificacao)values
-(1,1312312312);
-
-SHOW CREATE TABLE servidor;
-delete from servidor where idServidor = 1;
-select * from servidor;
-desc servidor;
 
 CREATE TABLE componentes (
 	idComponente INT PRIMARY KEY AUTO_INCREMENT,
@@ -125,7 +112,7 @@ CREATE TABLE componentes (
     parametro VARCHAR(45)
 );
 
-CREATE TABLE servidor_compinentes (
+CREATE TABLE servidor_componentes (
 	fkServidor INT NOT NULL,
     fkEmpresa INT NOT NULL,
 	fkComponente INT NOT NULL,
@@ -137,7 +124,7 @@ CREATE TABLE servidor_compinentes (
 				REFERENCES servidor(idServidor),
 		CONSTRAINT fkEmpresa_servidorComponente
 			FOREIGN KEY (fkEmpresa)
-				REFERENCES cadastroEmpresa(idcadastroEmpresa),
+				REFERENCES cadastroEmpresa(idEmpresa),
 		CONSTRAINT fkComponente_servidorComponente
 			FOREIGN KEY (fkComponente)
 				REFERENCES componentes(idComponente)
