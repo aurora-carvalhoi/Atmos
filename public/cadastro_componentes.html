@@ -41,10 +41,6 @@
                             <i>Processador (CPU)</i>
                         </label>
                         <label class="checkbox-item">
-                            <input type="checkbox" id="input_gpu">
-                            <i>Placa de Vídeo (GPU)</i>
-                        </label>
-                        <label class="checkbox-item">
                             <input type="checkbox" id="input_memoriaRam">
                             <i>Memória RAM</i>
                         </label>
@@ -52,19 +48,11 @@
                             <input type="checkbox" id="input_armazenamento">
                             <i>Armazenamento (HDD/SSD)</i>
                         </label>
-                        <label class="checkbox-item">
-                            <input type="checkbox" id="input_ventoinha">
-                            <i>Ventoinhas/Coolers (Fans)</i>
-                        </label>
-                        <label class="checkbox-item">
-                            <input type="checkbox" id="input_placaMae">
-                            <i>Placa-mãe (Motherboard)</i>
-                        </label>
                     </div>
 
                     <div class="bloco-input">
                         <div class="buttons">
-                            <a href="#" onclick="cadastrar()">
+                            <a href="#" onclick="cadastrarComponentes()">
                                 Cadastrar Componente
                             </a>
                         </div>
@@ -103,13 +91,66 @@
 </html>
 
 <script>
+function cadastrarComponentes(){
 
-    var input_cpu = input_cpu.checked;
-    var input_gpu = input_gpu.checked;
-    var input_memoriaRam = input_memoriaRam.checked;
-    var input_armazenamento = input_armazenamento.checked;
-    var input_ventoinha = input_ventoinha.checked;
-    var input_placaMae = input_placaMae.checked;
-    var input_fonteAlimentacao = input_fonteAlimentacao.checked;
+    var cpu = input_cpu.checked;
+    var ram = input_memoriaRam.checked;
+    var disco = input_armazenamento.checked;
 
+    var componentes = [];
+
+    if(cpu){
+        componentes.push(1);
+    }
+    if(ram){
+        componentes.push(2);
+    }
+    if(disco){
+        componentes.push(3);
+    }
+
+     fetch("/servidores/cadastrarComponentes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                Componentes: componentes,
+                fkEmpresa: sessionStorage.FKEMPRESA,
+                fkServidor: sessionStorage.ID_SERVIDOR 
+     
+                
+            })
+        })
+        .then(resposta => {
+            console.log("ESTOU NO THEN DO entrar()!")
+            console.log(resposta)
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then((json) => {
+                    console.log(json);
+                console.log("ur ur");
+
+                    console.log(JSON.stringify(json));
+                    setTimeout(function () {
+                        alert("")
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                   // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+    }
 </script>

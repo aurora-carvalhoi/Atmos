@@ -13,6 +13,25 @@ function cadastrar(nomeServidor, numeroIdentificacao, sistemaOperacional,enderec
     return database.executar(instrucaoSql);
 }
 
+function cadastrarComponentes(Componentes, fkEmpresa, fkServidor) {
+
+    var promises = [];
+
+    for (var i = 0; i < Componentes.length; i++) {
+
+        var instrucaoSql = `
+        INSERT INTO servidor_componentes (fkServidor, fkEmpresa, fkComponente)
+        VALUES (${fkServidor}, ${fkEmpresa}, ${Componentes[i]});
+        `;
+
+        promises.push(database.executar(instrucaoSql));
+    }
+
+    return Promise.all(promises);
+}
+
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    cadastrarComponentes
 };
