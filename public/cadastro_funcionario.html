@@ -65,7 +65,7 @@
                         <input type="date" id="data_nascimento" placeholder="**/**/****">
 
                         <p>CPF</p>
-                        <input type="text" id="cpf_funcionario" placeholder="***.***.***-**">
+                        <input type="text" id="cpf_funcionario" placeholder="***.***.***-**" maxlength="11">
 
                         <p>SENHA</p>
                         <input type="password" id="senha_funcionario" placeholder="*******">
@@ -161,7 +161,6 @@
             console.log("ESTOU NO THEN DO cadastrarFuncionario()!")
             console.log(resposta)
             if (resposta.ok) {
-                console.log(resposta);
 
                 resposta.json().then((json) => {
                     console.log(json);
@@ -177,7 +176,7 @@
                     
                     
                     setTimeout(function () {
-                        alert("")
+                        alert("Cadastro realizado com sucesso!")
                     }, 1000); // apenas para exibir o loading
 
                 });

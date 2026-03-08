@@ -82,10 +82,14 @@
 </html>
 <script>
     function cadastrarServidor(){
+
+        console.log("SESSION STORAGE:", sessionStorage);
+    console.log("FKEMPRESA:", sessionStorage.FKEMPRESA);
         nomeServidor = nome_servidor.value;
         numeroIdentificacao = numero_identificacao.value;
         sistemaOperacional = sistemaOperacional_input.value;
         enderecoIP = enderecoIP_input.value;
+
 
 
         if(nomeServidor == '' || numeroIdentificacao == '' || sistemaOperacional == ''|| enderecoIP == ''){
@@ -110,23 +114,25 @@
         })
         .then(resposta => {
             console.log("ESTOU NO THEN DO entrar()!")
+            
             console.log(resposta)
             if (resposta.ok) {
                 console.log(resposta);
 
                 resposta.json().then((json) => {
                     console.log(json);
-                console.log("ur ur");
 
                     console.log(JSON.stringify(json));
-                    sessionStorage.ID_SERVIDOR = json.idServidor
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.FKEMPRESA = json.fkEmpresa;
+                    sessionStorage.ID_SERVIDOR = json.insertId
+                    //sessionStorage.EMAIL_USUARIO = json.email;
+                    //sessionStorage.NOME_USUARIO = json.nome;
+                    //sessionStorage.ID_USUARIO = json.id;
+                    //sessionStorage.FKEMPRESA = json.fkEmpresa;
+                    
 
                     setTimeout(function () {
-                        alert("")
+                        alert("Servidor cadastrado com sucesso!")
+                        window.location.href = './cadastro_componentes.html'
                     }, 1000); // apenas para exibir o loading
 
                 });

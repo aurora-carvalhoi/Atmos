@@ -8,7 +8,7 @@
 
     <title>Atmos | Cadastro Componentes</title>
 
-    <script src="./assets/javascript/sessao.js"></script>
+       <!--<script src="./assets/javascript/sessao.js"></script>-->
 
     <link rel="stylesheet" href="./assets/css/cadastro.css">
     <!-- <link rel="stylesheet" href="./assets/css/index.css" /> -->
@@ -130,11 +130,10 @@ function cadastrarComponentes(){
 
                 resposta.json().then((json) => {
                     console.log(json);
-                console.log("ur ur");
 
                     console.log(JSON.stringify(json));
                     setTimeout(function () {
-                        alert("")
+                        alert("Componentes cadastrados com sucesso")
                     }, 1000); // apenas para exibir o loading
 
                 });
