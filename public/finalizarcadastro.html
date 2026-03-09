@@ -42,17 +42,16 @@
             <label for="input_nome">NOME</label>
             <input type="text" id="input_nome" placeholder="Ex: Celeste Schroeder">
             <label for="input_email">SENHA</label>
-            <input type="password" id="input_senha" placeholder="*******">
+            <input type="password" id="input_senha" placeholder="*******" oninput="validarSenha()">
             <label>CONFIRMAÇÃO DE SENHA</label>
             <input type="password" id="input_senhaconfirmacao" placeholder="*******">
         </div>
 
-        <div id="validacoes">
-            <p><span class="check">✔</span>Mínimo de 8 caracteres.</p>
-            <p><span class="check">✔</span>Caracteres de letras minúsculas</p>
-            <p><span class="check">✔</span>Caracteres de letras maiúsculas</p>
-            <p><span class="check">✔</span>Caracteres númericos</p>
-            <p><span class="check">✔</span>Caracteres minúsculas</p>
+        <div>
+            <p><span class="check">✔</span><span id="span_tamanho">Mínimo de 8 caracteres.</span></p>
+            <p><span class="check">✔</span><span id="span_num"> Caracteres númericos</span></p>
+            <p><span class="check">✔</span><span id="span_caracEsp" style="color: black;"> Caracteres especiais</span>
+            </p>
         </div>
 
         <div class="bloco-input">
@@ -71,16 +70,83 @@
 </html>
 
 <script>
+
+    var senhaValida = false;
+
+    function validarSenha() {
+        senha = input_senha.value;
+
+        var veriTam = false;
+        var veriNum = false;
+        var veriCarc = false;
+
+
+
+        // tamanho
+        if (senha.length >= 8) {
+            span_tamanho.style.color = "#004aad";
+            veriTam = true;
+        } else {
+            span_tamanho.style.color = "red";
+            veriTam = false;
+        }
+
+        if (senha.includes(0) || senha.includes(1) || senha.includes(2) || senha.includes(3) ||
+            senha.includes(4) || senha.includes(5) || senha.includes(6) ||
+            senha.includes(7) || senha.includes(8) || senha.includes(9)) {
+
+            span_num.style.color = "#004aad";
+            veriNum = true;
+
+        } else {
+            span_num.style.color = "red";
+            veriNum = false;
+        }
+
+        if (senha.includes('!') || senha.includes('%') || senha.includes('*') || senha.includes('.') ||
+            senha.includes('&') || senha.includes('#') || senha.includes('$')) {
+
+            span_caracEsp.style.color = "#004aad";
+            veriCarc = true;
+
+        } else {
+            span_caracEsp.style.color = "red";
+            veriCarc = false;
+        }
+
+        if (veriTam == false || veriNum == false || veriCarc == false) {
+            senhaValida = false;
+        } else {
+            senhaValida = true;
+        }
+    }
+
     function entrar() {
 
 
         var nomeVar = input_nome.value;
         var senhaVar = input_senha.value;
+        var senhaconfVar = input_senhaconfirmacao.value
+        var idUsuarioVar = sessionStorage.ID_USUARIO
 
-        if (nomeVar == "" || senhaVar == "") {
+        if (nomeVar == "" || senhaVar == "" || senhaconfVar == "") {
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             return;
         }
+
+        else if (!senhaValida) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "A senha não atende aos requisitos.";
+            return false;
+        }
+
+        else if (senhaVar != senhaconfVar) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "A confirmação da senha está diferente.";
+            return false;
+        }
+
+
 
 
         console.log("FORM NOME: ", nomeVar);
@@ -88,14 +154,14 @@
         console.log("TO AQUI");
 
         fetch("/usuarios/finalizarCadastro", {
-            method: "POST",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-
+                nomeServer: nomeVar,
+                senhaServer: senhaVar,
+                idServer: idUsuarioVar
             })
         })
             .then(resposta => {
@@ -109,11 +175,7 @@
                         console.log("ur ur");
 
                         console.log(JSON.stringify(json));
-                        sessionStorage.EMAIL_USUARIO = json.email;
-                        sessionStorage.NOME_USUARIO = json.nome;
-                        sessionStorage.ID_USUARIO = json.id;
-                        sessionStorage.FKEMPRESA = json.fkEmpresa;
-                        window.location = "./cadastro_funcionario.html";
+                        window.location = "./login.html";
 
                         setTimeout(function () {
                         }, 1000);

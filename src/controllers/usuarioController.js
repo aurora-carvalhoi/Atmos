@@ -6,9 +6,9 @@ function autenticar(req, res) {
     var senha = req.body.senhaServer;
 
     if (email == undefined) {
-         res.status(400).send("Seu email está undefined!");
+        res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
-         res.status(400).send("Sua senha está indefinida!");
+        res.status(400).send("Sua senha está indefinida!");
     } else {
 
         usuarioModel.autenticar(email, senha)
@@ -29,7 +29,7 @@ function autenticar(req, res) {
 
 
 
-                        
+
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -55,7 +55,7 @@ function cadastrarFuncionario(req, res) {
     var dataNascimento = req.body.dataNascimento;
     var cpf = req.body.cpf;
     var senha = req.body.senha;
-   
+
 
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
@@ -65,9 +65,9 @@ function cadastrarFuncionario(req, res) {
         res.status(400).send("Sua data de nascimento está undefined!");
     } else if (cpf == undefined) {
         res.status(400).send("Seu cpf está undefined!");
-    } else if (senha == undefined){
+    } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
-    }  else {
+    } else {
         usuarioModel.cadastrarFuncionario(fkEmpresa, idUsuario, nome, email, dataNascimento, cpf, senha)
             .then(
                 function (resultado) {
@@ -77,7 +77,7 @@ function cadastrarFuncionario(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                         "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
@@ -86,21 +86,21 @@ function cadastrarFuncionario(req, res) {
     }
 }
 
-function cadastrar(req, res){
+function cadastrar(req, res) {
     var email = req.body.emailServer;
     var codigo = req.body.codigoServer;
 
     if (email == undefined) {
-         res.status(400).send("Seu email está undefined!");
+        res.status(400).send("Seu email está undefined!");
     } else if (codigo == undefined) {
-         res.status(400).send("Seu codigo está undefined!");
+        res.status(400).send("Seu codigo está undefined!");
     } else {
 
         usuarioModel.cadastrar(email, codigo)
             .then(
                 function (resultadoCadastrar) {
                     console.log(`\nResultados encontrados: ${resultadoCadastrar.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoCadastrar)}`); 
+                    console.log(`Resultados: ${JSON.stringify(resultadoCadastrar)}`);
 
                     if (resultadoCadastrar.length == 1) {
                         console.log(resultadoCadastrar);
@@ -113,7 +113,7 @@ function cadastrar(req, res){
 
 
 
-                        
+
                     } else if (resultadoCadastrar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -130,8 +130,38 @@ function cadastrar(req, res){
     }
 }
 
+function finalizarCadastro(req, res) {
+    var nome = req.body.nomeServer;
+    var senha = req.body.senhaServer;
+    var id = req.body.idServer;
+
+    if (nome == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (senha == undefined) {
+        res.status(400).send("Sua senha está undefined!");
+    } else if (id == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else {
+
+        usuarioModel.finalizarCadastro(nome, senha, id)
+        .then(function (resultado) {
+
+            console.log("Update realizado");
+
+            res.json({
+                status: "ok"
+            });
+
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    cadastrarFuncionario
+    cadastrarFuncionario,
+    finalizarCadastro
 }
