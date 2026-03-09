@@ -86,7 +86,52 @@ function cadastrarFuncionario(req, res) {
     }
 }
 
+function cadastrar(req, res){
+    var email = req.body.emailServer;
+    var codigo = req.body.codigoServer;
+
+    if (email == undefined) {
+         res.status(400).send("Seu email está undefined!");
+    } else if (codigo == undefined) {
+         res.status(400).send("Seu codigo está undefined!");
+    } else {
+
+        usuarioModel.cadastrar(email, codigo)
+            .then(
+                function (resultadoCadastrar) {
+                    console.log(`\nResultados encontrados: ${resultadoCadastrar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoCadastrar)}`); 
+
+                    if (resultadoCadastrar.length == 1) {
+                        console.log(resultadoCadastrar);
+
+                        res.json({
+                            id: resultadoCadastrar[0].idUsuario,
+                            email: resultadoCadastrar[0].email,
+                            fkEmpresa: resultadoCadastrar[0].empresaId
+                        });
+
+
+
+                        
+                    } else if (resultadoCadastrar.length == 0) {
+                        res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     autenticar,
+    cadastrar,
     cadastrarFuncionario
 }
