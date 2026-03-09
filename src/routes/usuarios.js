@@ -17,5 +17,8 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 });
 
+router.patch("/finalizarCadastro", function (req, res) {
+    usuarioController.finalizarCadastro(req, res);
+});
 
 module.exports = router;

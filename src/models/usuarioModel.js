@@ -18,6 +18,15 @@ function cadastrar(email, codigo) {
     return database.executar(instrucaoSql);
 }
 
+function finalizarCadastro(nome, senha, id) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", nome, senha, id)
+    var instrucaoSql = `
+        UPDATE usuario SET nome = '${nome}', senha = '${senha}'WHERE idUsuario = ${id};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 
 function cadastrarFuncionario(fkEmpresa, idSuperior ,nome,email,dataNascimento,cpf,senha){
@@ -33,6 +42,7 @@ function cadastrarFuncionario(fkEmpresa, idSuperior ,nome,email,dataNascimento,c
 module.exports = {
     autenticar,
     cadastrarFuncionario,
-    cadastrar
+    cadastrar,
+    finalizarCadastro
 };
 
