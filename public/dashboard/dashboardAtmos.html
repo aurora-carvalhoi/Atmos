@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Atmos</title>
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+
+  <nav class="sidebar">
+    <div class="logo-container">
+      <a href="../index.html" class="logo">ATMOS</a>
+    </div>
+
+    <ul class="nav-links">
+
+      <li class="nav-item"> <a href="#">
+          <img src="../assets/images/pc.svg" class="icon" alt="">
+          <span>Overview</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#">
+          <img src="../assets/images/alert.svg" class="icon" alt="">
+          <span>Alertas</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#">
+          <img src="../assets/images/server.svg" class="icon" alt="">
+          <span>Servidores</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#">
+          <img src="../assets/images/user.svg" class="icon" alt="">
+          <span>Usuários</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="info-user">
+        <h3><span id="usuarionome">usuário</span></h3>
+        <h5><span id="usuarioemail">usuário</span></h3>
+    </div>
+
+  </nav>
+
+
+
+</body>
+
+</html>
+
+<script>
+  usuarionome.innerHTML = sessionStorage.NOME_USUARIO
+  usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+
+</script>

@@ -118,8 +118,6 @@ function cadastrarComponentes(){
                 Componentes: componentes,
                 fkEmpresa: sessionStorage.FKEMPRESA,
                 fkServidor: sessionStorage.ID_SERVIDOR 
-     
-                
             })
         })
         .then(resposta => {
@@ -140,7 +138,7 @@ function cadastrarComponentes(){
 
             } else {
 
-                console.log("Houve um erro ao tentar realizar o login!");
+                console.log("Houve um erro ao tentar realizar o cadastro dos componentes!");
 
                 resposta.text().then(texto => {
                     console.error(texto);
