@@ -41,6 +41,7 @@
     transition: 200ms ease-in-out;
 }
 
+
 .nav-item:hover {
     background-color: #041733;
     border-left: 4px solid #3879FC;

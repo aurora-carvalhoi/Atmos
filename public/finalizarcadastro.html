@@ -74,20 +74,20 @@
     function entrar() {
 
 
-        var emailVar = inputemail.value;
+        var nomeVar = input_nome.value;
         var senhaVar = input_senha.value;
 
-        if (emailVar == "" || senhaVar == "") {
+        if (nomeVar == "" || senhaVar == "") {
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             return;
         }
 
 
-        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM NOME: ", nomeVar);
         console.log("FORM SENHA: ", senhaVar);
         console.log("TO AQUI");
 
-        fetch("/usuarios/autenticar", {
+        fetch("/usuarios/finalizarCadastro", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

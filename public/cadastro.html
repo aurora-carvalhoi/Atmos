@@ -56,7 +56,7 @@
             <label for="input_email">EMAIL</label>
             <input type="text" id="inputemail" placeholder="email@empresa.com">
             <label>CÓDIGO DE ATIVAÇÃO</label>
-            <input type="text" id="input_senha" placeholder="ABC-123-DEF-456">
+            <input type="text" id="input_codigo" placeholder="ABC-123-DEF-456">
         </div>
 
         <div class="bloco-input">
@@ -82,26 +82,26 @@
     
 
         var emailVar = inputemail.value;
-        var senhaVar = input_senha.value;
+        var codigoVar = input_codigo.value;
 
-        if (emailVar == "" || senhaVar == "") {
+        if (emailVar == "" || codigoVar == "") {
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             return;
         }
         
 
         console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
+        console.log("FORM SENHA: ", codigoVar);
         console.log("TO AQUI");
       
-        fetch("/usuarios/autenticar", {
+        fetch("/usuarios/cadastrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 emailServer: emailVar,
-                senhaServer: senhaVar
+                codigoServer: codigoVar
      
             })
         })
@@ -117,11 +117,9 @@
 
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
                     sessionStorage.FKEMPRESA = json.fkEmpresa;
-                  //  sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-                    window.location = "./cadastro_funcionario.html";
+                    window.location = "./finalizarcadastro.html";
 
                     setTimeout(function () {
                        // window.location = "./cadastro_funcionario.html";
