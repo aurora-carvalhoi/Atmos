@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+    <!--HTML Meta Tags-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!--Title-->
+    <title>Atmos | Cadastro</title>
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="./assets/css/cadastrousuario.css" />
+
+    <!--Favicon-->
+    <link rel="icon" href="./assets/icons/favicon.ico" />
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+<!--Container login-->
+<div class="container-login">
+    <div class="login-info">
+        <div class="logo-login">
+            <a href="./index.html">
+                <img src="./assets/images/logo-atmos.svg" alt="Logo Atmos" />
+            </a>
+        </div>
+        <div class="texto-info">
+            <h1>Sua jornada com a ATMOS <br>
+                <span style="color: #004aad;">começa agora</span></h1>
+        </div>
+    </div>
+
+
+    <div class="login-input">
+
+        <div class="h1-login">
+            <h1>Faça seu cadastro</h1>
+            <p>Coloque seu endereço de e-mail e o código de ativação que foi enviado <br> para sua caixa de entrada.</p>
+        </div>
+
+
+        <div class="paragrafo-login">
+            <label for="input_email">EMAIL</label>
+            <input type="text" id="inputemail" placeholder="email@empresa.com">
+            <label>CÓDIGO DE ATIVAÇÃO</label>
+            <input type="text" id="input_senha" placeholder="ABC-123-DEF-456">
+        </div>
+
+        <div class="bloco-input">
+                    <span>
+                        Já é cadastrado?  
+                        <a href="./login.html"> Clique aqui.</a>
+                    </span>
+            <div class="buttons">
+                <button onclick="entrar()">
+                    Entrar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+</body>
+
+</html>
+
+<script>
+    function entrar() {
+    
+
+        var emailVar = inputemail.value;
+        var senhaVar = input_senha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            return;
+        }
+        
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+        console.log("TO AQUI");
+      
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+     
+            })
+        })
+        .then(resposta => {
+            console.log("ESTOU NO THEN DO entrar()!")
+            console.log(resposta)
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then((json) => {
+                    console.log(json);
+                console.log("ur ur");
+
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.FKEMPRESA = json.fkEmpresa;
+                  //  sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    window.location = "./cadastro_funcionario.html";
+
+                    setTimeout(function () {
+                       // window.location = "./cadastro_funcionario.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+    }
+
+    function sumirMensagem() {
+      //  cardErro.style.display = "none"
+    }
+
+</script>

@@ -1,0 +1,74 @@
+@import url('default.css');
+
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: var(--color-painel);
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-container {
+    padding: 30px 20px;
+}
+
+.logo {
+    color: #3879FC;
+    font-size: 32px;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1.5px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item a {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.nav-item {
+    transition: 200ms ease-in-out;
+}
+
+.nav-item:hover {
+    background-color: #041733;
+    border-left: 4px solid #3879FC;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px
+}
+
+.info-user {
+    background-color: #11161f;
+    margin-top: 42vh;
+    padding: 16px 10px;
+    margin-left: 2.5vh;
+    margin-right: 2.5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-user h3{
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.info-user h5{
+    font-size: 12px;
+    font-weight: normal;
+    color: var(--color-opaque);
+}
