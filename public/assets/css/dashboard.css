@@ -1,5 +1,9 @@
 @import url('default.css');
 
+body {
+    display: flex;
+    flex-direction: row;
+}
 
 .sidebar {
     width: 250px;
