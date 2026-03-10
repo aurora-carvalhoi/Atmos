@@ -111,9 +111,6 @@ function cadastrar(req, res) {
                             fkEmpresa: resultadoCadastrar[0].empresaId
                         });
 
-
-
-
                     } else if (resultadoCadastrar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
