@@ -8,6 +8,10 @@
     display: flex;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .btn {
     display: flex;
     text-transform: uppercase;
@@ -169,9 +173,9 @@ a {
     align-items: center;
     flex-direction: row;
     height: 100%;
-    /* justify-content: space-around; */
+    padding-top: 2vw;
     padding-left: 2vw;
-    /* gap: 6vw; */
+    padding-bottom: 2vw;
 }
 
 .container-info .title .emphasis {
@@ -208,19 +212,86 @@ a {
     display: flex;
     justify-content: center;
     padding-top: 6vw;
+    margin-bottom: 5vw;
 }
 
 .container-missao {
     display: flex;
-    width: 80vw;
+    width: 90vw;
     height: 45vw;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-top: 20vw;
+    padding-left: 10vw;
 }
 
-.container-background img {
-    width: 80%;
-    height: 100%;
+.container-essencia {
+    color: var(--color-white);
+    
+}
+
+.container-essencia h3 {
+    font-size: 2.2rem;
+    margin-bottom: 2vw;
+}
+
+.container-essencia p {
+    font-size: 2.2rem;
+}
+
+
+.equipe {
+    background-color: var(--color-blue);
+    color: var(--color-black);
+    padding-top: 5.5vw;
+    padding-left: 2vw;
+    padding-bottom: 4vw;
+}
+
+.equipe .titulo h3{
+    font-size: 2.5rem;
+    color: var(--color-white);
+    padding-bottom: 3vw;
+}
+
+.blocos-fotos, .blocos-fotos1 {
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+}
+
+.blocos-fotos h1, .blocos-fotos1 h1{
+    font-size: 1.5rem;
+}
+
+.blocos-fotos1 {
+    padding-top: 4vw;
+}
+
+.bloco {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--color-white);
+    width: 28vw;
+    height: 15vw;
+    gap: 2vw;
+    padding: 1vw;
+    border-radius: 2%;
+}
+
+.text-bloc h1 {
+    padding-bottom: 0.5vw;
+}
+
+.text-bloc h4 {
+    color: var(--color-blue);
+    padding-bottom: 0.5vw;
+}
+
+ .foto img {
+    width: 9vw;
+    border-radius: 1vw;
 }
 
 /* Fim - tela de inicio */
@@ -231,6 +302,7 @@ a {
     justify-content: space-between;
     width: 100%;
     align-items: flex-start;
+    padding-top: 4vw;
 }
 
 .logo-footer img {
