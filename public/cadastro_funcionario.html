@@ -42,9 +42,7 @@
             </div>
         </div> -->
 
-        <div class="modal" id="modal_2" style="display: flex;">
             <div class="container-cadastro">
-
                 <div class="cadastro-info">
                     <div class="h1-cadastro">
                         <h1>Cadastro de Colaborador</h1>
@@ -95,8 +93,8 @@
                             </div>
 
                             <!-- <div id="div_aguardar" class="loading-div">
-        <img src="./assets/images/loading.gif" alt="">
-      </div> -->
+                            <img src="./assets/images/loading.gif" alt="">
+                            </div> -->
 
                             <div class="alerta_erro">
                                 <div id="cardErro" class="card_erro">
@@ -105,7 +103,6 @@
                             </div>
                         </div>
                     </div>
-
     </main>
 </body>
 
@@ -152,7 +149,7 @@
             })
 
         })
-        .then(Resposta => {
+        .then(resposta => {
             console.log("ESTOU NO THEN DO cadastrarFuncionario()!")
             console.log(resposta)
             if (resposta.ok) {
@@ -161,26 +158,26 @@
                     console.log(json);
                     
                     console.log(JSON.stringify(json));
-                    sessionStorage.FKEMPRESA = json.fkEmpresa;
-                    sessionStorage.FKSUPERIOR = json.fkSuperior
-                    sessionStorage.NOME_USUARIO = json.nome
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.DTNASC_USUARIO = json.dataNascimento;
-                    sessionStorage.CPF_USUARIO = json.cpf;
-                    sessionStorage.SENHA_USUARIO = json.senha;
-                    
+                    // sessionStorage.FKEMPRESA = fkEmpresa;
+                    // sessionStorage.FKSUPERIOR = json.fkSuperior
+                    // sessionStorage.NOME_USUARIO = json.nome
+                    // sessionStorage.EMAIL_USUARIO = json.email;
+                    // sessionStorage.DTNASC_USUARIO = json.dataNascimento;
+                    // sessionStorage.CPF_USUARIO = json.cpf;
+                    // sessionStorage.SENHA_USUARIO = json.senha;
                     
                     setTimeout(function () {
                         alert("Cadastro realizado com sucesso!")
+                        window.location.href = './dashboardAtmos.html'
                     }, 1000); // apenas para exibir o loading
 
                 });
+
             } else {
                 console.log("Houve um erro ao tentar realizar o login!");
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                   // finalizarAguardar(texto);
                 });
             }
         }).catch(function (erro) {
