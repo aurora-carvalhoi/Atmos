@@ -46,10 +46,10 @@
                     <input type="number" id="enderecoIP_input" placeholder="Protocolo de Internet">
 
                     <div class="bloco-input">
-                        <div class="buttons">
-                            <button onclick="cadastrarServidor()">
+                            <div class="buttons">
+                                <a onclick="cadastrarServidor()">
                                 Cadastrar Servidor
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
     function cadastrarServidor(){
 
         console.log("SESSION STORAGE:", sessionStorage);
-    console.log("FKEMPRESA:", sessionStorage.FKEMPRESA);
+        console.log("FKEMPRESA:", sessionStorage.FKEMPRESA);
         nomeServidor = nome_servidor.value;
         numeroIdentificacao = numero_identificacao.value;
         sistemaOperacional = sistemaOperacional_input.value;
