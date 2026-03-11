@@ -197,12 +197,30 @@ a {
 }
 
 .container-paragrafos p {
-    
     font-size: 1.3rem;
 }
 
 .container-paragrafos {
     padding-top: 2vw;
+}
+
+.container-carrossel {
+    display: flex;
+    justify-content: center;
+    padding-top: 6vw;
+}
+
+.container-missao {
+    display: flex;
+    width: 80vw;
+    height: 45vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container-background img {
+    width: 80%;
+    height: 100%;
 }
 
 /* Fim - tela de inicio */
