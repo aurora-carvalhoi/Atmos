@@ -4,12 +4,23 @@
     display: none;
 }
 
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .links {
     display: flex;
 }
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 .btn {
@@ -155,8 +166,16 @@ a {
     display: flex;
     padding-top: 6vw;
     padding-left: 2.5vw;
-    width: 50vw;
+    width: 45vw;
     align-items: center;
+    pointer-events: none;
+    user-select: none;
+    animation: girar 100s linear infinite;
+
+}
+
+.header-content .imagem1 img:hover {
+    transform: rotate(360deg);
 }
 
 /* Header */
@@ -299,33 +318,33 @@ a {
 }
 
 .carrossel-container {
-  max-width: 30vw;
-  position: relative;
-  margin: auto;
-  overflow: hidden; 
+    max-width: 30vw;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
 }
 
 .slides {
-  display: flex;
-  transition: transform 0.5s ease-in-out; 
+    display: flex;
+    transition: transform 0.5s ease-in-out;
 }
 
 .slide {
-  min-width: 100%; 
+    min-width: 100%;
 }
 
 .slide img {
-  width: 100%;
-  display: block;
+    width: 100%;
+    display: block;
 }
 
-.button  button{
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: transparent;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
+.button button {
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
 }
 
 .button img {
