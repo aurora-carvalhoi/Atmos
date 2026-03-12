@@ -184,18 +184,62 @@
                         nossa essência.
                     </p>
                 </div>
+                <div class="carrossel-container" id="carouselSlide">
 
-                <!-- <div class="container-bloco-info">
-                    <h4>Missão</h4>
-                    <p>
-                        Garantir a alta disponibilidade e confiabilidade de <br>
-                        infraestruturas utilizadas em previsões atmosféricas, por <br>
-                        meio de monitoramento rigoroso e proativo, assegurando a <br>
-                        continuidade de serviços meteorológicos críticos.
-                    </p>
+                    <div class="slides">
+                        <div class="slide"><img src="../public/assets/images/missao-foto.svg" alt="Imagem 1"></div>
+                        <div class="slide"><img src="../public/assets/images/visao-foto.svg" alt="Imagem 2"></div>
+                        <div class="slide"><img src="../public/assets/images/valores-foto.svg" alt="Imagem 3"></div>
+                    </div>
+
+                    <div class="button">
+                        <button class="botao-prev" onclick="mudarSlide(-1)">
+                            <img src="../public/assets/images/seta-esquerda.svg" alt="">
+                        </button>
+                        <button class="botao-next" onclick="mudarSlide(1)">
+                            <img src="../public/assets/images/seta-direita.svg" alt="">
+                        </button>
+                    </div>
+
+
+
+                    <!-- <div class="slide" id="idMissao">
+                        <h4>Missão</h4>
+                        <p>
+                            Garantir a alta disponibilidade e confiabilidade de
+                            infraestruturas utilizadas em previsões atmosféricas, por
+                            meio de monitoramento rigoroso e proativo, assegurando a
+                            continuidade de serviços meteorológicos críticos.
+                        </p>
+                    </div>
+
+                    <div class="slide" id="idVisao">
+                        <h4>Visão</h4>
+                        <p>
+                            Ser referência em monitoramento de servidores
+                            para meteorologia, reconhecida pela excelência técnica,
+                            confiabilidade operacional e impacto direto na proteção
+                            da sociedade.
+                        </p>
+                    </div>
+
+                    <div class="slide" id="idValores">
+                        <h4>Valores</h4>
+                        <p>
+                            Confiabilidade em ambientes onde falhas não são aceitáveis
+                            Prevenção como princípio estratégico
+                            Excelência técnica em infraestrutura crtica
+                        </p>
+                    </div> -->
+                </div>
+                <!-- <div class="button">
+                    <button id="prev" onclick="moveSlide(-1)">&#10094;</button>
+                    <button id="next" onclick="moveSlide(1)">&#10095;</button>
                 </div> -->
             </div>
         </div>
+
+
 
         <div class="equipe" id="id_equipe">
             <div class="titulo">
@@ -333,3 +377,22 @@
 </body>
 
 </html>
+<script>
+    let slideIndex = 0;
+    const slides = document.querySelector('.slides'); // retona o primeiro elemnto encontrado
+    const totalSlides = document.querySelectorAll('.slide').length; // conta o queryselector
+
+    function mudarSlide(direcao) {
+        slideIndex += direcao;
+
+        // Loop infinito
+        if (slideIndex >= totalSlides) {
+            slideIndex = 0;
+        } else if (slideIndex < 0) {
+            slideIndex = totalSlides - 1;
+        }
+
+        const slideTrocar = -slideIndex * 100;
+        slides.style.transform = `translateX(${slideTrocar}%)`;
+    }
+</script>

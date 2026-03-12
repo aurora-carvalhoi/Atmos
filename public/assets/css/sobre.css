@@ -221,13 +221,15 @@ a {
     height: 45vw;
     background-repeat: no-repeat;
     background-size: cover;
-    padding-top: 20vw;
-    padding-left: 10vw;
+    padding-top: 22vw;
+    padding-left: 5vw;
+    gap: 15vw;
+    /* overflow: hidden; */
+    /* position: relative; */
 }
 
 .container-essencia {
     color: var(--color-white);
-    
 }
 
 .container-essencia h3 {
@@ -248,19 +250,21 @@ a {
     padding-bottom: 4vw;
 }
 
-.equipe .titulo h3{
+.equipe .titulo h3 {
     font-size: 2.5rem;
     color: var(--color-white);
     padding-bottom: 3vw;
 }
 
-.blocos-fotos, .blocos-fotos1 {
+.blocos-fotos,
+.blocos-fotos1 {
     display: flex;
     justify-content: center;
     gap: 2vw;
 }
 
-.blocos-fotos h1, .blocos-fotos1 h1{
+.blocos-fotos h1,
+.blocos-fotos1 h1 {
     font-size: 1.5rem;
 }
 
@@ -289,10 +293,56 @@ a {
     padding-bottom: 0.5vw;
 }
 
- .foto img {
+.foto img {
     width: 9vw;
     border-radius: 1vw;
 }
+
+.carrossel-container {
+  max-width: 30vw;
+  position: relative;
+  margin: auto;
+  overflow: hidden; 
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out; 
+}
+
+.slide {
+  min-width: 100%; 
+}
+
+.slide img {
+  width: 100%;
+  display: block;
+}
+
+.button  button{
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.button img {
+    width: 3vw;
+}
+
+/* .botao-prev { 
+    left: 0.1vw; 
+    width: 3vw;
+}
+
+.botao-next { 
+    right: 0.1vw; 
+    width: 3vw;
+} */
+
+
 
 /* Fim - tela de inicio */
 
