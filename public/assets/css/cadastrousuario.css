@@ -39,7 +39,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 7vh;
+    gap: 4vh;
 }
 
 .login-input h1 {
@@ -78,6 +78,7 @@
 }
 
 .bloco-input span{
+    padding-top: 1vw;
     color: var(--color-opaque);
 }
 
