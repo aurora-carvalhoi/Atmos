@@ -92,7 +92,7 @@ a {
 }
 
 
-/* Começo - tela de inicio */
+/* Começo - tela Sobre */
 /*Header*/
 .header-content {
     display: flex;
@@ -332,19 +332,8 @@ a {
     width: 3vw;
 }
 
-/* .botao-prev { 
-    left: 0.1vw; 
-    width: 3vw;
-}
 
-.botao-next { 
-    right: 0.1vw; 
-    width: 3vw;
-} */
-
-
-
-/* Fim - tela de inicio */
+/* Fim - tela Sobre */
 
 .container-footer {
     display: flex;
