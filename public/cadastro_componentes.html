@@ -51,10 +51,10 @@
                     </div>
 
                     <div class="bloco-input">
-                        <div class="buttons">
-                            <button type="submit" href="#" onclick="cadastrarComponentes()">
-                                Cadastrar Componente
-                            </button>
+                            <div class="buttons">
+                                <a onclick="cadastrarComponentes()">
+                                Cadastrar Componentes
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -132,6 +132,7 @@ function cadastrarComponentes(){
                     console.log(JSON.stringify(json));
                     setTimeout(function () {
                         alert("Componentes cadastrados com sucesso")
+                        window.location.href = 'dashboard/dashboardAtmos.html';
                     }, 1000); // apenas para exibir o loading
 
                 });
