@@ -171,7 +171,6 @@ a {
     pointer-events: none;
     user-select: none;
     animation: girar 100s linear infinite;
-
 }
 
 .header-content .imagem1 img:hover {
@@ -349,6 +348,8 @@ a {
 
 .button img {
     width: 3vw;
+    padding-top: 4vw;
+    filter: invert(100%) brightness(100);
 }
 
 
