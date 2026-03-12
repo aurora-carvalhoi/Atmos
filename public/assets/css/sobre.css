@@ -191,9 +191,7 @@ a {
     align-items: center;
     flex-direction: row;
     height: 100%;
-    padding-top: 2vw;
-    padding-left: 2vw;
-    padding-bottom: 2vw;
+    padding: 8%;
 }
 
 .container-info .title .emphasis {
@@ -211,7 +209,6 @@ a {
 
 .container-info .text img {
     width: 40vw;
-    padding-left: 2vw;
 }
 
 .container-paragrafos b {
@@ -219,7 +216,7 @@ a {
 }
 
 .container-paragrafos p {
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 
 .container-paragrafos {
