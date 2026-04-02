@@ -98,7 +98,12 @@
 .h1-login{
     display: flex;
     flex-direction: column;
-    text-align: left;
+    text-align: center;
+    background-color: red;
+}
+
+.h1-login h1 {
+    text-align: center;
 }
 
 .bloco-input .buttons {
@@ -224,7 +229,7 @@
 .h1-login{
     display: flex;
     flex-direction: column;
-    text-align: left;
+    text-align: center;
 }
 
 .bloco-input .buttons {
