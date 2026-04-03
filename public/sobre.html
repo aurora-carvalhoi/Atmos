@@ -25,6 +25,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
+
+<!-- bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
 </head>
 
 <body>
@@ -241,94 +246,174 @@
 
 
 
-        <div class="equipe" id="id_equipe">
-            <div class="titulo">
-                <h3>Conheça Nossa Equipe</h3>
-            </div>
+   <title>Carrossel - Nossa Equipe</title>
 
-            <div class="blocos-fotos">
-                <div class="bloco">
-                    <div class="foto">
-                        <img src="./assets/images/foto-geovanna.png" alt="">
-                    </div>
-                    <div class="text-bloc">
-                        <h1>Geovanna Vitoriana</h1>
-                        <h4>Governança</h4>
-                        <p>Responsável pelas tratativas durante o projeto.</p>
-                    </div>
-
-                </div>
-
-                <div class="bloco">
-                    <div class="foto">
-                        <img src="./assets/images/foto-ornagui.png" alt="">
-                    </div>
-                    <div class="text-bloc">
-                        <h1>Guilherme Ornaghi</h1>
-                        <h4>Back-End e Front-End</h4>
-                        <p>Focado no desenvolvimento e aprimoramento da experiência do usuário.</p>
-                    </div>
-
-                </div>
-
-                <div class="bloco">
-                    <div class="foto">
-                        <img src="./assets/images/foto-souto.png" alt="">
-                    </div>
-                    <div class="text-bloc">
-                        <h1>Guilherme Souto</h1>
-                        <h4>Back-End e Governança</h4>
-                        <p>Desenvolvedor de funcionalidades do Site Institucional</p>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="blocos-fotos1">
-                <div class="bloco">
-                    <div class="foto">
-                        <img src="./assets/images/foto-marley.jpeg" alt="">
-                    </div>
-                    <div class="text-bloc">
-                        <h1>Marley Santos</h1>
-                        <h4>Infraestrutura e Front-End</h4>
-                        <p>Representante da Infraestruta do projeto e aplicações visuais do Site</p>
-                    </div>
-
-                </div>
-
-                <div class="bloco">
-                    <div class="foto">
-                        <img src="./assets/images/foto-renan.png" alt="">
-                    </div>
-                    <div class="text-bloc">
-                        <h1>Renan Minosso</h1>
-                        <h4>Back-End e Front-End</h4>
-                        <p>Focado no desenvolvimento de funcionalidades e aprimoramentos visuais.</p>
-                    </div>
-
-                </div>
-
-                <div class="bloco">
-                    <div class="foto">
-                        <img src="./assets/images/foto_samara.png" alt="">
-                    </div>
-                    <div class="text-bloc">
-                        <h1>Samara Vicky</h1>
-                        <h4>Desenvolvedora DBA e Front-End</h4>
-                        <p>Responsável por gerenciar, atualizar e monitorar o bancos de dados.</p>
-                    </div>
-                </div>
-
-            </div>
-
+    <div class="container">
+        <div class="header">
+            <h2>Conheça Nossa Equipe</h2>
+            <div class="divider"></div>
         </div>
 
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto-geovanna.png" alt="Geovanna Vitoriana">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Geovanna Vitoriana</h1>
+                            <h4>Governança</h4>
+                            <p>Responsável pelas tratativas durante o projeto.</p>
+                        </div>
+                    </div>
+
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto-ornagui.png" alt="Guilherme Ornaghi">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Guilherme Ornaghi</h1>
+                            <h4>Back-End e Front-End</h4>
+                            <p>Focado no desenvolvimento e aprimoramento da experiência do usuário.</p>
+                        </div>
+                    </div>
+
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto-souto.png" alt="Guilherme Souto">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Guilherme Souto</h1>
+                            <h4>Back-End e Governança</h4>
+                            <p>Desenvolvedor de funcionalidades do Site Institucional</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto-marley.jpeg" alt="Marley Santos">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Marley Santos</h1>
+                            <h4>Infraestrutura e Front-End</h4>
+                            <p>Representante da Infraestrutura do projeto e aplicações visuais do Site</p>
+                        </div>
+                    </div>
+
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto-renan.png" alt="Renan Minosso">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Renan Minosso</h1>
+                            <h4>Back-End e Front-End</h4>
+                            <p>Focado no desenvolvimento de funcionalidades e aprimoramentos visuais.</p>
+                        </div>
+                    </div>
+
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto_samara.png" alt="Samara Vicky">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Samara Vicky</h1>
+                            <h4>Desenvolvedora DBA e Front-End</h4>
+                            <p>Responsável por gerenciar, atualizar e monitorar o bancos de dados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto_Anderson.png" alt="Anderson">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Anderson Augusto</h1>
+                            <h4>Infraestrutura e Desenvolvedora DBA</h4>
+                            <p>Responsável pela manutenção, organização e monitoramento dos sistemas e bancos de dados.</p>
+                        </div>
+                    </div>
+
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto_Aurora.png" alt="Aurora">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Aurora Carvalho</h1>
+                            <h4>Infraestrutura e Desenvolvedora DBA</h4>
+                            <p>Responsável pela manutenção, organização e monitoramento dos sistemas e bancos de dados.</p>
+                        </div>
+                    </div>
+
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto_Kaio.png" alt="Kaio">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Kaio Rodrigues</h1>
+                            <h4>Infraestrutura e Desenvolvedora DBA</h4>
+                            <p>Responsável pela manutenção, organização e monitoramento dos sistemas e bancos de dados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto_Luana.png" alt="Luana Gomes">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Luana Gomes</h1>
+                            <h4>Infraestrutura e Desenvolvedora DBA</h4>
+                            <p>Responsável pela manutenção, organização e monitoramento dos sistemas e bancos de dados.</p>
+                        </div>
+                    </div>
+
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto_Luiz.png" alt="Luiz">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Luiz Vittor</h1>
+                            <h4>Infraestrutura e Desenvolvedora DBA</h4>
+                            <p>Responsável pela manutenção, organização e monitoramento dos sistemas e bancos de dados.</p>
+                        </div>
+                    </div>
+
+                    <div class="bloco">
+                        <div class="foto">
+                            <img src="./assets/images/foto_Matheus.png" alt="Matheus">
+                        </div>
+                        <div class="text-bloc">
+                            <h1>Matheus Campos</h1>
+                            <h4>Product Owner e Full Stack</h4>
+                            <p>Responsável por definir requisitos, organizar o desenvolvimento e implementar soluções completas no sistema, do back-end ao front-end.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
-
-
-
+        
     <!--Footer-->
     <footer>
         <div class="container-footer">
@@ -395,4 +480,5 @@
         const slideTrocar = -slideIndex * 100;
         slides.style.transform = `translateX(${slideTrocar}%)`;
     }
+
 </script>
