@@ -538,6 +538,7 @@ input[type="checkbox"] {
     width: auto;
     display: flex;
     flex-direction: row;
+    gap: 150px;
 }
 
 .login-info {
