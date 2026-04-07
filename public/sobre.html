@@ -494,6 +494,14 @@
         createIndicators();
     }
 
+       function updateCarousel() {
+        const cardWidth = document.querySelector('.card-equipe').offsetWidth;
+        const gap = 32; // 2rem em pixels
+        const slideWidth = (cardWidth + gap) * cardsPerView;
+        const translateX = -currentIndex * slideWidth;
+        track.style.transform = `translateX(${translateX}px)`;
+        updateIndicators();
+    }
  
 
 </script>
