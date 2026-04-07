@@ -13,60 +13,89 @@
 
   <nav class="sidebar">
     <div class="logo-container">
-      <a href="../index.html" class="logo">ATMOS</a>
+      <a href="../index.html" class="logo">
+        <div class="cicle"></div>
+        <span>ATMOS</span>
+      </a>
     </div>
 
     <ul class="nav-links">
-
-      <li class="nav-item"> <a href="#">
-          <img src="../assets/images/pc.svg" class="icon" alt="">
-          <span>Overview</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#">
-          <img src="../assets/images/alert.svg" class="icon" alt="">
-          <span>Alertas</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/cadastro_servidor.html">
-          <img src="../assets/images/server.svg" class="icon" alt="">
-          <span>Servidores</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/cadastro_funcionario.html">
-          <img src="../assets/images/user.svg" class="icon" alt="">
-          <span>Usuários</span>
-        </a>
-      </li>
+      <ul>
+        <li class="nav-category">
+          <span>PRINCIPAL</span>
+        </li>
+        <li class="nav-item nav-item-active">
+          <a href="#">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#">
+            <img src="../assets/images/alert.svg" class="icon" alt="">
+            <span>Alertas</span>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li class="nav-category">
+          <span>INFRAESTRUTURA</span>
+        </li>
+        <li class="nav-item">
+          <a href="/cadastro_servidor.html">
+            <img src="../assets/images/server.svg" class="icon" alt="">
+            <span>Servidores</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/cadastro_funcionario.html">
+            <img src="../assets/images/user.svg" class="icon" alt="">
+            <span>Usuários</span>
+          </a>
+        </li>
+      </ul>
     </ul>
 
     <div class="info-user">
+      <div class="img-user" id="usarioimagem">
+        <img alt="A">
+      </div>
+      <div>
         <h3><span id="usuarionome">usuário</span></h3>
         <h5><span id="usuarioemail">email</span></h3>
+      </div>
     </div>
 
   </nav>
 
   <div class="container-dash">
-
     <div class="info-dash">
       <p>Sistema / Monitoramento</p>
-      
     </div>
-
   </div>
 
-
+  <!-- Menu Icon -->
+  <div class="container-menu">
+    <div class="menu-icon" id="menu-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
 
 </body>
 
 </html>
 
 <script>
-  usuarionome.innerHTML = sessionStorage.NOME_USUARIO
-  usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+  if (sessionStorage.NOME_USUARIO != null) {
+    usuarionome.innerHTML = sessionStorage.NOME_USUARIO
+    usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+    usarioimagem.innerHTML = "<img alt='A'>"
+  } else {
+    usuarionome.innerHTML = "Geraldo Atmos"
+    usuarioemail.innerHTML = "geraldo_adm@atmos.com"
+    usarioimagem.innerHTML = "G"
+  }
 
 </script>
