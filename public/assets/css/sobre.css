@@ -192,6 +192,7 @@ a {
     flex-direction: row;
     height: 100%;
     padding: 8%;
+    gap: 10rem;
 }
 
 .container-info .title .emphasis {
@@ -217,10 +218,12 @@ a {
 
 .container-paragrafos p {
     font-size: 1rem;
+
 }
 
 .container-paragrafos {
-    padding-top: 2vw;
+    padding-top: 8rem;
+    width: 65rem;
 }
 
 .container-carrossel {
