@@ -494,7 +494,7 @@
         createIndicators();
     }
 
-       function updateCarousel() {
+    function updateCarousel() {
         const cardWidth = document.querySelector('.card-equipe').offsetWidth;
         const gap = 32; // 2rem em pixels
         const slideWidth = (cardWidth + gap) * cardsPerView;
@@ -502,7 +502,7 @@
         track.style.transform = `translateX(${translateX}px)`;
         updateIndicators();
     }
- 
+
     function nextSlide() {
         if (currentIndex < totalSlidesEquipe - 1) {
             currentIndex++;
@@ -513,7 +513,7 @@
         }
     }
 
-        function prevSlide() {
+    function prevSlide() {
         if (currentIndex > 0) {
             currentIndex--;
             updateCarousel();
@@ -522,6 +522,16 @@
             updateCarousel();
         }
     }
- 
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    window.addEventListener('resize', () => {
+        setTimeout(() => {
+            updateCardsPerView();
+        }, 100);
+    });
+
+    setTimeout(() => {
+        updateCardsPerView();
+    }, 100);
 
 </script>
