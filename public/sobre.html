@@ -502,14 +502,23 @@
         track.style.transform = `translateX(${translateX}px)`;
         updateIndicators();
     }
-
-    
+ 
     function nextSlide() {
         if (currentIndex < totalSlidesEquipe - 1) {
             currentIndex++;
             updateCarousel();
         } else {
             currentIndex = 0;
+            updateCarousel();
+        }
+    }
+
+        function prevSlide() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+        } else {
+            currentIndex = totalSlidesEquipe - 1;
             updateCarousel();
         }
     }
