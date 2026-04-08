@@ -55,11 +55,13 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
+
 }
 
 nav ul li {
     margin: 2px 15px;
 }
+
 
 li a {
     transition: 180ms ease-in-out;
@@ -94,6 +96,7 @@ a {
 
 .links {
     margin-left: 12%;
+     
 }
 
 .logo-links .logo img {
