@@ -104,7 +104,8 @@ body {
 
     .info-user {
         background-color: var(--color-blue-effect);
-        margin-top: 30vh;
+        margin-top: auto;
+        margin-bottom: 5vh;
         padding: 16px 10px;
         margin-left: 2.5vh;
         margin-right: 2.5vh;
