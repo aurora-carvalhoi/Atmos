@@ -10,46 +10,226 @@
 </head>
 
 <body>
+<nav class="sidebar">
+    <div class="logo-container">
+      <a href="../index.html" class="logo">
+        <div class="cicle"></div>
+        <span>ATMOS</span>
+      </a>
+    </div>
 
-    <nav class="sidebar">
-        <div class="logo-container">
-            <a href="../index.html" class="logo">ATMOS</a>
+    <ul class="nav-links">
+      <ul>
+        <li class="nav-category">
+          <span>PRINCIPAL</span>
+        </li>
+        <li class="nav-item nav-item-active">
+          <a href="#">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#">
+            <img src="../assets/images/alert.svg" class="icon" alt="">
+            <span>Alertas</span>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li class="nav-category">
+          <span>INFRAESTRUTURA</span>
+        </li>
+        <li class="nav-item">
+          <a href="/cadastro_servidor.html">
+            <img src="../assets/images/server.svg" class="icon" alt="">
+            <span>Servidores</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/cadastro_funcionario.html">
+            <img src="../assets/images/user.svg" class="icon" alt="">
+            <span>Usuários</span>
+          </a>
+        </li>
+      </ul>
+    </ul>
+
+    <div class="info-user">
+      <div class="img-user" id="usarioimagem">
+        <img alt="A">
+      </div>
+      <div>
+        <h3><span id="usuarionome">usuário</span></h3>
+        <h5><span id="usuarioemail">email</span></h3>
+      </div>
+    </div>
+
+  </nav>
+
+  <main>
+    <header>
+
+        <div>
+            <ul class="breadcrumb">
+                <li><a href="#">Sistema</a></li>
+                <li><a href="#">Servidores</a></li>
+            </ul>
+            <span id="dataHora"></span>
         </div>
 
-        <ul class="nav-links">
-
-            <li class="nav-item"> <a href="./dashboardAtmos.html">
-                    <img src="../assets/images/pc.svg" class="icon" alt="">
-                    <span>Overview</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#">
-                    <img src="../assets/images/alert.svg" class="icon" alt="">
-                    <span>Alertas</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#">
-                    <img src="../assets/images/server.svg" class="icon" alt="">
-                    <span>Servidores</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="./dashboardUsuario.html">
-                    <img src="../assets/images/user.svg" class="icon" alt="">
-                    <span>Usuários</span>
-                </a>
-            </li>
-        </ul>
-        <div class="info-user">
-            <h3><span id="usuarionome">usuário</span></h3>
-            <h5><span id="usuarioemail">usuário</span></h3>
+        <div class="cabecalho">
+            <h2>Dashboard de Servidores</h2>
+            <h4>Monitoramento e Configuração de Servidores</h4>
+            <div>
+                <img src="../assets/icons/iconeAtualizar.svg" alt="">
+                <button>Atualizar</button>
+            </div>
+            <div>
+                <img src="../assets/icons/iconeAdd.svg" alt="">
+                <button>Novo Servidor</button>
+            </div>
         </div>
+        
+    </header>
 
-    </nav>
+    <section>
+        <div class="secao-kpis">
+            <div class="titulos-kpi">
+                <h2>Visão Geral</h2>
+                <h4>Informações Gerais</h4>
+            </div>
+            <div class="conjunto-kpis">
+                <div class="kpi">Bloco 1</div>
+                <div class="kpi">Bloco 2</div>
+                <div class="kpi">Bloco 3</div>
+                <div class="kpi">Bloco 4</div>
+            </div>
+        </div>
+    </section>
 
+    <section>
+        <div class="filtros-busca">
+            <div class="barra-busca">
+                <img src="../assets/icons/iconeBusca.svg" alt="">
+                <input type="text" placeholder="Buscar servidor por nome ou ID...">
+            </div>
+            <div class="select-status">
+                <select name="filtroStatus" id="filtroStatus">
+                    <option value="">Status 1</option>
+                    <option value="">Status 2</option>
+                    <option value="">Status 3</option>
+                </select>
+            </div>
+            <div class="select-sistema">
+                <select name="filtroSistema" id="filtroSistema">
+                    <option value="">Sistema 1</option>
+                    <option value="">Sistema 2</option>
+                    <option value="">Sistema 3</option>
+                </select>
+            </div>
+        </div>
+    </section>
 
+    <section>
+        <h3>Lista de Servidores</h3>
+      <div class="tabela">
+        <table>
+              <thead>
+            <tr>
+                <th>Status</th>
+                <th>Nome</th>
+                <th>IP</th>
+                <th>Sistema Operacional</th>
+                <th>CPU</th>
+                <th>RAM</th>
+                <th>Disco</th>
+                <th>Uptime</th>
+                <th>Ações</th>
+            </tr>
+
+            <tbody>
+                <tr>
+                    <td>Atenção</td>
+                    <td>SRV-PROD-02</td>
+                    <td>10.0.1.11</td>
+                    <td>Ubuntu 22.04</td>
+                    <td>
+                        <div class="container-barra">
+                            <div class="barra">
+                                <div class="preenchimento"></div>
+                             </div>
+                            <span>78%</span>
+                        </div>
+                    </td>
+                        <td>
+                        <div class="container-barra">
+                            <div class="barra">
+                                <div class="preenchimento"></div>
+                             </div>
+                            <span>54%</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container-barra">
+                            <div class="barra">
+                                <div class="preenchimento"></div>
+                             </div>
+                            <span>32%</span>
+                        </div>
+                    </td>
+                    <td>42h13min</td>
+                    <td>
+                        <button>Detalhes</button>
+                        <button>Remover</button>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Atenção</td>
+                    <td>SRV-PROD-02</td>
+                    <td>10.0.1.11</td>
+                    <td>Ubuntu 22.04</td>
+                    <td>
+                        <div class="container-barra">
+                            <div class="barra">
+                                <div class="preenchimento"></div>
+                             </div>
+                            <span>78%</span>
+                        </div>
+                    </td>
+                        <td>
+                        <div class="container-barra">
+                            <div class="barra">
+                                <div class="preenchimento"></div>
+                             </div>
+                            <span>54%</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container-barra">
+                            <div class="barra">
+                                <div class="preenchimento"></div>
+                             </div>
+                            <span>32%</span>
+                        </div>
+                    </td>
+                    <td>42h13min</td>
+                    <td>
+                        <button>Detalhes</button>
+                        <button>Remover</button>
+                    </td>
+                </tr>
+            </tbody>
+        </thead>
+        </table>
+      </div>
+      <div class="paginacao">
+        <button>1</button>
+        <button>2</button>
+      </div>
+    </section>
+  </main>
 
 </body>
 
@@ -58,5 +238,10 @@
 <script>
     usuarionome.innerHTML = sessionStorage.NOME_USUARIO
     usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+
+    const agora = new Date();
+    var dataHora = agora.getTime();
+    document.getElementById('dataHora').innerHTML = dataHora;
+
 
 </script>
