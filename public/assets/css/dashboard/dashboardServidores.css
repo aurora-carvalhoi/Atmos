@@ -1,0 +1,13 @@
+@import url("../dashboard.css");
+
+main{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1vw;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+}
+
