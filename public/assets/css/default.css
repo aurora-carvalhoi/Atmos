@@ -5,21 +5,23 @@
 :root {
   /*Colors*/
   --color-blue: #004aad;
-  --color-black: #000000;
-  --color-light: #f9f9f9;
-  --color-opaque: #757575;
-  --color-white: #ffffff;
-  --color-divider: #bdbdbd;
+  --color-blue1: #3879FC;
   --color-blue-hover: #00367a;
-  --color-white-hover: #ededed;
-  --color-disabled: #e0e0e0;
+  --color-blue-active: #0067FF14;
+  --color-blue-effect: #3879FC18;
   --color-danger: #db3232;
-  --color-ghost: #eeeeee;
-  --color-dark: #0a0a0a;
-  --color-dark2: #1a1a1a;
   --color-success: #00c951;
+  --color-white: #ffffff;
+  --color-light: #f9f9f9;
+  --color-ghost: #eeeeee;
+  --color-disabled: #e0e0e0;
+  --color-white-hover: #ededed;
+  --color-divider: #bdbdbd;
+  --color-opaque: #757575;
+  --color-black: #000000;
+  --color-dark: #0a0a0a;
   --color-painel: #050A14;
-
+  --color-dark2: #1a1a1a;
   /*Default Font*/
   --font-default: "Barlow";
 }
