@@ -1,0 +1,295 @@
+@import url('../default.css');
+
+body {
+    background-color: var(--color-white-blue);
+    scrollbar-width: thin;
+    /* Define a largura como "fina" */
+    scrollbar-color: var(--color-blue1);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ff0000;
+    border-radius: 10px;
+}
+
+
+.container {
+    width: 80%;
+    padding: 0px 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    padding-top: 25px;
+    margin-bottom: 2vh;
+}
+
+header .infos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .screen-title {
+    font-family: var(--font-default);
+    color: var(--color-opaque);
+    font-weight: 600;
+    font-size: 18px;
+}
+
+header .screen-title span {
+    color: #00367A;
+    margin-left: 10px;
+}
+
+header .screen-infos {
+    display: flex;
+    align-items: center;
+}
+
+header .screen-infos div {
+    width: 175px;
+    padding: 2px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #85FFBC40;
+    border: solid 1px #33C47588;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #44A774;
+}
+
+header .screen-infos div span {
+    width: 8px;
+    height: 8px;
+    background-color: #44A774;
+    border-radius: 100%;
+}
+
+#dataSistema {
+    width: 190px;
+    text-align: end;
+    color: var(--color-opaque);
+}
+
+header .tela {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-family: var(--font-default);
+    color: #004AAD;
+    font-size: 22px;
+}
+
+header .tela span {
+    color: var(--color-opaque);
+    font-weight: 500;
+    font-size: 13px;
+}
+
+header .acoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header button {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 125px;
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-family: var(--font-default);
+    border-radius: 3px;
+    border: none;
+    margin-left: 1vw;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s ease-in;
+}
+
+.btn-atualizar {
+    color: #00367A;
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+}
+
+.btn-exportar {
+    background: #3879fc;
+    color: white;
+}
+
+.btn-atualizar:hover {
+    background-color: rgba(0, 0, 0, 0.084);
+}
+
+.btn-exportar:hover {
+    background: #1e59d0;
+}
+
+section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5vh;
+}
+
+.card {
+    border-radius: 10px;
+    background: #ffffff;
+    height: 250px;
+    padding: 11px 15px;
+    box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    font-family: var(--font-default);
+    font-weight: 600;
+    font-size: 21px;
+    color: #004aad;
+    margin: 0;
+}
+
+.card span {
+    font-family: var(--font-default);
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--color-opaque);
+}
+
+.card-gfc-infraestrutura,
+.card-recursos,
+.card-servidores {
+    width: 60%;
+}
+
+.card-feed-alertas,
+.card-heat-map,
+.card-status-servidores {
+    width: 39%;
+}
+
+.card-servidores ,
+.card-status-servidores {
+    height: 300px;
+    
+}
+
+.ver-mais {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.ver-mais a {
+    text-decoration: none;
+    color: #004aad;
+}
+
+.conteudo {
+    margin-top: 1vh;
+}
+
+.conteudo-feed,
+.conteudo-servidor {
+    height: 70%;
+    overflow-y: auto;
+}
+
+.alerta {
+    width: 100%;
+    border-radius: 3px;
+    display: flex;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border: solid 1px;
+}
+
+.alerta .tipo-alerta {
+    width: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.alerta .bolinha-alerta {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+.alerta-emergencia {
+    background: #FF808035;
+    border: #F7B8A830;
+}
+
+.bolinha-emergencia {
+    background-color: #FA1616;
+}
+
+
+/* servidores */
+.servidor {
+    height: 40px;
+    border-radius: 5px;
+    background: #f9f8fd;
+    border: 1px solid #e6e6e6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.servidor .indentificador{
+    display: flex;
+    align-items: center;
+}
+.servidor .indentificador div{
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    background-color: #004AAD;
+}
+
+.servidor .indentificador h3{
+    color: var(--color-accent);
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.servidor .infos span{
+    color: var(--color-opaque);
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.servidor .recursos span{
+    color: var(--color-accent);
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+
+
+
+/* Graficos */
+.graf-infraestrutura{
+    height: 100%;
+    height: 175px;
+}
+.graf-status-servidores{
+    height: 200px;
+}
