@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atmos | Colaboradores</title>
+  <link rel="icon" href="../assets/icons/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="corpo-admin" data-page="colaboradores">
+  <div class="estrutura-admin">
+    <div class="menu-lateral">
+      <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
+      <span class="titulo-menu">MENU</span>
+      <div class="menu-nav">
+        <a href="index.html"><span class="ponto-nav"></span>Home</a>
+        <a href="empresas.html"><span class="ponto-nav"></span>Empresas</a>
+        <a href="colaboradores.html" class="active"><span class="ponto-nav"></span>Colaboradores</a>
+        <a href="servidores.html"><span class="ponto-nav"></span>Servidores</a>
+      </div>
+      <div class="usuario-menu">
+        <div class="avatar-admin" data-admin-user-avatar>A</div>
+        <div><strong data-admin-user-name>Administrador</strong><br><small data-admin-user-email>admin@atmos.com</small></div>
+      </div>
+    </div>
+
+    <section class="conteudo-admin">
+      <div class="topo-admin">
+        <div>
+          <h1>Colaboradores</h1>
+        </div>
+      </div>
+
+      <section class="grade-dividida">
+        <form class="card-formulario" id="colaboradorForm">
+          <h3>Cadastrar colaborador</h3>
+          <div class="grade-campos" style="margin-top:14px;">
+            <div class="campo"><label>Nome</label><input name="nome" required></div>
+            <div class="campo"><label>E-mail</label><input type="email" name="email" required></div>
+            <div class="campo"><label>Papel</label><select name="papel"><option>Administrador</option><option>Gestor</option><option>Analista</option><option>Operador</option></select></div>
+            <div class="campo"><label>Equipe</label><input name="equipe" required></div>
+            <div class="campo"><label>Documento</label><input name="documento" required></div>
+            <div class="campo"><label>Data de nascimento</label><input type="date" name="dataNascimento" required></div>
+            <div class="campo"><label>Empresa</label><select name="empresa" data-company-select required></select></div>
+            <div class="campo"><label>Status</label><select name="status"><option>Ativo</option><option>Em onboarding</option><option>Suspenso</option></select></div>
+            <div class="campo inteiro"><label>Senha provisória</label><input type="text" name="senha" placeholder="Atmos@123"></div>
+          </div>
+          <div class="rodape-formulario">
+            <button type="submit" class="btn-admin">Salvar colaborador</button>
+          </div>
+        </form>
+      </section>
+
+      <section style="margin-top:16px;" class="painel-tabela recursivo">
+        <div class="cabecalho-tabela">
+          <div>
+            <h2>Colaboradores cadastrados</h2>
+          </div>
+        </div>
+        <div id="colaboradoresTable"></div>
+      </section>
+    </section>
+  </div>
+  <div class="toast-admin" id="adminToast"></div>
+</body>
+</html>
+
+<script src="../assets/javascript/admin.js"></script>
