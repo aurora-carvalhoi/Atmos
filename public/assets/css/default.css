@@ -6,12 +6,14 @@
   /*Colors*/
   --color-blue: #004aad;
   --color-blue1: #3879FC;
+  --color-accent: #004AAD;
   --color-blue-hover: #00367a;
   --color-blue-active: #0067FF14;
   --color-blue-effect: #3879FC18;
   --color-danger: #db3232;
   --color-success: #00c951;
   --color-white: #ffffff;
+  --color-white-blue: #F3F5FA;
   --color-light: #f9f9f9;
   --color-ghost: #eeeeee;
   --color-disabled: #e0e0e0;
