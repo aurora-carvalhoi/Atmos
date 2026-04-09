@@ -4,9 +4,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title -->
   <title>Dashboard - Atmos</title>
+<<<<<<< HEAD
   <link rel="stylesheet" href="../assets/css/dashboardServidores.css">
+=======
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardAtmos.css">
+
+  <!-- Flavicon -->
+>>>>>>> origin/main
   <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+
+
+  <!-- ChartJS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -66,22 +89,300 @@
       </div>
     </div>
 
-  </nav>
+    <!-- Menu Icon -->
+    <div class="container-menu">
+      <div class="menu-icon" id="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
 
+  </nav>
+  <div class="container">
+    <header>
+      <div class="infos">
+        <div class="screen-title">
+          <div>
+            <ul class="breadcrumb">
+              <li><a href="#">Sistema</a></li>
+              <li><a href="#"><span>Servidores</span></a></li>
+            </ul>
+            <span id="dataHora"></span>
+          </div>
+          Sistema <span>Visão Geral</span>
+        </div>
+        <div class="screen-infos">
+          <div><span></span>Sistema Operacional</div>
+          <span id="dataSistema"></span>
+        </div>
+      </div>
+      <div class="tela">
+        <div>
+          <h1>Dashboard de Monitoramento</h1>
+          <span>Visão consolidada da Infraestrutura em tempo real</span>
+        </div>
+        <div class="acoes">
+          <button class="btn-atualizar">
+            <img src="../assets/images/icones/reload.svg" alt="reload icon">
+            ATUALIZAR
+          </button>
+          <button class="btn-exportar">
+            <img src="../assets/images/icones/export.svg" alt="export icon">
+            EXPORTAR
+          </button>
+        </div>
+      </div>
+    </header>
+
+
+    <main>
+      <section>
+        <div class="card card-gfc-infraestrutura">
+          <h3>Perfomance de Infraestrutura</h3>
+          <span>CPU - Rede - Incidentes</span>
+          <div class="conteudo">
+            <div>
+              <canvas id="perfomaInfra" class="graf-infraestrutura"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="card card-feed-alertas ">
+          <h3>Feed de Alertas</h3>
+          <span>Últimas ocorrências registradas</span>
+          <div class="conteudo conteudo-feed">
+            <div class="alerta alerta-emergencia">
+              <div class="tipo-alerta">
+                <span class="bolinha-alerta bolinha-emergencia"></span>
+              </div>
+              <div class="desc-alerta">
+                <h5>SRV-HMLG : Offline</h5>
+                <span>há 3 min - 91% de utilização </span>
+              </div>
+            </div>
+            <div class="alerta alerta-emergencia">
+              <div class="tipo-alerta">
+                <span class="bolinha-alerta bolinha-emergencia"></span>
+              </div>
+              <div class="desc-alerta">
+                <h5>SRV-HMLG : Offline</h5>
+                <span>há 3 min - 91% de utilização </span>
+              </div>
+            </div>
+            <div class="alerta alerta-emergencia">
+              <div class="tipo-alerta">
+                <span class="bolinha-alerta bolinha-emergencia"></span>
+              </div>
+              <div class="desc-alerta">
+                <h5>SRV-HMLG : Offline</h5>
+                <span>há 3 min - 91% de utilização </span>
+              </div>
+            </div>
+            <div class="alerta alerta-emergencia">
+              <div class="tipo-alerta">
+                <span class="bolinha-alerta bolinha-emergencia"></span>
+              </div>
+              <div class="desc-alerta">
+                <h5>SRV-HMLG : Offline</h5>
+                <span>há 3 min - 91% de utilização </span>
+              </div>
+            </div>
+          </div>
+          <div class="ver-mais">
+            <a href="#">Ver mais</a>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="card card-heat-map">
+          <h3>Perfomance de Infraestrutura</h3>
+          <span>CPU - Rede - Incidentes</span>
+          <div class="conteudo">
+
+          </div>
+        </div>
+        <div class="card card-recursos ">
+          <h3>Recursos em Tempo Real</h3>
+          <span>Últimas ocorrências registradas</span>
+          <div class="conteudo">
+
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="card card-servidores">
+          <h3>Servidores</h3>
+          <span>Últimos dados de Monitoramento</span>
+          <div class="conteudo conteudo-servidor">
+            <div class="servidor">
+              <div class="indentificador">
+                <div></div>
+                <h3>SRV-PROD-02</h3>
+              </div>
+              <div class="infos">
+                <span>10.0.1.30</span>
+                <span>Ubuntu 22</span>
+              </div>
+              <div class="recursos">
+                <span>45%</span>
+                <span>73%</span>
+                <span>48%</span>
+              </div>
+            </div>
+          </div>
+          <div class="ver-mais">
+            <a href="#">Ver mais</a>
+          </div>
+        </div>
+        <div class="card card-status-servidores ">
+          <h3>Status dos Servidores</h3>
+          <span>Por status atual</span>
+          <div class="conteudo">
+            <div>
+              <canvas id="statusServidores" class="graf-status-servidores"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+<<<<<<< HEAD
+=======
+
+  </div>
+>>>>>>> origin/main
 
 </body>
 
 </html>
 
+<!-- Graficos -->
 <script>
-  if (sessionStorage.NOME_USUARIO != null) {
-    usuarionome.innerHTML = sessionStorage.NOME_USUARIO
-    usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
-    usarioimagem.innerHTML = "<img alt='A'>"
-  } else {
-    usuarionome.innerHTML = "Geraldo Atmos"
-    usuarioemail.innerHTML = "geraldo_adm@atmos.com"
-    usarioimagem.innerHTML = "G"
-  }
+  // Grafico de Performaçe de infraestrutura
+  const perfomaInfra = document.getElementById("perfomaInfra")
+  new Chart(perfomaInfra,
+    {
+      data: {
+        datasets: [
+          {
+            label: 'RAM (%)',
+            data: [10, 10, 10, 10],
+            type: 'line',
+            order: 1,
+            tension: 0.2,
+          }, {
+            label: 'CPU (%)',
+            data: [10, 8, 0, 6],
+            type: 'line',
+            order: 2,
+            tension: 0.2,
+          }, {
+            label: 'Incidentes',
+            data: [1, 0, 3, 2],
+            type: 'line',
+            order: 3,
+            tension: 0.2,
+          },
+
+        ],
+        labels: ['January', 'February', 'March', 'April']
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    }
+  )
+
+
+  // grafico de Status dos Servidores
+  const statusServidores = document.getElementById("statusServidores")
+  new Chart(statusServidores, {
+    type: 'doughnut',
+    data: {
+      labels: ['Online', 'Atenção', "Offline"],
+      datasets: [{
+        label: '# of Votes',
+        data: [9, 2, 1],
+        borderWidth: 1,
+        backgroundColor: ["#02A44F", "#D77706", "#D92629"]
+      }],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            display: false
+          },
+          border: {
+            display: false,
+          },
+          ticks: {
+            display: false
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          border: {
+            display: false
+          },
+          ticks: {
+            display: false
+          }
+        }
+      },
+      cutout: "70%",
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+</script>
+
+
+<!-- formatação de data e hora -->
+
+<script>
+  // Declaração dos dais da semana e do mes como vetor
+  const semana = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
+  const meses = [
+    "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+    "Jul", "Ago", "Set", "Out", "Nov", "Dez"
+  ];
+
+  // busca pela data
+  var dataAtual = new Date()
+  var dia = dataAtual.getDate()
+  var ano = dataAtual.getFullYear()
+  // Identifica o dia da semana e o mes atual
+  var diaSemana = semana[dataAtual.getDay()]
+  var mes = meses[dataAtual.getUTCMonth()]
+  // Add o "0" caso a data seja menor que 10 dias pra ficar com dois digitos
+  if (dia < 10) dia = "0" + dia
+
+  // Formata a data no modelo: Ter 07 de Abr 2026 
+  var dataFormatada = diaSemana + " " + dia + " " + mes + " " + ano + " "
+
+  // busca a hora certinho
+  const relogio = setInterval(function time() {
+    var horarioAtual = new Date()
+    // Pega as informações da hora
+    var hr = horarioAtual.getHours();
+    var min = horarioAtual.getMinutes();
+    var sec = horarioAtual.getSeconds();
+
+    // Formata para dois digitos
+    if (hr < 10) hr = '0' + hr
+    if (min < 10) min = '0' + min
+    if (sec < 10) sec = '0' + sec
+
+    // Formata a data para: hh:min:se
+    var horaFormatada = hr + ":" + min + ":" + sec
+
+    // coloca na tela
+    dataSistema.innerHTML = dataFormatada + horaFormatada
+  })
 
 </script>
