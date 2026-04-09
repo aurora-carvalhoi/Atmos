@@ -1,7 +1,8 @@
 @import url('default.css');
+/* *{border: 1px solid red;} */
 
-/* Mobile <= 480px */
-@media screen and (max-width: 480px) {
+/* Mobile < 480px */
+@media screen and (max-width: 479px) {
   .links {
     display: none;
   }
@@ -11,6 +12,7 @@
     width: auto;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .login-info {
@@ -25,7 +27,7 @@
 }
 
 .logo-login img {
-    width: 20vw;
+    width: 35vw;
     height: auto;
 }
 
@@ -41,13 +43,21 @@
     font-size: 1rem;
 }
 
+.texto-info h1 {
+    text-align: center;
+}
+
+.texto-info span {
+    text-align: center;
+}
+
 .login-input {
-    height: 85%;
+    height: 75vh;
     width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-top: 4vh;
 }
 
 .login-input h1 {
@@ -58,7 +68,7 @@
 .login-input input {
     border: 2px solid var(--color-divider);
     background-color: var(--color-ghost);
-    width: 70vw;
+    width: 85vw;
     height: 7vh;
     color: var(--color-opaque);
     padding-left: 12px;
@@ -98,11 +108,27 @@
 .h1-login{
     display: flex;
     flex-direction: column;
-    text-align: left;
+    text-align: center;
+}
+
+.h1-login h1 {
+    text-align: center;
+}
+
+.h1-login p {
+    padding-left: 2vh;
+    padding-right: 2vh;
+    padding-bottom: 2vh;
+    max-width: 90vw;
+}
+
+.texto-cadastro{
+    display: flex;
+    flex-direction: column;
 }
 
 .bloco-input .buttons {
-  margin-top: 20px;
+  margin-top: 30px;
   display: flex;
   color: var(--color-black);
   text-transform: uppercase;
@@ -112,11 +138,12 @@
   transition: 180ms ease-in-out;
   text-transform: uppercase;
   font-weight: inherit;
+  font-size: 1.1rem;
   border: 2px solid var(--color-blue);
   padding: 16px 30px;
   color: var(--color-white);
   background-color: var(--color-blue);
-  width: 70vw;
+  width: 85vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -126,27 +153,43 @@
 .bloco-input .buttons button:hover {
   background-color: var(--color-blue-hover);
 }
+
+input[type="checkbox"] {
+  width: 2vh;
+  height: 2vh;
+}
+
+.termos-uso{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 4vh;
+    padding-bottom: 1vh;
+}
+
 }
 
 /* Mobile >= 480px */
-@media screen and (min-width: 480px) {
-  .links {
+@media screen and (min-width: 480px) and (max-width: 767px) {
+.links {
     display: none;
   }
-    .container-login {
-    height: 100vh;
+
+  .container-login {
     width: auto;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .login-info {
-    height: 100%;
-    width: 40%;
+    height: 15%;
+    width: 100%;
     background-color: var(--color-white);
     display: flex;
+    align-items: center;
     flex-direction: column;
-    padding-left: 5vw;
-    padding-top: 8vh;
+    padding-top: 3vh;
     gap: 3vh;
 }
 
@@ -158,7 +201,7 @@
 
 .login-info h1 {
     color: var(--color-black);
-    font-size: 1.7rem;
+    font-size: 2rem;
     padding-bottom: 2vh;
 }
 
@@ -167,24 +210,35 @@
     font-size: 1rem;
 }
 
+.texto-info h1 {
+    text-align: center;
+}
+
+.texto-info span {
+    text-align: center;
+}
+
 .login-input {
-    height: 100%;
-    width: 60%;
+    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-top: 1vh;
 }
 
 .login-input h1 {
     padding-bottom: 2vh;
-    text-align: left;
+    font-size: 2rem;
+}
+
+.login-input p{
+    font-size: 1.2rem;
 }
 
 .login-input input {
     border: 2px solid var(--color-divider);
     background-color: var(--color-ghost);
-    width: 50vw;
+    width: 85vw;
     height: 7vh;
     color: var(--color-opaque);
     padding-left: 12px;
@@ -193,7 +247,7 @@
 
 .paragrafo-login label {
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.2rem;
     padding-top: 2vh;
     padding-bottom: 2vh;
     color: var(--color-dark);
@@ -202,6 +256,10 @@
 .paragrafo-login label {
     display: flex;
     flex-direction: column;
+}
+
+input::placeholder{
+    font-size: 1.2rem;
 }
 
 .bloco-input{
@@ -224,11 +282,27 @@
 .h1-login{
     display: flex;
     flex-direction: column;
-    text-align: left;
+    text-align: center;
+}
+
+.h1-login h1 {
+    text-align: center;
+}
+
+.h1-login p {
+    padding-left: 2vh;
+    padding-right: 2vh;
+    padding-bottom: 2vh;
+    max-width: 90vw;
+}
+
+.texto-cadastro{
+    display: flex;
+    flex-direction: column;
 }
 
 .bloco-input .buttons {
-  margin-top: 20px;
+  margin-top: 30px;
   display: flex;
   color: var(--color-black);
   text-transform: uppercase;
@@ -238,11 +312,12 @@
   transition: 180ms ease-in-out;
   text-transform: uppercase;
   font-weight: inherit;
+  font-size: 1.2rem;
   border: 2px solid var(--color-blue);
   padding: 16px 30px;
   color: var(--color-white);
   background-color: var(--color-blue);
-  width: 50vw;
+  width: 85vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -252,15 +327,211 @@
 .bloco-input .buttons button:hover {
   background-color: var(--color-blue-hover);
 }
+
+.bloco-input span {
+    font-size: 1.1rem;
+    padding-bottom: 3vh;
+}
+
+input[type="checkbox"] {
+  width: 2vh;
+  height: 2vh;
+}
+
+.termos-uso{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 4vh;
+    padding-bottom: 1vh;
+    font-size: 1.2rem;
+}
+
 }
 
 
 /* Tablet >= 768px */
-@media screen and (min-width: 768px) {
-  .links {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .links {
     display: none;
   }
 
+  .container-login {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login-info {
+    height: 15%;
+    width: 100%;
+    background-color: var(--color-white);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 3vh;
+    gap: 3vh;
+}
+
+.logo-login img {
+    width: 28vw;
+    height: auto;
+}
+
+
+.login-info h1 {
+    color: var(--color-black);
+    font-size: 2.5rem;
+    padding-bottom: 2vh;
+}
+
+.login-info p {
+    color: var(--color-white);
+    font-size: 1rem;
+}
+
+.texto-info h1 {
+    text-align: center;
+}
+
+.texto-info span {
+    text-align: center;
+}
+
+.login-input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 1vh;
+}
+
+.login-input h1 {
+    padding-bottom: 2vh;
+    text-align: left;
+    font-size: 2.5rem;
+}
+
+.login-input p{
+    font-size: 1.5rem;
+}
+
+.login-input input {
+    border: 2px solid var(--color-divider);
+    background-color: var(--color-ghost);
+    width: 85vw;
+    height: 7vh;
+    color: var(--color-opaque);
+    padding-left: 12px;
+    transition: 180ms ease-in-out;
+}
+
+.paragrafo-login label {
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    color: var(--color-dark);
+}
+
+.paragrafo-login label {
+    display: flex;
+    flex-direction: column;
+}
+
+input::placeholder{
+    font-size: 1.5rem;
+}
+
+.bloco-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bloco-input span{
+    margin-top: 2dvh;
+    color: var(--color-opaque);
+}
+
+.bloco-input a:hover{
+    transition: 180ms ease-in-out;
+    color: var(--color-blue);
+}
+
+.h1-login{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.h1-login h1 {
+    text-align: center;
+}
+
+.h1-login p {
+    padding-left: 2vh;
+    padding-right: 2vh;
+    padding-bottom: 2vh;
+    max-width: 90vw;
+}
+
+.texto-cadastro{
+    display: flex;
+    flex-direction: column;
+}
+
+.bloco-input .buttons {
+  margin-top: 30px;
+  display: flex;
+  color: var(--color-black);
+  text-transform: uppercase;
+}
+
+.bloco-input .buttons button {
+  transition: 180ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: inherit;
+  font-size: 1.5rem;
+  border: 2px solid var(--color-blue);
+  padding: 16px 30px;
+  color: var(--color-white);
+  background-color: var(--color-blue);
+  width: 85vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.bloco-input .buttons button:hover {
+  background-color: var(--color-blue-hover);
+}
+
+.bloco-input span {
+    font-size: 1.5rem;
+}
+
+input[type="checkbox"] {
+  width: 2.5vh;
+  height: 2.5vh;
+}
+
+.termos-uso{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 4vh;
+    padding-bottom: 1vh;
+    font-size: 1.5rem;
+}
+
+}
+
+/* Desktop >= 1024px */
+@media screen and (min-width: 1024px) {
 .container-login {
     height: 100vh;
     width: auto;
@@ -271,7 +542,6 @@
 .login-info {
     height: 100%;
     width: 50%;
-    background-color: var(--color-white);
     display: flex;
     flex-direction: column;
     padding-left: 5vw;
@@ -285,13 +555,14 @@
 }
 
 .login-info h1 {
-    color: var(--color-black);
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     padding-bottom: 2vh;
 }
 
 .login-info p {
     color: var(--color-white);
+    max-width: 90%;
+    font-size: 1.5rem;
 }
 
 .login-input {
@@ -304,8 +575,15 @@
 }
 
 .login-input h1 {
-    padding-bottom: 2vh;
-    text-align: left;
+    padding-bottom: 2.5vh;
+    text-align: start;
+    font-size: 2.5rem;
+}
+
+.login-input p{
+    font-size: 1.5rem;
+    text-align: start;
+    max-width: 35vw;
 }
 
 .login-input input {
@@ -316,6 +594,11 @@
     color: var(--color-opaque);
     padding-left: 12px;
     transition: 180ms ease-in-out;
+    font-size: 1.5rem;
+}
+
+input::placeholder{
+    font-size: 1.5rem;
 }
 
 .texto-info {
@@ -324,7 +607,7 @@
 
 .paragrafo-login label {
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.5rem;
     padding-top: 2vh;
     padding-bottom: 2vh;
     color: var(--color-dark);
@@ -369,6 +652,7 @@
   transition: 180ms ease-in-out;
   text-transform: uppercase;
   font-weight: inherit;
+  font-size: 1.5rem;
   border: 2px solid var(--color-blue);
   padding: 16px 30px;
   color: var(--color-white);
@@ -382,129 +666,24 @@
 
 .bloco-input .buttons button:hover {
   background-color: var(--color-blue-hover);
-}
-}
-
-/* Desktop >= 1024px */
-@media screen and (min-width: 1024px) {
-
-.container-login {
-    height: 100vh;
-    width: auto;
-    display: flex;
-    flex-direction: row;
-}
-
-.login-info {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    padding-left: 5vw;
-    padding-top: 8vh;
-    gap: 15vh;
-}
-
-.login-info img {
-    width: 12vw;
-    height: auto;
-}
-
-.login-info h1 {
-    color: var(--color-black);
-    font-size: 2.8rem;
-    padding-bottom: 2vh;
-}
-
-.login-info p {
-    color: var(--color-white);
-}
-
-.login-input {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 4vh;
-}
-
-.login-input h1 {
-    padding-bottom: 2vh;
-    text-align: left;
-}
-
-.login-input input {
-    border: 2px solid var(--color-divider);
-    background-color: var(--color-ghost);
-    width: 35vw;
-    height: 7vh;
-    color: var(--color-opaque);
-    padding-left: 12px;
-    transition: 180ms ease-in-out;
-}
-
-.paragrafo-login label {
-    font-weight: bold;
-    font-size: 1rem;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    color: var(--color-dark);
-}
-
-.paragrafo-login label {
-    display: flex;
-    flex-direction: column;
-}
-
-.bloco-input{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
 .bloco-input span{
-    padding-top: 1vw;
-    color: var(--color-opaque);
+    font-size: 1.2rem;
 }
 
-.bloco-input a:hover{
-    transition: 180ms ease-in-out;
-    color: var(--color-blue);
+input[type="checkbox"] {
+  width: 1.2vw;
+  height: 1.2vw;
+  cursor: pointer;
 }
 
-.h1-login{
+.termos-uso{
     display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-.bloco-input .buttons {
-  margin-top: 20px;
-  display: flex;
-  color: var(--color-black);
-  text-transform: uppercase;
-}
-
-.bloco-input .buttons button {
-  transition: 180ms ease-in-out;
-  text-transform: uppercase;
-  font-weight: inherit;
-  border: 2px solid var(--color-blue);
-  padding: 16px 30px;
-  color: var(--color-white);
-  background-color: var(--color-blue);
-  width: 35vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-}
-
-.bloco-input .buttons button:hover {
-  background-color: var(--color-blue-hover);
+    align-items: center;
+    gap: 8px;
+    padding-top: 36px;
+    font-size: 1.2rem;
 }
 
 }
