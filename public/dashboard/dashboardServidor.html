@@ -5,8 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Servidor</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/dashboard/dashboardServidores.css">
     <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+    <script src="../assets/javascript/datetime.js"></script>
+    
+    <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+
 </head>
 
 <body>
@@ -69,41 +81,54 @@
 
   <main>
     <header>
+      <div class="infos">
 
-        <div>
-            <ul class="breadcrumb">
-                <li><a href="#">Sistema</a></li>
-                <li><a href="#">Servidores</a></li>
+        <div class="screen-title">
+         <ul class="breadcrumb">
+              <li><a href="#">Infraestrutura</a></li>
+              <li><a href="#"><span>Servidores</span></a></li>
             </ul>
-            <span id="dataHora"></span>
-        </div>
-
-        <div class="cabecalho">
-            <h2>Dashboard de Servidores</h2>
-            <h4>Monitoramento e Configuração de Servidores</h4>
-            <div>
-                <img src="../assets/icons/iconeAtualizar.svg" alt="">
-                <button>Atualizar</button>
-            </div>
-            <div>
-                <img src="../assets/icons/iconeAdd.svg" alt="">
-                <button>Novo Servidor</button>
-            </div>
         </div>
         
+        <div class="screen-infos">
+          <div><span></span>Sistema Operacional</div>
+          <span id="dataSistema"></span>
+        </div>
+      </div>
+
+      <div class="tela">
+
+        <div>
+          <h1>Dashboard de Servidores</h1>
+          <span>Monitoramento e configuração de Servidores</span>
+        </div>
+
+        <div class="acoes">
+          <button class="btn-atualizar">
+            <img src="../assets/images/icones/reload.svg" alt="reload icon">
+            ATUALIZAR
+          </button>
+          <button class="btn-adicionar">
+            <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">
+            NOVO SERVIDOR
+          </button>
+        </div>
+
+      </div>
     </header>
 
     <section>
+
         <div class="secao-kpis">
             <div class="titulos-kpi">
-                <h2>Visão Geral</h2>
+                <h3>Visão Geral</h3>
                 <h4>Informações Gerais</h4>
             </div>
             <div class="conjunto-kpis">
-                <div class="kpi">Bloco 1</div>
-                <div class="kpi">Bloco 2</div>
-                <div class="kpi">Bloco 3</div>
-                <div class="kpi">Bloco 4</div>
+                <div class="kpi"></div>
+                <div class="kpi"></div>
+                <div class="kpi"></div>
+                <div class="kpi"></div>
             </div>
         </div>
     </section>
@@ -111,17 +136,17 @@
     <section>
         <div class="filtros-busca">
             <div class="barra-busca">
-                <img src="../assets/icons/iconeBusca.svg" alt="">
+                <!-- <img src="../assets/images/icones/iconeBusca.svg" alt=""> -->
                 <input type="text" placeholder="Buscar servidor por nome ou ID...">
             </div>
-            <div class="select-status">
+            <div class="select">
                 <select name="filtroStatus" id="filtroStatus">
                     <option value="">Status 1</option>
                     <option value="">Status 2</option>
                     <option value="">Status 3</option>
                 </select>
             </div>
-            <div class="select-sistema">
+            <div class="select">
                 <select name="filtroSistema" id="filtroSistema">
                     <option value="">Sistema 1</option>
                     <option value="">Sistema 2</option>
@@ -132,8 +157,8 @@
     </section>
 
     <section>
-        <h3>Lista de Servidores</h3>
       <div class="tabela">
+        <h4>Lista de Servidores</h4>
         <table>
               <thead>
             <tr>
@@ -150,10 +175,12 @@
 
             <tbody>
                 <tr>
-                    <td>Atenção</td>
-                    <td>SRV-PROD-02</td>
-                    <td>10.0.1.11</td>
-                    <td>Ubuntu 22.04</td>
+                    <td><span class="status">● Atenção</span></td>
+                    <td><span class="nome-servidor">SRV-PROD-02</span>
+                      <span class="servidor-id">#002</span>
+                    </td>
+                    <td><span class="end-ip">10.0.0.1</span></td>
+                    <td><span class="nome-so">Ubuntu 22.04</span></td>
                     <td>
                         <div class="container-barra">
                             <div class="barra">
@@ -180,14 +207,16 @@
                     </td>
                     <td>42h13min</td>
                     <td>
-                        <button>Detalhes</button>
-                        <button>Remover</button>
+                        <button class="btn-detalhes">Detalhes</button>
+                        <button class="btn-remover">Remover</button>
                     </td>
                 </tr>
                 
                 <tr>
-                    <td>Atenção</td>
-                    <td>SRV-PROD-02</td>
+                    <td><span class="status">● Atenção</span></td>
+                    <td><span class="nome-servidor">SRV-PROD-02</span>
+                    <span class="servidor-id">#002</span>
+                    </td>
                     <td>10.0.1.11</td>
                     <td>Ubuntu 22.04</td>
                     <td>
@@ -216,17 +245,17 @@
                     </td>
                     <td>42h13min</td>
                     <td>
-                        <button>Detalhes</button>
-                        <button>Remover</button>
+                        <button class="btn-detalhes">Detalhes</button>
+                        <button class="btn-remover">Remover</button>
                     </td>
                 </tr>
             </tbody>
         </thead>
         </table>
-      </div>
-      <div class="paginacao">
-        <button>1</button>
-        <button>2</button>
+        <div class="paginacao">
+          <button>1</button>
+          <button>2</button>
+        </div>
       </div>
     </section>
   </main>
@@ -238,10 +267,5 @@
 <script>
     usuarionome.innerHTML = sessionStorage.NOME_USUARIO
     usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
-
-    const agora = new Date();
-    var dataHora = agora.getTime();
-    document.getElementById('dataHora').innerHTML = dataHora;
-
 
 </script>
