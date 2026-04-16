@@ -7,7 +7,6 @@
 
   <!-- Title -->
   <title>Dashboard - Atmos</title>
-  <link rel="stylesheet" href="../assets/css/dashboardServidores.css">
 
   <!-- Styles -->
   <link rel="stylesheet" href="../assets/css/dashboard.css">
@@ -24,11 +23,20 @@
     href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
 
-<!-- Scripts -->
-  <script src="../assets/javascript/datetime.js"></script>
+  <!-- Scripts -->
+  <!-- <script src="../assets/javascript/datetime.js"></script> -->
 
   <!-- ChartJS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+  <!-- HeatMap -->
+  <link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/plugins/LegendLite.min.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"></script>
 </head>
 
 <body>
@@ -47,7 +55,7 @@
           <span>PRINCIPAL</span>
         </li>
         <li class="nav-item nav-item-active">
-          <a href="#">
+          <a href="./dashboardAtmos.html">
             <img src="../assets/images/pc.svg" class="icon" alt="">
             <span>Overview</span>
           </a>
@@ -88,6 +96,61 @@
       </div>
     </div>
 
+
+
+
+    <!--Menu mobile-->
+    <div class="menu" style="display: none" id="menu">
+      <div class="menu-container">
+        <ul>
+          <ul>
+            <li class="nav-category">
+              <span>PRINCIPAL</span>
+            </li>
+            <li class="nav-item nav-item-active">
+              <a href="./dashboardAtmos.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Overview</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#">
+                <img src="../assets/images/alert.svg" class="icon" alt="">
+                <span>Alertas</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>INFRAESTRUTURA</span>
+            </li>
+            <li class="nav-item">
+              <a href="/cadastro_servidor.html">
+                <img src="../assets/images/server.svg" class="icon" alt="">
+                <span>Servidores</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/cadastro_funcionario.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Usuários</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>Usuário</span>
+            </li>
+            <li class="nav-item ">
+              <a href="./dashboardAtmos.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Perfil</span>
+              </a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
     <!-- Menu Icon -->
     <div class="container-menu">
       <div class="menu-icon" id="menu-icon">
@@ -102,10 +165,10 @@
     <header>
       <div class="infos">
         <div class="screen-title">
-         <ul class="breadcrumb">
-              <li><a href="#">Sistema</a></li>
-              <li><a href="#"><span>Servidores</span></a></li>
-            </ul>
+          <ul class="breadcrumb">
+            <li><a href="#">Sistema</a></li>
+            <li><a href="#"><span>Servidores</span></a></li>
+          </ul>
         </div>
         <div class="screen-infos">
           <div><span></span>Sistema Operacional</div>
@@ -191,16 +254,23 @@
       <section>
         <div class="card card-heat-map">
           <h3>Perfomance de Infraestrutura</h3>
-          <span>CPU - Rede - Incidentes</span>
-          <div class="conteudo">
-
+          <span>Mapa de quantidade de incidentes registrados</span>
+          <div class="conteudo conteudo-heatmap">
+            <div id="heatmap"></div>
+            <div class="legende-heatmap">
+              <span>Menos</span>
+              <div id="legenda-heatmap"></div>
+              <span>Mais</span>
+            </div>
           </div>
         </div>
         <div class="card card-recursos ">
           <h3>Recursos em Tempo Real</h3>
           <span>Últimas ocorrências registradas</span>
           <div class="conteudo">
-
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
         </div>
       </section>
@@ -240,10 +310,31 @@
         </div>
       </section>
     </main>
-
   </div>
 
-
+  <div class="modal" id="modal">
+    <div class="card-apresentacao">
+      <div class="titulo">
+        <h1>Olá, User, seja <span>muito bem-vindo!</span></h1>
+      </div>
+      <div class="conteudo">
+        <p>A <span>ATMOS</span> tem o prazer inigualável de dar as mais calorosas boas-vindas ao nosso inovador Software
+          de
+          Monitoramento. Este sistema foi desenvolvido para atender às crescentes necessidades do mercado.</p>
+        <p>O software oferece funcionalidades abrangentes, garantindo que usuários possam acompanhar, analisar e
+          otimizar suas operações com eficiência e eficácia. Nossa equipe dedicou tempo e esforço significativos para
+          criar uma solução que atenda às expectativas e ofereça uma experiência excepcional e intuitiva.</p>
+        <p>Acreditamos que este software será um grande aliado no cotidiano dos nossos clientes, proporcionando insights
+          valiosos e facilitando a tomada de decisões informadas. Vamos juntos explorar as possibilidades que este novo
+          software oferece!</p>
+      </div>
+      <div class="acoes">
+        <button onclick="fecharPopUp()">
+          Próximo
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
@@ -294,7 +385,7 @@
     data: {
       labels: ['Online', 'Atenção', "Offline"],
       datasets: [{
-        label: '# of Votes',
+        label: 'Servidores',
         data: [9, 2, 1],
         borderWidth: 1,
         backgroundColor: ["#02A44F", "#D77706", "#D92629"]
@@ -332,3 +423,97 @@
     }
   });
 </script>
+
+<!-- Heatmap -->
+<script>
+  const hoje = new Date();
+  const inicio = new Date(hoje.getFullYear(), hoje.getMonth() - 4, 1);
+  const cal = new CalHeatmap();
+  const data = [
+    { date: '2026-04-11', value: 1 },
+    { date: '2026-04-10', value: 0 },
+    { date: '2026-04-09', value: 3 },
+    { date: '2026-04-08', value: 4 },
+    { date: '2026-04-07', value: 5 },
+    { date: '2026-04-06', value: 1 },
+  ];
+  cal.paint({
+    itemSelector: "#heatmap",
+    date: {
+      start: inicio,
+      max: hoje // impede ir pra frente
+    },
+    range: 5,
+    verticalOrientation: false,
+    gutter: 0,
+    animationDuration: false,
+    domain: {
+      label: { position: 'top' },
+      type: 'month',
+    },
+    subDomain: {
+      type: 'ghDay',
+      radius: 2,
+      gutter: 4,
+      width: 13,
+      height: 13,
+    },
+    data: {
+      source: data,
+      x: 'date',
+      y: 'value'
+    },
+    scale: {
+      color: {
+        range: ['#E0E8F4', '#B3C7E3', '#80A6D2', '#4D85C1', '#1A64B0', '#00367A'],
+        domain: [0, 1, 2, 3, 4, 5]
+      }
+    },
+  },
+    [
+      [
+        Tooltip,
+        {
+          text: function (date, value, dayjsDate) {
+            return (
+              (value ? value + ' Incidentes' : 'Sem Incidentes') +
+              ' em ' +
+              formatarData(dayjsDate)
+            );
+          },
+        },
+      ],
+      [
+        LegendLite,
+        {
+          radius: 3,
+          itemSelector: '#legenda-heatmap',
+          width: 13,
+          height: 13,
+        }
+      ],
+
+    ]
+  )
+
+  function formatarData(timestamp) {
+    const meses = [
+      "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+      "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+    ];
+    var data = new Date(timestamp)
+    var dataFormatada = data.getDate() + " de " + meses[data.getUTCMonth()] + " de " + data.getFullYear()
+    return dataFormatada
+  }
+
+</script>
+
+<!--  -->
+<script>
+  function fecharPopUp() {
+    var modal = document.getElementById("modal")
+    modal.style.display = "none"
+  }
+</script>
+
+<script src="../assets/javascript/menu.js"></script>
