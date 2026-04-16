@@ -167,19 +167,23 @@ section {
     color: var(--color-opaque);
 }
 
-.card-gfc-infraestrutura,
+.card-informacoes-gerais{
+    width: 100%;
+}
+
 .card-recursos,
+.card-crescimento-usuarios,
 .card-servidores {
     width: 60%;
+    height: 300px;
 }
 
 .card-feed-alertas,
-.card-heat-map,
-.card-status-servidores {
+.card-distribuicao-usuarios {
     width: 39%;
+    height: 300px;
 }
 
-.card-servidores ,
 .card-status-servidores {
     height: 300px;
     
@@ -283,13 +287,11 @@ section {
 }
 
 
-
-
 /* Graficos */
-.graf-infraestrutura{
+.graf-crescimento-usuarios{
     height: 100%;
     height: 175px;
 }
-.graf-status-servidores{
+.graf-distribuicao-usuarios{
     height: 200px;
 }

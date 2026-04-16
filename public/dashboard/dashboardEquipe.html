@@ -107,7 +107,7 @@
         <div class="screen-title">
           <ul class="breadcrumb">
             <li><a href="#">Sistema</a></li>
-            <li><a href="#"><span>Servidores</span></a></li>
+            <li><a href="#"><span>Equipe</span></a></li>
           </ul>           
         </div>
         <div class="screen-infos">
@@ -136,73 +136,31 @@
 
     <main>
       <section>
-        <div class="card card-gfc-infraestrutura">
-          <h3>Perfomance de Infraestrutura</h3>
-          <span>CPU - Rede - Incidentes</span>
+        <div class="card card-informacoes-gerais">
+          <h3>Visão Geral</h3>
+          <span>Informações gerais</span>
           <div class="conteudo">
             <div>
-              <canvas id="perfomaInfra" class="graf-infraestrutura"></canvas>
+              <!-- Conteúdo -->
             </div>
-          </div>
-        </div>
-        <div class="card card-feed-alertas ">
-          <h3>Feed de Alertas</h3>
-          <span>Últimas ocorrências registradas</span>
-          <div class="conteudo conteudo-feed">
-            <div class="alerta alerta-emergencia">
-              <div class="tipo-alerta">
-                <span class="bolinha-alerta bolinha-emergencia"></span>
-              </div>
-              <div class="desc-alerta">
-                <h5>SRV-HMLG : Offline</h5>
-                <span>há 3 min - 91% de utilização </span>
-              </div>
-            </div>
-            <div class="alerta alerta-emergencia">
-              <div class="tipo-alerta">
-                <span class="bolinha-alerta bolinha-emergencia"></span>
-              </div>
-              <div class="desc-alerta">
-                <h5>SRV-HMLG : Offline</h5>
-                <span>há 3 min - 91% de utilização </span>
-              </div>
-            </div>
-            <div class="alerta alerta-emergencia">
-              <div class="tipo-alerta">
-                <span class="bolinha-alerta bolinha-emergencia"></span>
-              </div>
-              <div class="desc-alerta">
-                <h5>SRV-HMLG : Offline</h5>
-                <span>há 3 min - 91% de utilização </span>
-              </div>
-            </div>
-            <div class="alerta alerta-emergencia">
-              <div class="tipo-alerta">
-                <span class="bolinha-alerta bolinha-emergencia"></span>
-              </div>
-              <div class="desc-alerta">
-                <h5>SRV-HMLG : Offline</h5>
-                <span>há 3 min - 91% de utilização </span>
-              </div>
-            </div>
-          </div>
-          <div class="ver-mais">
-            <a href="#">Ver mais</a>
           </div>
         </div>
       </section>
       <section>
-        <div class="card card-heat-map">
-          <h3>Perfomance de Infraestrutura</h3>
-          <span>CPU - Rede - Incidentes</span>
+        <div class="card card-crescimento-usuarios">
+          <h3>Crescimento de Usuários</h3>
+          <span>Cadastros acumulados - últimos 6 meses</span>
           <div class="conteudo">
-
+            <canvas id="crescimentoUsuario" class="graf-crescimento-usuario"></canvas>
           </div>
         </div>
-        <div class="card card-recursos ">
-          <h3>Recursos em Tempo Real</h3>
-          <span>Últimas ocorrências registradas</span>
+        <div class="card card-distribuicao-usuarios">
+          <h3>Distribuição de Usuários</h3>
+          <span>Distribuição por Tipo de acesso: Analista - Gestor</span>
           <div class="conteudo">
+            <div>
+              <canvas id="distribuicaoUsuarios" class="graf-distribuicao-usuarios"></canvas>
+            </div>
 
           </div>
         </div>
@@ -232,15 +190,6 @@
             <a href="#">Ver mais</a>
           </div>
         </div>
-        <div class="card card-status-servidores ">
-          <h3>Status dos Servidores</h3>
-          <span>Por status atual</span>
-          <div class="conteudo">
-            <div>
-              <canvas id="statusServidores" class="graf-status-servidores"></canvas>
-            </div>
-          </div>
-        </div>
       </section>
     </main>
 
@@ -253,54 +202,18 @@
 
 <!-- Graficos -->
 <script>
-  // Grafico de Performaçe de infraestrutura
-  const perfomaInfra = document.getElementById("perfomaInfra")
-  new Chart(perfomaInfra,
-    {
-      data: {
-        datasets: [
-          {
-            label: 'RAM (%)',
-            data: [10, 10, 10, 10],
-            type: 'line',
-            order: 1,
-            tension: 0.2,
-          }, {
-            label: 'CPU (%)',
-            data: [10, 8, 0, 6],
-            type: 'line',
-            order: 2,
-            tension: 0.2,
-          }, {
-            label: 'Incidentes',
-            data: [1, 0, 3, 2],
-            type: 'line',
-            order: 3,
-            tension: 0.2,
-          },
-
-        ],
-        labels: ['January', 'February', 'March', 'April']
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    }
-  )
-
-
-  // grafico de Status dos Servidores
-  const statusServidores = document.getElementById("statusServidores")
-  new Chart(statusServidores, {
+  
+  // grafico de distribuição dos usuários
+  const distribuicaoUsuarios = document.getElementById("distribuicaoUsuarios")
+  new Chart(distribuicaoUsuarios, { 
     type: 'doughnut',
     data: {
-      labels: ['Online', 'Atenção', "Offline"],
+      labels: ['Gestor', 'Analista'],
       datasets: [{
         label: '# of Votes',
-        data: [9, 2, 1],
+        data: [6, 28],
         borderWidth: 1,
-        backgroundColor: ["#02A44F", "#D77706", "#D92629"]
+        backgroundColor: ["#00367A", "#0093CA"]
       }],
     },
     options: {
@@ -334,6 +247,42 @@
       maintainAspectRatio: false
     }
   });
+
+// Grafico Crescimento de Usuários
+  const crescimentoUsuario = document.getElementById("crescimentoUsuario")
+  new Chart(crescimentoUsuario,
+    {
+      data: {
+        datasets: [
+          {
+            label: 'Usuários Ativos',
+            data: [12, 15, 20, 25, 30, 35],
+            type: 'line',
+            borderColor: '#00367A',
+            order: 1,
+            tension: 0.2,
+          }, {
+            label: 'Cadastros Novos',
+            data: [4, 4, 4, 6, 4, 3],
+            type: 'line',
+            borderColor: '#0093CA',
+            order: 2,
+            borderDash: [5, 5],
+            tension: 0.2,
+          }, 
+
+        ],
+        labels: ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar']
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    }
+  )
+
+
+
 </script>
 
 
