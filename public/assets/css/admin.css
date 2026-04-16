@@ -453,18 +453,19 @@ textarea {
   margin-top: 14px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .grade-indicadores {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .grade-cards {
+  .grade-dividida {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 900px) {
-  .estrutura-admin {
+@media (max-width: 1024px) {
+  .estrutura-admin,
+  .grade-cards {
     grid-template-columns: 1fr;
   }
 
@@ -473,33 +474,69 @@ textarea {
     top: auto;
     height: auto;
     border-right: 0;
-    border-bottom: 1px solid #17314f;
+    border-bottom: 2px solid var(--adm-border);
     overflow: visible;
-  }
-
-  .usuario-menu {
-    margin-top: 16px;
-  }
-}
-
-@media (max-width: 700px) {
-  .conteudo-admin {
-    padding: 16px;
   }
 
   .topo-admin,
   .cabecalho-secao,
   .cabecalho-tabela,
-  .cabecalho-painel,
-  .rodape-formulario,
-  .acoes-admin {
+  .cabecalho-painel {
     flex-direction: column;
-    align-items: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body.corpo-admin {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .conteudo-admin {
+    padding: 16px 14px;
   }
 
   .grade-indicadores,
   .grade-campos {
     grid-template-columns: 1fr;
+  }
+
+  .topo-admin h1 {
+    font-size: 26px;
+  }
+
+  .painel,
+  .painel-tabela,
+  .card-formulario,
+  .card-apoio,
+  .card-indicador,
+  .card-modal {
+    padding: 16px;
+  }
+
+  .usuario-menu {
+    padding: 10px;
+  }
+
+  .toast-admin {
+    right: 12px;
+    left: 12px;
+    bottom: 12px;
+    max-width: none;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .conteudo-admin {
+    padding: 14px 12px;
+  }
+
+  .acoes-admin,
+  .rodape-formulario {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .btn-admin,
@@ -509,20 +546,36 @@ textarea {
     width: 100%;
   }
 
-  .card-indicador,
-  .painel,
-  .painel-tabela,
-  .card-formulario,
-  .card-apoio,
-  .card-modal {
-    padding: 16px;
+  #modalEmpresa {
+    padding: 10px;
+    align-items: flex-end;
   }
 
-  .tabela-admin {
-    min-width: 560px;
+  #modalEmpresa .caixa-modal {
+    max-width: 100%;
+    width: 100%;
+    max-height: 90vh;
+    border-radius: 14px 14px 0 0;
+  }
+
+  #modalEmpresa h2 {
+    font-size: 20px;
+  }
+
+  #modalEmpresa .acoes-modal {
+    flex-direction: column;
+  }
+
+  #modalEmpresa .acoes-modal button {
+    width: 100%;
   }
 
   .card-modal {
     width: 100%;
+  }
+
+  .envolve-tabela {
+    width: 84vw;
+    overflow-x: scroll;
   }
 }
