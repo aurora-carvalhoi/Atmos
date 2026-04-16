@@ -8,42 +8,77 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="corpo-admin" data-page="empresas">
+<body class="corpo-admin">
   <div class="estrutura-admin">
-    <div class="menu-lateral">
+    <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
       <span class="titulo-menu">MENU</span>
-      <div class="menu-nav">
+      <nav class="menu-nav">
         <a href="index.html"><span class="ponto-nav"></span>Home</a>
         <a href="empresas.html" class="active"><span class="ponto-nav"></span>Empresas</a>
         <a href="colaboradores.html"><span class="ponto-nav"></span>Colaboradores</a>
         <a href="servidores.html"><span class="ponto-nav"></span>Servidores</a>
-      </div>
+      </nav>
       <div class="usuario-menu">
-        <div class="avatar-admin" data-admin-user-avatar>A</div>
-        <div><strong data-admin-user-name>Administrador</strong><br><small data-admin-user-email>admin@atmos.com</small></div>
+        <div class="avatar-admin">G</div>
+        <div><strong>Geraldo Atmos</strong><br><small>geraldo_adm@atmos.com</small></div>
       </div>
-    </div>
+    </aside>
 
-    <section class="conteudo-admin">
+    <main class="conteudo-admin">
       <div class="topo-admin">
         <div>
           <h1>Empresas</h1>
         </div>
         <div class="acoes-admin">
-          <button onclick="abrirModalEmpresa()" class="btn-admin" type="button" data-open-company-modal>Cadastrar empresa</button>
+          <button onclick="abrirModalEmpresa()" class="btn-admin" type="button">Cadastrar empresa</button>
         </div>
       </div>
 
-      <section style="margin-top:16px;" class="painel-tabela">
+      <section class="painel-tabela">
         <div class="cabecalho-tabela">
           <div>
             <h2>Empresas cadastradas</h2>
           </div>
         </div>
-        <div id="empresasTable"></div>
+        <div class="envolve-tabela">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Empresa</th>
+                <th>Responsável</th>
+                <th>Segmento</th>
+                <th>Contato</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Atmos Monitoring Systems</td>
+                <td>Geraldo Atmos</td>
+                <td>Observabilidade climática</td>
+                <td>(11) 4000-2525<br>geraldo_adm@atmos.com</td>
+                <td><span class="etiqueta success">Operando</span></td>
+              </tr>
+              <tr>
+                <td>Cloud Aurora</td>
+                <td>Marina Torres</td>
+                <td>Monitoramento em nuvem</td>
+                <td>(11) 98888-1010<br>marina@cloudaurora.com</td>
+                <td><span class="etiqueta success">Implantação</span></td>
+              </tr>
+              <tr>
+                <td>Sky Pulse</td>
+                <td>Rafael Mendes</td>
+                <td>Telemetria e alertas</td>
+                <td>(41) 3777-9080<br>rafael@skypulse.com</td>
+                <td><span class="etiqueta success">Homologação</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
-    </section>
+    </main>
   </div>
 
   <div class="fundo-modal" id="companyModal">
@@ -55,7 +90,7 @@
         <button class="fechar-modal" data-close-company-modal type="button">Fechar</button>
       </div>
 
-      <form class="card-formulario" id="empresaForm" style="padding:0; border:0; box-shadow:none;">
+      <form class="card-formulario" style="padding:0; border:0; box-shadow:none;">
         <div class="grade-campos">
           <div class="campo"><label>Nome da empresa</label><input name="nome" required placeholder="Atmos Labs"></div>
           <div class="campo"><label>Responsável</label><input name="responsavel" required placeholder="Nome responsável"></div>
@@ -68,14 +103,13 @@
           <div class="campo inteiro"><label>Status</label><select name="status"><option>Operando</option><option>Implantação</option><option>Homologação</option></select></div>
         </div>
         <div class="rodape-formulario">
-          <button class="btn-admin" type="submit">Salvar empresa</button>
+          <button class="btn-admin" type="button" data-close-company-modal>Salvar empresa</button>
         </div>
       </form>
     </div>
   </div>
 
-  <div class="toast-admin" id="adminToast"></div>
+  <script src="../assets/javascript/admin.js"></script>
 </body>
 </html>
-
-<script src="../assets/javascript/admin.js"></script>
+  

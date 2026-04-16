@@ -8,27 +8,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="corpo-admin" data-page="home">
+<body class="corpo-admin">
   <div class="estrutura-admin">
-    <div class="menu-lateral">
+    <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
       <span class="titulo-menu">MENU</span>
-      <div class="menu-nav">
+      <nav class="menu-nav">
         <a href="index.html" class="active"><span class="ponto-nav"></span>Home</a>
         <a href="empresas.html"><span class="ponto-nav"></span>Empresas</a>
         <a href="colaboradores.html"><span class="ponto-nav"></span>Colaboradores</a>
         <a href="servidores.html"><span class="ponto-nav"></span>Servidores</a>
-      </div>
+      </nav>
       <div class="usuario-menu">
-        <div class="avatar-admin" data-admin-user-avatar>A</div>
+        <div class="avatar-admin">G</div>
         <div>
-          <strong data-admin-user-name>Administrador</strong><br>
-          <small data-admin-user-email>admin@atmos.com</small>
+          <strong>Geraldo Atmos</strong><br>
+          <small>geraldo_adm@atmos.com</small>
         </div>
       </div>
-    </div>
+    </aside>
 
-    <section class="conteudo-admin">
+    <main class="conteudo-admin">
       <div class="topo-admin">
         <div><h1>Home</h1></div>
         <div class="acoes-admin">
@@ -39,18 +39,18 @@
       <section class="grade-indicadores">
         <div class="card-indicador">
           <div class="rotulo-indicador">Empresas</div>
-          <div class="valor-indicador" id="kpiEmpresas">00</div>
+          <div class="valor-indicador">03</div>
           <div class="meta-indicador">Cadastradas</div>
         </div>
         <div class="card-indicador">
           <div class="rotulo-indicador">Colaboradores</div>
-          <div class="valor-indicador" id="kpiColaboradores">00</div>
+          <div class="valor-indicador">08</div>
           <div class="meta-indicador">Ativos</div>
         </div>
         <div class="card-indicador">
           <div class="rotulo-indicador">Servidores</div>
-          <div class="valor-indicador" id="kpiServidores">00</div>
-          <div class="meta-indicador">Ativos</div>
+          <div class="valor-indicador">05</div>
+          <div class="meta-indicador">Monitorados</div>
         </div>
       </section>
 
@@ -65,25 +65,86 @@
             <a class="link-atalho" href="servidores.html"><span>Cadastrar servidor</span><strong>→</strong></a>
           </div>
         </div>
-        <div class="painel-tabela">
+
+        <section class="painel-tabela">
           <div class="cabecalho-tabela">
             <div><h2>Empresas recentes</h2></div>
           </div>
-          <div id="overviewEmpresas"></div>
-        </div>
+          <div class="envolve-tabela">
+            <table class="tabela-admin">
+              <thead>
+                <tr>
+                  <th>Empresa</th>
+                  <th>Responsável</th>
+                  <th>Cidade / UF</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Atmos Monitoring Systems</td>
+                  <td>Geraldo Atmos</td>
+                  <td>São Paulo / SP</td>
+                  <td><span class="etiqueta success">Operando</span></td>
+                </tr>
+                <tr>
+                  <td>Cloud Aurora</td>
+                  <td>Marina Torres</td>
+                  <td>Campinas / SP</td>
+                  <td><span class="etiqueta success">Operando</span></td>
+                </tr>
+                <tr>
+                  <td>Sky Pulse</td>
+                  <td>Rafael Mendes</td>
+                  <td>Curitiba / PR</td>
+                  <td><span class="etiqueta success">Operando</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </section>
 
-      <section class="painel-tabela" style="margin-top: 14px;">
+      <section class="painel-tabela" style="margin-top: 16px;">
         <div class="cabecalho-tabela">
           <div><h2>Servidores recentes</h2></div>
         </div>
-        <div id="overviewInfra"></div>
+        <div class="envolve-tabela">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Servidor</th>
+                <th>IP</th>
+                <th>Sistema</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>srv-api-clima-01</td>
+                <td>10.20.5.14</td>
+                <td>Ubuntu 24.04</td>
+                <td><span class="etiqueta info">Estável</span></td>
+              </tr>
+              <tr>
+                <td>srv-db-core-02</td>
+                <td>10.20.5.21</td>
+                <td>Debian 12</td>
+                <td><span class="etiqueta info">Observação</span></td>
+              </tr>
+              <tr>
+                <td>srv-gateway-03</td>
+                <td>10.20.5.30</td>
+                <td>Windows Server</td>
+                <td><span class="etiqueta info">Estável</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
-    </section>
+    </main>
   </div>
 
-  <div class="toast-admin" id="adminToast"></div>
+  <script src="../assets/javascript/admin.js"></script>
 </body>
 </html>
-
-<script src="../assets/javascript/admin.js"></script>

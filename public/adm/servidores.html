@@ -8,24 +8,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="corpo-admin" data-page="servidores">
+<body class="corpo-admin">
   <div class="estrutura-admin">
-    <div class="menu-lateral">
+    <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
       <span class="titulo-menu">MENU</span>
-      <div class="menu-nav">
+      <nav class="menu-nav">
         <a href="index.html"><span class="ponto-nav"></span>Home</a>
         <a href="empresas.html"><span class="ponto-nav"></span>Empresas</a>
         <a href="colaboradores.html"><span class="ponto-nav"></span>Colaboradores</a>
         <a href="servidores.html" class="active"><span class="ponto-nav"></span>Servidores</a>
-      </div>
+      </nav>
       <div class="usuario-menu">
-        <div class="avatar-admin" data-admin-user-avatar>A</div>
-        <div><strong data-admin-user-name>Administrador</strong><br><small data-admin-user-email>admin@atmos.com</small></div>
+        <div class="avatar-admin">G</div>
+        <div><strong>Geraldo Atmos</strong><br><small>geraldo_adm@atmos.com</small></div>
       </div>
-    </div>
+    </aside>
 
-    <section class="conteudo-admin">
+    <main class="conteudo-admin">
       <div class="topo-admin">
         <div>
           <h1>Servidores</h1>
@@ -33,35 +33,69 @@
       </div>
 
       <section class="grade-dividida">
-        <form class="card-formulario" id="servidorForm">
+        <form class="card-formulario">
           <h3>Cadastrar servidor</h3>
           <div class="grade-campos" style="margin-top:14px;">
             <div class="campo"><label>Nome do host</label><input name="nome" required></div>
             <div class="campo"><label>Identificação</label><input name="identificacao" required></div>
             <div class="campo"><label>IP</label><input name="ip" required></div>
             <div class="campo"><label>Sistema operacional</label><input name="so" required></div>
-            <div class="campo"><label>Empresa</label><select name="empresa" data-company-select required></select></div>
+            <div class="campo"><label>Empresa</label><select name="empresa" required><option>Atmos Monitoring Systems</option><option>Cloud Aurora</option><option>Sky Pulse</option></select></div>
             <div class="campo"><label>Status</label><select name="status"><option>Estável</option><option>Observação</option><option>Crítico</option><option>Implantação</option></select></div>
             <div class="campo inteiro"><label>Observações</label><textarea name="observacoes" placeholder="Opcional"></textarea></div>
           </div>
           <div class="rodape-formulario">
-            <button type="submit" class="btn-admin">Salvar servidor</button>
+            <button type="button" class="btn-admin">Salvar servidor</button>
           </div>
         </form>
       </section>
 
-      <section style="margin-top:16px;" class="painel-tabela recursivo">
+      <section style="margin-top:16px;" class="painel-tabela">
         <div class="cabecalho-tabela">
           <div>
             <h2>Servidores cadastrados</h2>
           </div>
         </div>
-        <div id="servidoresTable"></div>
+        <div class="envolve-tabela">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Servidor</th>
+                <th>IP</th>
+                <th>Sistema</th>
+                <th>Empresa</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>srv-api-clima-01</td>
+                <td>10.20.5.14</td>
+                <td>Ubuntu 24.04</td>
+                <td>Atmos Monitoring Systems</td>
+                <td><span class="etiqueta info">Estável</span></td>
+              </tr>
+              <tr>
+                <td>srv-db-core-02</td>
+                <td>10.20.5.21</td>
+                <td>Debian 12</td>
+                <td>Cloud Aurora</td>
+                <td><span class="etiqueta info">Observação</span></td>
+              </tr>
+              <tr>
+                <td>srv-edge-03</td>
+                <td>10.20.5.35</td>
+                <td>Windows Server</td>
+                <td>Sky Pulse</td>
+                <td><span class="etiqueta info">Estável</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
-    </section>
+    </main>
   </div>
-  <div class="toast-admin" id="adminToast"></div>
+
+  <script src="../assets/javascript/admin.js"></script>
 </body>
 </html>
-
-<script src="../assets/javascript/admin.js"></script>
