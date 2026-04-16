@@ -8,24 +8,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="corpo-admin" data-page="colaboradores">
+<body class="corpo-admin">
   <div class="estrutura-admin">
-    <div class="menu-lateral">
+    <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
       <span class="titulo-menu">MENU</span>
-      <div class="menu-nav">
+      <nav class="menu-nav">
         <a href="index.html"><span class="ponto-nav"></span>Home</a>
         <a href="empresas.html"><span class="ponto-nav"></span>Empresas</a>
         <a href="colaboradores.html" class="active"><span class="ponto-nav"></span>Colaboradores</a>
         <a href="servidores.html"><span class="ponto-nav"></span>Servidores</a>
-      </div>
+      </nav>
       <div class="usuario-menu">
-        <div class="avatar-admin" data-admin-user-avatar>A</div>
-        <div><strong data-admin-user-name>Administrador</strong><br><small data-admin-user-email>admin@atmos.com</small></div>
+        <div class="avatar-admin">G</div>
+        <div><strong>Geraldo Atmos</strong><br><small>geraldo_adm@atmos.com</small></div>
       </div>
-    </div>
+    </aside>
 
-    <section class="conteudo-admin">
+    <main class="conteudo-admin">
       <div class="topo-admin">
         <div>
           <h1>Colaboradores</h1>
@@ -33,7 +33,7 @@
       </div>
 
       <section class="grade-dividida">
-        <form class="card-formulario" id="colaboradorForm">
+        <form class="card-formulario">
           <h3>Cadastrar colaborador</h3>
           <div class="grade-campos" style="margin-top:14px;">
             <div class="campo"><label>Nome</label><input name="nome" required></div>
@@ -42,28 +42,62 @@
             <div class="campo"><label>Equipe</label><input name="equipe" required></div>
             <div class="campo"><label>Documento</label><input name="documento" required></div>
             <div class="campo"><label>Data de nascimento</label><input type="date" name="dataNascimento" required></div>
-            <div class="campo"><label>Empresa</label><select name="empresa" data-company-select required></select></div>
+            <div class="campo"><label>Empresa</label><select name="empresa" required><option>Atmos Monitoring Systems</option><option>Cloud Aurora</option><option>Sky Pulse</option></select></div>
             <div class="campo"><label>Status</label><select name="status"><option>Ativo</option><option>Em onboarding</option><option>Suspenso</option></select></div>
             <div class="campo inteiro"><label>Senha provisória</label><input type="text" name="senha" placeholder="Atmos@123"></div>
           </div>
           <div class="rodape-formulario">
-            <button type="submit" class="btn-admin">Salvar colaborador</button>
+            <button type="button" class="btn-admin">Salvar colaborador</button>
           </div>
         </form>
       </section>
 
-      <section style="margin-top:16px;" class="painel-tabela recursivo">
+      <section style="margin-top:16px;" class="painel-tabela">
         <div class="cabecalho-tabela">
           <div>
             <h2>Colaboradores cadastrados</h2>
           </div>
         </div>
-        <div id="colaboradoresTable"></div>
+        <div class="envolve-tabela">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Papel</th>
+                <th>Equipe</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Celeste Rocha</td>
+                <td>celeste@atmos.com</td>
+                <td>Administrador</td>
+                <td>NOC</td>
+                <td><span class="etiqueta success">Ativo</span></td>
+              </tr>
+              <tr>
+                <td>João Pires</td>
+                <td>joao.pires@atmos.com</td>
+                <td>Analista</td>
+                <td>Infraestrutura</td>
+                <td><span class="etiqueta success">Ativo</span></td>
+              </tr>
+              <tr>
+                <td>Larissa Nunes</td>
+                <td>larissa.nunes@atmos.com</td>
+                <td>Gestor</td>
+                <td>Operações</td>
+                <td><span class="etiqueta success">Ativo</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
-    </section>
+    </main>
   </div>
-  <div class="toast-admin" id="adminToast"></div>
+
+  <script src="../assets/javascript/admin.js"></script>
 </body>
 </html>
-
-<script src="../assets/javascript/admin.js"></script>
