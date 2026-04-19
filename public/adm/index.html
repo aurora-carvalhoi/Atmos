@@ -44,7 +44,7 @@
         </div>
         <div class="card-indicador">
           <div class="rotulo-indicador">Colaboradores</div>
-          <div class="valor-indicador">08</div>
+          <div class="valor-indicador" id="kpiColaboradores"></div>
           <div class="meta-indicador">Ativos</div>
         </div>
         <div class="card-indicador">
@@ -168,6 +168,13 @@
         return res.json();
       }).then(function (empresas){
         document.getElementById("kpiEmpresas").innerText = empresas.length;
+
+      fetch("/usuarios/listarColaboradores").then(function (res){
+        return res.json();
+      }).then(function (colaboradores){
+        document.getElementById("kpiColaboradores").innerText = colaboradores.length;
+
+      })
       })
     }
   </script>
