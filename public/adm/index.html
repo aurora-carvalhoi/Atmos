@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="corpo-admin">
+<body onload="listar(); puxarKpi();" class="corpo-admin">
   <div class="estrutura-admin">
     <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
@@ -39,7 +39,7 @@
       <section class="grade-indicadores">
         <div class="card-indicador">
           <div class="rotulo-indicador">Empresas</div>
-          <div class="valor-indicador">03</div>
+          <div class="valor-indicador" id="kpiEmpresas"></div>
           <div class="meta-indicador">Cadastradas</div>
         </div>
         <div class="card-indicador">
@@ -146,5 +146,30 @@
   </div>
 
   <script src="../assets/javascript/admin.js"></script>
+  <script>
+    var listaEmpresasCadastradas = [];
+    function listar(){
+      fetch("/empresas/listar", {
+        method: "GET", 
+      }).then(function (resposta){
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+            console.log("listaEmpresasCadastradas");
+          })
+        })
+      }).catch(function(resposta){
+        console.log(`erro ${resposta}`)
+      })
+    }
+
+    function puxarKpi(){
+      fetch("/empresas/listar").then(function (res){
+        return res.json();
+      }).then(function (empresas){
+        document.getElementById("kpiEmpresas").innerText = empresas.length;
+      })
+    }
+  </script>
 </body>
 </html>
