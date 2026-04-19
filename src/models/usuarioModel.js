@@ -39,10 +39,18 @@ function cadastrarFuncionario(fkEmpresa, idSuperior ,nome,email,dataNascimento,c
     return database.executar(instrucaoSql);
 }
 
+function listarColaboradores(){
+    var instrucaoSql = `
+    SELECT * FROM usuario;
+    `;
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrarFuncionario,
     cadastrar,
-    finalizarCadastro
+    finalizarCadastro,
+    listarColaboradores
 };
 
