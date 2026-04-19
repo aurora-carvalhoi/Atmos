@@ -156,9 +156,16 @@ function finalizarCadastro(req, res) {
     }
 }
 
+function listarColaboradores(req, res){
+    usuarioModel.listarColaboradores().then((resultado)=>{
+        res.status(200).json(resultado);
+    })
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     cadastrarFuncionario,
-    finalizarCadastro
+    finalizarCadastro,
+    listarColaboradores
 }

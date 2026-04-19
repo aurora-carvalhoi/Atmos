@@ -21,4 +21,8 @@ router.patch("/finalizarCadastro", function (req, res) {
     usuarioController.finalizarCadastro(req, res);
 });
 
+router.get("/listarColaboradores", function(req, res){
+    usuarioController.listarColaboradores(req, res);
+});
+
 module.exports = router;
