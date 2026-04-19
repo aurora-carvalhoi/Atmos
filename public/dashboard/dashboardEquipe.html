@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title -->
+  <title>Dashboard - Atmos</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardEquipe.css">
+
+  <!-- Flavicon -->
+  <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+
+
+  <!-- ChartJS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <nav class="sidebar">
+    <div class="logo-container">
+      <a href="../index.html" class="logo">
+        <div class="cicle"></div>
+        <span>ATMOS</span>
+      </a>
+    </div>
+
+    <ul class="nav-links">
+      <ul>
+        <li class="nav-category">
+          <span>PRINCIPAL</span>
+        </li>
+        <li class="nav-item ">
+          <a href="#">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Visão Geral</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#">
+            <img src="../assets/images/alert.svg" class="icon" alt="">
+            <span>Alertas</span>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li class="nav-category">
+          <span>INFRAESTRUTURA</span>
+        </li>
+        <li class="nav-item">
+          <a href="/cadastro_servidor.html">
+            <img src="../assets/images/server.svg" class="icon" alt="">
+            <span>Servidores</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/cadastro_componentes.html">
+            <img src="../assets/images/component.svg" class="icon" alt="">
+            <span>Componentes</span>
+          </a>
+        </li>
+        <li class="nav-item nav-item-active">
+          <a href="/cadastro_funcionario.html">
+            <img src="../assets/images/user.svg" class="icon" alt="">
+            <span>Equipe</span>
+          </a>
+        </li>
+      </ul>
+    </ul>
+
+    <div class="info-user">
+      <div class="img-user" id="usarioimagem">
+        <img alt="A">
+      </div>
+      <div>
+        <h3><span id="usuarionome">usuário</span></h3>
+        <h5><span id="usuarioemail">email</span></h3>
+      </div>
+    </div>
+
+    <!-- Menu Icon -->
+    <div class="container-menu">
+      <div class="menu-icon" id="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+  </nav>
+  <div class="container">
+    <header>
+      <div class="infos">
+        <div class="screen-title">
+          <ul class="breadcrumb">
+            <li><a href="#">Sistema</a></li>
+            <li><a href="#"><span>Equipe</span></a></li>
+          </ul>           
+        </div>
+        <div class="screen-infos">
+          <div><span></span>Sistema Operacional</div>
+          <span id="dataSistema"></span>
+        </div>
+      </div>
+      <div class="tela">
+        <div>
+          <h1>Gerenciamento de Usuários</h1>
+          <span>Controle de acesso e Permições da plataforma</span>
+        </div>
+        <div class="acoes">
+          <button class="btn-atualizar">
+            <img src="../assets/images/icones/reload.svg" alt="reload icon">
+            ATUALIZAR
+          </button>
+          <button class="btn-exportar">
+            <img src="../assets/images/icones/export.svg" alt="export icon">
+            EXPORTAR
+          </button>
+        </div>
+      </div>
+    </header>
+
+
+    <main>
+      <section>
+        <div class="card card-informacoes-gerais">
+          <h3>Visão Geral</h3>
+          <span>Informações gerais</span>
+          <div class="conteudo">
+            <div>
+              <!-- Conteúdo -->
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="card card-crescimento-usuarios">
+          <h3>Crescimento de Usuários</h3>
+          <span>Cadastros acumulados - últimos 6 meses</span>
+          <div class="conteudo">
+            <canvas id="crescimentoUsuario" class="graf-crescimento-usuario"></canvas>
+          </div>
+        </div>
+        <div class="card card-distribuicao-usuarios">
+          <h3>Distribuição de Usuários</h3>
+          <span>Distribuição por Tipo de acesso: Analista - Gestor</span>
+          <div class="conteudo">
+            <div>
+              <canvas id="distribuicaoUsuarios" class="graf-distribuicao-usuarios"></canvas>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="card card-servidores">
+          <h3>Servidores</h3>
+          <span>Últimos dados de Monitoramento</span>
+          <div class="conteudo conteudo-servidor">
+            <div class="servidor">
+              <div class="indentificador">
+                <div></div>
+                <h3>SRV-PROD-02</h3>
+              </div>
+              <div class="infos">
+                <span>10.0.1.30</span>
+                <span>Ubuntu 22</span>
+              </div>
+              <div class="recursos">
+                <span>45%</span>
+                <span>73%</span>
+                <span>48%</span>
+              </div>
+            </div>
+          </div>
+          <div class="ver-mais">
+            <a href="#">Ver mais</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+  </div>
+
+</body>
+
+</html>
+
+<!-- Graficos -->
+<script>
+  
+  // grafico de distribuição dos usuários
+  const distribuicaoUsuarios = document.getElementById("distribuicaoUsuarios")
+  new Chart(distribuicaoUsuarios, { 
+    type: 'doughnut',
+    data: {
+      labels: ['Gestor', 'Analista'],
+      datasets: [{
+        label: '# of Votes',
+        data: [6, 28],
+        borderWidth: 1,
+        backgroundColor: ["#00367A", "#0093CA"]
+      }],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            display: false
+          },
+          border: {
+            display: false,
+          },
+          ticks: {
+            display: false
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          border: {
+            display: false
+          },
+          ticks: {
+            display: false
+          }
+        }
+      },
+      cutout: "70%",
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+
+// Grafico Crescimento de Usuários
+  const crescimentoUsuario = document.getElementById("crescimentoUsuario")
+  new Chart(crescimentoUsuario,
+    {
+      data: {
+        datasets: [
+          {
+            label: 'Usuários Ativos',
+            data: [12, 15, 20, 25, 30, 35],
+            type: 'line',
+            borderColor: '#00367A',
+            order: 1,
+            tension: 0.2,
+          }, {
+            label: 'Cadastros Novos',
+            data: [4, 4, 4, 6, 4, 3],
+            type: 'line',
+            borderColor: '#0093CA',
+            order: 2,
+            borderDash: [5, 5],
+            tension: 0.2,
+          }, 
+
+        ],
+        labels: ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar']
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    }
+  )
+
+
+
+</script>
+
+
+<!-- formatação de data e hora -->
+
+<script>
+  // Declaração dos dais da semana e do mes como vetor
+  const semana = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
+  const meses = [
+    "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+    "Jul", "Ago", "Set", "Out", "Nov", "Dez"
+  ];
+
+  // busca pela data
+  var dataAtual = new Date()
+  var dia = dataAtual.getDate()
+  var ano = dataAtual.getFullYear()
+  // Identifica o dia da semana e o mes atual
+  var diaSemana = semana[dataAtual.getDay()]
+  var mes = meses[dataAtual.getUTCMonth()]
+  // Add o "0" caso a data seja menor que 10 dias pra ficar com dois digitos
+  if (dia < 10) dia = "0" + dia
+
+  // Formata a data no modelo: Ter 07 de Abr 2026 
+  var dataFormatada = diaSemana + " " + dia + " " + mes + " " + ano + " "
+
+  // busca a hora certinho
+  const relogio = setInterval(function time() {
+    var horarioAtual = new Date()
+    // Pega as informações da hora
+    var hr = horarioAtual.getHours();
+    var min = horarioAtual.getMinutes();
+    var sec = horarioAtual.getSeconds();
+
+    // Formata para dois digitos
+    if (hr < 10) hr = '0' + hr
+    if (min < 10) min = '0' + min
+    if (sec < 10) sec = '0' + sec
+
+    // Formata a data para: hh:min:se
+    var horaFormatada = hr + ":" + min + ":" + sec
+
+    // coloca na tela
+    dataSistema.innerHTML = dataFormatada + horaFormatada
+  })
+
+</script>
