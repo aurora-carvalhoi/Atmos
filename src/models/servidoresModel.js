@@ -30,8 +30,14 @@ function cadastrarComponentes(Componentes, fkEmpresa, fkServidor) {
     return Promise.all(promises);
 }
 
+function listarServidores(){
+    var instrucaoSql = "SELECT * FROM servidor";
+    return database.executar(instrucaoSql);
+}
+
 
 module.exports = {
     cadastrar,
-    cadastrarComponentes
+    cadastrarComponentes,
+    listarServidores
 };

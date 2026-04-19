@@ -49,7 +49,7 @@
         </div>
         <div class="card-indicador">
           <div class="rotulo-indicador">Servidores</div>
-          <div class="valor-indicador">05</div>
+          <div class="valor-indicador" id="kpiServidores"></div>
           <div class="meta-indicador">Monitorados</div>
         </div>
       </section>
@@ -174,6 +174,11 @@
       }).then(function (colaboradores){
         document.getElementById("kpiColaboradores").innerText = colaboradores.length;
 
+       fetch("/servidores/listarServidores").then(function (res){
+        return res.json();
+      }).then(function (servidores){
+        document.getElementById("kpiServidores").innerText = servidores.length;
+      })
       })
       })
     }
