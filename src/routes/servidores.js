@@ -12,5 +12,9 @@ router.post("/cadastrarComponentes", function (req, res) {
     servidoresController.cadastrarComponentes(req, res);
 })
 
+router.get("/listarServidores", function (req, res) {
+    servidoresController.listarServidores(req, res);
+})
+
 module.exports = router;
 
