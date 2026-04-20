@@ -232,7 +232,7 @@
             </thead>
             <tbody>
               <tr>
-                <td><span class="status">● Atenção</span></td>
+                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
                 <td><span class="nome-servidor">SRV-PROD-02</span>
                   <span class="servidor-id">#002</span>
                 </td>
@@ -270,7 +270,7 @@
               </tr>
 
               <tr>
-                <td><span class="status">● Atenção</span></td>
+                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
                 <td><span class="nome-servidor">SRV-PROD-02</span>
                   <span class="servidor-id">#002</span>
                 </td>
@@ -318,6 +318,9 @@
       </div>
     </section>
   </main>
+
+
+  <!-- Modal -->
 
   <div class="fundoModal" id="modalDetalhes">
     <div class="modal modalDetalhes">
@@ -606,10 +609,8 @@
   }
 
   function fecharModal(tipoModal) {
-    {
-      const modal = document.getElementsByClassName("fundoModal")
-      modal[tipoModal].style.display = 'none';
-    }
+    const modal = document.getElementsByClassName("fundoModal")
+    modal[tipoModal].style.display = 'none';
   }
 
   function adicionarServidor() {

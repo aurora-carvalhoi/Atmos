@@ -191,7 +191,7 @@
       </div>
     </section>
 
-    <section>
+    <section class="section-graficos">
       <div class="card card-crescimento-usuarios">
         <h3>Crescimento de Usuários</h3>
         <span>Cadastros acumulados - últimos 6 meses</span>
@@ -210,35 +210,194 @@
         </div>
       </div>
     </section>
+
     <section>
-      <div class="card card-servidores">
-        <h3>Servidores</h3>
-        <span>Últimos dados de Monitoramento</span>
-        <div class="conteudo conteudo-servidor">
-          <div class="servidor">
-            <div class="indentificador">
-              <div></div>
-              <h3>SRV-PROD-02</h3>
-            </div>
-            <div class="infos">
-              <span>10.0.1.30</span>
-              <span>Ubuntu 22</span>
-            </div>
-            <div class="recursos">
-              <span>45%</span>
-              <span>73%</span>
-              <span>48%</span>
-            </div>
-          </div>
+      <div class="filtros-busca">
+        <div class="barra-busca">
+          <input type="text" placeholder="Buscar servidor por nome ou ID...">
         </div>
-        <div class="ver-mais">
-          <a href="#">Ver mais</a>
+        <div class="select">
+          <select name="filtroStatus" id="filtroStatus">
+            <option value="All_status">Todos os Status</option>
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+          </select>
+        </div>
+        <div class="select">
+          <select name="filtroSistema" id="filtroSistema">
+            <option value="all_acesso">Todos os tipos de Acesso</option>
+            <option value="gestor">Gestor</option>
+            <option value="analista">Analista</option>
+          </select>
         </div>
       </div>
     </section>
 
+    <section>
+      <div class="area-tabela">
+        <h4>Lista de Usuarios</h4>
+
+        <div class="envolve-tabela">
+          <table class="tabela-usuario">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Tipo de Acesso</th>
+                <th>Status</th>
+                <th>Data de Cadastro</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nomeUser">
+                  <div class="perfil">
+                    <span>BL</span>
+                  </div>
+                  <span class="nome">
+                    Brandão Lima
+                  </span>
+                  <span>ID #001</span>
+                </td>
+                <td>
+                  <span>brandao@sptech.school</span>
+                </td>
+                <td>
+                  <span class="etiqueta etiqueta-azul">● Gestor</span>
+                </td>
+                <td>
+                  <span class="etiqueta etiqueta-verde">● Ativo</span>
+                </td>
+                <td>
+                  <span>14/01/2026</span>
+                </td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhes()">Detalhes</button>
+                  <button class="btn-remover" onclick="inativarUsuario()">inativar</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="nomeUser">
+                  <div class="perfil">
+                    <span>AC</span>
+                  </div>
+                  <span class="nome">
+                    Anna Costa
+                  </span>
+                  <span>ID #002</span>
+                </td>
+                <td>
+                  <span>annacosta@spthech.com</span>
+                </td>
+                <td>
+                  <span class="etiqueta etiqueta-laranja">● Analista</span>
+                </td>
+                <td>
+                  <span class="etiqueta etiqueta-verde">● Ativo</span>
+                </td>
+                <td>
+                  <span>14/01/2026</span>
+                </td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhes()">Detalhes</button>
+                  <button class="btn-remover" onclick="inativarUsuario()">inativar</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="nomeUser">
+                  <div class="perfil">
+                    <span>PA</span>
+                  </div>
+                  <span class="nome">
+                    Pedro Alves
+                  </span>
+                  <span>ID #003</span>
+                </td>
+                <td>
+                  <span>pedroalves@spthech.com</span>
+                </td>
+                <td>
+                  <span class="etiqueta etiqueta-laranja">● Analista</span>
+                </td>
+                <td>
+                  <span class="etiqueta etiqueta-vermelho">● Inativo</span>
+                </td>
+                <td>
+                  <span>14/01/2026</span>
+                </td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhes()">Detalhes</button>
+                  <button class="btn-ativar" onclick="ativarUsuario()">Ativar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="paginacao">
+          <button onclick="ativarUsuario()">1</button>
+          <button onclick="desativarUsuario()">2</button>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Modal Desativar Usuario -->
+  <div class="fundoModal" id="modalDesativarUsuario">
+    <div class="modal modalAlteracaoStatus">
+      <header>
+        <!-- Titulo e subtitulo -->
+        <div>
+          <h2>Inativar Usuario</h2>
+          <span class="subTitulo">Inativar o usuario :NOME: da equipe
+          </span>
+        </div>
+      </header>
+      <div class="conteudo-remover">
+        <p>Tem certeza de que deseja desativar o acesso desta conta do contribuidor?</p>
+        <p>Essa ação é reversível, porém o contribuidor perderá o acesso ao sistema enquanto a conta estiver desativada.
+        </p>
+        <p>Você poderá reativá-la a qualquer momento.</p>
+        <p>Se deseja continuar, confirme a desativação. Caso contrário, recomendamos cancelar.</p>
+        <div class="acoesModal">
+          <button class="btn-branco" onclick="fecharModal(0)">
+            Cancelar
+          </button>
+          <button class="btn-vermelho" onclick="removerServidor()">
+            Desativar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Desativar Usuario -->
+  <div class="fundoModal" id="modalAtivarUsuario">
+    <div class="modal modalAlteracaoStatus">
+      <header>
+        <!-- Titulo e subtitulo -->
+        <div>
+          <h2>Ativar Usuario</h2>
+          <span class="subTitulo">Desativar o usuario :NOME: da equipe
+          </span>
+        </div>
+      </header>
+      <div class="conteudo-remover">
+        <p>Tem certeza de que deseja ativar esta conta do contribuidor?</p>
+        <p>Ao ativar, o contribuidor recuperará o acesso ao sistema e poderá voltar a utilizar normalmente os recursos disponíveis.
+        </p>
+        <p>Se deseja continuar, confirme a ativação. Caso contrário, você pode cancelar.</p>
+        <div class="acoesModal">
+          <button class="btn-branco" onclick="fecharModal(1)">
+            Cancelar
+          </button>
+          <button class="btn-azul" onclick="removerServidor()">
+            Ativar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
@@ -246,10 +405,8 @@
 <script src="../assets/javascript/datetime.js"></script>
 <script src="../assets/javascript/menu.js"></script>
 
-
 <!-- Graficos -->
 <script>
-
   // grafico de distribuição dos usuários
   const distribuicaoUsuarios = document.getElementById("distribuicaoUsuarios")
   new Chart(distribuicaoUsuarios, {
@@ -329,5 +486,26 @@
   )
 
 
+
+</script>
+
+<!-- modal -->
+<script>
+
+  function desativarUsuario() {
+    var modal = document.getElementById('modalDesativarUsuario')
+    modal.style.display = 'flex'
+  }
+
+  function ativarUsuario() {
+    var modal = document.getElementById('modalAtivarUsuario')
+    modal.style.display = 'flex'
+  }
+
+
+  function fecharModal(tipoModal) {
+    const modal = document.getElementsByClassName("fundoModal")
+    modal[tipoModal].style.display = 'none';
+  }
 
 </script>

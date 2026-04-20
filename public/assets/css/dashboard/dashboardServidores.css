@@ -74,6 +74,7 @@ select {
 
 table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 thead {
@@ -83,6 +84,7 @@ thead {
 }
 
 th {
+  
   text-transform: uppercase;
   letter-spacing: 0.15em;
   font-size: 0.75rem;
@@ -141,6 +143,7 @@ table button {
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 5px;
+  transition: .3s ease-in;
 }
 
 .btn-detalhes {
@@ -148,9 +151,17 @@ table button {
   color: var(--color-blue);
 }
 
+.btn-detalhes:hover {
+  background-color: #004bad2b;
+}
+
 .btn-remover {
   border-color: red;
   color: red;
+}
+
+.btn-remover:hover {
+  background-color: #ff00002b;
 }
 
 .status {
@@ -181,6 +192,7 @@ table button {
   margin-bottom: 5px;
 }
 
+/* Modal */
 .fundoModal .modal {
   width: 75%;
   background-color: white;
@@ -494,7 +506,7 @@ table button {
     height: auto;
   }
 
-  .modal .graficos{
+  .modal .graficos {
     padding: 10px 0px;
   }
 

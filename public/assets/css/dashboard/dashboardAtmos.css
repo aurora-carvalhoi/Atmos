@@ -127,8 +127,6 @@ section {
     align-items: center;
 }
 
-.conteudo-heatmap .legende-heatmap span {}
-
 #legenda-heatmap {
     margin-top: 1vh;
     height: 100%;
