@@ -69,8 +69,15 @@ function cadastrarComponentes(req, res){
     }
 }
 
+function listarServidores(req, res){
+    servidoresModel.listarServidores().then((resultado) => {
+        res.status(200).json(resultado)
+    })
+}
+
 
 module.exports = {
     cadastrar,
-    cadastrarComponentes
+    cadastrarComponentes,
+    listarServidores
 }
