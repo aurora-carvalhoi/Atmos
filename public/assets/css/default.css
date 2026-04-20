@@ -4,8 +4,8 @@
 /*Default Styles*/
 :root {
   /*Colors*/
-  --color-blue: #004aad;
   --color-blue1: #3879FC;
+  --color-blue: #004aad;
   --color-accent: #004AAD;
   --color-blue-hover: #00367a;
   --color-blue-active: #0067FF14;
@@ -20,6 +20,7 @@
   --color-white-hover: #ededed;
   --color-divider: #bdbdbd;
   --color-opaque: #757575;
+  --color-opaque2: #4e4e4e;
   --color-black: #000000;
   --color-dark: #0a0a0a;
   --color-painel: #050A14;

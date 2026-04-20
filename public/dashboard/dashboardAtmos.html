@@ -23,8 +23,7 @@
     href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
 
-  <!-- Scripts -->
-  <!-- <script src="../assets/javascript/datetime.js"></script> -->
+
 
   <!-- ChartJS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -43,7 +42,7 @@
 
   <nav class="sidebar">
     <div class="logo-container">
-      <a href="../index.html" class="logo">
+      <a href="./dashboardAtmos.html" class="logo">
         <div class="cicle"></div>
         <span>ATMOS</span>
       </a>
@@ -61,7 +60,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#">
+          <a href="./dashboardAlertas.html">
             <img src="../assets/images/alert.svg" class="icon" alt="">
             <span>Alertas</span>
           </a>
@@ -72,21 +71,21 @@
           <span>INFRAESTRUTURA</span>
         </li>
         <li class="nav-item">
-          <a href="/cadastro_servidor.html">
+          <a href="./dashboardServidor.html">
             <img src="../assets/images/server.svg" class="icon" alt="">
             <span>Servidores</span>
           </a>
         </li>
         <li class="nav-item">
-          <a href="/cadastro_funcionario.html">
+          <a href="./dashboardEquipe.html">
             <img src="../assets/images/user.svg" class="icon" alt="">
-            <span>Usuários</span>
+            <span>Equipe</span>
           </a>
         </li>
       </ul>
     </ul>
 
-    <div class="info-user">
+    <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
       <div class="img-user" id="usarioimagem">
         <img alt="A">
       </div>
@@ -95,9 +94,6 @@
         <h5><span id="usuarioemail">email</span></h3>
       </div>
     </div>
-
-
-
 
     <!--Menu mobile-->
     <div class="menu" style="display: none" id="menu">
@@ -114,7 +110,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#">
+              <a href="./dashboardAlertas.html">
                 <img src="../assets/images/alert.svg" class="icon" alt="">
                 <span>Alertas</span>
               </a>
@@ -125,15 +121,15 @@
               <span>INFRAESTRUTURA</span>
             </li>
             <li class="nav-item">
-              <a href="/cadastro_servidor.html">
+              <a href="./dashboardServidor.html">
                 <img src="../assets/images/server.svg" class="icon" alt="">
                 <span>Servidores</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/cadastro_funcionario.html">
+              <a href="./dashboardEquipe.html">
                 <img src="../assets/images/user.svg" class="icon" alt="">
-                <span>Usuários</span>
+                <span>Equipe</span>
               </a>
             </li>
           </ul>
@@ -142,7 +138,7 @@
               <span>Usuário</span>
             </li>
             <li class="nav-item ">
-              <a href="./dashboardAtmos.html">
+              <a href="./dashboardPerfil.html">
                 <img src="../assets/images/user.svg" class="icon" alt="">
                 <span>Perfil</span>
               </a>
@@ -161,12 +157,12 @@
     </div>
 
   </nav>
-  <div class="container">
+  <main>
     <header>
       <div class="infos">
         <div class="screen-title">
           <ul class="breadcrumb">
-            <li><a href="#">Sistema</a></li>
+            <li><a href="#">Principal</a></li>
             <li><a href="#"><span>Servidores</span></a></li>
           </ul>
         </div>
@@ -181,136 +177,129 @@
           <span>Visão consolidada da Infraestrutura em tempo real</span>
         </div>
         <div class="acoes">
-          <button class="btn-atualizar">
-            <img src="../assets/images/icones/reload.svg" alt="reload icon">
-            ATUALIZAR
-          </button>
-          <button class="btn-exportar">
+         
+          <button class="btn-azul">
             <img src="../assets/images/icones/export.svg" alt="export icon">
             EXPORTAR
           </button>
         </div>
       </div>
     </header>
-
-
-    <main>
-      <section>
-        <div class="card card-gfc-infraestrutura">
-          <h3>Perfomance de Infraestrutura</h3>
-          <span>CPU - Rede - Incidentes</span>
-          <div class="conteudo">
-            <div>
-              <canvas id="perfomaInfra" class="graf-infraestrutura"></canvas>
+    <section>
+      <div class="card card-gfc-infraestrutura">
+        <h3>Perfomance de Infraestrutura</h3>
+        <span>CPU - Rede - Incidentes</span>
+        <div class="conteudo">
+          <div>
+            <canvas id="perfomaInfra" class="graf-infraestrutura"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="card card-feed-alertas ">
+        <h3>Feed de Alertas</h3>
+        <span>Últimas ocorrências registradas</span>
+        <div class="conteudo conteudo-feed">
+          <div class="alerta alerta-emergencia">
+            <div class="tipo-alerta">
+              <span class="bolinha-alerta bolinha-emergencia"></span>
+            </div>
+            <div class="desc-alerta">
+              <h5>SRV-HMLG : Offline</h5>
+              <span>há 3 min - 91% de utilização </span>
+            </div>
+          </div>
+          <div class="alerta alerta-emergencia">
+            <div class="tipo-alerta">
+              <span class="bolinha-alerta bolinha-emergencia"></span>
+            </div>
+            <div class="desc-alerta">
+              <h5>SRV-HMLG : Offline</h5>
+              <span>há 3 min - 91% de utilização </span>
+            </div>
+          </div>
+          <div class="alerta alerta-emergencia">
+            <div class="tipo-alerta">
+              <span class="bolinha-alerta bolinha-emergencia"></span>
+            </div>
+            <div class="desc-alerta">
+              <h5>SRV-HMLG : Offline</h5>
+              <span>há 3 min - 91% de utilização </span>
+            </div>
+          </div>
+          <div class="alerta alerta-emergencia">
+            <div class="tipo-alerta">
+              <span class="bolinha-alerta bolinha-emergencia"></span>
+            </div>
+            <div class="desc-alerta">
+              <h5>SRV-HMLG : Offline</h5>
+              <span>há 3 min - 91% de utilização </span>
             </div>
           </div>
         </div>
-        <div class="card card-feed-alertas ">
-          <h3>Feed de Alertas</h3>
-          <span>Últimas ocorrências registradas</span>
-          <div class="conteudo conteudo-feed">
-            <div class="alerta alerta-emergencia">
-              <div class="tipo-alerta">
-                <span class="bolinha-alerta bolinha-emergencia"></span>
-              </div>
-              <div class="desc-alerta">
-                <h5>SRV-HMLG : Offline</h5>
-                <span>há 3 min - 91% de utilização </span>
-              </div>
-            </div>
-            <div class="alerta alerta-emergencia">
-              <div class="tipo-alerta">
-                <span class="bolinha-alerta bolinha-emergencia"></span>
-              </div>
-              <div class="desc-alerta">
-                <h5>SRV-HMLG : Offline</h5>
-                <span>há 3 min - 91% de utilização </span>
-              </div>
-            </div>
-            <div class="alerta alerta-emergencia">
-              <div class="tipo-alerta">
-                <span class="bolinha-alerta bolinha-emergencia"></span>
-              </div>
-              <div class="desc-alerta">
-                <h5>SRV-HMLG : Offline</h5>
-                <span>há 3 min - 91% de utilização </span>
-              </div>
-            </div>
-            <div class="alerta alerta-emergencia">
-              <div class="tipo-alerta">
-                <span class="bolinha-alerta bolinha-emergencia"></span>
-              </div>
-              <div class="desc-alerta">
-                <h5>SRV-HMLG : Offline</h5>
-                <span>há 3 min - 91% de utilização </span>
-              </div>
-            </div>
-          </div>
-          <div class="ver-mais">
-            <a href="#">Ver mais</a>
+        <div class="ver-mais">
+          <a href="#">Ver mais</a>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="card card-heat-map">
+        <h3>Perfomance de Infraestrutura</h3>
+        <span>Mapa de quantidade de incidentes registrados</span>
+        <div class="conteudo conteudo-heatmap">
+          <div id="heatmap"></div>
+          <div class="legende-heatmap">
+            <span>Menos</span>
+            <div id="legenda-heatmap"></div>
+            <span>Mais</span>
           </div>
         </div>
-      </section>
-      <section>
-        <div class="card card-heat-map">
-          <h3>Perfomance de Infraestrutura</h3>
-          <span>Mapa de quantidade de incidentes registrados</span>
-          <div class="conteudo conteudo-heatmap">
-            <div id="heatmap"></div>
-            <div class="legende-heatmap">
-              <span>Menos</span>
-              <div id="legenda-heatmap"></div>
-              <span>Mais</span>
+      </div>
+      <div class="card card-recursos ">
+        <h3>Recursos em Tempo Real</h3>
+        <span>Últimas ocorrências registradas</span>
+        <div class="conteudo">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="card card-servidores">
+        <h3>Servidores</h3>
+        <span>Últimos dados de Monitoramento</span>
+        <div class="conteudo conteudo-servidor">
+          <div class="servidor">
+            <div class="indentificador">
+              <div></div>
+              <h3>SRV-PROD-02</h3>
+            </div>
+            <div class="infos">
+              <span>10.0.1.30</span>
+              <span>Ubuntu 22</span>
+            </div>
+            <div class="recursos">
+              <span>45%</span>
+              <span>73%</span>
+              <span>48%</span>
             </div>
           </div>
         </div>
-        <div class="card card-recursos ">
-          <h3>Recursos em Tempo Real</h3>
-          <span>Últimas ocorrências registradas</span>
-          <div class="conteudo">
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="ver-mais">
+          <a href="#">Ver mais</a>
+        </div>
+      </div>
+      <div class="card card-status-servidores ">
+        <h3>Status dos Servidores</h3>
+        <span>Por status atual</span>
+        <div class="conteudo">
+          <div>
+            <canvas id="statusServidores" class="graf-status-servidores"></canvas>
           </div>
         </div>
-      </section>
-      <section>
-        <div class="card card-servidores">
-          <h3>Servidores</h3>
-          <span>Últimos dados de Monitoramento</span>
-          <div class="conteudo conteudo-servidor">
-            <div class="servidor">
-              <div class="indentificador">
-                <div></div>
-                <h3>SRV-PROD-02</h3>
-              </div>
-              <div class="infos">
-                <span>10.0.1.30</span>
-                <span>Ubuntu 22</span>
-              </div>
-              <div class="recursos">
-                <span>45%</span>
-                <span>73%</span>
-                <span>48%</span>
-              </div>
-            </div>
-          </div>
-          <div class="ver-mais">
-            <a href="#">Ver mais</a>
-          </div>
-        </div>
-        <div class="card card-status-servidores ">
-          <h3>Status dos Servidores</h3>
-          <span>Por status atual</span>
-          <div class="conteudo">
-            <div>
-              <canvas id="statusServidores" class="graf-status-servidores"></canvas>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
+      </div>
+    </section>
+  </main>
 
   <div class="modal" id="modal">
     <div class="card-apresentacao">
@@ -338,6 +327,10 @@
 </body>
 
 </html>
+<!-- Scripts Funcionais -->
+<script src="../assets/javascript/datetime.js"></script>
+<script src="../assets/javascript/menu.js"></script>
+
 
 <!-- Graficos -->
 <script>
@@ -508,12 +501,10 @@
 
 </script>
 
-<!--  -->
+<!-- Fechar PopUp  -->
 <script>
   function fecharPopUp() {
     var modal = document.getElementById("modal")
     modal.style.display = "none"
   }
 </script>
-
-<script src="../assets/javascript/menu.js"></script>
