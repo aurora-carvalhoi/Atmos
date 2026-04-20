@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Title -->
-  <title>Dashboard - Atmos</title>
+  <title>Dashboard - Equipe</title>
 
   <!-- Styles -->
   <link rel="stylesheet" href="../assets/css/dashboard.css">
@@ -32,7 +32,7 @@
 
   <nav class="sidebar">
     <div class="logo-container">
-      <a href="../index.html" class="logo">
+      <a href="./dashboardAtmos.html" class="logo">
         <div class="cicle"></div>
         <span>ATMOS</span>
       </a>
@@ -43,14 +43,14 @@
         <li class="nav-category">
           <span>PRINCIPAL</span>
         </li>
-        <li class="nav-item ">
-          <a href="#">
+        <li class="nav-item">
+          <a href="./dashboardAtmos.html">
             <img src="../assets/images/pc.svg" class="icon" alt="">
-            <span>Visão Geral</span>
+            <span>Overview</span>
           </a>
         </li>
         <li class="nav-item">
-          <a href="#">
+          <a href="./dashboardAlertas.html">
             <img src="../assets/images/alert.svg" class="icon" alt="">
             <span>Alertas</span>
           </a>
@@ -61,19 +61,13 @@
           <span>INFRAESTRUTURA</span>
         </li>
         <li class="nav-item">
-          <a href="/cadastro_servidor.html">
+          <a href="./dashboardServidor.html">
             <img src="../assets/images/server.svg" class="icon" alt="">
             <span>Servidores</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="/cadastro_componentes.html">
-            <img src="../assets/images/component.svg" class="icon" alt="">
-            <span>Componentes</span>
-          </a>
-        </li>
-        <li class="nav-item nav-item-active">
-          <a href="/cadastro_funcionario.html">
+        <li class="nav-item  nav-item-active">
+          <a href="./dashboardEquipe.html">
             <img src="../assets/images/user.svg" class="icon" alt="">
             <span>Equipe</span>
           </a>
@@ -81,7 +75,7 @@
       </ul>
     </ul>
 
-    <div class="info-user">
+    <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
       <div class="img-user" id="usarioimagem">
         <img alt="A">
       </div>
@@ -91,6 +85,58 @@
       </div>
     </div>
 
+    <!--Menu mobile-->
+    <div class="menu" style="display: none" id="menu">
+      <div class="menu-container">
+        <ul>
+          <ul>
+            <li class="nav-category">
+              <span>PRINCIPAL</span>
+            </li>
+            <li class="nav-item ">
+              <a href="./dashboardAtmos.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Overview</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./dashboardAlertas.html">
+                <img src="../assets/images/alert.svg" class="icon" alt="">
+                <span>Alertas</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>INFRAESTRUTURA</span>
+            </li>
+            <li class="nav-item">
+              <a href="./dashboardServidor.html">
+                <img src="../assets/images/server.svg" class="icon" alt="">
+                <span>Servidores</span>
+              </a>
+            </li>
+            <li class="nav-item  nav-item-active">
+              <a href="./dashboardEquipe.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Equipe</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>Usuário</span>
+            </li>
+            <li class="nav-item ">
+              <a href="./dashboardPerfil.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Perfil</span>
+              </a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
     <!-- Menu Icon -->
     <div class="container-menu">
       <div class="menu-icon" id="menu-icon">
@@ -101,14 +147,14 @@
     </div>
 
   </nav>
-  <div class="container">
+  <main class="container">
     <header>
       <div class="infos">
         <div class="screen-title">
           <ul class="breadcrumb">
             <li><a href="#">Sistema</a></li>
             <li><a href="#"><span>Equipe</span></a></li>
-          </ul>           
+          </ul>
         </div>
         <div class="screen-infos">
           <div><span></span>Sistema Operacional</div>
@@ -121,11 +167,8 @@
           <span>Controle de acesso e Permições da plataforma</span>
         </div>
         <div class="acoes">
-          <button class="btn-atualizar">
-            <img src="../assets/images/icones/reload.svg" alt="reload icon">
-            ATUALIZAR
-          </button>
-          <button class="btn-exportar">
+
+          <button class="btn-azul">
             <img src="../assets/images/icones/export.svg" alt="export icon">
             EXPORTAR
           </button>
@@ -133,79 +176,83 @@
       </div>
     </header>
 
-
-    <main>
-      <section>
-        <div class="card card-informacoes-gerais">
+    <section class="section-kpis">
+      <div class="secao-kpis">
+        <div class="titulos-kpi">
           <h3>Visão Geral</h3>
-          <span>Informações gerais</span>
-          <div class="conteudo">
-            <div>
-              <!-- Conteúdo -->
+          <h4>Informações Gerais</h4>
+        </div>
+        <div class="conjunto-kpis">
+          <div class="kpi"></div>
+          <div class="kpi"></div>
+          <div class="kpi"></div>
+          <div class="kpi"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="card card-crescimento-usuarios">
+        <h3>Crescimento de Usuários</h3>
+        <span>Cadastros acumulados - últimos 6 meses</span>
+        <div class="conteudo">
+          <canvas id="crescimentoUsuario" class="graf-crescimento-usuario"></canvas>
+        </div>
+      </div>
+      <div class="card card-distribuicao-usuarios">
+        <h3>Distribuição de Usuários</h3>
+        <span>Distribuição por Tipo de acesso: Analista - Gestor</span>
+        <div class="conteudo">
+          <div>
+            <canvas id="distribuicaoUsuarios" class="graf-distribuicao-usuarios"></canvas>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="card card-servidores">
+        <h3>Servidores</h3>
+        <span>Últimos dados de Monitoramento</span>
+        <div class="conteudo conteudo-servidor">
+          <div class="servidor">
+            <div class="indentificador">
+              <div></div>
+              <h3>SRV-PROD-02</h3>
+            </div>
+            <div class="infos">
+              <span>10.0.1.30</span>
+              <span>Ubuntu 22</span>
+            </div>
+            <div class="recursos">
+              <span>45%</span>
+              <span>73%</span>
+              <span>48%</span>
             </div>
           </div>
         </div>
-      </section>
-      <section>
-        <div class="card card-crescimento-usuarios">
-          <h3>Crescimento de Usuários</h3>
-          <span>Cadastros acumulados - últimos 6 meses</span>
-          <div class="conteudo">
-            <canvas id="crescimentoUsuario" class="graf-crescimento-usuario"></canvas>
-          </div>
+        <div class="ver-mais">
+          <a href="#">Ver mais</a>
         </div>
-        <div class="card card-distribuicao-usuarios">
-          <h3>Distribuição de Usuários</h3>
-          <span>Distribuição por Tipo de acesso: Analista - Gestor</span>
-          <div class="conteudo">
-            <div>
-              <canvas id="distribuicaoUsuarios" class="graf-distribuicao-usuarios"></canvas>
-            </div>
+      </div>
+    </section>
 
-          </div>
-        </div>
-      </section>
-      <section>
-        <div class="card card-servidores">
-          <h3>Servidores</h3>
-          <span>Últimos dados de Monitoramento</span>
-          <div class="conteudo conteudo-servidor">
-            <div class="servidor">
-              <div class="indentificador">
-                <div></div>
-                <h3>SRV-PROD-02</h3>
-              </div>
-              <div class="infos">
-                <span>10.0.1.30</span>
-                <span>Ubuntu 22</span>
-              </div>
-              <div class="recursos">
-                <span>45%</span>
-                <span>73%</span>
-                <span>48%</span>
-              </div>
-            </div>
-          </div>
-          <div class="ver-mais">
-            <a href="#">Ver mais</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-
-  </div>
+  </main>
 
 </body>
 
 </html>
+<!-- Scripts Funcionais -->
+<script src="../assets/javascript/datetime.js"></script>
+<script src="../assets/javascript/menu.js"></script>
+
 
 <!-- Graficos -->
 <script>
-  
+
   // grafico de distribuição dos usuários
   const distribuicaoUsuarios = document.getElementById("distribuicaoUsuarios")
-  new Chart(distribuicaoUsuarios, { 
+  new Chart(distribuicaoUsuarios, {
     type: 'doughnut',
     data: {
       labels: ['Gestor', 'Analista'],
@@ -248,7 +295,7 @@
     }
   });
 
-// Grafico Crescimento de Usuários
+  // Grafico Crescimento de Usuários
   const crescimentoUsuario = document.getElementById("crescimentoUsuario")
   new Chart(crescimentoUsuario,
     {
@@ -269,7 +316,7 @@
             order: 2,
             borderDash: [5, 5],
             tension: 0.2,
-          }, 
+          },
 
         ],
         labels: ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar']
@@ -282,51 +329,5 @@
   )
 
 
-
-</script>
-
-
-<!-- formatação de data e hora -->
-
-<script>
-  // Declaração dos dais da semana e do mes como vetor
-  const semana = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
-  const meses = [
-    "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
-    "Jul", "Ago", "Set", "Out", "Nov", "Dez"
-  ];
-
-  // busca pela data
-  var dataAtual = new Date()
-  var dia = dataAtual.getDate()
-  var ano = dataAtual.getFullYear()
-  // Identifica o dia da semana e o mes atual
-  var diaSemana = semana[dataAtual.getDay()]
-  var mes = meses[dataAtual.getUTCMonth()]
-  // Add o "0" caso a data seja menor que 10 dias pra ficar com dois digitos
-  if (dia < 10) dia = "0" + dia
-
-  // Formata a data no modelo: Ter 07 de Abr 2026 
-  var dataFormatada = diaSemana + " " + dia + " " + mes + " " + ano + " "
-
-  // busca a hora certinho
-  const relogio = setInterval(function time() {
-    var horarioAtual = new Date()
-    // Pega as informações da hora
-    var hr = horarioAtual.getHours();
-    var min = horarioAtual.getMinutes();
-    var sec = horarioAtual.getSeconds();
-
-    // Formata para dois digitos
-    if (hr < 10) hr = '0' + hr
-    if (min < 10) min = '0' + min
-    if (sec < 10) sec = '0' + sec
-
-    // Formata a data para: hh:min:se
-    var horaFormatada = hr + ":" + min + ":" + sec
-
-    // coloca na tela
-    dataSistema.innerHTML = dataFormatada + horaFormatada
-  })
 
 </script>

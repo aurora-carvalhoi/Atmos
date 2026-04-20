@@ -36,5 +36,6 @@
     var horaFormatada = hr + ":" + min + ":" + sec
 
     // coloca na tela
-    dataSistema.innerHTML = dataFormatada + horaFormatada
+    // var data = 
+    document.getElementById("dataSistema").innerHTML = dataFormatada + horaFormatada
   })
