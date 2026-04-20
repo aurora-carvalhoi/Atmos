@@ -6,18 +6,64 @@ body {
 }
 
 /* Padrões */
-.fundoModal {
-  z-index: 999;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.348);
-  backdrop-filter: blur(2px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
+@media screen {
+    .fundoModal {
+        z-index: 999;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.348);
+        backdrop-filter: blur(2px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
 
+    /* Formato e cores */
+    .etiqueta {
+        padding: 3px 10px;
+        border-radius: 100px;
+        border: solid 1px transparent;
+    }
+    .etiqueta-bold {
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 100px;
+        border: solid 1px transparent;
+    }
+
+    .etiqueta-amarela {
+        background-color: #fdff8540;
+        border-color: #bfc43388;
+        color: #a78644;
+    }
+
+    .etiqueta-azul {
+        background-color: #E6E7FA;
+        border-color: #0656d653;
+        color: #0349A7;
+    }
+
+    .etiqueta-laranja {
+        background-color: #FAEFE6;
+        border-color: #D6800638;
+        color: #D77706;
+    }
+
+    .etiqueta-verde {
+        background-color: #85FFBC40;
+        border-color: #33C47588;
+        color: #44A774;
+    }
+
+    .etiqueta-vermelha,
+    .etiqueta-vermelho {
+        background-color: #FAE6E6;
+        border-color: #d6060656;
+        color: #D92629;
+    }
+
+}
 
 /* Tablet e mobile */
 @media screen and (max-width: 1024px) {
@@ -466,7 +512,7 @@ body {
         background-color: rgba(0, 0, 0, 0.084);
     }
 
-    
+
 
     .kpi {
         width: 100%;
