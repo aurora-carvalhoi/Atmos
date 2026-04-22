@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="corpo-admin">
+<body class="corpo-admin" onload="listarServidoresCadastrados();">
   <div class="estrutura-admin">
     <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
@@ -67,8 +67,8 @@
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="servidoresCadastrados">
+              <!-- <tr>
                 <td>srv-api-clima-01</td>
                 <td>10.20.5.14</td>
                 <td>Ubuntu 24.04</td>
@@ -88,7 +88,7 @@
                 <td>Windows Server</td>
                 <td>Sky Pulse</td>
                 <td><span class="etiqueta info">Estável</span></td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -99,3 +99,29 @@
   <script src="../assets/javascript/admin.js"></script>
 </body>
 </html>
+<script>
+  function listarServidoresCadastrados(){
+      fetch("/servidores/listarServidoresCadastrados").then(function(res){
+        return res.json();
+      }).then(function(servidores){
+        var listaServidores = document.getElementById("servidoresCadastrados");
+        if (servidores.length == 0){
+          listaServidores.innerHTML = "<p> Nenhum servidor cadastrado </p>"
+          return
+        }
+        var tabelaServidoresCadastrados = "";
+        for (var i = 0; i < servidores.length; i++){
+          tabelaServidoresCadastrados += `
+            <tr>
+                <td>${servidores[i].nome}</td>
+                <td>${servidores[i].enderecoIP}</td>
+                <td>${servidores[i].sistemaOperacional}</td>
+                <td>${servidores[i].nomeEmpresa}</td>
+                <td><span class="etiqueta success">--</span></td>
+              </tr>
+          `
+        }
+        listaServidores.innerHTML = tabelaServidoresCadastrados;
+      })
+    }
+</script>
