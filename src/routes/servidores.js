@@ -20,5 +20,9 @@ router.get("/listarServidoresRecentes", function(req, res){
     servidoresController.listarServidoresRecentes(req, res);
 })
 
+router.get("/listarServidoresCadastrados", function(req, res){
+    servidoresController.listarServidoresCadastrados(req, res);
+})
+
 module.exports = router;
 

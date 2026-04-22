@@ -44,10 +44,20 @@ function listarServidoresRecentes(){
     return database.executar(instrucaoSql);
 }
 
+function listarServidoresCadastrados(){
+    var instrucaoSql = `
+    SELECT idServidor, nome, enderecoIP, sistemaOperacional, nomeEmpresa
+    FROM servidor LEFT JOIN cadastroEmpresa on idCadastroEmpresa = fkEmpresa
+    order by idServidor desc;
+    `;
+    return database.executar(instrucaoSql);
+}
+
 
 module.exports = {
     cadastrar,
     cadastrarComponentes,
     listarServidores,
-    listarServidoresRecentes
+    listarServidoresRecentes,
+    listarServidoresCadastrados
 };
