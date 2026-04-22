@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body onload="listar(); puxarKpi();" class="corpo-admin">
+<body onload="listar(); puxarKpi(); listarRecentes();" class="corpo-admin">
   <div class="estrutura-admin">
     <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
@@ -80,8 +80,8 @@
                   <th>Status</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
+              <tbody id="tabelaEmpresas">
+                <!-- <tr>
                   <td>Atmos Monitoring Systems</td>
                   <td>Geraldo Atmos</td>
                   <td>São Paulo / SP</td>
@@ -98,7 +98,7 @@
                   <td>Rafael Mendes</td>
                   <td>Curitiba / PR</td>
                   <td><span class="etiqueta success">Operando</span></td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
@@ -180,6 +180,31 @@
         document.getElementById("kpiServidores").innerText = servidores.length;
       })
       })
+      })
+    }
+
+    function listarRecentes(){
+      fetch("/empresas/listarRecentes").then(function(res){
+        return res.json();
+      }).then(function(empresas){
+        var lista = document.getElementById("tabelaEmpresas");
+        if(empresas.length == 0){
+          lista.innerHTML = "<p> Nenhuma empresa cadastrada </p>"
+          return;
+        }
+        var tabela = "";
+        for (var i = 0; i < empresas.length; i++){
+          tabela += 
+          `
+            <tr>
+                  <td>${empresas[i].nomeEmpresa}</td>
+                  <td>${empresas[i].nomeResponsavel}</td>
+                  <td>${empresas[i].cidade}/${empresas[i].uf}</td>
+                  <td><span class="etiqueta success">${empresas[i].statusCliente}</span></td>
+                </tr>
+          `;
+        }
+        lista.innerHTML = tabela; 
       })
     }
   </script>

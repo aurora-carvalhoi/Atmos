@@ -397,7 +397,7 @@ textarea {
 
 .tabela-admin th,
 .tabela-admin td {
-  background-color: rebeccapurple;
+  /* background-color: rebeccapurple; */
   text-align: left;
   padding: 14px 12px;
   border-bottom: 1px solid var(--adm-border);

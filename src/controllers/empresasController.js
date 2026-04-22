@@ -6,6 +6,13 @@ function listar(req, res){
     })
 }
 
+function listarRecentes(req, res){
+    empresaModel.listarRecentes().then((resultado) => {
+        res.status(200).json(resultado)
+    })
+}
+
 module.exports = {
-    listar
+    listar,
+    listarRecentes
 }
