@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body onload="listar(); puxarKpi(); listarRecentes();" class="corpo-admin">
+<body onload="listar(); puxarKpi(); listarRecentes(); listarServidoresRecentes();" class="corpo-admin">
   <div class="estrutura-admin">
     <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
@@ -119,8 +119,8 @@
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="tabelaServidoresRecentes">
+              <!-- <tr>
                 <td>srv-api-clima-01</td>
                 <td>10.20.5.14</td>
                 <td>Ubuntu 24.04</td>
@@ -137,7 +137,7 @@
                 <td>10.20.5.30</td>
                 <td>Windows Server</td>
                 <td><span class="etiqueta info">Estável</span></td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -205,6 +205,30 @@
           `;
         }
         lista.innerHTML = tabela; 
+      })
+    }
+
+    function listarServidoresRecentes(){
+      fetch("/servidores/listarServidoresRecentes").then(function(res){
+        return res.json();
+      }).then(function(servidores){
+        var listaServidores = document.getElementById("tabelaServidoresRecentes");
+        if (servidores.length == 0){
+          listaServidores.innerHTML = "<p> Nenhum servidor cadastrado </p>"
+          return
+        }
+        var tabelaServidores = "";
+        for (var i = 0; i < servidores.length; i++){
+          tabelaServidores += `
+            <tr>
+                <td>${servidores[i].nome}</td>
+                <td>${servidores[i].enderecoIP}</td>
+                <td>${servidores[i].sistemaOperacional}</td>
+                <td><span class="etiqueta info">--</span></td>
+              </tr>
+          `
+        }
+        listaServidores.innerHTML = tabelaServidores;
       })
     }
   </script>
