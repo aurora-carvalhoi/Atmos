@@ -16,5 +16,9 @@ router.get("/listarServidores", function (req, res) {
     servidoresController.listarServidores(req, res);
 })
 
+router.get("/listarServidoresRecentes", function(req, res){
+    servidoresController.listarServidoresRecentes(req, res);
+})
+
 module.exports = router;
 
