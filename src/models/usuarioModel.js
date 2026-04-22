@@ -46,11 +46,21 @@ function listarColaboradores(){
     return database.executar(instrucaoSql);
 }
 
+function listarColaboradoresCadastrados(){
+    var instrucaoSql = `
+    SELECT nome, email, tipoUsuario, statusUsuario
+    FROM usuario,
+    ORDER BY idUsuario desc;
+    `;
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrarFuncionario,
     cadastrar,
     finalizarCadastro,
-    listarColaboradores
+    listarColaboradores,
+    listarColaboradoresCadastrados
 };
 

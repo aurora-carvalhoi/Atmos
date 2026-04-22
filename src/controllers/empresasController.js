@@ -12,7 +12,14 @@ function listarRecentes(req, res){
     })
 }
 
+function listarEmpresasCadastradas(req, res){
+    empresaModel.listarEmpresasCadastradas().then((resultado) => {
+        res.status(200).json(resultado)
+    })
+}
+
 module.exports = {
     listar,
-    listarRecentes
+    listarRecentes,
+    listarEmpresasCadastradas
 }

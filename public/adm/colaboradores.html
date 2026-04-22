@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="corpo-admin">
+<body class="corpo-admin" onload="listarColaboradoresCadastrados();">
   <div class="estrutura-admin">
     <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
@@ -69,9 +69,9 @@
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="colaboradoresCadastrados">
               <tr>
-                <td>Celeste Rocha</td>
+                <!-- <td>Celeste Rocha</td>
                 <td>celeste@atmos.com</td>
                 <td>Administrador</td>
                 <td>NOC</td>
@@ -90,7 +90,7 @@
                 <td>Gestor</td>
                 <td>Operações</td>
                 <td><span class="etiqueta success">Ativo</span></td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -101,3 +101,29 @@
   <script src="../assets/javascript/admin.js"></script>
 </body>
 </html>
+<script>
+  function listarColaboradoresCadastrados(){
+      fetch("/usuarios/listarColaboradoresCadastrados").then(function(res){
+        return res.json();
+      }).then(function(usuarios){
+        var listaColaboradores = document.getElementById("colaboradoresCadastrados");
+        if (usuarios.length == 0){
+          listaColaboradores.innerHTML = "<p> Nenhum usuario cadastrado </p>"
+          return
+        }
+        var tabelaColaboradoresCadastrados = "";
+        for (var i = 0; i < usuarios.length; i++){
+          tabelaColaboradoresCadastrados += `
+            <tr>
+                <td>${usuarios[i].nome}</td>
+                <td>${usuarios[i].email}</td>
+                <td>${usuarios[i].tipoUsuario}</td>
+                <td>--</td>
+                <td><span class="etiqueta success">${usuarios[i].statusUsuario}</span></td>
+              </tr>
+          `
+        }
+        listaColaboradores.innerHTML = tabelaColaboradoresCadastrados;
+      })
+    }
+</script>
