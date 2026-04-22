@@ -25,4 +25,8 @@ router.get("/listarColaboradores", function(req, res){
     usuarioController.listarColaboradores(req, res);
 });
 
+router.get("/listarColaboradoresCadastrados", function(req, res){
+    usuarioController.listarColaboradores(req, res);
+});
+
 module.exports = router;

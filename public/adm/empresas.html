@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="corpo-admin">
+<body class="corpo-admin" onload="listarEmpresasCadastradas();">
   <div class="estrutura-admin">
     <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
@@ -47,13 +47,13 @@
               <tr>
                 <th>Empresa</th>
                 <th>Responsável</th>
-                <th>Segmento</th>
+                <th>CNPJ</th>
                 <th>Contato</th>
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="tabelaEmpresasCadastradas">
+              <!-- <tr>
                 <td>Atmos Monitoring Systems</td>
                 <td>Geraldo Atmos</td>
                 <td>Observabilidade climática</td>
@@ -73,7 +73,7 @@
                 <td>Telemetria e alertas</td>
                 <td>(41) 3777-9080<br>rafael@skypulse.com</td>
                 <td><span class="etiqueta success">Homologação</span></td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -112,4 +112,30 @@
   <script src="../assets/javascript/admin.js"></script>
 </body>
 </html>
+<script>
+  function listarEmpresasCadastradas(){
+      fetch("/empresas/listarEmpresasCadastradas").then(function(res){
+        return res.json();
+      }).then(function(empresas){
+        var listaEmpresas = document.getElementById("tabelaEmpresasCadastradas");
+        if (empresas.length == 0){
+          listaEmpresas.innerHTML = "<p> Nenhuma empresa cadastrada </p>"
+          return
+        }
+        var tabelaEmpresasCadastradas = "";
+        for (var i = 0; i < empresas.length; i++){
+          tabelaEmpresasCadastradas += `
+            <tr>
+                <td>${empresas[i].nomeEmpresa}</td>
+                <td>${empresas[i].nomeResponsavel}</td>
+                <td>${empresas[i].cnpj}</td>
+                <td>${empresas[i].telefoneFixo}<br>${empresas[i].email}</td>
+                <td><span class="etiqueta success">${empresas[i].statusCliente}</span></td>
+              </tr>
+          `
+        }
+        listaEmpresas.innerHTML = tabelaEmpresasCadastradas;
+      })
+    }
+</script>
   

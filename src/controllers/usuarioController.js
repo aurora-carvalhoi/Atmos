@@ -162,10 +162,17 @@ function listarColaboradores(req, res){
     })
 }
 
+function listarColaboradoresCadastrados(req, res){
+    usuarioModel.listarColaboradoresCadastrados().then((resultado)=>{
+        res.status(200).json(resultado);
+    })
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     cadastrarFuncionario,
     finalizarCadastro,
-    listarColaboradores
+    listarColaboradores,
+    listarColaboradoresCadastrados
 }

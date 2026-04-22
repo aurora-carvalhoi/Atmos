@@ -12,7 +12,17 @@ function listarRecentes(){
     return database.executar(instrucaoSql);
 }
 
+function listarEmpresasCadastradas(){
+    var instrucaoSql = `
+    SELECT idcadastroEmpresa, nomeEmpresa, nomeResponsavel, cnpj, telefoneFixo, email, statusCliente
+    FROM cadastroEmpresa LEFT JOIN contato on idcadastroEmpresa = fkEmpresa
+    order by idcadastroEmpresa desc; 
+    `;
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     listar,
-    listarRecentes
+    listarRecentes,
+    listarEmpresasCadastradas
 }

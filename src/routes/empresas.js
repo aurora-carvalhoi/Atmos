@@ -11,4 +11,9 @@ router.get("/listarRecentes",function (req, res){
     empresasController.listarRecentes(req, res)
 })
 
+router.get("/", empresasController.listarEmpresasCadastradas)
+router.get("/listarEmpresasCadastradas", function(req, res){
+    empresasController.listarEmpresasCadastradas(req, res)
+})
+
 module.exports = router;
