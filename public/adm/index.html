@@ -197,10 +197,10 @@
           tabela += 
           `
             <tr>
-                  <td>${empresas[i].nomeEmpresa}</td>
+                  <td>${empresas[i].razaoSocial}</td>
                   <td>${empresas[i].nomeResponsavel}</td>
                   <td>${empresas[i].cidade}/${empresas[i].uf}</td>
-                  <td><span class="etiqueta success">${empresas[i].statusCliente}</span></td>
+                  <td><span class="etiqueta success">${empresas[i].statusEmpresa}</span></td>
                 </tr>
           `;
         }
@@ -221,8 +221,8 @@
         for (var i = 0; i < servidores.length; i++){
           tabelaServidores += `
             <tr>
-                <td>${servidores[i].nome}</td>
-                <td>${servidores[i].enderecoIP}</td>
+                <td>${servidores[i].nomeIdentificacao}</td>
+                <td>${servidores[i].enderecoIPV4}</td>
                 <td>${servidores[i].sistemaOperacional}</td>
                 <td><span class="etiqueta info">--</span></td>
               </tr>

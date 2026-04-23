@@ -113,10 +113,10 @@
         for (var i = 0; i < servidores.length; i++){
           tabelaServidoresCadastrados += `
             <tr>
-                <td>${servidores[i].nome}</td>
-                <td>${servidores[i].enderecoIP}</td>
+                <td>${servidores[i].nomeIdentificacao}</td>
+                <td>${servidores[i].enderecoIPV4}</td>
                 <td>${servidores[i].sistemaOperacional}</td>
-                <td>${servidores[i].nomeEmpresa}</td>
+                <td>${servidores[i].razaoSocial}</td>
                 <td><span class="etiqueta success">--</span></td>
               </tr>
           `
