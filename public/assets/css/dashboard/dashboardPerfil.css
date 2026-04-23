@@ -1,0 +1,268 @@
+@import url("../dashboard.css");
+@import url("../default.css");
+
+@media screen {
+    .card-perfil {
+        width: 100%;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.1);
+        padding: 1vw;
+        margin-bottom: 3vh;
+    }
+
+    .dados-perfil {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 5px;
+        border-bottom: solid 2px var(--color-divider);
+    }
+
+    .dados-perfil span {
+        font-size: 12px;
+    }
+
+    .usuario {
+        display: flex;
+        align-items: center;
+    }
+
+    .perfil {
+        background-color: var(--color-accent);
+        width: 90px;
+        height: 90px;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 30px;
+        color: white;
+        margin-right: 30px;
+    }
+
+    .dados-gerais {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px 10px;
+    }
+
+    .dados {
+        display: flex;
+        flex-direction: column;
+        padding: 0% 20px;
+        margin: 15px 15px;
+    }
+
+    .dados .titulo {
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    .dados .info {
+        font-size: 15px;
+    }
+
+    .acoes {
+        width: 100%;
+        display: flex;
+        margin-top: 40px;
+        padding: 0px 20px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .acoes button {
+        width: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 10px 10px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .acoes button img {
+        height: 15px;
+    }
+
+    /* modal */
+    .fundoModal .modalUsuario {
+        width: 75%;
+        max-height: 800px;
+        min-height: 450px;
+        overflow-y: auto;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 0px 25px;
+        border-radius: 15px;
+    }
+
+    .modalUsuario header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--color-accent);
+        font-size: 16px;
+    }
+
+    .modalUsuario .subTitulo {
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-opaque);
+    }
+
+    .modalUsuario button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        color: white;
+        background-color: var(--color-blue1);
+        border-radius: 10px;
+        transition: .2s ease-in;
+    }
+
+    .modalUsuario button:hover {
+        background-color: var(--color-accent);
+    }
+
+    .modalUsuario .conteudo-usuario {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .modalUsuario .conteudo-usuario label {
+        display: flex;
+        flex-direction: column;
+        font-weight: 700;
+        font-size: 15px;
+        margin: 5px 0px;
+    }
+
+    .modalUsuario .conteudo-usuario input {
+        width: 100%;
+        height: 30px;
+        padding: 5px 10px;
+        margin-top: 5px;
+        border: solid 1px var(--color-accent);
+    }
+
+    .modalUsuario .conteudo-usuario input:focus {
+        border-color: var(--adm-blue);
+        box-shadow: 0 0 0 3px rgba(56, 121, 252, 0.12);
+    }
+
+    .modalUsuario .img-perfil {
+        width: 100%;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        background-color: #00367A;
+    }
+
+    .modalUsuario .acoesModal {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .acoesModal button {
+        display: flex;
+        align-items: center;
+        width: 125px;
+        height: 30px;
+        border-radius: 3px;
+        padding: 5px 10px;
+        font-weight: 600;
+        border: none;
+        margin-left: 10px;
+    }
+
+    .acoesModal .btn-branco {
+        color: #00367A;
+        background: #ffffff;
+        border: 1px solid #e6e6e6;
+    }
+
+    .acoesModal .btn-branco:hover {
+        background-color: rgba(0, 0, 0, 0.084);
+    }
+
+    .acoesModal .btn-vermelho {
+        background: #FC3838;
+    }
+
+    .acoesModal .btn-vermelho:hover {
+        background-color: #b73636;
+    }
+
+
+    .modalUsuario .dados-gerais-form {
+        justify-content: space-between;
+    }
+
+    .modalUsuario .w-75 {
+        width: 74.5%;
+    }
+
+    .modalUsuario .w-25 {
+        width: 24.5%;
+    }
+
+    .modalUsuario .w-33 {
+        width: 33%;
+    }
+
+    .modalUsuario .w-50 {
+        width: 49.5%;
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+    .fundoModal .modalUsuario {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .fundoModal .modalUsuario {
+        width: 100%;
+    }
+
+    .acoes {
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: end;
+        height: 70px;
+        margin-bottom: 15px;
+    }
+
+    .modalUsuario .usuario{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .modalUsuario .usuario .perfil{
+        margin: 0;
+    }
+    .modalUsuario .w-75,
+    .modalUsuario .w-25,
+    .modalUsuario .w-33,
+    .modalUsuario .w-50 {
+        width: 100%;
+    }
+
+
+}

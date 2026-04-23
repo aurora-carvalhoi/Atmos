@@ -384,7 +384,8 @@
       </header>
       <div class="conteudo-remover">
         <p>Tem certeza de que deseja ativar esta conta do contribuidor?</p>
-        <p>Ao ativar, o contribuidor recuperará o acesso ao sistema e poderá voltar a utilizar normalmente os recursos disponíveis.
+        <p>Ao ativar, o contribuidor recuperará o acesso ao sistema e poderá voltar a utilizar normalmente os recursos
+          disponíveis.
         </p>
         <p>Se deseja continuar, confirme a ativação. Caso contrário, você pode cancelar.</p>
         <div class="acoesModal">
@@ -398,6 +399,150 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal detalhes Usuario -->
+  <div class="fundoModal" id="modalDetalhesPerfil">
+    <div class="modal modalUsuario">
+      <header>
+        <div>
+          <h2>Detalhes do Servidor</h2>
+          <span class="subTitulo">Servidor | SRV-PROD-01</span>
+        </div>
+        <div>
+          <button onclick="fecharModal(2)">
+            X
+          </button>
+        </div>
+      </header>
+      <div class="conteudo-usuario">
+        <div class="dados-perfil">
+          <div class="usuario">
+            <div class="perfil">
+              BL
+            </div>
+            <div class="user">
+              <h2 id="nome_usuario">Brandão Lima</h2>
+              <span class="etiqueta-semi-bold etiqueta-azul">● Gestor</span>
+            </div>
+          </div>
+          <div class="status">
+            <span class="etiqueta-semi-bold etiqueta-verde">● Ativo</span>
+          </div>
+        </div>
+        <div class="dados-gerais">
+          <div class="dados">
+            <span class="titulo">E-MAIL</span>
+            <span class="info">brandaolima@sptech.school</span>
+          </div>
+          <div class="dados">
+            <span class="titulo">CONTATO</span>
+            <span class="info">+55 11 91234-5678</span>
+          </div>
+          <div class="dados">
+            <span class="titulo">EMPRESA</span>
+            <span class="info">INSTITUTO DE METEOROLOGIA DE SANTA CATARINA</span>
+          </div>
+          <div class="dados">
+            <span class="titulo">PAIS</span>
+            <span class="info">BRASIL</span>
+          </div>
+          <div class="dados">
+            <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+            <span class="info">123.456.789.99</span>
+          </div>
+          <div class="dados">
+            <span class="titulo">DATA DE NASCIMENTO</span>
+            <span class="info">25/12/2000</span>
+          </div>
+          <div class="dados">
+            <span class="titulo">REGIÃO</span>
+            <span class="info">SUL</span>
+          </div>
+          <div class="dados">
+            <span class="titulo">CONTA CRIADA EM</span>
+            <span class="info">25/02/2026</span>
+          </div>
+          <div class="dados">
+            <span class="titulo">LOCALIZAÇÃO</span>
+            <span class="info">São Paulo/Brasil</span>
+          </div>
+        </div>
+        <div class="acoesModal">
+          <p>Última atualização: 25/01/2026 às 13:00</p>
+          <button class="btn-azul" onclick="editarPerfil(1)">
+            Alterar dados
+          </button>
+         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Editar Usuario -->
+  <div class="fundoModal" id="modalEditarPerfil">
+        <div class="modal modalUsuario modalEditar">
+            <!-- Topo do modal -->
+            <header>
+                <!-- Titulo e subtitulo -->
+                <div>
+                    <h2>Detalhes do Servidor</h2>
+                    <span class="subTitulo">Servidor | SRV-PROD-01</span>
+                </div>
+                <!-- botão de sair -->
+                <div>
+                    <button onclick="fecharModal(3)">
+                        X
+                    </button>
+                </div>
+            </header>
+            <div class="conteudo-usuario">
+               <div class="dados-perfil">
+                    <div class="usuario">
+                        <div class="perfil">
+                            BL
+                        </div>
+                        <div>
+                            <input type="file" name="imagem" id="">    
+                        </div>
+                    </div>
+                </div>
+                <div class="dados-gerais dados-gerais-form">
+                    <label class="w-75">
+                        <span class="titulo">E-MAIL</span>
+                        <input type="text" id="input_email" value="" placeholder="geraldo@atmos.com">
+                    </label>
+                    <label class="w-25">
+                        <span class="titulo">CONTATO</span>
+                        <input type="text" id="input_contato" value="" placeholder="+55 11 98989-6969">
+                    </label>
+                    <label class="w-33">
+                        <span class="titulo">NOME</span>
+                        <input type="text" id="input_nome" value="" placeholder="Geraldo Atmos">
+                    </label>
+                    <label class="w-33">
+                        <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+                        <input type="text" id="input_doc_indentificacao" value="" placeholder="000.000.000-01">
+                    </label>
+                    <label class="w-33">
+                        <span class="titulo">DATA DE NASCIMENTO</span>
+                        <input type="date" id="input_data_nasc" value="">
+                    </label>
+                  
+                </div>
+                <div class="acoesModal">
+                    <div></div>
+                    <div style="display: flex;">
+                        <button class="btn-branco" onclick="fecharModal(2)">
+                            Cancelar
+                        </button>
+                        <button class="btn-azul" onclick="alterarDados ()">
+                            Confirmar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+
 </body>
 
 </html>
@@ -506,6 +651,16 @@
   function fecharModal(tipoModal) {
     const modal = document.getElementsByClassName("fundoModal")
     modal[tipoModal].style.display = 'none';
+  }
+
+  function detalhes() {
+    var modal = document.getElementById("modalDetalhesPerfil")
+    modal.style.display = 'flex'
+  }
+
+  function editarPerfil(id){
+    var modal = document.getElementById("modalEditarPerfil")
+    modal.style.display = 'flex'
   }
 
 </script>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title -->
+    <title>Dashboard - Equipe</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardPerfil.css">
+
+    <!-- Flavicon -->
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+
+
+    <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <nav class="sidebar">
+        <div class="logo-container">
+            <a href="./dashboardAtmos.html" class="logo">
+                <div class="cicle"></div>
+                <span>ATMOS</span>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <ul>
+                <li class="nav-category">
+                    <span>PRINCIPAL</span>
+                </li>
+                <li class="nav-item">
+                    <a href="./dashboardAtmos.html">
+                        <img src="../assets/images/pc.svg" class="icon" alt="">
+                        <span>Overview</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="./dashboardAlertas.html">
+                        <img src="../assets/images/alert.svg" class="icon" alt="">
+                        <span>Alertas</span>
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li class="nav-category">
+                    <span>INFRAESTRUTURA</span>
+                </li>
+                <li class="nav-item">
+                    <a href="./dashboardServidor.html">
+                        <img src="../assets/images/server.svg" class="icon" alt="">
+                        <span>Servidores</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="./dashboardEquipe.html">
+                        <img src="../assets/images/user.svg" class="icon" alt="">
+                        <span>Equipe</span>
+                    </a>
+                </li>
+            </ul>
+        </ul>
+
+        <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
+            <div class="img-user" id="usarioimagem">
+                <img alt="A">
+            </div>
+            <div>
+                <h3><span id="usuarionome">usuário</span></h3>
+                <h5><span id="usuarioemail">email</span></h3>
+            </div>
+        </div>
+
+        <!--Menu mobile-->
+        <div class="menu" style="display: none" id="menu">
+            <div class="menu-container">
+                <ul>
+                    <ul>
+                        <li class="nav-category">
+                            <span>PRINCIPAL</span>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./dashboardAtmos.html">
+                                <img src="../assets/images/pc.svg" class="icon" alt="">
+                                <span>Overview</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./dashboardAlertas.html">
+                                <img src="../assets/images/alert.svg" class="icon" alt="">
+                                <span>Alertas</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="nav-category">
+                            <span>INFRAESTRUTURA</span>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./dashboardServidor.html">
+                                <img src="../assets/images/server.svg" class="icon" alt="">
+                                <span>Servidores</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="./dashboardEquipe.html">
+                                <img src="../assets/images/user.svg" class="icon" alt="">
+                                <span>Equipe</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="nav-category">
+                            <span>Usuário</span>
+                        </li>
+                        <li class="nav-item nav-item-active">
+                            <a href="./dashboardPerfil.html">
+                                <img src="../assets/images/user.svg" class="icon" alt="">
+                                <span>Perfil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <!-- Menu Icon -->
+        <div class="container-menu">
+            <div class="menu-icon" id="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+    </nav>
+    <main class="container">
+        <header>
+            <div class="infos">
+                <div class="screen-title">
+                    <ul class="breadcrumb">
+                        <li><a href="#">Usuário</a></li>
+                        <li><a href="#"><span>Perfil</span></a></li>
+                    </ul>
+                </div>
+                <div class="screen-infos">
+                    <div><span></span>Sistema Operacional</div>
+                    <span id="dataSistema"></span>
+                </div>
+            </div>
+            <div class="tela">
+                <div>
+                    <h1>Perfil de Usuário</h1>
+                    <span>Configuração e visualoização dos dados de usuário</span>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="card-perfil">
+                <div class="dados-perfil">
+                    <div class="usuario">
+                        <div class="perfil">
+                            BL
+                        </div>
+                        <div class="user">
+                            <h2 id="nome_usuario">Brandão Lima</h2>
+                            <span class="etiqueta-semi-bold etiqueta-azul">● Gestor</span>
+                        </div>
+                    </div>
+                    <div class="status">
+                        <span class="etiqueta-semi-bold etiqueta-verde">● Ativo</span>
+                    </div>
+                </div>
+                <div class="dados-gerais">
+                    <div class="dados">
+                        <span class="titulo">E-MAIL</span>
+                        <span class="info">brandaolima@sptech.school</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">CONTATO</span>
+                        <span class="info">+55 11 91234-5678</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">EMPRESA</span>
+                        <span class="info">INSTITUTO DE METEOROLOGIA DE SANTA CATARINA</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">PAIS</span>
+                        <span class="info">BRASIL</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+                        <span class="info">123.456.789.99</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">DATA DE NASCIMENTO</span>
+                        <span class="info">25/12/2000</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">REGIÃO</span>
+                        <span class="info">SUL</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">CONTA CRIADA EM</span>
+                        <span class="info">25/02/2026</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">LOCALIZAÇÃO</span>
+                        <span class="info">São Paulo/Brasil</span>
+                    </div>
+                </div>
+                <div class="acoes">
+                    <p>Última atualização: 25/01/2026 às 13:00</p>
+                    <button class="btn-azul" onclick="editarPerfil()">
+                        <img src="../assets/images/icones/editar.svg" alt="editar icon">
+                        Alterar dados
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <div class="fundoModal" id="modalEditarPerfil">
+        <div class="modal modalUsuario">
+            <!-- Topo do modal -->
+            <header>
+                <!-- Titulo e subtitulo -->
+                <div>
+                    <h2>Detalhes do Servidor</h2>
+                    <span class="subTitulo">Servidor | SRV-PROD-01</span>
+                </div>
+                <!-- botão de sair -->
+                <div>
+                    <button onclick="fecharModal(0)">
+                        X
+                    </button>
+                </div>
+            </header>
+            <div class="conteudo-usuario">
+                <div class="dados-perfil">
+                    <div class="usuario">
+                        <div class="perfil">
+                            BL
+                        </div>
+                        <div>
+                            <input type="file" name="imagem" id="">
+                        </div>
+                    </div>
+                </div>
+                <div class="dados-gerais dados-gerais-form">
+                    <label class="w-75">
+                        <span class="titulo">E-MAIL</span>
+                        <input type="text" id="input_email" value="" placeholder="geraldo@atmos.com">
+                    </label>
+                    <label class="w-25">
+                        <span class="titulo">CONTATO</span>
+                        <input type="text" id="input_contato" value="" placeholder="+55 11 98989-6969">
+                    </label>
+                    <label class="w-33">
+                        <span class="titulo">NOME</span>
+                        <input type="text" id="input_nome" value="" placeholder="Geraldo Atmos">
+                    </label>
+                    <label class="w-33">
+                        <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+                        <input type="text" id="input_doc_indentificacao" value="" placeholder="000.000.000-01">
+                    </label>
+                    <label class="w-33">
+                        <span class="titulo">DATA DE NASCIMENTO</span>
+                        <input type="date" id="input_data_nasc" value="">
+                    </label>
+                    <label class="w-50">
+                        <span class="titulo">SENHA</span>
+                        <input type="password" id="input_senha" value="" placeholder="*****">
+                    </label>
+                    <label class="w-50">
+                        <span class="titulo">CONFIRMAÇÃO DE SENHA</span>
+                        <input type="password" id="input_confimacao_senha" value="" placeholder="*****">
+                    </label>
+                </div>
+                <div class="acoesModal">
+                    <div></div>
+                    <div style="display: flex;">
+                        <button class="btn-branco" onclick="cancelar(0)">
+                            Cancelar
+                        </button>
+                        <button class="btn-azul" onclick="alterarDados ()">
+                            Confirmar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<!-- Scripts Funcionais -->
+<script src="../assets/javascript/datetime.js"></script>
+<script src="../assets/javascript/menu.js"></script>
+
+<script>
+    function fecharModal(tipoModal) {
+        const modal = document.getElementsByClassName("fundoModal")
+        modal[tipoModal].style.display = 'none';
+    }
+
+    function editarPerfil() {
+        var modal = document.getElementById("modalEditarPerfil")
+        modal.style.display = 'flex'
+    }
+
+    function cancelar(modal) {
+        input_email.value = ''
+        input_contato.value = ''
+        input_nome.value = ''
+        input_doc_indentificacao.value = ''
+        input_data_nasc.value = ''
+        input_senha.value = ''
+        input_confimacao_senha.value = ''
+        fecharModal(modal)
+    }
+</script>

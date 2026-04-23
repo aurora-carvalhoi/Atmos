@@ -3,10 +3,13 @@
 body {
     display: flex;
     flex-direction: row;
+    box-sizing: border-box;
 }
 
 /* Padrões */
 @media screen {
+    /* <span class="etiqueta etiqueta-amarela">● Atenção</span> */
+
     .fundoModal {
         z-index: 999;
         position: fixed;
@@ -24,7 +27,16 @@ body {
         padding: 3px 10px;
         border-radius: 100px;
         border: solid 1px transparent;
+        font-size: 12px;
     }
+
+    .etiqueta-semi-bold {
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 100px;
+        border: solid 1px transparent;
+    }
+
     .etiqueta-bold {
         font-weight: 700;
         padding: 3px 10px;
@@ -32,7 +44,8 @@ body {
         border: solid 1px transparent;
     }
 
-    .etiqueta-amarela {
+    .etiqueta-amarela,
+    .etiqueta-amarelo {
         background-color: #fdff8540;
         border-color: #bfc43388;
         color: #a78644;

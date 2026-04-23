@@ -388,7 +388,7 @@ body {
         background-color: var(--color-accent);
     }
 
-    .modal .acoesModal{
+    .modal .acoesModal {
         display: flex;
         justify-content: end;
         margin-top: 10px;
@@ -435,6 +435,125 @@ body {
         font-weight: 600;
     }
 
+    /* Modal Usuario */
+    .modalUsuario {
+        max-height: 700px;
+        min-height: 450px;
+        overflow-y: auto;
+        background-color: #004AAD;
+    }
+
+    .modalUsuario .conteudo-usuario {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .modalUsuario .acoesModal {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .modalUsuario .dados-perfil {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 5px;
+        border-bottom: solid 2px var(--color-divider);
+    }
+
+    .modalUsuario .dados-perfil span {
+        font-size: 12px;
+    }
+
+    .modalUsuario .usuario {
+        display: flex;
+        align-items: center;
+    }
+
+    .modalUsuario .perfil {
+        background-color: var(--color-accent);
+        width: 90px;
+        height: 90px;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 30px;
+        color: white;
+        margin-right: 30px;
+    }
+
+    .modalUsuario .dados-gerais {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px 10px;
+    }
+
+    .modalUsuario .dados {
+        display: flex;
+        flex-direction: column;
+        padding: 0% 20px;
+        margin: 15px 15px;
+    }
+
+    .modalUsuario .dados .titulo {
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    .modalUsuario .dados .info {
+        font-size: 15px;
+    }
+
+    /* Modal Editar Usuario */
+
+
+    .modalUsuario .dados-gerais-form {
+        justify-content: space-between;
+    }
+
+    .modalUsuario .conteudo-usuario label {
+        display: flex;
+        flex-direction: column;
+        font-weight: 700;
+        font-size: 15px;
+        margin: 5px 0px;
+    }
+
+    .modalUsuario .conteudo-usuario input {
+        width: 100%;
+        height: 30px;
+        padding: 5px 10px;
+        margin-top: 5px;
+        border: solid 1px var(--color-accent);
+    }
+
+    .modalUsuario .conteudo-usuario input:focus {
+        border-color: var(--adm-blue);
+        box-shadow: 0 0 0 3px rgba(56, 121, 252, 0.12);
+    }
+
+    .modalUsuario .w-75 {
+        width: 74.5%;
+    }
+
+    .modalUsuario .w-25 {
+        width: 24.5%;
+    }
+
+    .modalUsuario .w-33 {
+        width: 33%;
+    }
+
+    .modalUsuario .w-50 {
+        width: 49.5%;
+    }
 
 }
 
@@ -465,7 +584,6 @@ body {
         font-weight: 500;
     }
 
-
     /* modal */
     .fundoModal .modal {
         width: 90%;
@@ -483,5 +601,26 @@ body {
     .section-graficos .card {
         width: 100%;
         margin-bottom: 10px;
+    }
+
+    .fundoModal .modalUsuario {
+        width: 100%;
+    }
+
+    .modalEditar .usuario {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .modalEditar .usuario .perfil {
+        margin: 0;
+    }
+
+    .modalUsuario .w-75,
+    .modalUsuario .w-25,
+    .modalUsuario .w-33,
+    .modalUsuario .w-50 {
+        width: 100%;
     }
 }
