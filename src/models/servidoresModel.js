@@ -1,13 +1,13 @@
 var database = require("../database/config")
 
 
-function cadastrar(nomeServidor, numeroIdentificacao, sistemaOperacional,enderecoIP, fkEmpresa) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nomeServidor, numeroIdentificacao, sistemaOperacional,enderecoIP, fkEmpresa);
+function cadastrar(nomeIdentificacao, numeroIdentificacao, sistemaOperacional,enderecoIPV4, fkEmpresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nomeIdentificacao, numeroIdentificacao, sistemaOperacional,enderecoIPV4, fkEmpresa);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO servidor (fkEmpresa, nome, numeroIdentificacao, sistemaOperacional,enderecoIP) VALUES (${fkEmpresa},'${nomeServidor}','${numeroIdentificacao}','${sistemaOperacional}','${enderecoIP}');
+        INSERT INTO servidor (fkEmpresa, nomeIdentificacao, numeroIdentificacao, sistemaOperacional,enderecoIPV4) VALUES (${fkEmpresa},'${nomeIdentificacao}','${numeroIdentificacao}','${sistemaOperacional}','${enderecoIPV4}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -37,7 +37,7 @@ function listarServidores(){
 
 function listarServidoresRecentes(){
     var instrucaoSql = `
-    SELECT idServidor, nome, enderecoIP, sistemaOperacional
+    SELECT idServidor, nomeIdentificacao, enderecoIPV4, sistemaOperacional
     FROM servidor
     order by idServidor desc limit 3;
     `;
@@ -46,8 +46,8 @@ function listarServidoresRecentes(){
 
 function listarServidoresCadastrados(){
     var instrucaoSql = `
-    SELECT idServidor, nome, enderecoIP, sistemaOperacional, nomeEmpresa
-    FROM servidor LEFT JOIN cadastroEmpresa on idCadastroEmpresa = fkEmpresa
+    SELECT idServidor, nomeIdentificacao, enderecoIPV4, sistemaOperacional, razaoSocial
+    FROM servidor LEFT JOIN empresa on idEmpresa = fkEmpresa
     order by idServidor desc;
     `;
     return database.executar(instrucaoSql);
