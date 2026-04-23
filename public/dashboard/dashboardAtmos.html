@@ -163,7 +163,7 @@
         <div class="screen-title">
           <ul class="breadcrumb">
             <li><a href="#">Principal</a></li>
-            <li><a href="#"><span>Servidores</span></a></li>
+            <li><a href="#"><span>Overview</span></a></li>
           </ul>
         </div>
         <div class="screen-infos">
@@ -177,7 +177,7 @@
           <span>Visão consolidada da Infraestrutura em tempo real</span>
         </div>
         <div class="acoes">
-         
+
           <button class="btn-azul">
             <img src="../assets/images/icones/export.svg" alt="export icon">
             EXPORTAR
@@ -187,8 +187,17 @@
     </header>
     <section>
       <div class="card card-gfc-infraestrutura">
-        <h3>Perfomance de Infraestrutura</h3>
-        <span>CPU - Rede - Incidentes</span>
+        <div>
+          <h3>Perfomance de Infraestrutura</h3>
+          <span>CPU - Rede - Incidentes</span>
+        </div>
+        <div class="area-select">
+          <select id="">
+            <option value="">SRV-PROD-01</option>
+            <option value="">SRV-PROD-02</option>
+            <option value="">SRV-PROD-03</option>
+          </select>
+        </div>
         <div class="conteudo">
           <div>
             <canvas id="perfomaInfra" class="graf-infraestrutura"></canvas>
@@ -255,12 +264,28 @@
         </div>
       </div>
       <div class="card card-recursos ">
-        <h3>Recursos em Tempo Real</h3>
+        <h3>Recursos Dos Servidores</h3>
         <span>Últimas ocorrências registradas</span>
-        <div class="conteudo">
-          <div></div>
-          <div></div>
-          <div></div>
+        <div class="area-select">
+          <select id="">
+            <option value="">CPU</option>
+            <option value="">RAM</option>
+            <option value="">DISCO</option>
+          </select>
+        </div>
+        <div class="conteudo-recursos">
+          <div class="kpi">
+            <h4>Média</h4>
+            <p>50%</p>
+          </div>
+          <div class="kpi">
+            <h4>Mediana</h4>
+            <p>50%</p>
+          </div>
+          <div class="kpi">
+            <h4>Pico</h4>
+            <p>50%</p>
+          </div>
         </div>
       </div>
     </section>
@@ -279,9 +304,9 @@
               <span>Ubuntu 22</span>
             </div>
             <div class="recursos">
-              <span>45%</span>
-              <span>73%</span>
-              <span>48%</span>
+              <span>CPU - 45%</span>
+              <span>RAM - 73%</span>
+              <span>DISCO - 48%</span>
             </div>
           </div>
         </div>
