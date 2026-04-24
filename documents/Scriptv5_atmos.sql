@@ -104,7 +104,24 @@ CREATE TABLE servidorComponente (
     CONSTRAINT fkComponente_servidorComponente FOREIGN KEY (fkComponente) REFERENCES componentes(idComponente)
 );
 
+CREATE TABLE funcionarioAtmos (
+    idFuncionario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(100) NOT NULL,
+    cargo VARCHAR(50) NOT NULL DEFAULT 'Colaborador',
+    statusFuncionario VARCHAR(10) NOT NULL DEFAULT 'Ativo',
+    dataCadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chkStatusFuncionario CHECK (statusFuncionario IN ('Ativo', 'Inativo'))
+);
+
+
+
 -- INSERTS
+
+INSERT INTO funcionarioAtmos (nome, email, senha, cargo) VALUES
+('Admin Atmos', 'admin@atmos.io', 'atmos2026', 'Administrador'),
+('Suporte Atmos', 'suporte@atmos.io', 'suporte123', 'Suporte');
 
 INSERT INTO empresa (nomeResponsavel, razaoSocial, cnpj, senha, statusEmpresa) VALUES
 ('Carlos Silva', 'ClimaTech LTDA', '11111111000101', '123456', 'Ativo'),

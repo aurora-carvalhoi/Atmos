@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+    <!--HTML Meta Tags-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!--Title-->
+    <title>Atmos | Acesso Interno</title>
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="./assets/css/login.css" />
+    <link rel="stylesheet" href="./assets/css/login_adm.css" />
+
+    <!--Favicon-->
+    <link rel="icon" href="./assets/icons/favicon.ico" />
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+</head>
+<body>
+
+    <!--Container login ADM-->
+    <div class="container-login">
+        <div class="login-info login-info--adm">
+            <div class="logo-login">
+                <a href="./index.html">
+                    <img src="./assets/images/logo-atmos-alternative.svg" alt="Logo Atmos" />
+                </a>
+            </div>
+            <div class="texto-info">
+                <div class="badge-adm">ACESSO RESTRITO</div>
+                <h1>Painel Administrativo</h1>
+                <p>Área exclusiva para funcionários Atmos. O acesso é monitorado e registrado.</p>
+            </div>
+        </div>
+
+        <div class="login-input">
+
+            <div class="h1-login">
+                <h1>Login Interno</h1>
+                <p>Credenciais de funcionário Atmos</p>
+            </div>
+
+            <div class="paragrafo-login">
+                <label for="inputemail_adm">EMAIL CORPORATIVO</label>
+                <input type="text" id="inputemail_adm" placeholder="funcionario@atmos.io">
+                <label for="input_senha_adm">SENHA</label>
+                <input type="password" id="input_senha_adm" placeholder="*******">
+            </div>
+
+            <div class="bloco-input">
+                <div class="buttons">
+                    <button onclick="entrarAdm()">
+                        Autenticar
+                    </button>
+                </div>
+                <span id="mensagem_erro_adm"></span>
+                <span class="link-voltar">
+                    <a href="./login.html">Voltar ao login de usuário</a>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    function entrarAdm() {
+        var emailVar = inputemail_adm.value;
+        var senhaVar = input_senha_adm.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            mensagem_erro_adm.innerHTML = "Preencha todos os campos.";
+            return;
+        }
+
+        fetch("/funcionarioAtmos/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        })
+        .then(resposta => {
+            if (resposta.ok) {
+                resposta.json().then((json) => {
+                    sessionStorage.EMAIL_ADM   = json.email;
+                    sessionStorage.NOME_ADM    = json.nome;
+                    sessionStorage.ID_ADM      = json.id;
+                    window.location = "./adm/index.html";
+                });
+            } else {
+                resposta.text().then(texto => {
+                    mensagem_erro_adm.innerHTML = "Credenciais inválidas.";
+                });
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+        });
+    }
+</script>

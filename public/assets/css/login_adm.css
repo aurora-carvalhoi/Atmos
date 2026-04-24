@@ -1,0 +1,39 @@
+.login-info--adm {
+    background-color: var(--color-painel) !important;
+}
+
+.badge-adm {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.5vh;
+}
+
+.link-voltar {
+    margin-top: 1.5dvh !important;
+    font-size: 0.95rem !important;
+}
+
+.link-voltar a {
+    color: var(--color-opaque);
+    text-decoration: none;
+    transition: 180ms ease-in-out;
+}
+
+.link-voltar a:hover {
+    color: var(--color-blue);
+}
+
+#mensagem_erro_adm {
+    color: var(--color-danger);
+    font-size: 0.95rem;
+    min-height: 1.4em;
+    margin-top: 1dvh;
+}
