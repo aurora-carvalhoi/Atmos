@@ -33,23 +33,23 @@
       </div>
 
       <section class="grade-dividida">
-        <form class="card-formulario">
+        <div class="card-formulario">
           <h3>Cadastrar colaborador</h3>
           <div class="grade-campos" style="margin-top:14px;">
-            <div class="campo"><label>Nome</label><input name="nome" required></div>
-            <div class="campo"><label>E-mail</label><input type="email" name="email" required></div>
-            <div class="campo"><label>Papel</label><select name="papel"><option>Administrador</option><option>Gestor</option><option>Analista</option><option>Operador</option></select></div>
-            <div class="campo"><label>Equipe</label><input name="equipe" required></div>
-            <div class="campo"><label>Documento</label><input name="documento" required></div>
-            <div class="campo"><label>Data de nascimento</label><input type="date" name="dataNascimento" required></div>
-            <div class="campo"><label>Empresa</label><select name="empresa" required><option>Atmos Monitoring Systems</option><option>Cloud Aurora</option><option>Sky Pulse</option></select></div>
-            <div class="campo"><label>Status</label><select name="status"><option>Ativo</option><option>Em onboarding</option><option>Suspenso</option></select></div>
-            <div class="campo inteiro"><label>Senha provisória</label><input type="text" name="senha" placeholder="Atmos@123"></div>
+            <div class="campo"><label>Nome</label><input id="input_nome" required></div>
+            <div class="campo"><label>E-mail</label><input id="input_email" required></div>
+            <div class="campo"><label>Papel</label><select id="input_papel"><option>Administrador</option><option>Gestor</option><option>Analista</option><option>Operador</option></select></div>
+            <div class="campo"><label>Equipe</label><input id="input_equipe" required></div>
+            <div class="campo"><label>Documento</label><input id="input_documento" required></div>
+            <div class="campo"><label>Data de nascimento</label><input type="date" id="dataNascimento" required></div>
+            <div class="campo"><label>Empresa</label><select id="select_fk_empresa" required></select></div>
+            <div class="campo"><label>Status</label><select id="select_status"><option>Ativo</option><option>Em onboarding</option><option>Suspenso</option></select></div>
+            <div class="campo inteiro"><label>Senha provisória</label><input id="input_senha" placeholder="Atmos@123"></div>
           </div>
           <div class="rodape-formulario">
-            <button type="button" class="btn-admin">Salvar colaborador</button>
+            <button onclick="cadastrarColaborador()" class="btn-admin">Salvar colaborador</button>
           </div>
-        </form>
+        </div>
       </section>
 
       <section style="margin-top:16px;" class="painel-tabela">

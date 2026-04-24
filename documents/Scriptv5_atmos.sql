@@ -115,8 +115,6 @@ CREATE TABLE funcionarioAtmos (
     CONSTRAINT chkStatusFuncionario CHECK (statusFuncionario IN ('Ativo', 'Inativo'))
 );
 
-
-
 -- INSERTS
 
 INSERT INTO funcionarioAtmos (nome, email, senha, cargo) VALUES
