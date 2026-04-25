@@ -1,77 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atmos | Colaboradores</title>
-  <link rel="icon" href="../assets/icons/favicon.ico" />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/admin.css">
-</head>
-<body class="corpo-admin" onload="listarColaboradoresCadastrados();">
-  <div class="estrutura-admin">
-    <aside class="menu-lateral">
-      <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
-      <span class="titulo-menu">MENU</span>
-      <nav class="menu-nav">
-        <a href="index.html"><span class="ponto-nav"></span>Home</a>
-        <a href="empresas.html"><span class="ponto-nav"></span>Empresas</a>
-        <a href="colaboradores.html" class="active"><span class="ponto-nav"></span>Colaboradores</a>
-        <a href="servidores.html"><span class="ponto-nav"></span>Servidores</a>
-      </nav>
-      <div class="usuario-menu">
-        <div class="avatar-admin">G</div>
-        <div><strong>Geraldo Atmos</strong><br><small>geraldo_adm@atmos.com</small></div>
-      </div>
-    </aside>
-
-    <main class="conteudo-admin">
-      <div class="topo-admin">
-        <div>
-          <h1>Colaboradores</h1>
-        </div>
-      </div>
-
-      <section class="grade-dividida">
-        <div class="card-formulario">
-          <h3>Cadastrar colaborador</h3>
-          <div class="grade-campos" style="margin-top:14px;">
-            <div class="campo"><label>Nome</label><input id="input_nome" required></div>
-            <div class="campo"><label>E-mail</label><input id="input_email" required></div>
-            <div class="campo"><label>Papel</label><select id="input_papel"><option>Administrador</option><option>Gestor</option><option>Analista</option><option>Operador</option></select></div>
-            <div class="campo"><label>Equipe</label><input id="input_equipe" required></div>
-            <div class="campo"><label>Documento</label><input id="input_documento" required></div>
-            <div class="campo"><label>Data de nascimento</label><input type="date" id="dataNascimento" required></div>
-            <div class="campo"><label>Empresa</label><select id="select_fk_empresa" required></select></div>
-            <div class="campo"><label>Status</label><select id="select_status"><option>Ativo</option><option>Em onboarding</option><option>Suspenso</option></select></div>
-            <div class="campo inteiro"><label>Senha provisória</label><input id="input_senha" placeholder="Atmos@123"></div>
-          </div>
-          <div class="rodape-formulario">
-            <button onclick="cadastrarColaborador()" class="btn-admin">Salvar colaborador</button>
-          </div>
-        </div>
-      </section>
-
-      <section style="margin-top:16px;" class="painel-tabela">
-        <div class="cabecalho-tabela">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atmos | Colaboradores</title>
+    <link rel="icon" href="../assets/icons/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/admin.css" />
+  </head>
+  <body class="corpo-admin" onload="listarColaboradoresCadastrados()">
+    <div class="estrutura-admin">
+      <aside class="menu-lateral">
+        <a class="logo-admin" href="index.html"
+          ><span class="ponto-logo"></span>ATMOS</a
+        >
+        <span class="titulo-menu">MENU</span>
+        <nav class="menu-nav">
+          <a href="index.html"><span class="ponto-nav"></span>Home</a>
+          <a href="empresas.html"><span class="ponto-nav"></span>Empresas</a>
+          <a href="colaboradores.html" class="active"
+            ><span class="ponto-nav"></span>Colaboradores</a
+          >
+          <a href="servidores.html"
+            ><span class="ponto-nav"></span>Servidores</a
+          >
+        </nav>
+        <div class="usuario-menu">
+          <div class="avatar-admin">G</div>
           <div>
-            <h2>Colaboradores cadastrados</h2>
+            <strong>Geraldo Atmos</strong><br /><small
+              >geraldo_adm@atmos.com</small
+            >
           </div>
         </div>
-        <div class="envolve-tabela">
-          <table class="tabela-admin">
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Papel</th>
-                <th>Equipe</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="colaboradoresCadastrados">
-              <tr>
-                <!-- <td>Celeste Rocha</td>
+      </aside>
+
+      <main class="conteudo-admin">
+        <div class="topo-admin">
+          <div>
+            <h1>Colaboradores</h1>
+          </div>
+        </div>
+
+        <section class="grade-dividida">
+          <div class="card-formulario">
+            <h3>Cadastrar colaborador</h3>
+            <div class="grade-campos" style="margin-top: 14px">
+              <div class="campo">
+                <label>Nome</label><input id="input_nome" required />
+              </div>
+              <div class="campo">
+                <label>E-mail</label><input id="input_email" required />
+              </div>
+              <div class="campo">
+                <label>Papel</label
+                ><select id="input_papel">
+                  <option>Administrador</option>
+                  <option>Gestor</option>
+                  <option>Analista</option>
+                  <option>Operador</option>
+                </select>
+              </div>
+              <div class="campo">
+                <label>Equipe</label><input id="input_equipe" required />
+              </div>
+              <div class="campo">
+                <label>CPF</label><input id="input_cpf" required />
+              </div>
+              <div class="campo">
+                <label>Data de nascimento</label
+                ><input type="date" id="input_dataNascimento" required />
+              </div>
+              <div class="campo">
+                <label>Empresa</label
+                ><select id="select_fk_empresa" required></select>
+              </div>
+              <div class="campo">
+                <label>Status</label
+                ><select id="select_status">
+                  <option>Ativo</option>
+                  <option>Em onboarding</option>
+                  <option>Suspenso</option>
+                </select>
+              </div>
+              <div class="campo inteiro">
+                <label>Senha provisória</label
+                ><input id="input_senha" placeholder="Atmos@123" />
+              </div>
+            </div>
+            <div class="rodape-formulario">
+              <button onclick="cadastrarColaborador()" class="btn-admin">
+                Salvar colaborador
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section style="margin-top: 16px" class="painel-tabela">
+          <div class="cabecalho-tabela">
+            <div>
+              <h2>Colaboradores cadastrados</h2>
+            </div>
+          </div>
+          <div class="envolve-tabela">
+            <table class="tabela-admin">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>E-mail</th>
+                  <th>Papel</th>
+                  <th>Equipe</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="colaboradoresCadastrados">
+                <tr>
+                  <!-- <td>Celeste Rocha</td>
                 <td>celeste@atmos.com</td>
                 <td>Administrador</td>
                 <td>NOC</td>
@@ -91,39 +138,146 @@
                 <td>Operações</td>
                 <td><span class="etiqueta success">Ativo</span></td>
               </tr> -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-  </div>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
 
-  <script src="../assets/javascript/admin.js"></script>
-</body>
+    <script src="../assets/javascript/admin.js"></script>
+  </body>
 </html>
 <script>
-  function listarColaboradoresCadastrados(){
-      fetch("/usuarios/listarColaboradoresCadastrados").then(function(res){
+  function listarColaboradoresCadastrados() {
+    fetch("/usuarios/listarColaboradoresCadastrados")
+      .then(function (res) {
         return res.json();
-      }).then(function(usuarios){
-        var listaColaboradores = document.getElementById("colaboradoresCadastrados");
-        if (usuarios.length == 0){
-          listaColaboradores.innerHTML = "<p> Nenhum usuario cadastrado </p>"
-          return
+      })
+      .then(function (usuarios) {
+        var listaColaboradores = document.getElementById(
+          "colaboradoresCadastrados",
+        );
+        if (usuarios.length == 0) {
+          listaColaboradores.innerHTML = "<p> Nenhum usuario cadastrado </p>";
+          return;
         }
         var tabelaColaboradoresCadastrados = "";
-        for (var i = 0; i < usuarios.length; i++){
+        for (var i = 0; i < usuarios.length; i++) {
           tabelaColaboradoresCadastrados += `
             <tr>
                 <td>${usuarios[i].nome}</td>
                 <td>${usuarios[i].email}</td>
                 <td>${usuarios[i].tipoUsuario}</td>
-                <td>--</td>
+                <td>${usuarios[i].setor}</td>
                 <td><span class="etiqueta success">${usuarios[i].statusUsuario}</span></td>
               </tr>
-          `
+          `;
         }
         listaColaboradores.innerHTML = tabelaColaboradoresCadastrados;
+      });
+  }
+
+  function listarEmpresas() {
+    var listaEmpresas =
+      '<option value="0" selected disabled>Escolha a empresa</option>';
+    var cont = 0;
+    var selectEmpresa = document.getElementById("select_fk_empresa");
+    fetch("/empresas/listarEmpresasCadastradas", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            cont++;
+            console.log(empresa);
+            listaEmpresas += `
+                            <option value="${empresa.idEmpresa}">${empresa.razaoSocial}</option>
+                            `;
+          });
+          selectEmpresa.innerHTML = listaEmpresas;
+        });
       })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function cadastrarColaborador() {
+    var nomeVar = input_nome.value.trim();
+    var emailVar = input_email.value.trim();
+    var papelVar = input_papel.value.trim();
+    var equipeVar = input_equipe.value.trim();
+    var cpfVar = input_cpf.value.trim();
+    var dataNascimentoVar = input_dataNascimento.value.trim();
+    var idEmpresaVar = select_fk_empresa.value;
+    var statusVar = select_status.value;
+    var senhaVar = input_senha.value;
+
+    if (
+      nomeVar == null ||
+      nomeVar == "" ||
+      emailVar == null ||
+      emailVar == "" ||
+      papelVar == null ||
+      papelVar == "" ||
+      equipeVar == null ||
+      equipeVar == "" ||
+      cpfVar == null ||
+      cpfVar == "" ||
+      dataNascimentoVar == null ||
+      dataNascimentoVar == "" ||
+      idEmpresaVar == null ||
+      idEmpresaVar == "" ||
+      statusVar == null ||
+      statusVar == "" ||
+      senhaVar == null ||
+      senhaVar == ""
+    ) {
+      alert("Nenhum campo pode estar vazio!");
     }
+
+    fetch("/usuarios/cadastrarColaborador", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        papelServer: papelVar,
+        equipeServer: equipeVar,
+        cpfServer: cpfVar,
+        dataNascimentoServer: dataNascimentoVar,
+        idEmpresaServer: idEmpresaVar,
+        statusServer: statusVar,
+        senhaServer: senhaVar,
+      }),
+    }).then(function (resposta) {
+      if(resposta.ok){
+        limparFormulario();
+        listarColaboradoresCadastrados();
+        alert("Colaborador cadastrado com sucesso!")
+      }else{
+        throw "Erro no cadastro de colaborador"
+        alert("Erro ao cadastrar colaborador")
+      }
+    }).catch(function(resposta){
+      console.log(`#Erro: ${resposta}`)
+    })
+    return false;
+  }
+
+  function limparFormulario() {
+    input_nome.value = "";
+    input_email.value = "";
+    input_papel.value = "";
+    input_equipe.value = "";
+    input_cpf.value = "";
+    input_dataNascimento.value = "";
+    select_fk_empresa.value = "";
+    select_status.value = "";
+    input_senha.value = "";
+  }
+
+  listarEmpresas();
 </script>

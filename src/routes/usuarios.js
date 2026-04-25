@@ -21,12 +21,16 @@ router.patch("/finalizarCadastro", function (req, res) {
     usuarioController.finalizarCadastro(req, res);
 });
 
-router.get("/listarColaboradores", function(req, res){
-    usuarioController.listarColaboradores(req, res);
-});
+// router.get("/listarColaboradores", function(req, res){
+//     usuarioController.listarColaboradores(req, res);
+// });
 
 router.get("/listarColaboradoresCadastrados", function(req, res){
-    usuarioController.listarColaboradores(req, res);
+    usuarioController.listarColaboradoresCadastrados(req, res);
+});
+
+router.post("/cadastrarColaborador", function(req, res){
+    usuarioController.cadastrarColaborador(req, res);
 });
 
 module.exports = router;

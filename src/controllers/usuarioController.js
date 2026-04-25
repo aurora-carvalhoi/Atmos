@@ -156,11 +156,11 @@ function finalizarCadastro(req, res) {
     }
 }
 
-function listarColaboradores(req, res){
-    usuarioModel.listarColaboradores().then((resultado)=>{
-        res.status(200).json(resultado);
-    })
-}
+// function listarColaboradores(req, res){
+//     usuarioModel.listarColaboradores().then((resultado)=>{
+//         res.status(200).json(resultado);
+//     })
+// }
 
 function listarColaboradoresCadastrados(req, res){
     usuarioModel.listarColaboradoresCadastrados().then((resultado)=>{
@@ -168,11 +168,59 @@ function listarColaboradoresCadastrados(req, res){
     })
 }
 
+function cadastrarColaborador(req, res){
+    var nome = req.body.nomeServer
+    var email = req.body.emailServer
+    var papel = req.body.papelServer
+    var equipe = req.body.equipeServer
+    var cpf = req.body.cpfServer
+    var dataNascimento = req.body.dataNascimentoServer
+    var idEmpresa = req.body.idEmpresaServer
+    var status = req.body.statusServer
+    var senha = req.body.senhaServer
+
+    if(nome == undefined){
+        res.status(400).send("Seu nome está undefined")
+    }else if(email == undefined){
+        res.status(400).send("Seu email está undefined")
+    }else if(papel == undefined){
+        res.status(400).send("Seu papel está undefined")
+    }else if(equipe == undefined){
+        res.status(400).send("Sua equipe está undefined")
+    }else if(cpf == undefined){
+        res.status(400).send("Seu cpf está undefined")
+    }else if(dataNascimento == undefined){
+        res.status(400).send("Sua dataNascimento está undefined")
+    }else if(idEmpresa == undefined){
+        res.status(400).send("Seu idEmpresa está undefined")
+    }else if(status == undefined){
+        res.status(400).send("Seu status está undefined")
+    }else if(senha == undefined){
+        res.status(400).send("Sua senha está undefined")
+    } else{
+        usuarioModel.cadastrarColaborador(nome, email, papel, equipe, cpf, 
+            dataNascimento, idEmpresa, status, senha).then(
+                function(resultado){
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro){
+                    console.log(erro);
+                    console.log("Houve um erro ao cadastrar colaborador. Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage)
+                }
+            )
+    }
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     cadastrarFuncionario,
     finalizarCadastro,
-    listarColaboradores,
-    listarColaboradoresCadastrados
+    // listarColaboradores,
+    listarColaboradoresCadastrados,
+    cadastrarColaborador
 }
