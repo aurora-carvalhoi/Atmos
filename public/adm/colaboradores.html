@@ -215,25 +215,20 @@
     var statusVar = select_status.value;
     var senhaVar = input_senha.value;
 
+    const variaveisCadastroColaborador = [
+      nomeVar,
+      emailVar,
+      papelVar,
+      equipeVar,
+      cpfVar,
+      dataNascimentoVar,
+      idEmpresaVar,
+      statusVar,
+      senhaVar,
+    ];
+
     if (
-      nomeVar == null ||
-      nomeVar == "" ||
-      emailVar == null ||
-      emailVar == "" ||
-      papelVar == null ||
-      papelVar == "" ||
-      equipeVar == null ||
-      equipeVar == "" ||
-      cpfVar == null ||
-      cpfVar == "" ||
-      dataNascimentoVar == null ||
-      dataNascimentoVar == "" ||
-      idEmpresaVar == null ||
-      idEmpresaVar == "" ||
-      statusVar == null ||
-      statusVar == "" ||
-      senhaVar == null ||
-      senhaVar == ""
+      isNuloOuVazio(variaveisCadastroColaborador)
     ) {
       alert("Nenhum campo pode estar vazio!");
     }
@@ -252,18 +247,20 @@
         statusServer: statusVar,
         senhaServer: senhaVar,
       }),
-    }).then(function (resposta) {
-      if(resposta.ok){
-        limparFormulario();
-        listarColaboradoresCadastrados();
-        alert("Colaborador cadastrado com sucesso!")
-      }else{
-        throw "Erro no cadastro de colaborador"
-        alert("Erro ao cadastrar colaborador")
-      }
-    }).catch(function(resposta){
-      console.log(`#Erro: ${resposta}`)
     })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          limparFormulario();
+          listarColaboradoresCadastrados();
+          alert("Colaborador cadastrado com sucesso!");
+        } else {
+          throw "Erro no cadastro de colaborador";
+          alert("Erro ao cadastrar colaborador");
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#Erro: ${resposta}`);
+      });
     return false;
   }
 
@@ -277,6 +274,14 @@
     select_fk_empresa.value = "";
     select_status.value = "";
     input_senha.value = "";
+  }
+
+  function isNuloOuVazio(listaStrings) {
+    var retorno = false;
+    listaStrings.forEach(
+      (string) => (retorno = string == null || string == ""),
+    );
+    return retorno;
   }
 
   listarEmpresas();
