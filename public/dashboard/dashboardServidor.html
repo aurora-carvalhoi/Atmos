@@ -193,7 +193,7 @@
     <section>
       <div class="filtros-busca">
         <div class="barra-busca">
-          <input type="text" placeholder="Buscar servidor por nome ou ID...">
+          <input type="text" id="input_busca_por_nome" placeholder="Buscar servidor por nome ou ID...">
         </div>
         <div class="select">
           <select name="filtroStatus" id="filtroStatus">
@@ -231,81 +231,6 @@
               </tr>
             </thead>
             <tbody id="tabela_lista_servidor">
-              <!-- <tr>
-                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
-                <td><span class="nome-servidor">SRV-PROD-02</span>
-                  <span class="servidor-id">#002</span>
-                </td>
-                <td><span class="end-ip">10.0.0.1</span></td>
-                <td><span class="nome-so">Ubuntu 22.04</span></td>
-                <td>
-                  <div class="container-barra">
-                    <div class="barra">
-                      <div class="preenchimento"></div>
-                    </div>
-                    <span>78%</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="container-barra">
-                    <div class="barra">
-                      <div class="preenchimento"></div>
-                    </div>
-                    <span>54%</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="container-barra">
-                    <div class="barra">
-                      <div class="preenchimento"></div>
-                    </div>
-                    <span>32%</span>
-                  </div>
-                </td>
-                <td>42h13min</td>
-                <td>
-                  <button class="btn-detalhes" onclick="detalhes()">Detalhes</button>
-                  <button class="btn-remover" onclick="removerServidor()">Remover</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
-                <td><span class="nome-servidor">SRV-PROD-02</span>
-                  <span class="servidor-id">#002</span>
-                </td>
-                <td>10.0.1.11</td>
-                <td>Ubuntu 22.04</td>
-                <td>
-                  <div class="container-barra">
-                    <div class="barra">
-                      <div class="preenchimento"></div>
-                    </div>
-                    <span>78%</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="container-barra">
-                    <div class="barra">
-                      <div class="preenchimento"></div>
-                    </div>
-                    <span>54%</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="container-barra">
-                    <div class="barra">
-                      <div class="preenchimento"></div>
-                    </div>
-                    <span>32%</span>
-                  </div>
-                </td>
-                <td>42h13min</td>
-                <td>
-                  <button class="btn-detalhes">Detalhes</button>
-                  <button class="btn-remover">Remover</button>
-                </td>
-              </tr> -->
               <tr>
                 <td>
                   <h4>Nenhum servidor encontrado</h4>
@@ -542,9 +467,15 @@
 
 
 <script type="module">
-  import { listarServidor, criarGraficos } from "../assets/javascript/servidor.js"
+  import { listarServidor, criarGraficos, buscarServidorPorNome } from "../assets/javascript/servidor.js"
   listarServidor()
   criarGraficos()
+
+  const buscarPorNome = document.getElementById('input_busca_por_nome')
+  buscarPorNome.addEventListener('input', () => {
+    buscarServidorPorNome(buscarPorNome.value.toLowerCase().trim())
+  })
+
 </script>
 
 
