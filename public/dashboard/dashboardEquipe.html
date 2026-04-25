@@ -249,8 +249,8 @@
                 <th>Ações</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="tabela_colaboradores">
+              <!-- <tr>
                 <td class="nomeUser">
                   <div class="perfil">
                     <span>BL</span>
@@ -276,8 +276,8 @@
                   <button class="btn-detalhes" onclick="detalhes()">Detalhes</button>
                   <button class="btn-remover" onclick="inativarUsuario()">inativar</button>
                 </td>
-              </tr>
-              <tr>
+              </tr> -->
+              <!-- <tr>
                 <td class="nomeUser">
                   <div class="perfil">
                     <span>AC</span>
@@ -330,7 +330,7 @@
                   <button class="btn-detalhes" onclick="detalhes()">Detalhes</button>
                   <button class="btn-ativar" onclick="ativarUsuario()">Ativar</button>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -472,75 +472,75 @@
           <button class="btn-azul" onclick="editarPerfil(1)">
             Alterar dados
           </button>
-         </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Modal Editar Usuario -->
   <div class="fundoModal" id="modalEditarPerfil">
-        <div class="modal modalUsuario modalEditar">
-            <!-- Topo do modal -->
-            <header>
-                <!-- Titulo e subtitulo -->
-                <div>
-                    <h2>Detalhes do Servidor</h2>
-                    <span class="subTitulo">Servidor | SRV-PROD-01</span>
-                </div>
-                <!-- botão de sair -->
-                <div>
-                    <button onclick="fecharModal(3)">
-                        X
-                    </button>
-                </div>
-            </header>
-            <div class="conteudo-usuario">
-               <div class="dados-perfil">
-                    <div class="usuario">
-                        <div class="perfil">
-                            BL
-                        </div>
-                        <div>
-                            <input type="file" name="imagem" id="">    
-                        </div>
-                    </div>
-                </div>
-                <div class="dados-gerais dados-gerais-form">
-                    <label class="w-75">
-                        <span class="titulo">E-MAIL</span>
-                        <input type="text" id="input_email" value="" placeholder="geraldo@atmos.com">
-                    </label>
-                    <label class="w-25">
-                        <span class="titulo">CONTATO</span>
-                        <input type="text" id="input_contato" value="" placeholder="+55 11 98989-6969">
-                    </label>
-                    <label class="w-33">
-                        <span class="titulo">NOME</span>
-                        <input type="text" id="input_nome" value="" placeholder="Geraldo Atmos">
-                    </label>
-                    <label class="w-33">
-                        <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
-                        <input type="text" id="input_doc_indentificacao" value="" placeholder="000.000.000-01">
-                    </label>
-                    <label class="w-33">
-                        <span class="titulo">DATA DE NASCIMENTO</span>
-                        <input type="date" id="input_data_nasc" value="">
-                    </label>
-                  
-                </div>
-                <div class="acoesModal">
-                    <div></div>
-                    <div style="display: flex;">
-                        <button class="btn-branco" onclick="fecharModal(2)">
-                            Cancelar
-                        </button>
-                        <button class="btn-azul" onclick="alterarDados ()">
-                            Confirmar
-                        </button>
-                    </div>
-                </div>
-            </div>
+    <div class="modal modalUsuario modalEditar">
+      <!-- Topo do modal -->
+      <header>
+        <!-- Titulo e subtitulo -->
+        <div>
+          <h2>Detalhes do Servidor</h2>
+          <span class="subTitulo">Servidor | SRV-PROD-01</span>
         </div>
+        <!-- botão de sair -->
+        <div>
+          <button onclick="fecharModal(3)">
+            X
+          </button>
+        </div>
+      </header>
+      <div class="conteudo-usuario">
+        <div class="dados-perfil">
+          <div class="usuario">
+            <div class="perfil">
+              BL
+            </div>
+            <div>
+              <input type="file" name="imagem" id="">
+            </div>
+          </div>
+        </div>
+        <div class="dados-gerais dados-gerais-form">
+          <label class="w-75">
+            <span class="titulo">E-MAIL</span>
+            <input type="text" id="input_email" value="" placeholder="geraldo@atmos.com">
+          </label>
+          <label class="w-25">
+            <span class="titulo">CONTATO</span>
+            <input type="text" id="input_contato" value="" placeholder="+55 11 98989-6969">
+          </label>
+          <label class="w-33">
+            <span class="titulo">NOME</span>
+            <input type="text" id="input_nome" value="" placeholder="Geraldo Atmos">
+          </label>
+          <label class="w-33">
+            <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+            <input type="text" id="input_doc_indentificacao" value="" placeholder="000.000.000-01">
+          </label>
+          <label class="w-33">
+            <span class="titulo">DATA DE NASCIMENTO</span>
+            <input type="date" id="input_data_nasc" value="">
+          </label>
+
+        </div>
+        <div class="acoesModal">
+          <div></div>
+          <div style="display: flex;">
+            <button class="btn-branco" onclick="fecharModal(2)">
+              Cancelar
+            </button>
+            <button class="btn-azul" onclick="alterarDados ()">
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </body>
@@ -658,9 +658,82 @@
     modal.style.display = 'flex'
   }
 
-  function editarPerfil(id){
+  function editarPerfil(id) {
     var modal = document.getElementById("modalEditarPerfil")
     modal.style.display = 'flex'
   }
+
+</script>
+
+<script>
+  function listarUsuario() {
+    var idEmpresa = sessionStorage.FKEMPRESA
+    fetch(`/usuarios/listarColaboradoresEmpresa/${idEmpresa}`)
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (usuarios) {
+        var listaColaboradores = document.getElementById("tabela_colaboradores");
+        if (usuarios.length == 0) {
+          listaColaboradores.innerHTML = "<p> Nenhum usuario cadastrado </p>";
+          return;
+        }
+        var tabelaColaboradoresCadastrados = "";
+        var etiquetaAcesso = ''
+        var etiquetaStatus = ''
+        console.log(usuarios)
+        for (var i = 0; i < usuarios.length; i++) {
+          var usuario = usuarios[i]
+          if(usuario.tipoUsuario == 'Gestor'){
+            etiquetaAcesso = `etiqueta-azul`
+          }else{
+            etiquetaAcesso = `etiqueta-laranja`
+          }
+          if(usuario.statusUsuario == 'Ativo'){
+            etiquetaStatus = `etiqueta-verde`
+            var button = `
+              <button class="btn-remover" onclick="inativarUsuario(${usuario.idUsuario, i})">inativar</button>
+            `
+          }else{
+            etiquetaStatus = `etiqueta-vermelha`
+             var button = `
+              <button class="btn-ativar" onclick="ativarUsuario(${usuario.idUsuario, i})">Ativar</button>
+            `
+          }
+
+          tabelaColaboradoresCadastrados += `
+            <tr>
+                <td class="nomeUser">
+                  <div class="perfil">
+                    <span>${usuario.nome.split(" ")[0].split("")[0] + usuario.nome.split(" ")[1].split("")[0]}</span>
+                  </div>
+                  <span class="nome">
+                    ${usuario.nome}
+                  </span>
+                  <span>ID #${usuario.idUsuario}</span>
+                </td>
+                <td>
+                  <span>${usuario.email}</span>
+                </td>
+                <td>
+                  <span class="etiqueta ${etiquetaAcesso}">● ${usuario.tipoUsuario}</span>
+                </td>
+                <td>
+                  <span class="etiqueta ${etiquetaStatus}">● ${usuario.statusUsuario}</span>
+                </td>
+                <td>
+                  <span>${usuario.dataCadastro}</span>
+                </td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhes(${usuario.idUsuario, i})">Detalhes</button>
+                  ${button}
+                </td>
+              </tr>
+          `;
+        }
+        listaColaboradores.innerHTML = tabelaColaboradoresCadastrados;
+      });
+  }
+listarUsuario()
 
 </script>

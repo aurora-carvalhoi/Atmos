@@ -33,4 +33,10 @@ router.post("/cadastrarColaborador", function(req, res){
     usuarioController.cadastrarColaborador(req, res);
 });
 
+
+router.get("/listarColaboradoresEmpresa/:idEmpresa", function(req, res){
+    // usuarioController.listarColaboradoresCadastrados(req, res);
+    usuarioController.listarColaboradoresEmpresa(req, res)
+})
+
 module.exports = router;
