@@ -24,7 +24,9 @@ function autenticar(req, res) {
                             id: resultadoAutenticar[0].idUsuario,
                             email: resultadoAutenticar[0].email,
                             nome: resultadoAutenticar[0].nome,
-                            fkEmpresa: resultadoAutenticar[0].empresaId
+                            fkEmpresa: resultadoAutenticar[0].empresaId,
+                            statusUsuario: resultadoAutenticar[0].statusUsuario,
+                            tipoUsuario: resultadoAutenticar[0].statusUsuario
                         });
 
 
@@ -162,8 +164,14 @@ function finalizarCadastro(req, res) {
 //     })
 // }
 
-function listarColaboradoresCadastrados(req, res){
-    usuarioModel.listarColaboradoresCadastrados().then((resultado)=>{
+function listarColaboradoresEmpresa(req, res){
+    var idEmpresa = req.params.idEmpresa;
+    
+    console.log(idEmpresa)
+    if(idEmpresa == undefined){
+        res.status(400).send("ID empresa indefinido!");
+    }
+    usuarioModel.listarColaboradoresEmpresa(idEmpresa).then((resultado)=>{
         res.status(200).json(resultado);
     })
 }
@@ -215,6 +223,12 @@ function cadastrarColaborador(req, res){
     }
 }
 
+function listarColaboradoresCadastrados(req, res){
+    usuarioModel.listarColaboradoresCadastrados().then((resultado)=>{
+        res.status(200).json(resultado);
+    })
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -222,5 +236,6 @@ module.exports = {
     finalizarCadastro,
     // listarColaboradores,
     listarColaboradoresCadastrados,
-    cadastrarColaborador
+    cadastrarColaborador,
+    listarColaboradoresEmpresa
 }
