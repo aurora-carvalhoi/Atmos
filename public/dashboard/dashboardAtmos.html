@@ -192,10 +192,7 @@
           <span>CPU - Rede - Incidentes</span>
         </div>
         <div class="area-select">
-          <select id="">
-            <option value="">SRV-PROD-01</option>
-            <option value="">SRV-PROD-02</option>
-            <option value="">SRV-PROD-03</option>
+          <select id="select_lista_servidores" onselect="trocarGrafico()">
           </select>
         </div>
         <div class="conteudo">
@@ -267,24 +264,24 @@
         <h3>Recursos Dos Servidores</h3>
         <span>Últimas ocorrências registradas</span>
         <div class="area-select">
-          <select id="">
-            <option value="">CPU</option>
-            <option value="">RAM</option>
-            <option value="">DISCO</option>
+          <select id="select_metricas_kpis">
+            <option value="cpu">CPU</option>
+            <option value="ram">RAM</option>
+            <option value="disco">DISCO</option>
           </select>
         </div>
         <div class="conteudo-recursos">
           <div class="kpi">
-            <h4>Média</h4>
-            <p>50%</p>
+            <h4 id="conteudo_recursos_legenda_1">Média</h4>
+            <p id="conteudo_recursos_kpi_1">50%</p>
           </div>
           <div class="kpi">
-            <h4>Mediana</h4>
-            <p>50%</p>
+            <h4 id="conteudo_recursos_legenda_2">Mediana</h4>
+            <p id="conteudo_recursos_kpi_2">50%</p>
           </div>
           <div class="kpi">
-            <h4>Pico</h4>
-            <p>50%</p>
+            <h4 id="conteudo_recursos_legenda_3">Pico</h4>
+            <p id="conteudo_recursos_kpi_3">50%</p>
           </div>
         </div>
       </div>
@@ -293,22 +290,8 @@
       <div class="card card-servidores">
         <h3>Servidores</h3>
         <span>Últimos dados de Monitoramento</span>
-        <div class="conteudo conteudo-servidor">
-          <div class="servidor">
-            <div class="indentificador">
-              <div></div>
-              <h3>SRV-PROD-02</h3>
-            </div>
-            <div class="infos">
-              <span>10.0.1.30</span>
-              <span>Ubuntu 22</span>
-            </div>
-            <div class="recursos">
-              <span>CPU - 45%</span>
-              <span>RAM - 73%</span>
-              <span>DISCO - 48%</span>
-            </div>
-          </div>
+        <div class="conteudo conteudo-servidor" id="resulmoServidores">
+
         </div>
         <div class="ver-mais">
           <a href="#">Ver mais</a>
@@ -359,43 +342,6 @@
 
 <!-- Graficos -->
 <script>
-  // Grafico de Performaçe de infraestrutura
-  const perfomaInfra = document.getElementById("perfomaInfra")
-  new Chart(perfomaInfra,
-    {
-      data: {
-        datasets: [
-          {
-            label: 'RAM (%)',
-            data: [10, 10, 10, 10],
-            type: 'line',
-            order: 1,
-            tension: 0.2,
-          }, {
-            label: 'CPU (%)',
-            data: [10, 8, 0, 6],
-            type: 'line',
-            order: 2,
-            tension: 0.2,
-          }, {
-            label: 'Incidentes',
-            data: [1, 0, 3, 2],
-            type: 'line',
-            order: 3,
-            tension: 0.2,
-          },
-
-        ],
-        labels: ['January', 'February', 'March', 'April']
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    }
-  )
-
-
   // grafico de Status dos Servidores
   const statusServidores = document.getElementById("statusServidores")
   new Chart(statusServidores, {
@@ -532,4 +478,21 @@
     var modal = document.getElementById("modal")
     modal.style.display = "none"
   }
+</script>
+
+<script type="module">
+  import { listarResulmoServidores, graficoResulmoServidores, trocarGrafico, trocarKpi } from "../assets/javascript/servidor.js"
+  listarResulmoServidores()
+  graficoResulmoServidores()
+  trocarKpi('cpu')
+  const escolhaServidor = document.getElementById('select_lista_servidores')
+  escolhaServidor.addEventListener('change', () => {
+    trocarGrafico(escolhaServidor.value)
+  })
+
+  const metricaKpi = document.getElementById('select_metricas_kpis')
+  metricaKpi.addEventListener('change', () =>{
+    trocarKpi(metricaKpi.value)
+  })
+
 </script>
