@@ -169,7 +169,7 @@
       }).then(function (empresas){
         document.getElementById("kpiEmpresas").innerText = empresas.length;
 
-      fetch("/usuarios/listarColaboradores").then(function (res){
+      fetch("/usuarios/listarColaboradoresCadastrados").then(function (res){
         return res.json();
       }).then(function (colaboradores){
         document.getElementById("kpiColaboradores").innerText = colaboradores.length;

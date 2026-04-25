@@ -39,18 +39,25 @@ function cadastrarFuncionario(fkEmpresa, idSuperior ,nome,email,dataNascimento,c
     return database.executar(instrucaoSql);
 }
 
-function listarColaboradores(){
+// function listarColaboradores(){
+//     var instucaoSql = `select idUsuario, nome, usuario.email, razaoSocial as empresa 
+//     from usuario join empresa on fk_empresa = idEmpresa order by idUsuario;`
+//     return database.executar(instrucaoSql);
+// }
+
+function listarColaboradoresCadastrados(){
     var instrucaoSql = `
-    SELECT * FROM usuario;
+    SELECT nome, email, tipoUsuario, setor, statusUsuario
+    FROM usuario
+    ORDER BY idUsuario desc;
     `;
     return database.executar(instrucaoSql);
 }
 
-function listarColaboradoresCadastrados(){
+function cadastrarColaborador(nome, email, papel, equipe, cpf, dataNascimento, idEmpresa, status, senha){
     var instrucaoSql = `
-    SELECT nome, email, tipoUsuario, statusUsuario
-    FROM usuario,
-    ORDER BY idUsuario desc;
+    INSERT INTO usuario (nome, email, tipoUsuario, setor, cpf, dataNascimento, fkEmpresa, statusUsuario, senha)
+     VALUES ( '${nome}', '${email}', '${papel}', '${equipe}', '${cpf}', '${dataNascimento}', '${idEmpresa}', '${status}', '${senha}');
     `;
     return database.executar(instrucaoSql);
 }
@@ -60,7 +67,8 @@ module.exports = {
     cadastrarFuncionario,
     cadastrar,
     finalizarCadastro,
-    listarColaboradores,
-    listarColaboradoresCadastrados
+    // listarColaboradores,
+    listarColaboradoresCadastrados,
+    cadastrarColaborador
 };
 
