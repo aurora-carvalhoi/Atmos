@@ -9,8 +9,6 @@
   <link rel="stylesheet" href="../assets/css/dashboard/dashboardServidores.css">
   <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
 
-  <script type="module" src="../assets/javascript/servidores.js"></script>
-
   <!-- ChartJS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -232,8 +230,8 @@
                 <th>Ações</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="tabela_lista_servidor">
+              <!-- <tr>
                 <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
                 <td><span class="nome-servidor">SRV-PROD-02</span>
                   <span class="servidor-id">#002</span>
@@ -307,6 +305,11 @@
                   <button class="btn-detalhes">Detalhes</button>
                   <button class="btn-remover">Remover</button>
                 </td>
+              </tr> -->
+              <tr>
+                <td>
+                  <h4>Nenhum servidor encontrado</h4>
+                </td>
               </tr>
             </tbody>
 
@@ -331,7 +334,7 @@
         <!-- Titulo e subtitulo -->
         <div>
           <h2>Detalhes do Servidor</h2>
-          <span class="subTitulo">Servidor | SRV-PROD-01</span>
+          <span class="subTitulo" id="modal_cabecalho_indicador">Servidor | SRV-PROD-01</span>
         </div>
         <!-- botão de sair -->
         <div>
@@ -354,7 +357,7 @@
                 <img src="" alt="#">
               </div>
               <div>
-                <h2>SRV-PROD-01</h2>
+                <h2 id="modal_detalhe_nome_servidor">Nome Servidor</h2>
                 <span>Ubunto 22.04 - PI: 10.0.1.10 - ID: #001</span>
               </div>
               <div class="area-status">
@@ -370,37 +373,37 @@
             <div>
               <div class="infos-metricas">
                 <span class="metrica">CPU</span>
-                <span class="porcentagem">68%</span>
+                <span class="porcentagem" id="modal_detalhe_uso_cpu">--</span>
               </div>
               <div class="barra">
-                <div class="preenchimento"></div>
+                <div class="preenchimento" id="modal_detalhe_preenchimento_cpu"></div>
               </div>
             </div>
             <div>
               <div class="infos-metricas">
-                <span class="metrica">CPU</span>
-                <span class="porcentagem">68%</span>
+                <span class="metrica">RAM</span>
+                <span class="porcentagem" id="modal_detalhe_uso_ram">--</span>
               </div>
               <div class="barra">
-                <div class="preenchimento"></div>
+                <div class="preenchimento" id="modal_detalhe_preenchimento_ram"></div>
               </div>
             </div>
             <div>
               <div class="infos-metricas">
-                <span class="metrica">CPU</span>
-                <span class="porcentagem">68%</span>
+                <span class="metrica">Disco</span>
+                <span class="porcentagem" id="modal_detalhe_uso_disco">---</span>
               </div>
               <div class="barra">
-                <div class="preenchimento"></div>
+                <div class="preenchimento" id="modal_detalhe_preenchimento_disco"></div>
               </div>
             </div>
             <div>
               <div class="infos-metricas">
-                <span class="metrica">CPU</span>
-                <span class="porcentagem">68%</span>
+                <span class="metrica">--</span>
+                <span class="porcentagem">--</span>
               </div>
               <div class="barra">
-                <div class="preenchimento"></div>
+                <div class=""></div>
               </div>
             </div>
 
@@ -409,27 +412,24 @@
           <div class="infosAdicionais">
             <!-- Card de infos adicionais  -->
             <div class="card">
-              <p class="legenda">Update</p>
-              <p class="valor">72d 12h 03m</p>
+              <p class="legenda">Disco tota</p>
+              <p class="valor" id="modal_info_disco"> -- </p>
             </div>
 
             <div class="card">
               <p class="legenda">Temperatura</p>
-              <p class="valor" style="color: #31D642">54°C</p>
+              <p class="valor" style="color: #31D642" id="modal_info_temperatura">54°C</p>
             </div>
 
             <div class="card">
               <p class="legenda">Processos</p>
-              <p class="valor">218</p>
+              <p class="valor" id="modal_info_processos">218</p>
             </div>
 
             <div class="card">
               <p class="legenda">Conexão TCP</p>
-              <p class="valor">1,432</p>
+              <p class="valor" id="modal_info_conexao_tcp">1,432</p>
             </div>
-
-
-
           </div>
         </div>
         <div class="graficos">
@@ -509,7 +509,7 @@
         <!-- Titulo e subtitulo -->
         <div>
           <h2>Remover Servidor</h2>
-          <span class="subTitulo">Remover Servidor: SRV-PROD-01
+          <span class="subTitulo" id="modal_remover_servidor">Remover Servidor: SRV-PROD-01
           </span>
         </div>
       </header>
@@ -532,7 +532,7 @@
     </div>
   </div>
 
-  
+
 </body>
 
 </html>
@@ -540,77 +540,15 @@
 <script src="../assets/javascript/datetime.js"></script>
 <script src="../assets/javascript/menu.js"></script>
 
-<!-- Graficos -->
-<script>
-  // Grafico de Performaçe de infraestrutura
-  const perfomaInfra = document.getElementById("perfomaInfra")
-  const perfomaInfra2 = document.getElementById("perfomaInfra2")
-  new Chart(perfomaInfra2,
-    {
-      data: {
-        datasets: [
-          {
-            label: 'RAM (%)',
-            data: [10, 10, 10, 10],
-            type: 'line',
-            order: 1,
-            tension: 0.2,
-          }, {
-            label: 'CPU (%)',
-            data: [10, 8, 0, 6],
-            type: 'line',
-            order: 2,
-            tension: 0.2,
-          }
-        ],
-        labels: ['January', 'February', 'March', 'April']
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    }
-  )
-  new Chart(perfomaInfra,
-    {
-      data: {
-        datasets: [
-          {
-            label: 'RAM (%)',
-            data: [10, 10, 10, 10],
-            type: 'line',
-            order: 1,
-            tension: 0.2,
-          }, {
-            label: 'CPU (%)',
-            data: [10, 8, 0, 6],
-            type: 'line',
-            order: 2,
-            tension: 0.2,
-          }
-        ],
-        labels: ['January', 'February', 'March', 'April']
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    }
-  )
 
+<script type="module">
+  import { listarServidor, criarGraficos } from "../assets/javascript/servidor.js"
+  listarServidor()
+  criarGraficos()
 </script>
 
 
-
 <script>
-  usuarionome.innerHTML = sessionStorage.NOME_USUARIO
-  usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
-
-  function detalhes() {
-    var modal = document.getElementById("modalDetalhes")
-    modal.style.display = 'flex'
-  }
-
   function fecharModal(tipoModal) {
     const modal = document.getElementsByClassName("fundoModal")
     modal[tipoModal].style.display = 'none';
@@ -621,10 +559,6 @@
     modal.style.display = 'flex'
   }
 
-  function removerServidor() {
-    var modal = document.getElementById("modalRemoverServidor")
-    modal.style.display = 'flex'
-  }
 
   function cancerCadServidor() {
     input_nome_identificacao.value = ''
