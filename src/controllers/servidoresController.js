@@ -87,10 +87,51 @@ function listarServidoresCadastrados(req, res){
     })
 }
 
+function cadastrarServidor(req, res){
+    var servidorNome = req.body.servidorNome
+    var servidorIdentificacao = req.body.servidorIdentificacao
+    var servidorIp = req.body.servidorIp
+    var servidorSo = req.body.servidorSo
+    var idEmpresa = req.body.idEmpresaServer
+    var servidorStatus = req.body.servidorStatus
+
+    if (servidorNome == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (servidorIdentificacao == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (servidorIp == undefined) {
+        res.status(400).send("Seu ip está undefined!");
+    } else if (servidorSo == undefined) {
+        res.status(400).send("Seu sistema operacional está undefined!");
+    } else if (idEmpresa == undefined) {
+        res.status(400).send("Seu idEmpresa está undefined!");
+    } else if (servidorStatus == undefined) {
+        res.status(400).send("Seu status está undefined!");
+    } else {
+         servidoresModel.cadastrarServidor(servidorNome, servidorIdentificacao, servidorIp, servidorSo, 
+            idEmpresa, servidorStatus).then(
+                function(resultado){
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro){
+                    console.log(erro);
+                    console.log("Houve um erro ao cadastrar servidor. Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage)
+                }
+            )
+    }
+
+
+}
+
 module.exports = {
     cadastrar,
     cadastrarComponentes,
     listarServidores,
     listarServidoresRecentes,
-    listarServidoresCadastrados
+    listarServidoresCadastrados,
+    cadastrarServidor
 }
