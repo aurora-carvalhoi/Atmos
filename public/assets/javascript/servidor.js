@@ -121,7 +121,6 @@ function trocarKpi(kpi) {
   }
 }
 
-
 // Servidores 
 function listarServidor() {
   var listaServidores = ''

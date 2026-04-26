@@ -29,8 +29,8 @@ function finalizarCadastro(nome, senha, id) {
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 
-function cadastrarFuncionario(fkEmpresa, idSuperior ,nome,email,dataNascimento,cpf,senha){
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkEmpresa, idSuperior, nome,email, dataNascimento,cpf,senha);
+function cadastrarFuncionario(fkEmpresa, idSuperior, nome, email, dataNascimento, cpf, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkEmpresa, idSuperior, nome, email, dataNascimento, cpf, senha);
 
     var instrucaoSql = `
     INSERT INTO usuario(fkEmpresa, fkSuperior, nome, email, dataNascimento, cpf, senha, statusUsuario, tipoUsuario) VALUES ('${fkEmpresa}','${idSuperior}','${nome}','${email}','${dataNascimento}','${cpf}','${senha}','Ativo','Funcionario');
@@ -45,7 +45,7 @@ function cadastrarFuncionario(fkEmpresa, idSuperior ,nome,email,dataNascimento,c
 //     return database.executar(instrucaoSql);
 // }
 
-function listarColaboradoresCadastrados(){
+function listarColaboradoresCadastrados() {
     var instrucaoSql = `
     SELECT nome, email, tipoUsuario, setor, statusUsuario
     FROM usuario
@@ -54,7 +54,7 @@ function listarColaboradoresCadastrados(){
     return database.executar(instrucaoSql);
 }
 
-function cadastrarColaborador(nome, email, papel, equipe, cpf, dataNascimento, idEmpresa, status, senha){
+function cadastrarColaborador(nome, email, papel, equipe, cpf, dataNascimento, idEmpresa, status, senha) {
     var instrucaoSql = `
     INSERT INTO usuario (nome, email, tipoUsuario, setor, cpf, dataNascimento, fkEmpresa, statusUsuario, senha)
      VALUES ( '${nome}', '${email}', '${papel}', '${equipe}', '${cpf}', '${dataNascimento}', '${idEmpresa}', '${status}', '${senha}');
@@ -63,13 +63,23 @@ function cadastrarColaborador(nome, email, papel, equipe, cpf, dataNascimento, i
 }
 
 
-function listarColaboradoresEmpresa(idEmpresa){
+function listarColaboradoresEmpresa(idEmpresa) {
     var instrucaoSql = `
-    SELECT u.idUsuario, u.nome, u.email, u.fkEmpresa as empresaId, u.statusUsuario, u.tipoUsuario, u.dataNascimento, u.cpf, 
-        u.documentoIdetificacao, u.dataCadastro, u.dataAtualizacao, u.setor, s.nome as nomeSupevisor FROM usuario AS u 
+     SELECT u.idUsuario, u.nome, u.email, u.fkEmpresa as empresaId, u.statusUsuario, u.tipoUsuario, u.dataNascimento, u.cpf, 
+        u.documentoIdentificacao, u.dataCadastro, u.dataAtualizacao, u.setor, s.nome as nomeSupevisor, e.razaoSocial AS razaoSocial FROM usuario AS u 
         LEFT JOIN usuario as s on u.fkSuperior = s.idUsuario
+        JOIN empresa e on u.fkEmpresa= idEmpresa
     WHERE u.fkEmpresa = ${idEmpresa};
     `
+    console.log("Execultando o comando: \n"+ instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
+function alterarStatusUsuario(idUsuario, status){
+    var instrucaoSql = `
+         UPDATE usuario set statusUsuario = '${status}', dataAtualizacao = CURRENT_TIMESTAMP WHERE idUsuario = ${idUsuario};
+    `
+    console.log("Execultando o comando: \n"+ instrucaoSql)
     return database.executar(instrucaoSql)
 }
 
@@ -81,6 +91,7 @@ module.exports = {
     // listarColaboradores,
     listarColaboradoresCadastrados,
     cadastrarColaborador,
-    listarColaboradoresEmpresa
+    listarColaboradoresEmpresa,
+    alterarStatusUsuario
 };
 

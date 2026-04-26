@@ -250,87 +250,11 @@
               </tr>
             </thead>
             <tbody id="tabela_colaboradores">
-              <!-- <tr>
-                <td class="nomeUser">
-                  <div class="perfil">
-                    <span>BL</span>
-                  </div>
-                  <span class="nome">
-                    Brandão Lima
-                  </span>
-                  <span>ID #001</span>
-                </td>
+              <tr>
                 <td>
-                  <span>brandao@sptech.school</span>
-                </td>
-                <td>
-                  <span class="etiqueta etiqueta-azul">● Gestor</span>
-                </td>
-                <td>
-                  <span class="etiqueta etiqueta-verde">● Ativo</span>
-                </td>
-                <td>
-                  <span>14/01/2026</span>
-                </td>
-                <td>
-                  <button class="btn-detalhes" onclick="detalhes()">Detalhes</button>
-                  <button class="btn-remover" onclick="inativarUsuario()">inativar</button>
-                </td>
-              </tr> -->
-              <!-- <tr>
-                <td class="nomeUser">
-                  <div class="perfil">
-                    <span>AC</span>
-                  </div>
-                  <span class="nome">
-                    Anna Costa
-                  </span>
-                  <span>ID #002</span>
-                </td>
-                <td>
-                  <span>annacosta@spthech.com</span>
-                </td>
-                <td>
-                  <span class="etiqueta etiqueta-laranja">● Analista</span>
-                </td>
-                <td>
-                  <span class="etiqueta etiqueta-verde">● Ativo</span>
-                </td>
-                <td>
-                  <span>14/01/2026</span>
-                </td>
-                <td>
-                  <button class="btn-detalhes" onclick="detalhes()">Detalhes</button>
-                  <button class="btn-remover" onclick="inativarUsuario()">inativar</button>
+                  <h4>Nenhum servidor encontrado</h4>
                 </td>
               </tr>
-              <tr>
-                <td class="nomeUser">
-                  <div class="perfil">
-                    <span>PA</span>
-                  </div>
-                  <span class="nome">
-                    Pedro Alves
-                  </span>
-                  <span>ID #003</span>
-                </td>
-                <td>
-                  <span>pedroalves@spthech.com</span>
-                </td>
-                <td>
-                  <span class="etiqueta etiqueta-laranja">● Analista</span>
-                </td>
-                <td>
-                  <span class="etiqueta etiqueta-vermelho">● Inativo</span>
-                </td>
-                <td>
-                  <span>14/01/2026</span>
-                </td>
-                <td>
-                  <button class="btn-detalhes" onclick="detalhes()">Detalhes</button>
-                  <button class="btn-ativar" onclick="ativarUsuario()">Ativar</button>
-                </td>
-              </tr> -->
             </tbody>
           </table>
         </div>
@@ -363,15 +287,17 @@
           <button class="btn-branco" onclick="fecharModal(0)">
             Cancelar
           </button>
-          <button class="btn-vermelho" onclick="removerServidor()">
+          <button class="btn-vermelho" onclick="confirmarAlteracao('Inativo')">
             Desativar
           </button>
+          <input type="text" style="display: none;" id="input_modal_desativar_id_usuario">
+
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal Desativar Usuario -->
+  <!-- Modal ativar Usuario -->
   <div class="fundoModal" id="modalAtivarUsuario">
     <div class="modal modalAlteracaoStatus">
       <header>
@@ -392,9 +318,10 @@
           <button class="btn-branco" onclick="fecharModal(1)">
             Cancelar
           </button>
-          <button class="btn-azul" onclick="removerServidor()">
+          <button class="btn-azul" onclick="confirmarAlteracao('Ativo')">
             Ativar
           </button>
+          <input type="text" style="display: none;" id="input_modal_ativar_id_usuario">
         </div>
       </div>
     </div>
@@ -402,79 +329,7 @@
 
   <!-- Modal detalhes Usuario -->
   <div class="fundoModal" id="modalDetalhesPerfil">
-    <div class="modal modalUsuario">
-      <header>
-        <div>
-          <h2>Detalhes do Servidor</h2>
-          <span class="subTitulo">Servidor | SRV-PROD-01</span>
-        </div>
-        <div>
-          <button onclick="fecharModal(2)">
-            X
-          </button>
-        </div>
-      </header>
-      <div class="conteudo-usuario">
-        <div class="dados-perfil">
-          <div class="usuario">
-            <div class="perfil">
-              BL
-            </div>
-            <div class="user">
-              <h2 id="nome_usuario">Brandão Lima</h2>
-              <span class="etiqueta-semi-bold etiqueta-azul">● Gestor</span>
-            </div>
-          </div>
-          <div class="status">
-            <span class="etiqueta-semi-bold etiqueta-verde">● Ativo</span>
-          </div>
-        </div>
-        <div class="dados-gerais">
-          <div class="dados">
-            <span class="titulo">E-MAIL</span>
-            <span class="info">brandaolima@sptech.school</span>
-          </div>
-          <div class="dados">
-            <span class="titulo">CONTATO</span>
-            <span class="info">+55 11 91234-5678</span>
-          </div>
-          <div class="dados">
-            <span class="titulo">EMPRESA</span>
-            <span class="info">INSTITUTO DE METEOROLOGIA DE SANTA CATARINA</span>
-          </div>
-          <div class="dados">
-            <span class="titulo">PAIS</span>
-            <span class="info">BRASIL</span>
-          </div>
-          <div class="dados">
-            <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
-            <span class="info">123.456.789.99</span>
-          </div>
-          <div class="dados">
-            <span class="titulo">DATA DE NASCIMENTO</span>
-            <span class="info">25/12/2000</span>
-          </div>
-          <div class="dados">
-            <span class="titulo">REGIÃO</span>
-            <span class="info">SUL</span>
-          </div>
-          <div class="dados">
-            <span class="titulo">CONTA CRIADA EM</span>
-            <span class="info">25/02/2026</span>
-          </div>
-          <div class="dados">
-            <span class="titulo">LOCALIZAÇÃO</span>
-            <span class="info">São Paulo/Brasil</span>
-          </div>
-        </div>
-        <div class="acoesModal">
-          <p>Última atualização: 25/01/2026 às 13:00</p>
-          <button class="btn-azul" onclick="editarPerfil(1)">
-            Alterar dados
-          </button>
-        </div>
-      </div>
-    </div>
+
   </div>
 
   <!-- Modal Editar Usuario -->
@@ -637,25 +492,125 @@
 <!-- modal -->
 <script>
 
-  function desativarUsuario() {
+  function desativarUsuario(idUsuario) {
     var modal = document.getElementById('modalDesativarUsuario')
     modal.style.display = 'flex'
+    document.getElementById('input_modal_desativar_id_usuario').value = idUsuario
   }
 
-  function ativarUsuario() {
+  function ativarUsuario(idUsuario) {
     var modal = document.getElementById('modalAtivarUsuario')
     modal.style.display = 'flex'
+    document.getElementById('input_modal_ativar_id_usuario').value = idUsuario
   }
-
 
   function fecharModal(tipoModal) {
     const modal = document.getElementsByClassName("fundoModal")
     modal[tipoModal].style.display = 'none';
   }
 
-  function detalhes() {
-    var modal = document.getElementById("modalDetalhesPerfil")
-    modal.style.display = 'flex'
+  function detalhes(posicaoUsuario) {
+    var idEmpresa = sessionStorage.FKEMPRESA
+    fetch(`/usuarios/listarColaboradoresEmpresa/${idEmpresa}`)
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (usuarios) {
+        var usuario = usuarios[posicaoUsuario]
+        var etiquetaAcesso = ''
+        var etiquetaStatus = ''
+        var nomeSuperior = ''
+        if (usuario.tipoUsuario == 'Gestor') {
+          etiquetaAcesso = `etiqueta-azul`
+        } else {
+          etiquetaAcesso = `etiqueta-laranja`
+        }
+        if (usuario.statusUsuario == 'Ativo') {
+          etiquetaStatus = `etiqueta-verde`
+
+        } else {
+          etiquetaStatus = `etiqueta-vermelha`
+        }
+        if(usuario.nomeSupevisor != null){
+          nomeSuperior = usuario.nomeSupevisor
+        }else{
+          nomeSuperior = "Não possui"
+        }
+        var modalDetalhe =
+          `
+        <div class="modal modalUsuario">
+          <header>
+            <div>
+              <h2>Detalhes do Servidor</h2>
+              <span class="subTitulo">Detalhes do usuario ${usuario.nome}</span>
+            </div>
+            <div>
+              <button onclick="fecharModal(2)">
+                X
+              </button>
+            </div>
+          </header>
+          <div class="conteudo-usuario">
+            <div class="dados-perfil">
+              <div class="usuario">
+                <div class="perfil">
+                  ${usuario.nome.split(" ")[0].split("")[0] + usuario.nome.split(" ")[1].split("")[0]}
+                </div>
+                <div class="user">
+                  <h2 id="nome_usuario">${usuario.nome}</h2>
+                  <span class="etiqueta-semi-bold ${etiquetaAcesso}">● ${usuario.tipoUsuario}</span>
+                </div>
+              </div>
+              <div class="status">
+                <span class="etiqueta-semi-bold ${etiquetaStatus}">● ${usuario.statusUsuario}</span>
+              </div>
+            </div>
+            <div class="dados-gerais">
+              <div class="dados">
+                <span class="titulo">E-MAIL</span>
+                <span class="info">${usuario.email}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">SETOR</span>
+                <span class="info">${usuario.setor}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">EMPRESA</span>
+                <span class="info">${usuario.razaoSocial}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+                <span class="info">${usuario.cpf}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">DATA DE NASCIMENTO</span>
+                <span class="info">${new Date(usuario.dataNascimento).toLocaleDateString('pt-BR')}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">CONTA CRIADA EM</span>
+                <span class="info">${new Date(usuario.dataCadastro).toLocaleDateString('pt-BR')}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">SUPERVISOR</span>
+                <span class="info">${nomeSuperior}</span>
+              </div>
+            </div>
+            <div class="acoesModal">
+              <p>Última atualização:${new Date(usuario.dataAtualizacao).toLocaleString('pt-BR')}</p>
+              <input type="text" style="display: none;">
+              <button class="btn-azul" onclick="editarPerfil(${usuario.idUsuario}, ${posicaoUsuario})" >
+                Alterar dados
+              </button>
+            </div>
+          </div>
+        </div>
+        `
+
+        var modal = document.getElementById("modalDetalhesPerfil")
+        modal.style.display = 'flex'
+        modal.innerHTML = modalDetalhe
+
+      });
   }
 
   function editarPerfil(id) {
@@ -665,8 +620,10 @@
 
 </script>
 
+<!-- manipulação de usuario -->
 <script>
-  function listarUsuario() {
+
+  async function listarUsuario() {
     var idEmpresa = sessionStorage.FKEMPRESA
     fetch(`/usuarios/listarColaboradoresEmpresa/${idEmpresa}`)
       .then(function (res) {
@@ -681,26 +638,25 @@
         var tabelaColaboradoresCadastrados = "";
         var etiquetaAcesso = ''
         var etiquetaStatus = ''
-        console.log(usuarios)
+        const resposta = usuarios
         for (var i = 0; i < usuarios.length; i++) {
           var usuario = usuarios[i]
-          if(usuario.tipoUsuario == 'Gestor'){
+          if (usuario.tipoUsuario == 'Gestor') {
             etiquetaAcesso = `etiqueta-azul`
-          }else{
+          } else {
             etiquetaAcesso = `etiqueta-laranja`
           }
-          if(usuario.statusUsuario == 'Ativo'){
+          if (usuario.statusUsuario == 'Ativo') {
             etiquetaStatus = `etiqueta-verde`
             var button = `
-              <button class="btn-remover" onclick="inativarUsuario(${usuario.idUsuario, i})">inativar</button>
+              <button class="btn-remover" onclick="desativarUsuario(${usuario.idUsuario})">inativar</button>
             `
-          }else{
+          } else {
             etiquetaStatus = `etiqueta-vermelha`
-             var button = `
-              <button class="btn-ativar" onclick="ativarUsuario(${usuario.idUsuario, i})">Ativar</button>
+            var button = `
+              <button class="btn-ativar" onclick="ativarUsuario(${usuario.idUsuario})">Ativar</button>
             `
           }
-
           tabelaColaboradoresCadastrados += `
             <tr>
                 <td class="nomeUser">
@@ -725,7 +681,7 @@
                   <span>${usuario.dataCadastro}</span>
                 </td>
                 <td>
-                  <button class="btn-detalhes" onclick="detalhes(${usuario.idUsuario, i})">Detalhes</button>
+                  <button class="btn-detalhes" onclick="detalhes(${i})">Detalhes</button>
                   ${button}
                 </td>
               </tr>
@@ -734,6 +690,48 @@
         listaColaboradores.innerHTML = tabelaColaboradoresCadastrados;
       });
   }
-listarUsuario()
 
+  function confirmarAlteracao(alteracao) {
+    var idUsuario
+    var modal
+    switch (alteracao) {
+      case "Inativo":
+        idUsuario = document.getElementById('input_modal_desativar_id_usuario').value
+        modal = 0
+        break;
+      case 'Ativo':
+        idUsuario = document.getElementById('input_modal_ativar_id_usuario').value
+        modal = 1
+        break;
+    }
+    fetch("/usuarios/alterarStatusColaborador", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        idUsuarioServer: idUsuario,
+        statusUsuarioServer: alteracao,
+      })
+    })
+      .then(resposta => {
+        console.log(resposta)
+        if (resposta.ok) {
+          resposta.json().then((json) => {
+            fecharModal(modal)
+            listarUsuario()
+          });
+        } else {
+          console.log("Houve um erro ao trocar o status do usuario");
+          resposta.text().then(texto => {
+            console.error(texto);
+          });
+        }
+      }).catch(function (erro) {
+        console.log(erro);
+      })
+
+  }
+
+  listarUsuario()
 </script>
