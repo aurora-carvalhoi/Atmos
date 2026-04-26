@@ -37,7 +37,7 @@ function listarServidores(){
 
 function listarServidoresRecentes(){
     var instrucaoSql = `
-    SELECT idServidor, nomeIdentificacao, enderecoIPV4, sistemaOperacional
+    SELECT idServidor, nomeIdentificacao, enderecoIPV4, sistemaOperacional, statusServidor
     FROM servidor
     order by idServidor desc limit 3;
     `;
@@ -46,10 +46,18 @@ function listarServidoresRecentes(){
 
 function listarServidoresCadastrados(){
     var instrucaoSql = `
-    SELECT idServidor, nomeIdentificacao, enderecoIPV4, sistemaOperacional, razaoSocial
+    SELECT idServidor, nomeIdentificacao, enderecoIPV4, sistemaOperacional, razaoSocial, statusServidor
     FROM servidor LEFT JOIN empresa on idEmpresa = fkEmpresa
     order by idServidor desc;
     `;
+    return database.executar(instrucaoSql);
+}
+
+function cadastrarServidor(servidorNome, servidorIdentificacao, servidorIp, servidorSo, idEmpresa,  servidorStatus){
+    var instrucaoSql = `
+     INSERT INTO servidor (nomeIdentificacao, numeroIdentificacao, enderecoIPV4, sistemaOperacional, fkEmpresa, statusServidor) 
+     VALUES ('${servidorNome}', '${servidorIdentificacao}', '${servidorIp}', '${servidorSo}', '${idEmpresa}', '${servidorStatus}');
+    `
     return database.executar(instrucaoSql);
 }
 
@@ -59,5 +67,6 @@ module.exports = {
     cadastrarComponentes,
     listarServidores,
     listarServidoresRecentes,
-    listarServidoresCadastrados
+    listarServidoresCadastrados,
+    cadastrarServidor
 };

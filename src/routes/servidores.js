@@ -24,5 +24,9 @@ router.get("/listarServidoresCadastrados", function(req, res){
     servidoresController.listarServidoresCadastrados(req, res);
 })
 
+router.post("/cadastrarServidor", function (req, res){
+    servidoresController.cadastrarServidor(req, res);
+})
+
 module.exports = router;
 
