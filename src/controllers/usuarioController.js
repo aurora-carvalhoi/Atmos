@@ -244,6 +244,57 @@ function alterarStatusUsuario(req, res) {
     }
 }
 
+function buscarUsuarioPorId(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    console.log(idUsuario)
+    if (idUsuario == undefined) {
+        res.status(400).send("ID ususario indefinido!");
+    }
+    usuarioModel.buscarUsuarioPorId(idUsuario).then((resultado) => {
+        res.status(200).json(resultado);
+    })
+}
+
+function alterarDadosPerfil(req, res) {
+    var email = req.body.emailServer
+    var nome = req.body.nomeServer
+    var docIndentificacao = req.body.docIndentificacaoServer
+    var senha = req.body.senhaServer
+    var dataNasc = req.body.dataNascServer
+    var idUsuario = req.body.idUsuarioServer
+
+
+    if (email == undefined) {
+        res.status(400).send("email está undefined")
+    } else if (nome == undefined) {
+        res.status(400).send("nome está undefined")
+    } else if (docIndentificacao == undefined) {
+        res.status(400).send("documento de Indentificacao está undefined")
+    } else if (senha == undefined) {
+        res.status(400).send("senha está undefined")
+    } else if (dataNasc == undefined) {
+        res.status(400).send("data de nascimento está undefined")
+    } else if (idUsuario == undefined) {
+        res.status(400).send("idUsuario está undefined")
+    } else {
+        usuarioModel.alterarDadoPerfil(nome, email, docIndentificacao, senha, dataNasc ,idUsuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao alterar os dados do perfil. Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage)
+                }
+            )
+    }
+
+}
 
 module.exports = {
     autenticar,
@@ -254,5 +305,7 @@ module.exports = {
     listarColaboradoresCadastrados,
     cadastrarColaborador,
     listarColaboradoresEmpresa,
-    alterarStatusUsuario
+    alterarStatusUsuario,
+    buscarUsuarioPorId,
+    alterarDadosPerfil
 }

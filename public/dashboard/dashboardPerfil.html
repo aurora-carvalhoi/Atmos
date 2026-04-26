@@ -173,30 +173,33 @@
             <div class="card-perfil">
                 <div class="dados-perfil">
                     <div class="usuario">
-                        <div class="perfil">
+                        <div class="perfil" id="perfil_iniciais">
                             BL
                         </div>
                         <div class="user">
-                            <h2 id="nome_usuario">Brandão Lima</h2>
-                            <span class="etiqueta-semi-bold etiqueta-azul">● Gestor</span>
+                            <h2 id="perfil_nome_usuario">Brandão Lima</h2>
+                            <div id="perfil_tipo_conta">
+                                <span class="etiqueta-semi-bold etiqueta-azul">● Gestor</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="status">
+                    <div class="status" id="perfil_status_conta">
                         <span class="etiqueta-semi-bold etiqueta-verde">● Ativo</span>
                     </div>
                 </div>
                 <div class="dados-gerais">
                     <div class="dados">
                         <span class="titulo">E-MAIL</span>
-                        <span class="info">brandaolima@sptech.school</span>
+                        <span class="info" id="perfil_email_usuario">brandaolima@sptech.school</span>
                     </div>
                     <div class="dados">
-                        <span class="titulo">CONTATO</span>
-                        <span class="info">+55 11 91234-5678</span>
+                        <span class="titulo">SETOR</span>
+                        <span class="info" id="perfil_setor_usuario">--</span>
                     </div>
                     <div class="dados">
                         <span class="titulo">EMPRESA</span>
-                        <span class="info">INSTITUTO DE METEOROLOGIA DE SANTA CATARINA</span>
+                        <span class="info" id="perfil_empresa_usuario">INSTITUTO DE METEOROLOGIA DE SANTA
+                            CATARINA</span>
                     </div>
                     <div class="dados">
                         <span class="titulo">PAIS</span>
@@ -204,27 +207,28 @@
                     </div>
                     <div class="dados">
                         <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
-                        <span class="info">123.456.789.99</span>
+                        <span class="info" id="perfil_documento_usuario">123.456.789.99</span>
                     </div>
                     <div class="dados">
                         <span class="titulo">DATA DE NASCIMENTO</span>
-                        <span class="info">25/12/2000</span>
-                    </div>
-                    <div class="dados">
-                        <span class="titulo">REGIÃO</span>
-                        <span class="info">SUL</span>
+                        <span class="info" id="perfil_data_nasc">25/12/2000</span>
                     </div>
                     <div class="dados">
                         <span class="titulo">CONTA CRIADA EM</span>
-                        <span class="info">25/02/2026</span>
+                        <span class="info" id="perfil_data_criacao">25/02/2026</span>
                     </div>
                     <div class="dados">
                         <span class="titulo">LOCALIZAÇÃO</span>
                         <span class="info">São Paulo/Brasil</span>
                     </div>
+                    <div class="dados">
+                        <span class="titulo">SUPERVISOR</span>
+                        <span class="info" id="perfil_supervisor_usuario">São Paulo/Brasil</span>
+                    </div>
+
                 </div>
                 <div class="acoes">
-                    <p>Última atualização: 25/01/2026 às 13:00</p>
+                    <p id="perfil_data_atualizacao">Última atualização: </p>
                     <button class="btn-azul" onclick="editarPerfil()">
                         <img src="../assets/images/icones/editar.svg" alt="editar icon">
                         Alterar dados
@@ -241,8 +245,8 @@
             <header>
                 <!-- Titulo e subtitulo -->
                 <div>
-                    <h2>Detalhes do Servidor</h2>
-                    <span class="subTitulo">Servidor | SRV-PROD-01</span>
+                    <h2>Alterar Dados</h2>
+                    <span class="subTitulo">Alterar dados da conta</span>
                 </div>
                 <!-- botão de sair -->
                 <div>
@@ -254,22 +258,18 @@
             <div class="conteudo-usuario">
                 <div class="dados-perfil">
                     <div class="usuario">
-                        <div class="perfil">
+                        <div class="perfil" id="modal_iniciais">
                             BL
                         </div>
                         <div>
-                            <input type="file" name="imagem" id="">
+                            <!-- <input type="file" name="imagem" id=""> -->
                         </div>
                     </div>
                 </div>
                 <div class="dados-gerais dados-gerais-form">
-                    <label class="w-75">
+                    <label class="w-100">
                         <span class="titulo">E-MAIL</span>
                         <input type="text" id="input_email" value="" placeholder="geraldo@atmos.com">
-                    </label>
-                    <label class="w-25">
-                        <span class="titulo">CONTATO</span>
-                        <input type="text" id="input_contato" value="" placeholder="+55 11 98989-6969">
                     </label>
                     <label class="w-33">
                         <span class="titulo">NOME</span>
@@ -298,7 +298,7 @@
                         <button class="btn-branco" onclick="cancelar(0)">
                             Cancelar
                         </button>
-                        <button class="btn-azul" onclick="alterarDados ()">
+                        <button class="btn-azul" onclick="alterarDados(sessionStorage.ID_USUARIO)">
                             Confirmar
                         </button>
                     </div>
@@ -334,5 +334,109 @@
         input_confimacao_senha.value = ''
         fecharModal(modal)
     }
+
+    function bucarDadosUsuario() {
+        var idUsuario = sessionStorage.ID_USUARIO
+        fetch(`/usuarios/buscarUsuarioPorId/${idUsuario}`)
+            .then(function (res) {
+                return res.json();
+            })
+            .then(function (usuarios) {
+                var usuario = usuarios[0]
+                var etiquetaAcesso = ''
+                var etiquetaStatus = ''
+                var supervisor = ''
+                if (usuario.tipoUsuario == 'Gestor') {
+                    etiquetaAcesso = `etiqueta-azul`
+                } else {
+                    etiquetaAcesso = `etiqueta-laranja`
+                }
+                if (usuario.statusUsuario == 'Ativo') {
+                    etiquetaStatus = `etiqueta-verde`
+                } else {
+                    etiquetaStatus = `etiqueta-vermelha`
+                }
+                if (usuario.supervisor == null) {
+                    supervisor = 'Não Vinculado'
+                } else {
+                    supervisor = usuario.supervisor
+                }
+
+                document.getElementById('perfil_iniciais').innerText = usuario.nome.split(" ")[0].split("")[0] + usuario.nome.split(" ")[1].split("")[0]
+                document.getElementById('perfil_nome_usuario').innerText = usuario.nome
+                document.getElementById('perfil_tipo_conta').innerHTML = `<span class="etiqueta-semi-bold ${etiquetaAcesso}">● ${usuario.tipoUsuario}</span>`
+                document.getElementById('perfil_status_conta').innerHTML = `<span class="etiqueta-semi-bold ${etiquetaStatus}">● ${usuario.statusUsuario}</span>`
+                document.getElementById('perfil_email_usuario').innerText = usuario.email
+                document.getElementById('perfil_setor_usuario').innerText = usuario.setor
+                document.getElementById('perfil_empresa_usuario').innerText = usuario.razaoSocial
+                document.getElementById('perfil_documento_usuario').innerText = usuario.cpf
+                document.getElementById('perfil_data_nasc').innerText = new Date(usuario.dataNascimento).toLocaleDateString('pt-BR')
+                document.getElementById('perfil_data_criacao').innerText = new Date(usuario.dataCadastro).toLocaleDateString('pt-BR')
+                document.getElementById('perfil_supervisor_usuario').innerText = supervisor
+                document.getElementById('perfil_data_atualizacao').innerHTML += new Date(usuario.dataAtualizacao).toLocaleString('pt-BR')
+
+                // modal
+                document.getElementById('modal_iniciais').value = usuario.nome.split(" ")[0].split("")[0] + usuario.nome.split(" ")[1].split("")[0]
+                document.getElementById('input_email').value = usuario.email
+                document.getElementById('input_nome').value = usuario.nome
+                document.getElementById('input_doc_indentificacao').value = usuario.cpf
+                document.getElementById('input_data_nasc').value = usuario.dataNascimento
+            });
+    }
+
+    function alterarDados() {
+        var email = document.getElementById('input_email').value
+        var nome = document.getElementById('input_nome').value
+        var doc_indentificacao = document.getElementById('input_doc_indentificacao').value
+        var data_nasc = document.getElementById('input_data_nasc').value
+        var senha = document.getElementById('input_senha').value
+        var confimacao_senha = document.getElementById('input_confimacao_senha').value
+
+        if (
+            email == null ||
+            nome == null ||
+            doc_indentificacao == null ||
+            data_nasc == null ||
+            senha == null ||
+            confimacao_senha == null
+        ) {
+            console.log('vazio')
+        } else {
+            fetch("/usuarios/alterarDadosPerfil", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: email,
+                    nomeServer: nome,
+                    docIndentificacaoServer: doc_indentificacao,
+                    senhaServer: senha,
+                    dataNascServer: data_nasc,
+                    idUsuarioServer: sessionStorage.ID_USUARIO
+                })
+            })
+            .then(resposta => {
+                console.log("ESTOU NO THEN DO alterarDados()!")
+                console.log(resposta)
+                if (resposta.ok) {
+                    console.log(resposta);
+                    resposta.json().then((json) => {
+                        console.log('passou')
+                    });
+                    window.location.reload()
+                } else {
+                    console.log("Houve um erro ao atualizar os dados!");
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+
+
+        }
+    }
+
+    bucarDadosUsuario()
 
 </script>
