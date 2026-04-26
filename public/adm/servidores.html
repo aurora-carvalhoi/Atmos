@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="corpo-admin" onload="listarServidoresCadastrados();">
+<body class="corpo-admin" onload="listarServidoresCadastrados(); listarEmpresas();">
   <div class="estrutura-admin">
     <aside class="menu-lateral">
       <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
@@ -33,21 +33,21 @@
       </div>
 
       <section class="grade-dividida">
-        <form class="card-formulario">
+        <div class="card-formulario">
           <h3>Cadastrar servidor</h3>
           <div class="grade-campos" style="margin-top:14px;">
-            <div class="campo"><label>Nome do host</label><input name="nome" required></div>
-            <div class="campo"><label>Identificação</label><input name="identificacao" required></div>
-            <div class="campo"><label>IP</label><input name="ip" required></div>
-            <div class="campo"><label>Sistema operacional</label><input name="so" required></div>
-            <div class="campo"><label>Empresa</label><select name="empresa" required><option>Atmos Monitoring Systems</option><option>Cloud Aurora</option><option>Sky Pulse</option></select></div>
-            <div class="campo"><label>Status</label><select name="status"><option>Estável</option><option>Observação</option><option>Crítico</option><option>Implantação</option></select></div>
-            <div class="campo inteiro"><label>Observações</label><textarea name="observacoes" placeholder="Opcional"></textarea></div>
+            <div class="campo"><label>Nome do host</label><input id="servidorNome" required></div>
+            <div class="campo"><label>Identificação</label><input id="servidorIdentificacao" required></div>
+            <div class="campo"><label>IP</label><input id="servidorIp" required></div>
+            <div class="campo"><label>Sistema operacional</label><input id="servidorSo" required></div>
+            <div class="campo"><label>Empresa</label><select id="select_fk_empresa" required></select></div>
+            <div class="campo"><label>Status</label><select id="servidorStatus"><option>Ativo</option><option>Inativo</option></select></div>
+            <div class="campo inteiro"><label>Observações</label><textarea placeholder="Opcional"></textarea></div>
           </div>
           <div class="rodape-formulario">
-            <button type="button" class="btn-admin">Salvar servidor</button>
+            <button onclick="cadastrarServidor()" class="btn-admin">Salvar servidor</button>
           </div>
-        </form>
+        </div>
       </section>
 
       <section style="margin-top:16px;" class="painel-tabela">
@@ -117,11 +117,103 @@
                 <td>${servidores[i].enderecoIPV4}</td>
                 <td>${servidores[i].sistemaOperacional}</td>
                 <td>${servidores[i].razaoSocial}</td>
-                <td><span class="etiqueta success">--</span></td>
+                <td><span class="etiqueta success">${servidores[i].statusServidor}</span></td>
               </tr>
           `
         }
         listaServidores.innerHTML = tabelaServidoresCadastrados;
       })
     }
+
+    function listarEmpresas() {
+    var listaEmpresas =
+      '<option value="0" selected disabled>Escolha a empresa</option>';
+    var cont = 0;
+    var selectEmpresa = document.getElementById("select_fk_empresa");
+    fetch("/empresas/listarEmpresasCadastradas", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            cont++;
+            console.log(empresa);
+            listaEmpresas += `
+                            <option value="${empresa.idEmpresa}">${empresa.razaoSocial}</option>
+                            `;
+          });
+          selectEmpresa.innerHTML = listaEmpresas;
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+    function cadastrarServidor(){
+
+      var servidorNomeVar = servidorNome.value.trim()
+      var servidorIdentificacaoVar = servidorIdentificacao.value.trim()
+      var servidorIpVar = servidorIp.value.trim()
+      var servidorSoVar = servidorSo.value.trim()
+      var idEmpresaVar = select_fk_empresa.value;
+      var servidorStatusVar = servidorStatus.value
+
+      const variaveisCadastroServidor = [
+        servidorNomeVar,
+        servidorIdentificacaoVar,
+        servidorIpVar,
+        servidorSoVar,
+        idEmpresaVar,
+        servidorStatusVar
+      ]
+
+      if(isNuloOuVazio(variaveisCadastroServidor)){
+        alert("Nenhum campo pode estar vazio!");
+      }
+
+      fetch("/servidores/cadastrarServidor", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          servidorNome: servidorNomeVar,
+          servidorIdentificacao: servidorIdentificacaoVar,
+          servidorIp: servidorIpVar,
+          servidorSo: servidorSoVar,
+          idEmpresaServer: idEmpresaVar,
+          servidorStatus: servidorStatusVar
+        })
+      })
+      .then(function (resposta){
+        if (resposta.ok) {
+          limparFormulario();
+          listarServidoresCadastrados();
+          alert("Servidor cadastrado com sucesso!")
+        } else {
+          throw "Erro de cadastro de servidor";
+          alert("Erro ao cadastrar servidor!")
+        }
+      })
+      .catch(function (resposta){
+        console.log(`#Erro: ${resposta}`);
+      })
+      return false;
+    }
+
+    function isNuloOuVazio(listaStrings) {
+    var retorno = false;
+    listaStrings.forEach(
+      (string) => (retorno = string == null || string == ""),
+    );
+    return retorno;
+  }
+
+  function limparFormulario(){
+    servidorNome.value = "";
+    servidorIdentificacao.value = "";
+    servidorIp.value = "";
+    servidorSo.value = "";
+    select_fk_empresa.value = "";
+    servidorStatus.value = "";
+  }
 </script>
