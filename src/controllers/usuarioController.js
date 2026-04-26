@@ -143,18 +143,18 @@ function finalizarCadastro(req, res) {
     } else {
 
         usuarioModel.finalizarCadastro(nome, senha, id)
-        .then(function (resultado) {
+            .then(function (resultado) {
 
-            console.log("Update realizado");
+                console.log("Update realizado");
 
-            res.json({
-                status: "ok"
+                res.json({
+                    status: "ok"
+                });
+
+            }).catch(function (erro) {
+                console.log(erro);
+                res.status(500).json(erro.sqlMessage);
             });
-
-        }).catch(function (erro) {
-            console.log(erro);
-            res.status(500).json(erro.sqlMessage);
-        });
     }
 }
 
@@ -164,19 +164,19 @@ function finalizarCadastro(req, res) {
 //     })
 // }
 
-function listarColaboradoresEmpresa(req, res){
+function listarColaboradoresEmpresa(req, res) {
     var idEmpresa = req.params.idEmpresa;
-    
+
     console.log(idEmpresa)
-    if(idEmpresa == undefined){
+    if (idEmpresa == undefined) {
         res.status(400).send("ID empresa indefinido!");
     }
-    usuarioModel.listarColaboradoresEmpresa(idEmpresa).then((resultado)=>{
+    usuarioModel.listarColaboradoresEmpresa(idEmpresa).then((resultado) => {
         res.status(200).json(resultado);
     })
 }
 
-function cadastrarColaborador(req, res){
+function cadastrarColaborador(req, res) {
     var nome = req.body.nomeServer
     var email = req.body.emailServer
     var papel = req.body.papelServer
@@ -187,32 +187,32 @@ function cadastrarColaborador(req, res){
     var status = req.body.statusServer
     var senha = req.body.senhaServer
 
-    if(nome == undefined){
+    if (nome == undefined) {
         res.status(400).send("Seu nome está undefined")
-    }else if(email == undefined){
+    } else if (email == undefined) {
         res.status(400).send("Seu email está undefined")
-    }else if(papel == undefined){
+    } else if (papel == undefined) {
         res.status(400).send("Seu papel está undefined")
-    }else if(equipe == undefined){
+    } else if (equipe == undefined) {
         res.status(400).send("Sua equipe está undefined")
-    }else if(cpf == undefined){
+    } else if (cpf == undefined) {
         res.status(400).send("Seu cpf está undefined")
-    }else if(dataNascimento == undefined){
+    } else if (dataNascimento == undefined) {
         res.status(400).send("Sua dataNascimento está undefined")
-    }else if(idEmpresa == undefined){
+    } else if (idEmpresa == undefined) {
         res.status(400).send("Seu idEmpresa está undefined")
-    }else if(status == undefined){
+    } else if (status == undefined) {
         res.status(400).send("Seu status está undefined")
-    }else if(senha == undefined){
+    } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined")
-    } else{
-        usuarioModel.cadastrarColaborador(nome, email, papel, equipe, cpf, 
+    } else {
+        usuarioModel.cadastrarColaborador(nome, email, papel, equipe, cpf,
             dataNascimento, idEmpresa, status, senha).then(
-                function(resultado){
+                function (resultado) {
                     res.json(resultado);
                 }
             ).catch(
-                function (erro){
+                function (erro) {
                     console.log(erro);
                     console.log("Houve um erro ao cadastrar colaborador. Erro: ",
                         erro.sqlMessage
@@ -223,11 +223,27 @@ function cadastrarColaborador(req, res){
     }
 }
 
-function listarColaboradoresCadastrados(req, res){
-    usuarioModel.listarColaboradoresCadastrados().then((resultado)=>{
+function listarColaboradoresCadastrados(req, res) {
+    usuarioModel.listarColaboradoresCadastrados().then((resultado) => {
         res.status(200).json(resultado);
     })
 }
+
+function alterarStatusUsuario(req, res) {
+    var idUsuario = req.body.idUsuarioServer;
+    var status = req.body.statusUsuarioServer;
+
+    if (idUsuario == undefined) {
+        res.status(400).send("ID do usuario indefinido!");
+    } else if (status == undefined) {
+        res.status(400).send("Status do usuario indefinido!");
+    } else {
+        usuarioModel.alterarStatusUsuario(idUsuario, status).then((resultado) => {
+            res.status(200).json(resultado);
+        })
+    }
+}
+
 
 module.exports = {
     autenticar,
@@ -237,5 +253,6 @@ module.exports = {
     // listarColaboradores,
     listarColaboradoresCadastrados,
     cadastrarColaborador,
-    listarColaboradoresEmpresa
+    listarColaboradoresEmpresa,
+    alterarStatusUsuario
 }
