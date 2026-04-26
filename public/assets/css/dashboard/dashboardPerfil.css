@@ -209,9 +209,13 @@
 
 
     .modalUsuario .dados-gerais-form {
+        width: 100%;
         justify-content: space-between;
     }
 
+    .modalUsuario .w-100{
+        width: 100%;
+    }
     .modalUsuario .w-75 {
         width: 74.5%;
     }

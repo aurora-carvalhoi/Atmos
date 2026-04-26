@@ -42,5 +42,11 @@ router.post("/alterarStatusColaborador", function(req, res){
     usuarioController.alterarStatusUsuario(req, res)
 })
 
+router.get("/buscarUsuarioPorId/:idUsuario", function(req, res){
+    usuarioController.buscarUsuarioPorId(req, res)
+})
 
+router.post("/alterarDadosPerfil", function(req, res){
+    usuarioController.alterarDadosPerfil(req, res)
+})
 module.exports = router;

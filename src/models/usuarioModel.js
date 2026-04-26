@@ -71,15 +71,35 @@ function listarColaboradoresEmpresa(idEmpresa) {
         JOIN empresa e on u.fkEmpresa= idEmpresa
     WHERE u.fkEmpresa = ${idEmpresa};
     `
-    console.log("Execultando o comando: \n"+ instrucaoSql)
+    console.log("Execultando o comando: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
 }
 
-function alterarStatusUsuario(idUsuario, status){
+function buscarUsuarioPorId(idUsuario) {
+    var instrucaoSql = `
+     SELECT u.idUsuario, u.nome, u.email, u.fkEmpresa as empresaId, u.statusUsuario, u.tipoUsuario, u.dataNascimento, u.cpf, 
+        u.documentoIdentificacao, u.dataCadastro, u.dataAtualizacao, u.setor, s.nome as nomeSupevisor, e.razaoSocial AS razaoSocial FROM usuario AS u 
+        LEFT JOIN usuario as s on u.fkSuperior = s.idUsuario
+        JOIN empresa e on u.fkEmpresa= idEmpresa
+    WHERE u.idUsuario = ${idUsuario};
+    `
+    console.log("Execultando o comando: \n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
+function alterarStatusUsuario(idUsuario, status) {
     var instrucaoSql = `
          UPDATE usuario set statusUsuario = '${status}', dataAtualizacao = CURRENT_TIMESTAMP WHERE idUsuario = ${idUsuario};
     `
-    console.log("Execultando o comando: \n"+ instrucaoSql)
+    console.log("Execultando o comando: \n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
+function alterarDadoPerfil(nome, email, cpf, senha, dataNasc ,idUsuario){
+    var instrucaoSql = `
+        UPDATE usuario SET nome = '${nome}', email = '${email}', cpf = '${cpf}', dataNascimento = '${dataNasc}', senha = '${senha}', dataAtualizacao = CURRENT_TIMESTAMP WHERE idUsuario = ${idUsuario};
+    `
+    console.log("Execultando o comando: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
 }
 
@@ -92,6 +112,8 @@ module.exports = {
     listarColaboradoresCadastrados,
     cadastrarColaborador,
     listarColaboradoresEmpresa,
-    alterarStatusUsuario
+    alterarStatusUsuario,
+    buscarUsuarioPorId,
+    alterarDadoPerfil
 };
 
