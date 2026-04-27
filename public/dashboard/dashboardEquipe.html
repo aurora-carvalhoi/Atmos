@@ -30,7 +30,7 @@
 
 <body>
 
- <nav class="sidebar" id="siderbar">
+  <nav class="sidebar" id="siderbar">
     <div class="logo-container">
       <a href="./dashboardAtmos.html" class="logo">
         <div class="cicle"></div>
@@ -171,7 +171,7 @@
     </div>
 
   </nav>
-  
+
 
 
   <main class="container">
@@ -195,9 +195,9 @@
         </div>
         <div class="acoes">
 
-          <button class="btn-azul">
-            <img src="../assets/images/icones/export.svg" alt="export icon">
-            EXPORTAR
+          <button class="btn-azul" onclick="adicionarUsuario()">
+            <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">
+            ADICIONAR
           </button>
         </div>
       </div>
@@ -300,7 +300,7 @@
         <!-- Titulo e subtitulo -->
         <div>
           <h2>Inativar Usuario</h2>
-          <span class="subTitulo">Inativar o usuario :NOME: da equipe
+          <span class="subTitulo">Inativar o usuario da equipe
           </span>
         </div>
       </header>
@@ -331,7 +331,7 @@
         <!-- Titulo e subtitulo -->
         <div>
           <h2>Ativar Usuario</h2>
-          <span class="subTitulo">Desativar o usuario :NOME: da equipe
+          <span class="subTitulo">Desativar o usuario da equipe
           </span>
         </div>
       </header>
@@ -362,14 +362,11 @@
   <!-- Modal Editar Usuario -->
   <div class="fundoModal" id="modalEditarPerfil">
     <div class="modal modalUsuario modalEditar">
-      <!-- Topo do modal -->
       <header>
-        <!-- Titulo e subtitulo -->
         <div>
-          <h2>Detalhes do Servidor</h2>
-          <span class="subTitulo">Servidor | SRV-PROD-01</span>
+          <h2>Atualizar usuário</h2>
+          <span class="subTitulo">Atualizar dados do contribuidor da equipe</span>
         </div>
-        <!-- botão de sair -->
         <div>
           <button onclick="fecharModal(3)">
             X
@@ -388,25 +385,39 @@
           </div>
         </div>
         <div class="dados-gerais dados-gerais-form">
+          <label style="display: none;">
+            <span class="titulo">ID USUARIO</span>
+            <input type="text" id="input_id_usuario" value="" placeholder="geraldo@atmos.com">
+          </label>
           <label class="w-75">
             <span class="titulo">E-MAIL</span>
             <input type="text" id="input_email" value="" placeholder="geraldo@atmos.com">
           </label>
           <label class="w-25">
-            <span class="titulo">CONTATO</span>
-            <input type="text" id="input_contato" value="" placeholder="+55 11 98989-6969">
-          </label>
-          <label class="w-33">
-            <span class="titulo">NOME</span>
-            <input type="text" id="input_nome" value="" placeholder="Geraldo Atmos">
-          </label>
-          <label class="w-33">
             <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
             <input type="text" id="input_doc_indentificacao" value="" placeholder="000.000.000-01">
           </label>
-          <label class="w-33">
+          <label class="w-75">
+            <span class="titulo">NOME</span>
+            <input type="text" id="input_nome" value="" placeholder="Geraldo Atmos">
+          </label>
+
+          <label class="w-25">
             <span class="titulo">DATA DE NASCIMENTO</span>
             <input type="date" id="input_data_nasc" value="">
+          </label>
+          <label class="w-50">
+            <span class="titulo">TIPO DE ACESSO</span>
+            <select id="select_tipo_acesso">
+              <option value="Gestor">Gestor</option>
+              <option value="Funcionario" selected>Contribuidor</option>
+            </select>
+          </label>
+          <label class="w-50">
+            <span class="titulo">SUPERVISOR</span>
+            <select id="select_supervisor">
+              <option value="NULL" selected>Não vincular</option>
+            </select>
           </label>
 
         </div>
@@ -416,7 +427,96 @@
             <button class="btn-branco" onclick="fecharModal(2)">
               Cancelar
             </button>
-            <button class="btn-azul" onclick="alterarDados ()">
+            <button class="btn-azul" onclick="alterarDados(2)">
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fundoModal" id="modalAdicionar">
+    <div class="modal modalUsuario modalEditar">
+      <header>
+        <div>
+          <h2>Adicionar usuários</h2>
+          <span class="subTitulo">Adicionar novo contribuidor para a equipe</span>
+        </div>
+        <div>
+          <button onclick="fecharModal(4)">
+            X
+          </button>
+        </div>
+      </header>
+      <div class="conteudo-usuario">
+        <div class="dados-perfil">
+          <div class="usuario">
+            <div class="perfil">
+              AT
+            </div>
+            <div>
+              <h1>Novo Usuário</h1>
+            </div>
+          </div>
+        </div>
+        <div class="dados-gerais dados-gerais-form">
+
+          <label class="w-50">
+            <span class="titulo">E-MAIL</span>
+            <input type="text" id="input_cad_email" value="" placeholder="geraldo@atmos.com">
+          </label>
+
+          <label class="w-50">
+            <span class="titulo">NOME</span>
+            <input type="text" id="input_cad_nome" value="" placeholder="Geraldo Atmos">
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+            <input type="text" id="input_cad_doc_indentificacao" value="" placeholder="000.000.000-01">
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">SENHA PROVISÓRIA</span>
+            <input type="text" id="input_cad_data_nasc" value="" placeholder="Atmos@123*">
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">DATA DE NASCIMENTO</span>
+            <input type="date" id="input_cad_data_nasc" value="">
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">TIPO DE ACESSO</span>
+            <select id="select_cad_tipo_acesso">
+              <option value="Gestor">Gestor</option>
+              <option value="Funcionario" selected>Contribuidor</option>
+            </select>
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">SUPERVISOR</span>
+            <select id="select_cad_supervisor">
+            </select>
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">STATUS</span>
+            <select id="select_cad_status">
+              <option value="Ativo" selected>Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+          </label>
+
+        </div>
+        <div class="acoesModal">
+          <div></div>
+          <div style="display: flex;">
+            <button class="btn-branco" onclick="fecharModal(2)">
+              Cancelar
+            </button>
+            <button class="btn-azul" onclick="alterarDados(2)">
               Confirmar
             </button>
           </div>
@@ -442,7 +542,7 @@
     data: {
       labels: ['Gestor', 'Analista'],
       datasets: [{
-        label: '# of Votes',
+        label: 'Quantidade',
         data: [6, 28],
         borderWidth: 1,
         backgroundColor: ["#00367A", "#0093CA"]
@@ -513,13 +613,17 @@
     }
   )
 
-
+  function graficoDistribuicao(qtdGestor, qtdAnalista) {
+    var graficoDistribuicao = Chart.getChart('distribuicaoUsuarios')
+    graficoDistribuicao.data.datasets[0].data[0] = qtdGestor
+    graficoDistribuicao.data.datasets[0].data[1] = qtdAnalista
+    graficoDistribuicao.update()
+  }
 
 </script>
 
 <!-- modal -->
 <script>
-
   function desativarUsuario(idUsuario) {
     var modal = document.getElementById('modalDesativarUsuario')
     modal.style.display = 'flex'
@@ -548,6 +652,7 @@
         var etiquetaAcesso = ''
         var etiquetaStatus = ''
         var nomeSuperior = ''
+        var buttonAtualizar = ''
         if (usuario.tipoUsuario == 'Gestor') {
           etiquetaAcesso = `etiqueta-azul`
         } else {
@@ -559,10 +664,15 @@
         } else {
           etiquetaStatus = `etiqueta-vermelha`
         }
-        if(usuario.nomeSupevisor != null){
+        if (usuario.nomeSupevisor != null) {
           nomeSuperior = usuario.nomeSupevisor
-        }else{
+        } else {
           nomeSuperior = "Não possui"
+        }
+        if (usuario.nome != sessionStorage.NOME_USUARIO) {
+          buttonAtualizar = `
+          <button class="btn-azul" onclick="editarPerfil()"> Alterar dados </button>
+          `
         }
         var modalDetalhe =
           `
@@ -626,34 +736,117 @@
             <div class="acoesModal">
               <p>Última atualização:${new Date(usuario.dataAtualizacao).toLocaleString('pt-BR')}</p>
               <input type="text" style="display: none;">
-              <button class="btn-azul" onclick="editarPerfil(${usuario.idUsuario}, ${posicaoUsuario})" >
-                Alterar dados
-              </button>
+              ${buttonAtualizar}
             </div>
           </div>
         </div>
         `
-
         var modal = document.getElementById("modalDetalhesPerfil")
         modal.style.display = 'flex'
         modal.innerHTML = modalDetalhe
 
+        var superiores = '<option value="NULL" Selected>Não vincular</option>'
+        for (var i = 0; i < usuarios.length; i++) {
+          if (usuarios[i].tipoUsuario == 'Gestor' && usuarios[i].nome != usuario.nome) {
+            superiores += `
+            <option value="${usuarios[i].idUsuario}" selected>${usuarios[i].nome}</option>
+            `
+          }
+        }
+        input_id_usuario.value = usuario.idUsuario
+        input_email.value = usuario.email
+        input_nome.value = usuario.nome
+        input_doc_indentificacao.value = usuario.cpf
+        select_supervisor.innerHTML = superiores
       });
   }
 
-  function editarPerfil(id) {
+  function editarPerfil() {
     var modal = document.getElementById("modalEditarPerfil")
     modal.style.display = 'flex'
+  }
+
+  function alterarDados() {
+    var idUsuario = document.getElementById('input_id_usuario').value
+    var email = document.getElementById('input_email').value
+    var docIndentificacao = document.getElementById('input_doc_indentificacao').value
+    var nome = document.getElementById('input_nome').value
+    var dataNasc = document.getElementById('input_data_nasc').value
+    var tipoAcesso = document.getElementById('select_tipo_acesso').value
+    var fkSupervisor = document.getElementById('select_supervisor').value
+
+    if (
+      idUsuario == null ||
+      email == null ||
+      docIndentificacao == null ||
+      nome == null ||
+      dataNasc == null ||
+      tipoAcesso == null ||
+      fkSupervisor == null
+    ) {
+      console.log('Erro')
+    } else {
+      fetch('/usuarios/atualizarDadosContribuidor', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          idUsuarioServer: idUsuario,
+          emailServer: email,
+          docIndentificacaoServer: docIndentificacao,
+          nomeServer: nome,
+          dataNascServer: dataNasc,
+          tipoAcessoServer: tipoAcesso,
+          fkSupervisorServer: fkSupervisor
+        })
+      })
+        .then(resposta => {
+          console.log(resposta)
+          if (resposta.ok) {
+            resposta.json().then((json) => {
+              console.log('OK')
+              fecharModal(2)
+              fecharModal(3)
+              listarUsuario()
+            });
+          } else {
+            console.log("Houve um erro ao atualizar os dados do usuario");
+            resposta.text().then(texto => {
+              console.error(texto);
+            });
+          }
+        }).catch(function (erro) {
+          console.log(erro);
+        })
+
+    }
+  }
+
+  function adicionarUsuario() {
+    var modalAdicionar = document.getElementById('modalAdicionar')
+    modalAdicionar.style.display = 'flex'
+  }
+
+  function cadastrar() {
+    // input_cad_email
+    // input_cad_nome
+    // input_cad_doc_indentificacao
+    // input_cad_data_nasc
+    // input_cad_data_nasc
+    // select_cad_tipo_acesso
+    // select_cad_supervisor
+    // select_cad_supervisor
   }
 
 </script>
 
 <!-- manipulação de usuario -->
 <script>
-
   async function listarUsuario() {
     var idEmpresa = sessionStorage.FKEMPRESA
     fetch(`/usuarios/listarColaboradoresEmpresa/${idEmpresa}`)
+    // select_cad_supervisor
       .then(function (res) {
         return res.json();
       })
@@ -666,12 +859,16 @@
         var tabelaColaboradoresCadastrados = "";
         var etiquetaAcesso = ''
         var etiquetaStatus = ''
+        var qtdGestor = 0
+        var qtdAnalista = 0
         for (var i = 0; i < usuarios.length; i++) {
           var usuario = usuarios[i]
           if (usuario.tipoUsuario == 'Gestor') {
             etiquetaAcesso = `etiqueta-azul`
+            qtdGestor++;
           } else {
             etiquetaAcesso = `etiqueta-laranja`
+            qtdAnalista++
           }
           if (usuario.statusUsuario == 'Ativo') {
             etiquetaStatus = `etiqueta-verde`
@@ -714,6 +911,7 @@
               </tr>
           `;
         }
+        graficoDistribuicao(qtdGestor, qtdAnalista)
         listaColaboradores.innerHTML = tabelaColaboradoresCadastrados;
       });
   }

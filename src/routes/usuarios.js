@@ -49,4 +49,9 @@ router.get("/buscarUsuarioPorId/:idUsuario", function(req, res){
 router.post("/alterarDadosPerfil", function(req, res){
     usuarioController.alterarDadosPerfil(req, res)
 })
+
+router.post("/atualizarDadosContribuidor", function(req, res){
+    usuarioController.atualizarDadosContribuidor(req, res)
+})
+
 module.exports = router;

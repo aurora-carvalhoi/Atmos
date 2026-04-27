@@ -278,7 +278,7 @@ function alterarDadosPerfil(req, res) {
     } else if (idUsuario == undefined) {
         res.status(400).send("idUsuario está undefined")
     } else {
-        usuarioModel.alterarDadoPerfil(nome, email, docIndentificacao, senha, dataNasc ,idUsuario)
+        usuarioModel.alterarDadoPerfil(nome, email, docIndentificacao, senha, dataNasc, idUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -296,6 +296,47 @@ function alterarDadosPerfil(req, res) {
 
 }
 
+function atualizarDadosContribuidor(req, res) {
+    var idUsuario = req.body.idUsuarioServer
+    var email = req.body.emailServer
+    var docIndentificacao = req.body.docIndentificacaoServer
+    var nome = req.body.nomeServer
+    var dataNasc = req.body.dataNascServer
+    var tipoAcesso = req.body.tipoAcessoServer
+    var fkSupervisor = req.body.fkSupervisorServer
+
+    if (idUsuario == undefined) {
+        res.status(400).send("ID usuario está undefined")
+    } else if (email == undefined) {
+        res.status(400).send("Email está undefined")
+    } else if (docIndentificacao == undefined) {
+        res.status(400).send("Documentacao está undefined")
+    } else if (nome == undefined) {
+        res.status(400).send("Nome está undefined")
+    } else if (dataNasc == undefined) {
+        res.status(400).send("Data Nascimento está undefined")
+    } else if (tipoAcesso == undefined) {
+        res.status(400).send("Tipo de acesso está undefined")
+    } else if (fkSupervisor == undefined) {
+        res.status(400).send("FK Superior está undefined")
+    } else {
+        usuarioModel.atualizarDadosContribuidor(nome, email, docIndentificacao, dataNasc, tipoAcesso, fkSupervisor, idUsuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao alterar os dados do perfil. Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage)
+                }
+            )
+    }
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -307,5 +348,6 @@ module.exports = {
     listarColaboradoresEmpresa,
     alterarStatusUsuario,
     buscarUsuarioPorId,
-    alterarDadosPerfil
+    alterarDadosPerfil,
+    atualizarDadosContribuidor
 }
