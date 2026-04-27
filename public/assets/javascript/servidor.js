@@ -7,7 +7,7 @@ const dataClient = await buscarClient()
 const ultimoValor = (dataClient.resumo.total_registros / dataClient.resumo.hosts_ativos) - 1
 
 // OverView
-function listarResulmoServidores() {
+function listarResumoServidores() {
   var servidores = ''
   var listaServidores = ''
   for (var i = 0; i < dataClient.resumo.hosts_ativos; i++) {
@@ -162,7 +162,7 @@ function listarServidor() {
                 <td>42h13min</td>
                 <td>
                   <button class="btn-detalhes" onclick="detalhesServidor(${i})">Detalhes</button>
-                  <button class="btn-remover" onclick="removerServidor(${i})">Remover</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(${i})">Remover</button> -->
                 </td>
               </tr>
         `
@@ -387,6 +387,6 @@ window.detalhesServidor = detalhesServidor
 window.removerServidor = removerServidor
 window.exibirGraficos = exibirGraficos
 export {
-  listarServidor, criarGraficos, listarResulmoServidores,
+  listarServidor, criarGraficos, listarResumoServidores,
   graficoResulmoServidores, trocarGrafico, trocarKpi, buscarServidorPorNome
 }

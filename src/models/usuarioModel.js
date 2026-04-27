@@ -103,6 +103,14 @@ function alterarDadoPerfil(nome, email, cpf, senha, dataNasc ,idUsuario){
     return database.executar(instrucaoSql)
 }
 
+function atualizarDadosContribuidor(nome, email, cpf, dataNasc, tipoAcesso, fkSupervisor, idUsuario){
+    var instrucaoSql = `
+        UPDATE usuario SET nome = '${nome}', email = '${email}', cpf = '${cpf}', dataNascimento = '${dataNasc}', tipoUsuario = '${tipoAcesso}', fkSuperior = '${fkSupervisor}', dataAtualizacao = CURRENT_TIMESTAMP WHERE idUsuario = ${idUsuario};
+    `
+    console.log("Execultando o comando: \n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     autenticar,
     cadastrarFuncionario,
@@ -114,6 +122,7 @@ module.exports = {
     listarColaboradoresEmpresa,
     alterarStatusUsuario,
     buscarUsuarioPorId,
-    alterarDadoPerfil
+    alterarDadoPerfil,
+    atualizarDadosContribuidor
 };
 
