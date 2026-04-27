@@ -8,8 +8,8 @@ body {
 
 /* Padrões */
 @media screen {
-    /* <span class="etiqueta etiqueta-amarela">● Atenção</span> */
 
+    /* <span class="etiqueta etiqueta-amarela">● Atenção</span> */
     .fundoModal {
         z-index: 999;
         position: fixed;
@@ -74,6 +74,28 @@ body {
         background-color: #FAE6E6;
         border-color: #d6060656;
         color: #D92629;
+    }
+
+    .kpi {
+        padding: 5px 10px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .kpi h4 {
+        text-align: start;
+    }
+
+    .kpi p {
+        font-size: 30px;
+        font-weight: 700;
+        color: #004AAD;
+    }
+
+    .kpi .kpi-vermelho {
+        color: red;
     }
 
 }
@@ -170,6 +192,33 @@ body {
         height: 100vh;
         z-index: 500;
     }
+
+    .menu-container-contribuidor {
+        background-color: var(--color-nav-contribuidor);
+    }
+
+    .menu-container-contribuidor span {
+        color: #fff;
+    }
+
+    .menu-container-contribuidor .area-contribuidor {
+        display: block;
+    }
+
+    .menu-container-contribuidor .area-gestor {
+        display: none;
+    }
+
+    .menu-container-gestor .area-gestor {
+        display: block;
+    }
+
+    .menu-container-gestor .area-contribuidor {
+        display: none;
+    }
+
+
+
 
     .container-menu {
         display: flex;
@@ -554,6 +603,30 @@ body {
         top: 0;
     }
 
+    .sidebar-contribuidor {
+        background-color: var(--color-nav-contribuidor);
+    }
+
+    .sidebar-contribuidor span {
+        color: white;
+    }
+
+    .sidebar-contribuidor .area-contribuidor {
+        display: block;
+    }
+
+    .sidebar-contribuidor .area-gestor {
+        display: none;
+    }
+
+    .sidebar-gestor .area-gestor {
+        display: block;
+    }
+
+    .sidebar-gestor .area-contribuidor {
+        display: none;
+    }
+
     .logo-container {
         padding: 30px 20px;
         border-bottom: solid 3px var(--color-blue1);
@@ -657,6 +730,7 @@ body {
 
     .menu-container {
         display: none;
+        background-color: #00367A;
     }
 
     header {

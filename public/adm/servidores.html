@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
+
 <body class="corpo-admin" onload="listarServidoresCadastrados(); listarEmpresas();">
   <div class="estrutura-admin">
     <aside class="menu-lateral">
@@ -41,7 +43,10 @@
             <div class="campo"><label>IP</label><input id="servidorIp" required></div>
             <div class="campo"><label>Sistema operacional</label><input id="servidorSo" required></div>
             <div class="campo"><label>Empresa</label><select id="select_fk_empresa" required></select></div>
-            <div class="campo"><label>Status</label><select id="servidorStatus"><option>Ativo</option><option>Inativo</option></select></div>
+            <div class="campo"><label>Status</label><select id="servidorStatus">
+                <option>Ativo</option>
+                <option>Inativo</option>
+              </select></div>
             <div class="campo inteiro"><label>Observações</label><textarea placeholder="Opcional"></textarea></div>
           </div>
           <div class="rodape-formulario">
@@ -98,20 +103,21 @@
 
   <script src="../assets/javascript/admin.js"></script>
 </body>
+
 </html>
 <script>
-  function listarServidoresCadastrados(){
-      fetch("/servidores/listarServidoresCadastrados").then(function(res){
-        return res.json();
-      }).then(function(servidores){
-        var listaServidores = document.getElementById("servidoresCadastrados");
-        if (servidores.length == 0){
-          listaServidores.innerHTML = "<p> Nenhum servidor cadastrado </p>"
-          return
-        }
-        var tabelaServidoresCadastrados = "";
-        for (var i = 0; i < servidores.length; i++){
-          tabelaServidoresCadastrados += `
+  function listarServidoresCadastrados() {
+    fetch("/servidores/listarServidoresCadastrados").then(function (res) {
+      return res.json();
+    }).then(function (servidores) {
+      var listaServidores = document.getElementById("servidoresCadastrados");
+      if (servidores.length == 0) {
+        listaServidores.innerHTML = "<p> Nenhum servidor cadastrado </p>"
+        return
+      }
+      var tabelaServidoresCadastrados = "";
+      for (var i = 0; i < servidores.length; i++) {
+        tabelaServidoresCadastrados += `
             <tr>
                 <td>${servidores[i].nomeIdentificacao}</td>
                 <td>${servidores[i].enderecoIPV4}</td>
@@ -120,12 +126,12 @@
                 <td><span class="etiqueta success">${servidores[i].statusServidor}</span></td>
               </tr>
           `
-        }
-        listaServidores.innerHTML = tabelaServidoresCadastrados;
-      })
-    }
+      }
+      listaServidores.innerHTML = tabelaServidoresCadastrados;
+    })
+  }
 
-    function listarEmpresas() {
+  function listarEmpresas() {
     var listaEmpresas =
       '<option value="0" selected disabled>Escolha a empresa</option>';
     var cont = 0;
@@ -150,41 +156,40 @@
       });
   }
 
-    function cadastrarServidor(){
+  function cadastrarServidor() {
+    var servidorNomeVar = servidorNome.value.trim()
+    var servidorIdentificacaoVar = servidorIdentificacao.value.trim()
+    var servidorIpVar = servidorIp.value.trim()
+    var servidorSoVar = servidorSo.value.trim()
+    var idEmpresaVar = select_fk_empresa.value;
+    var servidorStatusVar = servidorStatus.value
 
-      var servidorNomeVar = servidorNome.value.trim()
-      var servidorIdentificacaoVar = servidorIdentificacao.value.trim()
-      var servidorIpVar = servidorIp.value.trim()
-      var servidorSoVar = servidorSo.value.trim()
-      var idEmpresaVar = select_fk_empresa.value;
-      var servidorStatusVar = servidorStatus.value
+    const variaveisCadastroServidor = [
+      servidorNomeVar,
+      servidorIdentificacaoVar,
+      servidorIpVar,
+      servidorSoVar,
+      idEmpresaVar,
+      servidorStatusVar
+    ]
 
-      const variaveisCadastroServidor = [
-        servidorNomeVar,
-        servidorIdentificacaoVar,
-        servidorIpVar,
-        servidorSoVar,
-        idEmpresaVar,
-        servidorStatusVar
-      ]
+    if (isNuloOuVazio(variaveisCadastroServidor)) {
+      alert("Nenhum campo pode estar vazio!");
+    }
 
-      if(isNuloOuVazio(variaveisCadastroServidor)){
-        alert("Nenhum campo pode estar vazio!");
-      }
-
-      fetch("/servidores/cadastrarServidor", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          servidorNome: servidorNomeVar,
-          servidorIdentificacao: servidorIdentificacaoVar,
-          servidorIp: servidorIpVar,
-          servidorSo: servidorSoVar,
-          idEmpresaServer: idEmpresaVar,
-          servidorStatus: servidorStatusVar
-        })
+    fetch("/servidores/cadastrarServidor", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        servidorNome: servidorNomeVar,
+        servidorIdentificacao: servidorIdentificacaoVar,
+        servidorIp: servidorIpVar,
+        servidorSo: servidorSoVar,
+        idEmpresaServer: idEmpresaVar,
+        servidorStatus: servidorStatusVar
       })
-      .then(function (resposta){
+    })
+      .then(function (resposta) {
         if (resposta.ok) {
           limparFormulario();
           listarServidoresCadastrados();
@@ -194,13 +199,13 @@
           alert("Erro ao cadastrar servidor!")
         }
       })
-      .catch(function (resposta){
+      .catch(function (resposta) {
         console.log(`#Erro: ${resposta}`);
       })
-      return false;
-    }
+    return false;
+  }
 
-    function isNuloOuVazio(listaStrings) {
+  function isNuloOuVazio(listaStrings) {
     var retorno = false;
     listaStrings.forEach(
       (string) => (retorno = string == null || string == ""),
@@ -208,7 +213,7 @@
     return retorno;
   }
 
-  function limparFormulario(){
+  function limparFormulario() {
     servidorNome.value = "";
     servidorIdentificacao.value = "";
     servidorIp.value = "";

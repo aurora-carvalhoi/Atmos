@@ -21,6 +21,16 @@ function validarSessao() {
         nomeUsuario.innerHTML = nome;
         emailUsuario.innerHTML = email;
         imgUsuario.innerHTML = `<span style="font-weight: 600">${inciais}</span>`
+
+        var menu = document.getElementById('siderbar')
+        var menuMobile = document.getElementById('menu-mobile')
+        if(tipousuario == 'Gestor'){
+            menu.classList.add('sidebar-gestor')
+            menuMobile.classList.add('menu-container-gestor')  
+        }else{
+            menu.classList.add('sidebar-contribuidor')
+            menuMobile.classList.add('menu-container-contribuidor')  
+        }
         
     } else {
         window.location = "../login.html";
@@ -47,6 +57,14 @@ function finalizarAguardar(texto) {
         divErrosLogin.style.display = "flex";
         divErrosLogin.innerHTML = texto;
     }
+}
+
+function tipoMenu(){
+    var menu = ''
+    menu = `
+        
+
+    `
 }
 
 validarSessao()
