@@ -10,6 +10,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/css/admin.css" />
+    <script src="../assets/javascript/erros.js"></script>
   </head>
   <body class="corpo-admin" onload="listarColaboradoresCadastrados()">
     <div class="estrutura-admin">
@@ -215,7 +216,19 @@
     var statusVar = select_status.value;
     var senhaVar = input_senha.value;
 
-    const variaveisCadastroColaborador = [
+    if (nomeVar == "" ||
+    emailVar == "" ||
+    papelVar == "" ||
+    equipeVar == "" ||
+    cpfVar == "" ||
+    dataNascimentoVar == "" ||
+    idEmpresaVar == "" ||
+    statusVar == "" ||
+    senhaVar == ""){
+      mostrarErro("Por favor verifique os campos novamente e confira se todos estão preenchidos corretamente!");
+    }
+
+/*     const variaveisCadastroColaborador = [
       nomeVar,
       emailVar,
       papelVar,
@@ -231,8 +244,7 @@
       isNuloOuVazio(variaveisCadastroColaborador)
     ) {
       alert("Nenhum campo pode estar vazio!");
-    }
-
+    } */
     fetch("/usuarios/cadastrarColaborador", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -250,12 +262,12 @@
     })
       .then(function (resposta) {
         if (resposta.ok) {
+          mostrarSucesso("Colaborador cadastrado com sucesso!")
           limparFormulario();
           listarColaboradoresCadastrados();
-          alert("Colaborador cadastrado com sucesso!");
         } else {
           throw "Erro no cadastro de colaborador";
-          alert("Erro ao cadastrar colaborador");
+          mostrarErro("Erro ao cadastrar colaborador");
         }
       })
       .catch(function (resposta) {

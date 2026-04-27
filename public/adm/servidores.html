@@ -1,74 +1,118 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atmos | Servidores</title>
-  <link rel="icon" href="../assets/icons/favicon.ico" />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/admin.css">
-</head>
-<body class="corpo-admin" onload="listarServidoresCadastrados(); listarEmpresas();">
-  <div class="estrutura-admin">
-    <aside class="menu-lateral">
-      <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
-      <span class="titulo-menu">MENU</span>
-      <nav class="menu-nav">
-        <a href="index.html"><span class="ponto-nav"></span>Home</a>
-        <a href="empresas.html"><span class="ponto-nav"></span>Empresas</a>
-        <a href="colaboradores.html"><span class="ponto-nav"></span>Colaboradores</a>
-        <a href="servidores.html" class="active"><span class="ponto-nav"></span>Servidores</a>
-      </nav>
-      <div class="usuario-menu">
-        <div class="avatar-admin">G</div>
-        <div><strong>Geraldo Atmos</strong><br><small>geraldo_adm@atmos.com</small></div>
-      </div>
-    </aside>
-
-    <main class="conteudo-admin">
-      <div class="topo-admin">
-        <div>
-          <h1>Servidores</h1>
-        </div>
-      </div>
-
-      <section class="grade-dividida">
-        <div class="card-formulario">
-          <h3>Cadastrar servidor</h3>
-          <div class="grade-campos" style="margin-top:14px;">
-            <div class="campo"><label>Nome do host</label><input id="servidorNome" required></div>
-            <div class="campo"><label>Identificação</label><input id="servidorIdentificacao" required></div>
-            <div class="campo"><label>IP</label><input id="servidorIp" required></div>
-            <div class="campo"><label>Sistema operacional</label><input id="servidorSo" required></div>
-            <div class="campo"><label>Empresa</label><select id="select_fk_empresa" required></select></div>
-            <div class="campo"><label>Status</label><select id="servidorStatus"><option>Ativo</option><option>Inativo</option></select></div>
-            <div class="campo inteiro"><label>Observações</label><textarea placeholder="Opcional"></textarea></div>
-          </div>
-          <div class="rodape-formulario">
-            <button onclick="cadastrarServidor()" class="btn-admin">Salvar servidor</button>
-          </div>
-        </div>
-      </section>
-
-      <section style="margin-top:16px;" class="painel-tabela">
-        <div class="cabecalho-tabela">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atmos | Servidores</title>
+    <link rel="icon" href="../assets/icons/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/admin.css" />
+    <script src="../assets/javascript/erros.js"></script>
+  </head>
+  <body
+    class="corpo-admin"
+    onload="
+      listarServidoresCadastrados();
+      listarEmpresas();
+    "
+  >
+    <div class="estrutura-admin">
+      <aside class="menu-lateral">
+        <a class="logo-admin" href="index.html"
+          ><span class="ponto-logo"></span>ATMOS</a
+        >
+        <span class="titulo-menu">MENU</span>
+        <nav class="menu-nav">
+          <a href="index.html"><span class="ponto-nav"></span>Home</a>
+          <a href="empresas.html"><span class="ponto-nav"></span>Empresas</a>
+          <a href="colaboradores.html"
+            ><span class="ponto-nav"></span>Colaboradores</a
+          >
+          <a href="servidores.html" class="active"
+            ><span class="ponto-nav"></span>Servidores</a
+          >
+        </nav>
+        <div class="usuario-menu">
+          <div class="avatar-admin">G</div>
           <div>
-            <h2>Servidores cadastrados</h2>
+            <strong>Geraldo Atmos</strong><br /><small
+              >geraldo_adm@atmos.com</small
+            >
           </div>
         </div>
-        <div class="envolve-tabela">
-          <table class="tabela-admin">
-            <thead>
-              <tr>
-                <th>Servidor</th>
-                <th>IP</th>
-                <th>Sistema</th>
-                <th>Empresa</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="servidoresCadastrados">
-              <!-- <tr>
+      </aside>
+
+      <main class="conteudo-admin">
+        <div class="topo-admin">
+          <div>
+            <h1>Servidores</h1>
+          </div>
+        </div>
+
+        <section class="grade-dividida">
+          <div class="card-formulario">
+            <h3>Cadastrar servidor</h3>
+            <div class="grade-campos" style="margin-top: 14px">
+              <div class="campo">
+                <label>Nome do host</label><input id="servidorNome" required />
+              </div>
+              <div class="campo">
+                <label>Identificação</label
+                ><input id="servidorIdentificacao" required />
+              </div>
+              <div class="campo">
+                <label>IP</label><input id="servidorIp" required />
+              </div>
+              <div class="campo">
+                <label>Sistema operacional</label
+                ><input id="servidorSo" required />
+              </div>
+              <div class="campo">
+                <label>Empresa</label
+                ><select id="select_fk_empresa" required></select>
+              </div>
+              <div class="campo">
+                <label>Status</label
+                ><select id="servidorStatus">
+                  <option>Ativo</option>
+                  <option>Inativo</option>
+                </select>
+              </div>
+              <div class="campo inteiro">
+                <label>Observações</label
+                ><textarea placeholder="Opcional"></textarea>
+              </div>
+            </div>
+            <div class="rodape-formulario">
+              <button onclick="cadastrarServidor()" class="btn-admin">
+                Salvar servidor
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section style="margin-top: 16px" class="painel-tabela">
+          <div class="cabecalho-tabela">
+            <div>
+              <h2>Servidores cadastrados</h2>
+            </div>
+          </div>
+          <div class="envolve-tabela">
+            <table class="tabela-admin">
+              <thead>
+                <tr>
+                  <th>Servidor</th>
+                  <th>IP</th>
+                  <th>Sistema</th>
+                  <th>Empresa</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="servidoresCadastrados">
+                <!-- <tr>
                 <td>srv-api-clima-01</td>
                 <td>10.20.5.14</td>
                 <td>Ubuntu 24.04</td>
@@ -89,28 +133,30 @@
                 <td>Sky Pulse</td>
                 <td><span class="etiqueta info">Estável</span></td>
               </tr> -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-  </div>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
 
-  <script src="../assets/javascript/admin.js"></script>
-</body>
+    <script src="../assets/javascript/admin.js"></script>
+  </body>
 </html>
 <script>
-  function listarServidoresCadastrados(){
-      fetch("/servidores/listarServidoresCadastrados").then(function(res){
+  function listarServidoresCadastrados() {
+    fetch("/servidores/listarServidoresCadastrados")
+      .then(function (res) {
         return res.json();
-      }).then(function(servidores){
+      })
+      .then(function (servidores) {
         var listaServidores = document.getElementById("servidoresCadastrados");
-        if (servidores.length == 0){
-          listaServidores.innerHTML = "<p> Nenhum servidor cadastrado </p>"
-          return
+        if (servidores.length == 0) {
+          listaServidores.innerHTML = "<p> Nenhum servidor cadastrado </p>";
+          return;
         }
         var tabelaServidoresCadastrados = "";
-        for (var i = 0; i < servidores.length; i++){
+        for (var i = 0; i < servidores.length; i++) {
           tabelaServidoresCadastrados += `
             <tr>
                 <td>${servidores[i].nomeIdentificacao}</td>
@@ -119,13 +165,13 @@
                 <td>${servidores[i].razaoSocial}</td>
                 <td><span class="etiqueta success">${servidores[i].statusServidor}</span></td>
               </tr>
-          `
+          `;
         }
         listaServidores.innerHTML = tabelaServidoresCadastrados;
-      })
-    }
+      });
+  }
 
-    function listarEmpresas() {
+  function listarEmpresas() {
     var listaEmpresas =
       '<option value="0" selected disabled>Escolha a empresa</option>';
     var cont = 0;
@@ -150,57 +196,61 @@
       });
   }
 
-    function cadastrarServidor(){
+  function cadastrarServidor() {
+    var servidorNomeVar = servidorNome.value.trim();
+    var servidorIdentificacaoVar = servidorIdentificacao.value.trim();
+    var servidorIpVar = servidorIp.value.trim();
+    var servidorSoVar = servidorSo.value.trim();
+    var idEmpresaVar = select_fk_empresa.value;
+    var servidorStatusVar = servidorStatus.value;
 
-      var servidorNomeVar = servidorNome.value.trim()
-      var servidorIdentificacaoVar = servidorIdentificacao.value.trim()
-      var servidorIpVar = servidorIp.value.trim()
-      var servidorSoVar = servidorSo.value.trim()
-      var idEmpresaVar = select_fk_empresa.value;
-      var servidorStatusVar = servidorStatus.value
-
-      const variaveisCadastroServidor = [
-        servidorNomeVar,
-        servidorIdentificacaoVar,
-        servidorIpVar,
-        servidorSoVar,
-        idEmpresaVar,
-        servidorStatusVar
-      ]
-
-      if(isNuloOuVazio(variaveisCadastroServidor)){
-        alert("Nenhum campo pode estar vazio!");
+/*     const variaveisCadastroServidor = [
+      servidorNomeVar,
+      servidorIdentificacaoVar,
+      servidorIpVar,
+      servidorSoVar,
+      idEmpresaVar,
+      servidorStatusVar,
+    ]; */
+      if (servidorNomeVar == "" ||
+      servidorIdentificacaoVar == "" ||
+      servidorIpVar == "" ||
+      servidorSoVar == "" ||
+      idEmpresaVar == "" ||
+      servidorStatusVar == "") {
+        mostrarErro("Por favor verifique os campos novamente e confira se todos estão preenchidos corretamente!");
       }
 
-      fetch("/servidores/cadastrarServidor", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          servidorNome: servidorNomeVar,
-          servidorIdentificacao: servidorIdentificacaoVar,
-          servidorIp: servidorIpVar,
-          servidorSo: servidorSoVar,
-          idEmpresaServer: idEmpresaVar,
-          servidorStatus: servidorStatusVar
-        })
-      })
-      .then(function (resposta){
+    fetch("/servidores/cadastrarServidor", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        servidorNome: servidorNomeVar,
+        servidorIdentificacao: servidorIdentificacaoVar,
+        servidorIp: servidorIpVar,
+        servidorSo: servidorSoVar,
+        idEmpresaServer: idEmpresaVar,
+        servidorStatus: servidorStatusVar,
+      }),
+    })
+      .then(function (resposta) {
         if (resposta.ok) {
+          mostrarSucesso("Servidor cadastrado com sucesso!")
           limparFormulario();
           listarServidoresCadastrados();
-          alert("Servidor cadastrado com sucesso!")
         } else {
           throw "Erro de cadastro de servidor";
-          alert("Erro ao cadastrar servidor!")
+          mostrarErro("Erro ao cadastrar servidor");
+
         }
       })
-      .catch(function (resposta){
+      .catch(function (resposta) {
         console.log(`#Erro: ${resposta}`);
-      })
-      return false;
-    }
+      });
+    return false;
+  }
 
-    function isNuloOuVazio(listaStrings) {
+  function isNuloOuVazio(listaStrings) {
     var retorno = false;
     listaStrings.forEach(
       (string) => (retorno = string == null || string == ""),
@@ -208,7 +258,7 @@
     return retorno;
   }
 
-  function limparFormulario(){
+  function limparFormulario() {
     servidorNome.value = "";
     servidorIdentificacao.value = "";
     servidorIp.value = "";
