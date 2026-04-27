@@ -8,6 +8,7 @@
   <link rel="icon" href="../assets/icons/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/admin.css">
+    <script src="../assets/javascript/erros.js"></script>
 </head>
 
 <body class="corpo-admin" onload="listarEmpresasCadastradas();">
@@ -254,7 +255,37 @@
 }
 
 function cadastrarEmpresa() {
-    const dados = {
+  var varnome = input_nome.value;
+  var varresponsavel = input_responsavel.value;
+  var varcnpj = input_cnpj.value;
+  var varemail = input_email.value;
+  var vartelefone = input_telefone.value;
+  var varcep = input_cep.value;
+  var varlogradouro = input_logradouro.value;
+  var varbairro = input_bairro.value;
+  var varcidade = input_cidade.value;
+  var varuf = input_uf.value;
+  var varnumero = input_numero.value;
+  var varstatus = select_status.value;
+  var varddi = "55";
+
+  if (varnome == "" ||
+    varresponsavel == "" ||
+    varcnpj == "" ||
+    varemail == "" ||
+    vartelefone == "" ||
+    varcep == "" ||
+    varlogradouro == "" ||
+    varbairro == "" ||
+    varcidade == "" ||
+    varuf == "" ||
+    varnumero == "" ||
+    varstatus == ""
+  ){
+    mostrarErro("Por favor verifique os campos novamente e confira se todos estão preenchidos corretamente!");
+  }
+  
+  const dados = {
         nome: input_nome.value,
         responsavel: input_responsavel.value,
         cnpj: input_cnpj.value.replace(/\D/g, ""),
@@ -272,7 +303,6 @@ function cadastrarEmpresa() {
     };
 
     if (!dados.nome || !dados.cnpj || !dados.cep) {
-        alert("Preencha os campos essenciais!");
         return;
     }
 
@@ -283,8 +313,14 @@ function cadastrarEmpresa() {
     })
     .then(res => {
         if (res.ok) {
-            alert("Empresa cadastrada com sucesso!");
-            location.reload(); 
+          mostrarSucesso("Empresa cadastrada com sucesso!");
+          setTimeout(function () {
+              const popup = document.getElementById("companyModal");
+              if (popup) popup.remove();
+            }, 2500);
+        } else {
+            mostrarErro("Erro ao cadastrar empresa!");
+            return;
         }
     });
 }
