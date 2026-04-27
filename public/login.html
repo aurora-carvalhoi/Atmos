@@ -112,7 +112,6 @@
                 console.log(resposta)
                 if (resposta.ok) {
                     console.log(resposta);
-
                     resposta.json().then((json) => {
                         console.log(json);
 
@@ -124,19 +123,24 @@
                         sessionStorage.STATUS_USUARIO = json.statusUsuario;
                         sessionStorage.TIPO_USUARIO = json.tipoUsuario;
                         if (json.tipoUsuario == 'Gestor') {
+                            mostrarSucessoDash(`
+                            Login realizado com sucesso! <br>
+                            Bem Vindo, Gestor`)
+
                             setTimeout(function () {
                                 window.location = "./dashboard/dashboardAtmosGerente.html";
-                            }, 1000); 
+                            }, 2500); 
                         } else {
+                            mostrarSucessoDash(`Login realizado com sucesso! <br> Bem Vindo!`)
                             setTimeout(function () {
                                 window.location = "./dashboard/dashboardAtmos.html";
-                            }, 1000); // apenas para exibir o loading
+                            }, 2500); // apenas para exibir o loading
                         }
 
                     });
 
                 } else {
-                    mostrarErro("Erro ao realizar login! Verifique suas credencias");
+                    mostrarErroDash("Erro ao realizar login! Verifique suas credencias");
                     console.log("Houve um erro ao tentar realizar o login!");
                     resposta.text().then(texto => {
                         console.error(texto);
