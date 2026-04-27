@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Servidor</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardServidores.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardRelatorios.css">
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+    <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+
+</head>
+
+<body>
+    <nav class="sidebar" id="siderbar">
+        <div class="logo-container">
+            <a href="./dashboardAtmos.html" class="logo">
+                <div class="cicle"></div>
+                <span>ATMOS</span>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <ul>
+                <li class="nav-category">
+                    <span>PRINCIPAL</span>
+                </li>
+                <li class="nav-item area-contribuidor">
+                    <a href="./dashboardAtmos.html">
+                        <img src="../assets/images/pc.svg" class="icon" alt="">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item area-gestor">
+                    <a href="./dashboardAtmosGerente.html">
+                        <img src="../assets/images/pc.svg" class="icon" alt="">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="./dashboardAlertas.html">
+                        <img src="../assets/images/alert.svg" class="icon" alt="">
+                        <span>Alertas</span>
+                    </a>
+                </li>
+                <li class="nav-item nav-item-active area-gestor">
+                    <a href="./dashboardRelatorios.html">
+                        <img src="../assets/images/documentos.svg" class="icon" alt="">
+                        <span>Relatorios</span>
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li class="nav-category">
+                    <span>INFRAESTRUTURA</span>
+                </li>
+                <li class="nav-item">
+                    <a href="./dashboardServidor.html">
+                        <img src="../assets/images/server.svg" class="icon" alt="">
+                        <span>Servidores</span>
+                    </a>
+                </li>
+                <li class="nav-item area-gestor">
+                    <a href="./dashboardEquipe.html">
+                        <img src="../assets/images/user.svg" class="icon" alt="">
+                        <span>Equipe</span>
+                    </a>
+                </li>
+            </ul>
+        </ul>
+
+        <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
+            <div class="img-user" id="usarioimagem">
+                <img alt="A">
+            </div>
+            <div>
+                <h3><span id="usuarionome">usuário</span></h3>
+                <h5><span id="usuarioemail">email</span></h3>
+            </div>
+        </div>
+
+        <!--Menu mobile-->
+        <div class="menu" style="display: none" id="menu">
+            <div class="menu-container" id="menu-mobile">
+                <ul>
+                    <ul>
+                        <li class="nav-category">
+                            <span>PRINCIPAL</span>
+                        </li>
+                        <li class="nav-item area-contribuidor">
+                            <a href="./dashboardAtmos.html">
+                                <img src="../assets/images/pc.svg" class="icon" alt="">
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item area-gestor">
+                            <a href="./dashboardAtmosGerente.html">
+                                <img src="../assets/images/pc.svg" class="icon" alt="">
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./dashboardAlertas.html">
+                                <img src="../assets/images/alert.svg" class="icon" alt="">
+                                <span>Alertas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item-active area-gestor">
+                            <a href="./dashboardRelatorios.html">
+                                <img src="../assets/images/documentos.svg" class="icon" alt="">
+                                <span>Relatorios</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="nav-category">
+                            <span>INFRAESTRUTURA</span>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./dashboardServidor.html">
+                                <img src="../assets/images/server.svg" class="icon" alt="">
+                                <span>Servidores</span>
+                            </a>
+                        </li>
+                        <li class="nav-item area-gestor">
+                            <a href="./dashboardEquipe.html">
+                                <img src="../assets/images/user.svg" class="icon" alt="">
+                                <span>Equipe</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="nav-category">
+                            <span>Usuário</span>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="./dashboardPerfil.html">
+                                <img src="../assets/images/user.svg" class="icon" alt="">
+                                <span>Perfil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <!-- Menu Icon -->
+        <div class="container-menu">
+            <div class="menu-icon" id="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header>
+            <div class="infos">
+
+                <div class="screen-title">
+                    <ul class="breadcrumb">
+                        <li><a href="#">Principal</a></li>
+                        <li><a href="#"><span>Relatorios</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="screen-infos">
+                    <div><span></span>Sistema Operacional</div>
+                    <span id="dataSistema"></span>
+                </div>
+            </div>
+
+            <div class="tela">
+
+                <div>
+                    <h1>Dashboard de Relatorios</h1>
+                    <span>Historico de relatorios gerados da empresa</span>
+                </div>
+
+                <div class="acoes">
+                    <button class="btn-adicionar" onclick="adicionarServidor()">
+                        <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">
+                        NOVO SERVIDOR
+                    </button>
+                </div>
+
+            </div>
+        </header>
+        <!-- 
+        <section>
+            <div class="secao-kpis">
+                <div class="titulos-kpi">
+                    <h3>Visão Geral</h3>
+                    <h4>Informações Gerais</h4>
+                </div>
+                <div class="conjunto-kpis">
+                    <div class="kpi">
+                        <h4>Quantidade de servidores</h4>
+                        <p>6</p>
+                        <span>Total de servidores</span>
+                    </div>
+                    <div class="kpi">
+                        <h4>Servidores Ativos</h4>
+                        <p>6</p>
+                        <span>Servidores ativos</span>
+                    </div>
+                    <div class="kpi">
+                        <h4>Alertas</h4>
+                        <p class="kpi-vermelho">0</p>
+                        <span>Alertas atuais</span>
+                    </div>
+                    <div class="kpi">
+                        <h4>Incidentes Registrados</h4>
+                        <p class="kpi-vermelho">6</p>
+                        <span>Registrados no mês</span>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <section>
+            <div class="filtros-busca">
+                <div style="width: 100%;" class="barra-busca">
+                    <input style="width: 100%;" type="text" id="input_busca_por_nome"
+                        placeholder="Buscar servidor por nome ou ID...">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="tabela">
+                <h4>Lista de Servidores</h4>
+                <div class="tabela-servidores">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Data</th>
+                                <th>Tipo</th>
+                                <th>Responsavel</th>
+                                <th>Baixar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela_lista_servidor">
+                            <tr>
+                                <td>
+                                    <span>
+                                        RelatorioAtmos-26-04-2026-19-54.pdf
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>26/04/2026 19:54:30</span>
+                                </td>
+                                <td>
+                                    <span>Sistema</span>
+                                </td>
+                                <td>
+                                    <span>Sistema Atmos</span>
+                                </td>
+                                <td>
+                                    <button class="btn-detalhes" onclick="detalhesServidor()">Detalhes</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <div class="paginacao">
+                    <!-- <button>1</button>
+                    <button>2</button> -->
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
+<!-- Scripts Funcionais -->
+<script src="../assets/javascript/datetime.js"></script>
+<script src="../assets/javascript/menu.js"></script>
+<script src="../assets/javascript/sessao.js"></script>
+
+<script>
+</script>

@@ -1,0 +1,8 @@
+@import url("../dashboard.css");
+@import url("../default.css");
+
+@media screen {
+    table span{
+        font-weight: 500;
+    }
+}

@@ -4,14 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Servidor</title>
+
+  <!-- Title -->
+  <title>Dashboard - Atmos</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="../assets/css/dashboard.css">
-  <link rel="stylesheet" href="../assets/css/dashboard/dashboardAlertas.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardAtmos.css">
+
+  <!-- Script -->
+
+  <!-- Flavicon -->
   <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
-
-
-  <!-- ChartJS -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!--Google Fonts-->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -21,6 +25,16 @@
     href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
 
+  <!-- ChartJS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- HeatMap -->
+  <link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/plugins/LegendLite.min.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"></script>
 </head>
 
 <body>
@@ -37,19 +51,19 @@
         <li class="nav-category">
           <span>PRINCIPAL</span>
         </li>
-        <li class="nav-item area-contribuidor">
+        <li class="nav-item nav-item-active area-contribuidor">
           <a href="./dashboardAtmos.html">
             <img src="../assets/images/pc.svg" class="icon" alt="">
             <span>Home</span>
           </a>
         </li>
-        <li class="nav-item area-gestor">
+        <li class="nav-item nav-item-active area-gestor">
           <a href="./dashboardAtmosGerente.html">
             <img src="../assets/images/pc.svg" class="icon" alt="">
             <span>Home</span>
           </a>
         </li>
-        <li class="nav-item nav-item-active">
+        <li class="nav-item">
           <a href="./dashboardAlertas.html">
             <img src="../assets/images/alert.svg" class="icon" alt="">
             <span>Alertas</span>
@@ -99,19 +113,19 @@
             <li class="nav-category">
               <span>PRINCIPAL</span>
             </li>
-            <li class="nav-item area-contribuidor">
+            <li class="nav-item nav-item-active area-contribuidor">
               <a href="./dashboardAtmos.html">
                 <img src="../assets/images/pc.svg" class="icon" alt="">
                 <span>Home</span>
               </a>
             </li>
-            <li class="nav-item area-gestor">
+            <li class="nav-item nav-item-active area-gestor">
               <a href="./dashboardAtmosGerente.html">
                 <img src="../assets/images/pc.svg" class="icon" alt="">
                 <span>Home</span>
               </a>
             </li>
-            <li class="nav-item nav-item-active">
+            <li class="nav-item">
               <a href="./dashboardAlertas.html">
                 <img src="../assets/images/alert.svg" class="icon" alt="">
                 <span>Alertas</span>
@@ -165,75 +179,35 @@
     </div>
 
   </nav>
-  
   <main>
     <header>
       <div class="infos">
-
         <div class="screen-title">
           <ul class="breadcrumb">
             <li><a href="#">Principal</a></li>
-            <li><a href="#"><span>Alertas</span></a></li>
+            <li><a href="#"><span>Overview Gerente</span></a></li>
           </ul>
         </div>
-
         <div class="screen-infos">
           <div><span></span>Sistema Operacional</div>
           <span id="dataSistema"></span>
         </div>
       </div>
-
       <div class="tela">
-
         <div>
-          <h1>Alertas do Sistema</h1>
-          <span>Visualização das ultimas ocorrencias do sistema</span>
+          <h1>Dashboard de Monitoramento</h1>
+          <span>Visão consolidada da Infraestrutura em tempo real</span>
+        </div>
+        <div class="acoes">
+
+          <button class="btn-azul">
+            <img src="../assets/images/icones/export.svg" alt="export icon">
+            EXPORTAR
+          </button>
         </div>
       </div>
     </header>
 
-    <section>
-      <div class="secao-kpis">
-        <div class="titulos-kpi">
-          <h3>Legenda de Alerta</h3>
-          <h4>Informalçoes sobre as categorias</h4>
-        </div>
-        <div class="conjunto-kpis">
-          <div class="kpi alerta alerta-auto">
-            <h4>Alto</h5>
-              <span>Alertas que tem grande impacto no servidor, risco de interrução inesperada</span>
-          </div>
-          <div class="kpi alerta alerta-medio">
-            <h4>Médio</h4>
-            <span>Alertas que tem grande impacto no servidor, risco de travamento ou instabilidades</span>
-          </div>
-          <div class="kpi alerta alerta-baixo">
-            <h4>Baixo</h4>
-            <span>Alerta de monitoramento, os parametros do servidor servidor estão na zona de risco</span>
-          </div>
-          <div class="kpi alerta alerta-atualizacao">
-            <h4>Atualização</h4>
-            <span>Aviso sobre adição, alteração ou remoção de usuários ou servidores do sistema</span>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="card-alerta alerta-medio">
-          <h4>CPU: SRV-PROD-02</h4>
-          <span>CPU do servidor SRV-PROD-02 está em 80%, alto risco para o sistema</span>
-          <p>23/04/2026</p>
-        </div>
-        <div class="card-alerta alerta-auto">
-          <h4>Disco: SRV-PROD-02</h4>
-          <span>Disco do servidor: SRV-PROD-02 está em 98%, baixa capacidade de armazenamento no sistemas</span>
-          <p>23/04/2026</p>
-        </div>
-
-      </div>
-    </section>
-  </main>
 </body>
 
 </html>
@@ -241,8 +215,3 @@
 <script src="../assets/javascript/datetime.js"></script>
 <script src="../assets/javascript/menu.js"></script>
 <script src="../assets/javascript/sessao.js"></script>
-
-<script>
-  usuarionome.innerHTML = sessionStorage.NOME_USUARIO
-  usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
-</script>

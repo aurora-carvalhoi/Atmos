@@ -30,7 +30,7 @@
 
 <body>
 
-  <nav class="sidebar">
+ <nav class="sidebar" id="siderbar">
     <div class="logo-container">
       <a href="./dashboardAtmos.html" class="logo">
         <div class="cicle"></div>
@@ -43,16 +43,28 @@
         <li class="nav-category">
           <span>PRINCIPAL</span>
         </li>
-        <li class="nav-item">
+        <li class="nav-item area-contribuidor">
           <a href="./dashboardAtmos.html">
             <img src="../assets/images/pc.svg" class="icon" alt="">
-            <span>Overview</span>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardAtmosGerente.html">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Home</span>
           </a>
         </li>
         <li class="nav-item">
           <a href="./dashboardAlertas.html">
             <img src="../assets/images/alert.svg" class="icon" alt="">
             <span>Alertas</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardRelatorios.html">
+            <img src="../assets/images/documentos.svg" class="icon" alt="">
+            <span>Relatorios</span>
           </a>
         </li>
       </ul>
@@ -66,7 +78,7 @@
             <span>Servidores</span>
           </a>
         </li>
-        <li class="nav-item  nav-item-active">
+        <li class="nav-item nav-item-active area-gestor">
           <a href="./dashboardEquipe.html">
             <img src="../assets/images/user.svg" class="icon" alt="">
             <span>Equipe</span>
@@ -87,22 +99,34 @@
 
     <!--Menu mobile-->
     <div class="menu" style="display: none" id="menu">
-      <div class="menu-container">
+      <div class="menu-container" id="menu-mobile">
         <ul>
           <ul>
             <li class="nav-category">
               <span>PRINCIPAL</span>
             </li>
-            <li class="nav-item ">
+            <li class="nav-item area-contribuidor">
               <a href="./dashboardAtmos.html">
                 <img src="../assets/images/pc.svg" class="icon" alt="">
-                <span>Overview</span>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardAtmosGerente.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Home</span>
               </a>
             </li>
             <li class="nav-item">
               <a href="./dashboardAlertas.html">
                 <img src="../assets/images/alert.svg" class="icon" alt="">
                 <span>Alertas</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardRelatorios.html">
+                <img src="../assets/images/documentos.svg" class="icon" alt="">
+                <span>Relatorios</span>
               </a>
             </li>
           </ul>
@@ -116,7 +140,7 @@
                 <span>Servidores</span>
               </a>
             </li>
-            <li class="nav-item  nav-item-active">
+            <li class="nav-item nav-item-active area-gestor">
               <a href="./dashboardEquipe.html">
                 <img src="../assets/images/user.svg" class="icon" alt="">
                 <span>Equipe</span>
@@ -147,6 +171,9 @@
     </div>
 
   </nav>
+  
+
+
   <main class="container">
     <header>
       <div class="infos">
@@ -404,6 +431,7 @@
 <!-- Scripts Funcionais -->
 <script src="../assets/javascript/datetime.js"></script>
 <script src="../assets/javascript/menu.js"></script>
+<script src="../assets/javascript/sessao.js"></script>
 
 <!-- Graficos -->
 <script>
@@ -677,7 +705,7 @@
                   <span class="etiqueta ${etiquetaStatus}">● ${usuario.statusUsuario}</span>
                 </td>
                 <td>
-                  <span>${usuario.dataCadastro}</span>
+                  <span>${new Date(usuario.dataCadastro).toLocaleDateString('pt-BR')}</span>
                 </td>
                 <td>
                   <button class="btn-detalhes" onclick="detalhes(${i})">Detalhes</button>

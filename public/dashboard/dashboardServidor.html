@@ -23,7 +23,7 @@
 </head>
 
 <body>
-  <nav class="sidebar">
+  <nav class="sidebar" id="siderbar">
     <div class="logo-container">
       <a href="./dashboardAtmos.html" class="logo">
         <div class="cicle"></div>
@@ -36,16 +36,28 @@
         <li class="nav-category">
           <span>PRINCIPAL</span>
         </li>
-        <li class="nav-item">
+        <li class="nav-item area-contribuidor">
           <a href="./dashboardAtmos.html">
             <img src="../assets/images/pc.svg" class="icon" alt="">
-            <span>Overview</span>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardAtmosGerente.html">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Home</span>
           </a>
         </li>
         <li class="nav-item">
           <a href="./dashboardAlertas.html">
             <img src="../assets/images/alert.svg" class="icon" alt="">
             <span>Alertas</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardRelatorios.html">
+            <img src="../assets/images/documentos.svg" class="icon" alt="">
+            <span>Relatorios</span>
           </a>
         </li>
       </ul>
@@ -59,7 +71,7 @@
             <span>Servidores</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item area-gestor">
           <a href="./dashboardEquipe.html">
             <img src="../assets/images/user.svg" class="icon" alt="">
             <span>Equipe</span>
@@ -80,22 +92,34 @@
 
     <!--Menu mobile-->
     <div class="menu" style="display: none" id="menu">
-      <div class="menu-container">
+      <div class="menu-container" id="menu-mobile">
         <ul>
           <ul>
             <li class="nav-category">
               <span>PRINCIPAL</span>
             </li>
-            <li class="nav-item nav-item-active">
+            <li class="nav-item area-contribuidor">
               <a href="./dashboardAtmos.html">
                 <img src="../assets/images/pc.svg" class="icon" alt="">
-                <span>Overview</span>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardAtmosGerente.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Home</span>
               </a>
             </li>
             <li class="nav-item">
               <a href="./dashboardAlertas.html">
                 <img src="../assets/images/alert.svg" class="icon" alt="">
                 <span>Alertas</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardRelatorios.html">
+                <img src="../assets/images/documentos.svg" class="icon" alt="">
+                <span>Relatorios</span>
               </a>
             </li>
           </ul>
@@ -109,10 +133,10 @@
                 <span>Servidores</span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item area-gestor">
               <a href="./dashboardEquipe.html">
                 <img src="../assets/images/user.svg" class="icon" alt="">
-                <span>Usuários</span>
+                <span>Equipe</span>
               </a>
             </li>
           </ul>
@@ -138,7 +162,6 @@
         <span></span>
       </div>
     </div>
-
   </nav>
 
   <main>
@@ -182,10 +205,26 @@
           <h4>Informações Gerais</h4>
         </div>
         <div class="conjunto-kpis">
-          <div class="kpi"></div>
-          <div class="kpi"></div>
-          <div class="kpi"></div>
-          <div class="kpi"></div>
+          <div class="kpi">
+            <h4>Quantidade de servidores</h4>
+            <p>6</p>
+            <span>Total de servidores</span>
+          </div>
+          <div class="kpi">
+            <h4>Servidores Ativos</h4>
+            <p>6</p>
+            <span>Servidores ativos</span>
+          </div>
+          <div class="kpi">
+            <h4>Alertas</h4>
+            <p class="kpi-vermelho">0</p>
+            <span>Alertas atuais</span>
+          </div>
+          <div class="kpi">
+            <h4>Incidentes Registrados</h4>
+            <p class="kpi-vermelho">6</p>
+            <span>Registrados no mês</span>
+          </div>
         </div>
       </div>
     </section>
@@ -402,17 +441,13 @@
         <div class="infosCad">
           <h3>Detalhes Técnicos</h3>
           <div class="inputs">
-            <label class="w-30">
+            <label class="w-50">
               <span>Sistema Operacional</span>
               <input id="input_sistema_operacional" type="text" placeholder="Ubuntu 22.04">
             </label>
-            <label class="w-30">
+            <label class="w-50">
               <span>Endereco de IPV4</span>
               <input id="input_endereco_ipv4" type="text" placeholder="10.0.1.10">
-            </label>
-            <label class="w-30">
-              <span>Endereco de IPV6</span>
-              <input id="input_endereco_ipv6" type="text" placeholder="2001:0DB8:AD1F:25E2:CADE:CAFE:F0CA:84C1">
             </label>
           </div>
         </div>
@@ -464,6 +499,7 @@
 <!-- Scripts Funcionais -->
 <script src="../assets/javascript/datetime.js"></script>
 <script src="../assets/javascript/menu.js"></script>
+<script src="../assets/javascript/sessao.js"></script>
 
 
 <script type="module">
@@ -490,13 +526,70 @@
     modal.style.display = 'flex'
   }
 
-
   function cancerCadServidor() {
     input_nome_identificacao.value = ''
     input_numero_identificacao.value = ''
     input_sistema_operacional.value = ''
     input_endereco_ipv4.value = ''
-    input_endereco_ipv6.value = ''
     fecharModal(1)
   }
+
+  function cadastrarServidor() {
+    var servidorNomeVar = input_nome_identificacao.value.trim()
+    var servidorIdentificacaoVar = input_numero_identificacao.value.trim()
+    var servidorIpVar = input_endereco_ipv4.value.trim()
+    var servidorSoVar = input_sistema_operacional.value.trim()
+    var idEmpresaVar = sessionStorage.FKEMPRESA;
+    var servidorStatusVar = 'Ativo'
+
+    const variaveisCadastroServidor = [
+      servidorNomeVar,
+      servidorIdentificacaoVar,
+      servidorIpVar,
+      servidorSoVar,
+      idEmpresaVar,
+      servidorStatusVar
+    ]
+
+    if (isNuloOuVazio(variaveisCadastroServidor)) {
+      alert("Nenhum campo pode estar vazio!");
+    }
+
+    fetch("/servidores/cadastrarServidor", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        servidorNome: servidorNomeVar,
+        servidorIdentificacao: servidorIdentificacaoVar,
+        servidorIp: servidorIpVar,
+        servidorSo: servidorSoVar,
+        idEmpresaServer: idEmpresaVar,
+        servidorStatus: servidorStatusVar
+      })
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          cancerCadServidor();
+          alert("Servidor cadastrado com sucesso!")
+          window.location.reload()
+        } else {
+          throw "Erro de cadastro de servidor";
+          alert("Erro ao cadastrar servidor!")
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#Erro: ${resposta}`);
+      })
+    return false;
+  }
+
+  function isNuloOuVazio(listaStrings) {
+    var retorno = false;
+    listaStrings.forEach(
+      (string) => (retorno = string == null || string == ""),
+    );
+    return retorno;
+  }
+
+
 </script>
