@@ -1,4 +1,5 @@
 // sessão
+
 function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
@@ -8,9 +9,14 @@ function validarSessao() {
     var status = sessionStorage.STATUS_USUARIO;
     var tipousuario = sessionStorage.TIPO_USUARIO
 
+
     var nomeUsuario = document.getElementById("usuarionome");
     var emailUsuario = document.getElementById('usuarioemail')
     var imgUsuario = document.getElementById('usarioimagem')
+
+    if(status == "Inativo"){
+       window.location = "../login.html";
+    }
 
     if (email != null && nome != null ||
         tipo != null && empresa != null ||
@@ -66,5 +72,4 @@ function tipoMenu(){
 
     `
 }
-
 validarSessao()

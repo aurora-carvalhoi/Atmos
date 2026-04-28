@@ -185,7 +185,7 @@
         <div class="screen-title">
           <ul class="breadcrumb">
             <li><a href="#">Principal</a></li>
-            <li><a href="#"><span>Overview Gerente</span></a></li>
+            <li><a href="#"><span>Overview Gestor</span></a></li>
           </ul>
         </div>
         <div class="screen-infos">
@@ -193,14 +193,14 @@
           <span id="dataSistema"></span>
         </div>
       </div>
+
       <div class="tela">
         <div>
-          <h1>Dashboard de Monitoramento</h1>
-          <span>Visão consolidada da Infraestrutura em tempo real</span>
+          <h1>Home do Gestor</h1>
+          <span>Leitura executiva da equipe, alertas e relatórios usando os dados reais da empresa</span>
         </div>
         <div class="acoes">
-
-          <button class="btn-azul">
+          <button class="btn-azul" id="btn_exportar_painel" type="button">
             <img src="../assets/images/icones/export.svg" alt="export icon">
             EXPORTAR
           </button>
@@ -212,40 +212,92 @@
       <div class="secao-kpis">
         <div class="titulos-kpi">
           <h3>Visão Geral</h3>
-          <h4>Informações Gerais</h4>
+          <h4>Resumo da equipe carregado da API</h4>
         </div>
-        <div class="conjunto-kpis">
-          <div class="kpi">
-            <h4>Membros da Equipe</h4>
-            <p id="kpi_1"></p>
-            <span>Membros Ativos</span>
+        <div class="conjunto-kpis" id="kpis_gestor"></div>
+      </div>
+    </section>
+
+    <section class="grade-principal">
+      <div class="painel painel-alertas">
+        <div class="cabecalho-painel">
+          <div>
+            <h3>Alertas</h3>
+            <span>Exceções que pedem atenção imediata</span>
           </div>
-          <div class="kpi">
-            <h4>Membros da Equipe</h4>
-            <p id="kpi_2" class="kpi-vermelho"></p>
-            <span>Membros inativados</span>
+        </div>
+        <div class="lista-alertas" id="lista_alertas_gestor"></div>
+      </div>
+
+      <div class="painel painel-relatorios">
+        <div class="cabecalho-painel cabecalho-painel-flex">
+          <div>
+            <h3>Relatórios</h3>
+            <span>Recorte por período com exportação CSV</span>
           </div>
-          <div class="kpi">
-            <h4>Membros Adicionados</h4>
-            <p id="kpi_3"></p>
-            <span>Ultimo mês</span>
+          <div class="acoes-painel">
+            <select id="filtro_relatorios" class="filtro-relatorios">
+              <option value="7">Últimos 7 dias</option>
+              <option value="15">Últimos 15 dias</option>
+              <option value="30" selected>Últimos 30 dias</option>
+              <option value="90">Últimos 90 dias</option>
+            </select>
+            <button class="btn-secundario" id="btn_exportar_relatorios" type="button">Baixar CSV</button>
           </div>
-          <div class="kpi">
-            <h4>Supervisores</h4>
-            <p id="kpi_4"></p>
-            <span>Vinculados</span>
-          </div>
+        </div>
+
+        <div class="tabela-wrap">
+          <table class="tabela-relatorio">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Tipo</th>
+                <th>Status</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody id="tabela_relatorios_gestor"></tbody>
+          </table>
         </div>
       </div>
     </section>
 
+    <section class="grade-secundaria">
+      <div class="painel painel-heatmap">
+        <div class="cabecalho-painel">
+          <div>
+            <h3>Mapa de atividade</h3>
+            <span>Volume diário com base nas datas reais de cadastro e atualização</span>
+          </div>
+        </div>
+        <div class="heatmap-rodape">
+          <div class="heatmap" id="heatmap_gestor"></div>
+          <div class="heatmap-legenda">
+            <span>Baixo</span>
+            <span>Médio</span>
+            <span>Alto</span>
+          </div>
+        </div>
+      </div>
 
-    <section>
-      <div class="card"></div>
-      <div class="card"></div>
+      <div class="painel painel-equipe">
+        <div class="cabecalho-painel">
+          <div>
+            <h3>Resumo da equipe</h3>
+            <span>Cartões compactos com o status atual</span>
+          </div>
+        </div>
+        <div class="grade-equipe" id="lista_equipe_cards"></div>
+      </div>
     </section>
 
+    <div class="erro-painel" id="dashboard_erro"></div>
   </main>
+</body>
+
+  
+  </html>
 </body>
 
 </html>
