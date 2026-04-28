@@ -122,6 +122,12 @@
                         sessionStorage.FKEMPRESA = json.fkEmpresa;
                         sessionStorage.STATUS_USUARIO = json.statusUsuario;
                         sessionStorage.TIPO_USUARIO = json.tipoUsuario;
+                        if (json.statusUsuario == "Inativo"){
+                            mostrarErroDash(`Usuario Inativo! <br> Contate um superior.`)
+                            return;
+                        }
+
+
                         if (json.tipoUsuario == 'Gestor') {
                             mostrarSucessoDash(`
                             Login realizado com sucesso! <br>
