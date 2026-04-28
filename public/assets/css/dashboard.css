@@ -57,6 +57,13 @@ body {
         color: #0349A7;
     }
 
+    .etiqueta-roxo,
+    .etiqueta-roxa {
+        background-color: #f1e6fa;
+        border-color: #7f06d653;
+        color: #7603a7;
+    }
+
     .etiqueta-laranja {
         background-color: #FAEFE6;
         border-color: #D6800638;

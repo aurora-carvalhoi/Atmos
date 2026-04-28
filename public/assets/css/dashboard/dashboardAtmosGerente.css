@@ -3,459 +3,503 @@
 
 @media screen {
 
-  .section-kpis {
-    display: block;
-    margin-bottom: 1rem;
-  }
+    .section-kpis {
+        display: block;
+        margin-bottom: 1rem;
+    }
 
-  .secao-kpis {
-    display: flex;
-    flex-direction: column;
-    gap: .9rem;
-  }
+    .secao-kpis {
+        display: flex;
+        flex-direction: column;
+        gap: .9rem;
+    }
 
-  .conjunto-kpis {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: .8rem;
-  }
+    .conjunto-kpis {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .8rem;
+    }
 
-  .kpi {
-    min-width: 0;
-    width: auto;
-    height: auto;
-    background: #f9f8fd;
-    border: 1px solid #e7ebf1;
-    border-radius: 12px;
-    padding: .9rem 1rem;
-    box-shadow: none;
-  }
+    .kpi {
+        min-width: 0;
+        width: auto;
+        background: #f9f8fd;
+        border: 1px solid #e7ebf1;
+        border-radius: 12px;
+        padding: .9rem 1rem;
+        box-shadow: none;
+    }
 
-  .kpi h4 {
-    margin: 0;
-    color: #4f5f77;
-    font-size: 13px;
-    font-weight: 600;
-  }
+    .kpi h4 {
+        margin: 0;
+        color: #4f5f77;
+        font-size: 13px;
+        font-weight: 600;
+    }
 
-  .kpi p {
-    margin: .45rem 0 .2rem;
-    font-size: 28px;
-    line-height: 1;
-  }
+    .kpi p {
+        margin: .45rem 0 .2rem;
+        font-size: 28px;
+        line-height: 1;
+    }
 
-  .kpi span {
-    color: var(--color-opaque);
-    font-size: 12px;
-  }
+    .kpi span {
+        color: var(--color-opaque);
+        font-size: 12px;
+    }
 
-  .grade-principal,
-  .grade-secundaria {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .painel {
-    background: #fff;
-    border: 1px solid #ebeff5;
-    border-radius: 14px;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
-    padding: 1rem 1rem 1.1rem;
-    min-width: 0;
-  }
-
-  .cabecalho-painel {
-    margin-bottom: .9rem;
-  }
-
-  .cabecalho-painel-flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: .75rem;
-  }
-
-  .cabecalho-painel h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #004aad;
-  }
-
-  .cabecalho-painel span {
-    display: block;
-    margin-top: .2rem;
-    color: var(--color-opaque);
-    font-size: 13px;
-  }
-
-  .acoes-painel {
-    display: flex;
-    align-items: center;
-    gap: .65rem;
-    flex-wrap: wrap;
-  }
-
-  .btn-secundario {
-    height: 36px;
-    padding: 0 .9rem;
-    border-radius: 10px;
-    border: 1px solid #dbe4f3;
-    background: #f3f7ff;
-    color: #004aad;
-    font-weight: 700;
-    cursor: pointer;
-  }
-
-  .filtro-relatorios {
-    height: 36px;
-    min-width: 140px;
-    padding: 0 .7rem;
-    border-radius: 10px;
-    border: 1px solid #dbe4f3;
-    background: #fff;
-    color: #2d3f5c;
-    font-weight: 600;
-  }
-
-  .lista-alertas {
-    display: grid;
-    gap: .75rem;
-  }
-
-  .alerta-card {
-    border-radius: 12px;
-    border: 1px solid #e8edf4;
-    background: #fbfcfe;
-    padding: .9rem 1rem;
-  }
-
-  .alerta-topo {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: .4rem;
-  }
-
-  .badge-alerta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
-    font-size: 11px;
-    font-weight: 800;
-    padding: .25rem .55rem;
-    letter-spacing: .03em;
-  }
-
-  .badge-high {
-    background: #fde8e8;
-    color: #b42029;
-    border: 1px solid #f7c6c6;
-  }
-
-  .badge-medium {
-    background: #fff1e3;
-    color: #c96e00;
-    border: 1px solid #ffd8b0;
-  }
-
-  .badge-low {
-    background: #eef9ee;
-    color: #2f7d46;
-    border: 1px solid #cfe9d4;
-  }
-
-  .badge-info {
-    background: #eaf1ff;
-    color: #004aad;
-    border: 1px solid #cfe0ff;
-  }
-
-  .alerta-card h4 {
-    margin: 0 0 .25rem;
-    font-size: 15px;
-    color: #162033;
-  }
-
-  .alerta-card p {
-    margin: 0;
-    color: var(--color-opaque);
-    font-size: 13px;
-    line-height: 1.45;
-  }
-
-  .tabela-wrap {
-    overflow-x: auto;
-  }
-
-  .tabela-relatorio {
-    width: 100%;
-    min-width: 760px;
-    border-collapse: collapse;
-  }
-
-  .tabela-relatorio th,
-  .tabela-relatorio td {
-    text-align: left;
-    padding: .85rem .55rem;
-    border-bottom: 1px solid #edf1f6;
-    vertical-align: middle;
-  }
-
-  .tabela-relatorio th {
-    color: #5a6782;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-  }
-
-  .tabela-relatorio td span {
-    color: #243042;
-  }
-
-  .nome-pessoa {
-    display: flex;
-    flex-direction: column;
-    gap: .15rem;
-  }
-
-  .nome-pessoa strong {
-    font-size: 14px;
-    color: #162033;
-  }
-
-  .nome-pessoa small {
-    color: var(--color-opaque);
-  }
-
-  .etiqueta-status {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
-    padding: .24rem .55rem;
-    font-size: 11px;
-    font-weight: 700;
-    border: 1px solid transparent;
-  }
-
-  .status-ativo {
-    background: #eaf8ee;
-    color: #2f7d46;
-    border-color: #cfe9d4;
-  }
-
-  .status-inativo {
-    background: #fde8e8;
-    color: #b42029;
-    border-color: #f3c1c1;
-  }
-
-  .status-pendente {
-    background: #fff1e3;
-    color: #c96e00;
-    border-color: #ffd8b0;
-  }
-
-  .grade-secundaria {
-    grid-template-columns: 0.9fr 1.1fr;
-    align-items: start;
-  }
-
-  .heatmap-rodape {
-    display: flex;
-    flex-direction: column;
-    gap: .8rem;
-  }
-
-  .heatmap {
-    display: grid;
-    grid-template-columns: repeat(10, minmax(0, 1fr));
-    gap: .45rem;
-  }
-
-  .heatmap-dia {
-    min-height: 42px;
-    border-radius: 10px;
-    border: 1px solid #e6ebf2;
-    background: #f7f9fc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: #637089;
-  }
-
-  .heatmap-dia[data-nivel="1"] { background: #edf3ff; color: #2d5cb8; }
-  .heatmap-dia[data-nivel="2"] { background: #dce8ff; color: #1f4fa8; }
-  .heatmap-dia[data-nivel="3"] { background: #bfd2ff; color: #143c86; }
-  .heatmap-dia[data-nivel="4"] { background: #8fb1ff; color: #fff; }
-  .heatmap-dia[data-nivel="5"] { background: #578fff; color: #fff; }
-
-  .heatmap-legenda {
-    display: flex;
-    align-items: center;
-    gap: .8rem;
-    color: var(--color-opaque);
-    font-size: 12px;
-    flex-wrap: wrap;
-  }
-
-  .heatmap-legenda span {
-    display: inline-flex;
-    align-items: center;
-    gap: .35rem;
-  }
-
-  .heatmap-legenda span::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: 3px;
-    background: #f7f9fc;
-    border: 1px solid #e6ebf2;
-    display: inline-block;
-  }
-
-  .heatmap-legenda span:nth-child(2)::before { background: #dce8ff; border-color: #dce8ff; }
-  .heatmap-legenda span:nth-child(3)::before { background: #8fb1ff; border-color: #8fb1ff; }
-
-  .grade-equipe {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .75rem;
-  }
-
-  .cartao-equipe {
-    border: 1px solid #ebeff5;
-    border-radius: 12px;
-    background: #fff;
-    padding: .9rem;
-  }
-
-  .cartao-topo {
-    display: flex;
-    gap: .75rem;
-    align-items: center;
-    margin-bottom: .65rem;
-  }
-
-  .avatar {
-    width: 46px;
-    height: 46px;
-    border-radius: 14px;
-    background: #e6efff;
-    color: #004aad;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-  }
-
-  .cartao-topo h4 {
-    margin: 0;
-    color: #162033;
-    font-size: 15px;
-  }
-
-  .cartao-topo span {
-    display: block;
-    margin-top: .2rem;
-    color: var(--color-opaque);
-    font-size: 12px;
-  }
-
-  .cartao-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .45rem;
-    margin-bottom: .7rem;
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 999px;
-    padding: .25rem .55rem;
-    font-size: 11px;
-    font-weight: 700;
-  }
-
-  .badge-gestor {
-    background: #e6e7fa;
-    color: #0349a7;
-  }
-
-  .badge-analista {
-    background: #faefe6;
-    color: #d77706;
-  }
-
-  .badge-ativo {
-    background: #eaf8ee;
-    color: #2f7d46;
-  }
-
-  .badge-inativo {
-    background: #fde8e8;
-    color: #b42029;
-  }
-
-  .cartao-meta {
-    display: grid;
-    gap: .32rem;
-    color: var(--color-opaque);
-    font-size: 12px;
-    line-height: 1.35;
-  }
-
-  .erro-painel {
-    display: none;
-    margin-top: 1rem;
-    padding: .9rem 1rem;
-    border-radius: 12px;
-    border: 1px solid #f3c1c1;
-    background: #fff7f7;
-    color: #9d2026;
-  }
-
-  @media screen and (max-width: 1180px) {
-    .conjunto-kpis,
     .grade-principal,
-    .grade-secundaria,
-    .grade-equipe {
-      grid-template-columns: 1fr;
+    .grade-secundaria {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
     }
 
-    .heatmap {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+    .painel {
+        background: #fff;
+        border: 1px solid #ebeff5;
+        border-radius: 14px;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+        padding: 1rem 1rem 1.1rem;
+        min-width: 0;
+        height: 400px;
+        overflow-x: auto;
     }
-  }
 
-  @media screen and (max-width: 760px) {
-    main {
-      padding: 0 0.8rem 1rem;
-    }
-
-    .conjunto-kpis,
-    .grade-principal,
-    .grade-secundaria,
-    .grade-equipe {
-      grid-template-columns: 1fr;
+    .cabecalho-painel {
+        margin-bottom: .9rem;
     }
 
     .cabecalho-painel-flex {
-      flex-direction: column;
-      align-items: flex-start;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .75rem;
+    }
+
+    .cabecalho-painel h3 {
+        margin: 0;
+        font-size: 18px;
+        color: #004aad;
+    }
+
+    .cabecalho-painel span {
+        display: block;
+        margin-top: .2rem;
+        color: var(--color-opaque);
+        font-size: 13px;
+    }
+
+    .acoes-painel {
+        display: flex;
+        align-items: center;
+        gap: .65rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-secundario {
+        height: 36px;
+        padding: 0 .9rem;
+        border-radius: 10px;
+        border: 1px solid #dbe4f3;
+        background: #f3f7ff;
+        color: #004aad;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .filtro-relatorios {
+        height: 36px;
+        min-width: 140px;
+        padding: 0 .7rem;
+        border-radius: 10px;
+        border: 1px solid #dbe4f3;
+        background: #fff;
+        color: #2d3f5c;
+        font-weight: 600;
+    }
+
+    .lista-alertas {
+        display: grid;
+        flex-wrap: wrap;
+        gap: .75rem;
+    }
+
+    .alerta-card {
+        border-radius: 12px;
+        border: 1px solid #e8edf4;
+        background: #fbfcfe;
+        padding: .9rem 1rem;
+    }
+
+    .alerta-topo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: .4rem;
+    }
+
+    .badge-alerta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 800;
+        padding: .25rem .55rem;
+        letter-spacing: .03em;
+    }
+
+    .badge-high {
+        background: #fde8e8;
+        color: #b42029;
+        border: 1px solid #f7c6c6;
+    }
+
+    .badge-medium {
+        background: #fff1e3;
+        color: #c96e00;
+        border: 1px solid #ffd8b0;
+    }
+
+    .badge-low {
+        background: #eef9ee;
+        color: #2f7d46;
+        border: 1px solid #cfe9d4;
+    }
+
+    .badge-info {
+        background: #eaf1ff;
+        color: #004aad;
+        border: 1px solid #cfe0ff;
+    }
+
+    .alerta-card h4 {
+        margin: 0 0 .25rem;
+        font-size: 15px;
+        color: #162033;
+    }
+
+    .alerta-card p {
+        margin: 0;
+        color: var(--color-opaque);
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .tabela-wrap {
+        overflow-x: auto;
+    }
+
+    .tabela-relatorio {
+        width: 100%;
+        min-width: 760px;
+        border-collapse: collapse;
+    }
+
+    .tabela-relatorio th,
+    .tabela-relatorio td {
+        text-align: left;
+        padding: .85rem .55rem;
+        border-bottom: 1px solid #edf1f6;
+        vertical-align: middle;
+    }
+
+    .tabela-relatorio th {
+        color: #5a6782;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+    }
+
+    /* .tabela-relatorio td span {
+        color: #243042;
+    } */
+
+    .nome-pessoa {
+        display: flex;
+        flex-direction: column;
+        gap: .15rem;
+    }
+
+    .nome-pessoa strong {
+        font-size: 14px;
+        color: #162033;
+    }
+
+    .nome-pessoa small {
+        color: var(--color-opaque);
+    }
+
+    .etiqueta-status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: .24rem .55rem;
+        font-size: 11px;
+        font-weight: 700;
+        border: 1px solid transparent;
+    }
+
+    .status-ativo {
+        background: #eaf8ee;
+        color: #2f7d46;
+        border-color: #cfe9d4;
+    }
+
+    .status-inativo {
+        background: #fde8e8;
+        color: #b42029;
+        border-color: #f3c1c1;
+    }
+
+    .status-pendente {
+        background: #fff1e3;
+        color: #c96e00;
+        border-color: #ffd8b0;
+    }
+
+    .grade-secundaria {
+        grid-template-columns: 0.9fr 1.1fr;
+        align-items: start;
+    }
+
+    .heatmap-rodape {
+        display: flex;
+        flex-direction: column;
+        gap: .8rem;
+        align-items: center;
+    }
+
+    .heatmap-rodape text {
+        font-size: 15px;
+    }
+
+    .heatmap-legenda {
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+        color: var(--color-opaque);
+        font-size: 12px;
+        flex-wrap: wrap;
+    }
+
+    .heatmap-legenda span {
+        display: inline-flex;
+        align-items: center;
+        gap: .35rem;
+    }
+
+    .heatmap-legenda span::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        background: #f7f9fc;
+        border: 1px solid #e6ebf2;
+        display: inline-block;
+    }
+
+    .heatmap-legenda span:nth-child(2)::before {
+        background: #dce8ff;
+        border-color: #dce8ff;
+    }
+
+    .heatmap-legenda span:nth-child(3)::before {
+        background: #8fb1ff;
+        border-color: #8fb1ff;
+    }
+
+    .grade-equipe {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .75rem;
+    }
+
+    .cartao-equipe {
+        border: 1px solid #ebeff5;
+        border-radius: 12px;
+        background: #fff;
+        padding: .9rem;
+    }
+
+    .cartao-topo {
+        display: flex;
+        gap: .75rem;
+        align-items: center;
+        margin-bottom: .65rem;
+    }
+
+    .avatar {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: #e6efff;
+        color: #004aad;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+    }
+
+    .cartao-topo h4 {
+        margin: 0;
+        color: #162033;
+        font-size: 15px;
+    }
+
+    .cartao-topo span {
+        display: block;
+        margin-top: .2rem;
+        color: var(--color-opaque);
+        font-size: 12px;
+    }
+
+    .cartao-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .45rem;
+        margin-bottom: .7rem;
+    }
+
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: .25rem .55rem;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .badge-gestor {
+        background: #e6e7fa;
+        color: #0349a7;
+    }
+
+    .badge-analista {
+        background: #faefe6;
+        color: #d77706;
+    }
+
+    .badge-ativo {
+        background: #eaf8ee;
+        color: #2f7d46;
+    }
+
+    .badge-inativo {
+        background: #fde8e8;
+        color: #b42029;
+    }
+
+    .cartao-meta {
+        display: grid;
+        gap: .32rem;
+        color: var(--color-opaque);
+        font-size: 12px;
+        line-height: 1.35;
+    }
+
+    .erro-painel {
+        display: none;
+        margin-top: 1rem;
+        padding: .9rem 1rem;
+        border-radius: 12px;
+        border: 1px solid #f3c1c1;
+        background: #fff7f7;
+        color: #9d2026;
+    }
+
+    .legende-heatmap {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 250px;
+    }
+
+    .card-alerta {
+        width: 100%;
+        min-height: 80px;
+        margin-bottom: 5px;
+        border: solid 2px;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+
+    .card-alerta h4 {
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    .card-alerta span,
+    .card-alerta p {
+        color: var(--color-opaque2);
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .alerta-auto {
+        color: #C5373E;
+        background-color: #FDE8E8;
+        border-color: #C5373E40;
+    }
+
+    .alerta-medio {
+        color: #D77706;
+        background-color: #FFE8DE;
+        border-color: #D7770635;
+    }
+
+    .alerta-baixo {
+        color: #dfbc1e;
+        background-color: #FFF3DD;
+        border-color: #FDD83540;
+    }
+
+    .alerta-atualizacao {
+        color: #0349A7;
+        background-color: #ddedff;
+        border-color: #0349A750;
+    }
+
+}
+
+@media screen and (max-width: 1180px) {
+
+    .conjunto-kpis,
+    .grade-principal,
+    .grade-secundaria,
+    .grade-equipe {
+        grid-template-columns: 1fr;
     }
 
     .heatmap {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-columns: repeat(6, minmax(0, 1fr));
     }
-  }
+}
+
+@media screen and (max-width: 760px) {
+    main {
+        padding: 0 0.8rem 1rem;
+    }
+
+    .conjunto-kpis,
+    .grade-principal,
+    .grade-secundaria,
+    .grade-equipe {
+        grid-template-columns: 1fr;
+    }
+
+    .cabecalho-painel-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .heatmap {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
 }
