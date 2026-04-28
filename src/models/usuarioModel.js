@@ -95,7 +95,7 @@ function alterarStatusUsuario(idUsuario, status) {
     return database.executar(instrucaoSql)
 }
 
-function alterarDadoPerfil(nome, email, cpf, senha, dataNasc ,idUsuario){
+function alterarDadoPerfil(nome, email, cpf, senha, dataNasc, idUsuario) {
     var instrucaoSql = `
         UPDATE usuario SET nome = '${nome}', email = '${email}', cpf = '${cpf}', dataNascimento = '${dataNasc}', senha = '${senha}', dataAtualizacao = CURRENT_TIMESTAMP WHERE idUsuario = ${idUsuario};
     `
@@ -103,10 +103,16 @@ function alterarDadoPerfil(nome, email, cpf, senha, dataNasc ,idUsuario){
     return database.executar(instrucaoSql)
 }
 
-function atualizarDadosContribuidor(nome, email, cpf, dataNasc, tipoAcesso, fkSupervisor, idUsuario){
-    var instrucaoSql = `
-        UPDATE usuario SET nome = '${nome}', email = '${email}', cpf = '${cpf}', dataNascimento = '${dataNasc}', tipoUsuario = '${tipoAcesso}', fkSuperior = '${fkSupervisor}', dataAtualizacao = CURRENT_TIMESTAMP WHERE idUsuario = ${idUsuario};
-    `
+function atualizarDadosContribuidor(nome, email, cpf, dataNasc, tipoAcesso, fkSupervisor, idUsuario) {
+    if (fkSupervisor == 'NULL') {
+        var instrucaoSql = `
+            UPDATE usuario SET nome = '${nome}', email = '${email}', cpf = '${cpf}', dataNascimento = '${dataNasc}', tipoUsuario = '${tipoAcesso}', fkSuperior = ${fkSupervisor}, dataAtualizacao = CURRENT_TIMESTAMP WHERE idUsuario = ${idUsuario};
+        `
+    } else {
+        var instrucaoSql = `
+            UPDATE usuario SET nome = '${nome}', email = '${email}', cpf = '${cpf}', dataNascimento = '${dataNasc}', tipoUsuario = '${tipoAcesso}', fkSuperior = '${fkSupervisor}', dataAtualizacao = CURRENT_TIMESTAMP WHERE idUsuario = ${idUsuario};
+        `
+    }
     console.log("Execultando o comando: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
 }
