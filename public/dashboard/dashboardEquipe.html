@@ -210,10 +210,26 @@
           <h4>Informações Gerais</h4>
         </div>
         <div class="conjunto-kpis">
-          <div class="kpi"></div>
-          <div class="kpi"></div>
-          <div class="kpi"></div>
-          <div class="kpi"></div>
+          <div class="kpi">
+            <h4>Membros da Equipe</h4>
+            <p id="kpi_1"></p>
+            <span>Membros Ativos</span>
+          </div>
+          <div class="kpi">
+            <h4>Membros da Equipe</h4>
+            <p id="kpi_2" class="kpi-vermelho"></p>
+            <span>Membros inativados</span>
+          </div>
+          <div class="kpi">
+            <h4>Membros Adicionados</h4>
+            <p id="kpi_3"></p>
+            <span>Ultimo mês</span>
+          </div>
+          <div class="kpi">
+            <h4>Supervisores</h4>
+            <p id="kpi_4"></p>
+            <span>Vinculados</span>
+          </div>
         </div>
       </div>
     </section>
@@ -479,7 +495,7 @@
 
           <label class="w-33">
             <span class="titulo">SENHA PROVISÓRIA</span>
-            <input type="text" id="input_cad_data_nasc" value="" placeholder="Atmos@123*">
+            <input type="text" id="input_cad_senha" value="" placeholder="Atmos@123*">
           </label>
 
           <label class="w-33">
@@ -496,8 +512,11 @@
           </label>
 
           <label class="w-33">
-            <span class="titulo">SUPERVISOR</span>
-            <select id="select_cad_supervisor">
+            <span class="titulo">SETOR</span>
+            <select id="select_cad_setor">
+              <option value="Dados">Dados</option>
+              <option value="Infraestrutura">Infraestrutura</option>
+              <option value="TI">TI</option>
             </select>
           </label>
 
@@ -513,10 +532,10 @@
         <div class="acoesModal">
           <div></div>
           <div style="display: flex;">
-            <button class="btn-branco" onclick="fecharModal(2)">
+            <button class="btn-branco" onclick="fecharModal(4)">
               Cancelar
             </button>
-            <button class="btn-azul" onclick="alterarDados(2)">
+            <button class="btn-azul" onclick="cadastrar(4)">
               Confirmar
             </button>
           </div>
@@ -749,7 +768,7 @@
         for (var i = 0; i < usuarios.length; i++) {
           if (usuarios[i].tipoUsuario == 'Gestor' && usuarios[i].nome != usuario.nome) {
             superiores += `
-            <option value="${usuarios[i].idUsuario}" selected>${usuarios[i].nome}</option>
+            <option value="${usuarios[i].idUsuario}">${usuarios[i].nome}</option>
             `
           }
         }
@@ -829,15 +848,69 @@
   }
 
   function cadastrar() {
-    // input_cad_email
-    // input_cad_nome
-    // input_cad_doc_indentificacao
-    // input_cad_data_nasc
-    // input_cad_data_nasc
-    // select_cad_tipo_acesso
-    // select_cad_supervisor
-    // select_cad_supervisor
+    var nomeVar = input_cad_nome.value.trim();
+    var emailVar = input_cad_email.value.trim();
+    var cpfVar = input_cad_doc_indentificacao.value.trim();
+    var dataNascimentoVar = input_cad_data_nasc.value.trim();
+    var idEmpresaVar = sessionStorage.FKEMPRESA;
+    var statusVar = select_cad_status.value;
+    var papelVar = select_cad_tipo_acesso.value.trim();
+    var senhaVar = input_cad_senha.value;
+    var equipeVar = select_cad_setor.value;
+
+    if (nomeVar == "" ||
+      emailVar == "" ||
+      papelVar == "" ||
+      equipeVar == "" ||
+      cpfVar == "" ||
+      dataNascimentoVar == "" ||
+      idEmpresaVar == "" ||
+      statusVar == "" ||
+      senhaVar == "") {
+      mostrarErro("Por favor verifique os campos novamente e confira se todos estão preenchidos corretamente!");
+    }
+    fetch("/usuarios/cadastrarColaborador", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        papelServer: papelVar,
+        equipeServer: equipeVar,
+        cpfServer: cpfVar,
+        dataNascimentoServer: dataNascimentoVar,
+        idEmpresaServer: idEmpresaVar,
+        statusServer: statusVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          fecharModal(4)
+          limparFormulario();
+          listarUsuario()
+        } else {
+          throw "Erro no cadastro de colaborador";
+          mostrarErro("Erro ao cadastrar colaborador");
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#Erro: ${resposta}`);
+      });
+    return false;
   }
+
+  function limparFormulario() {
+    input_cad_nome.value = ''
+    input_cad_email.value = ''
+    input_cad_doc_indentificacao.value = ''
+    input_cad_data_nasc.value = ''
+    select_cad_status.value = ''
+    select_cad_tipo_acesso.value = ''
+    input_cad_senha.value = ''
+    select_cad_setor.value = ''
+  }
+
 
 </script>
 
@@ -846,7 +919,6 @@
   async function listarUsuario() {
     var idEmpresa = sessionStorage.FKEMPRESA
     fetch(`/usuarios/listarColaboradoresEmpresa/${idEmpresa}`)
-    // select_cad_supervisor
       .then(function (res) {
         return res.json();
       })
@@ -861,11 +933,29 @@
         var etiquetaStatus = ''
         var qtdGestor = 0
         var qtdAnalista = 0
+
+        // KPI
+        var totalMembrosAtivos = 0
+        var totalMembrosInativos = 0
+        var membrosAdicionados = 0
+        var supervisor = []
+        var qtdSupervisor = 0
         for (var i = 0; i < usuarios.length; i++) {
           var usuario = usuarios[i]
+          var dataAtual = new Date()
+          if (new Date(usuario.dataCadastro).getMonth() == dataAtual.getMonth() &&
+            new Date(usuario.dataCadastro).getFullYear() == dataAtual.getFullYear()
+          ) {
+            membrosAdicionados++
+          }
+          if(usuario.nomeSupevisor != null && !supervisor.includes(usuario.nomeSupevisor)){
+            supervisor[qtdSupervisor] = usuario.nomeSupevisor
+            qtdSupervisor++
+          }
           if (usuario.tipoUsuario == 'Gestor') {
             etiquetaAcesso = `etiqueta-azul`
             qtdGestor++;
+            // superiores += ` <option value="${usuarios[i].idUsuario}">${usuarios[i].nome}</option> `
           } else {
             etiquetaAcesso = `etiqueta-laranja`
             qtdAnalista++
@@ -875,11 +965,13 @@
             var button = `
               <button class="btn-remover" onclick="desativarUsuario(${usuario.idUsuario})">inativar</button>
             `
+            totalMembrosAtivos++
           } else {
             etiquetaStatus = `etiqueta-vermelha`
             var button = `
               <button class="btn-ativar" onclick="ativarUsuario(${usuario.idUsuario})">Ativar</button>
             `
+            totalMembrosInativos++
           }
           tabelaColaboradoresCadastrados += `
             <tr>
@@ -911,6 +1003,11 @@
               </tr>
           `;
         }
+        // document.getElementById('select_cad_supervisor').innerHTML = superiores
+        kpi_1.innerText = totalMembrosAtivos
+        kpi_2.innerText = totalMembrosInativos
+        kpi_3.innerText = membrosAdicionados
+        kpi_4.innerText = qtdSupervisor
         graficoDistribuicao(qtdGestor, qtdAnalista)
         listaColaboradores.innerHTML = tabelaColaboradoresCadastrados;
       });
