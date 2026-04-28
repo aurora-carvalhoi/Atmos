@@ -97,7 +97,7 @@ function trocarKpi(kpi) {
   var legenda2 = document.getElementById('conteudo_recursos_legenda_2')
   var legenda3 = document.getElementById('conteudo_recursos_legenda_3')
   // conteudo_recursos_legenda_1
-  legenda1.innerText = 'Percente'
+  legenda1.innerText = 'Percentil'
   legenda2.innerText = 'Pico Min.'
   legenda3.innerText = 'Pico Max.'
   switch (kpi) {

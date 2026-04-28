@@ -23,6 +23,24 @@
 
 </head>
 
+<div id="editorModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999;">
+    
+    <div style="background:#fff; width:80%; max-width:900px; margin:5% auto; padding:20px; border-radius:10px;">
+        
+        <h2>Criar Relatório</h2>
+
+        <div id="editorTexto" contenteditable="true"
+            style="border:1px solid #ccc; min-height:300px; padding:10px; margin-top:10px;">
+        </div>
+
+        <div style="margin-top:15px; display:flex; gap:10px;">
+            <button onclick="exportarRelatorioPDF()">Exportar PDF</button>
+            <button onclick="fecharEditor()">Fechar</button>
+        </div>
+
+    </div>
+</div>
+
 <body>
     <nav class="sidebar" id="siderbar">
         <div class="logo-container">
@@ -190,9 +208,8 @@
                 </div>
 
                 <div class="acoes">
-                    <button class="btn-adicionar" onclick="adicionarServidor()">
-                        <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">
-                        NOVO SERVIDOR
+                    <button class="btn-adicionar" onclick="abrirEditorRelatorio()">
+                        <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">RELATÓRIO
                     </button>
                 </div>
 
@@ -264,13 +281,70 @@
                                     <span>26/04/2026 19:54:30</span>
                                 </td>
                                 <td>
-                                    <span>Sistema</span>
+                                    <span class="etiqueta etiqueta-azul">Sistema</span>
                                 </td>
                                 <td>
                                     <span>Sistema Atmos</span>
                                 </td>
                                 <td>
-                                    <button class="btn-detalhes" onclick="detalhesServidor()">Detalhes</button>
+                                    <button class="btn-detalhes" onclick="baixarServidor()">Baixar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RelatorioAtmos-26-04-2026-10-07.pdf
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>26/04/2026 10:07:49</span>
+                                </td>
+                                <td>
+                                    <span class="etiqueta etiqueta-azul">Sistema</span>
+                                </td>
+                                <td>
+                                    <span>Sistema Atmos</span>
+                                </td>
+                                <td>
+                                    <button class="btn-detalhes" onclick="baixarServidor()">Baixar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RelatorioAtmos-25-04-2026-21-34.pdf
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>25/04/2026 21:34:57</span>
+                                </td>
+                                <td>
+                                    <span class="etiqueta etiqueta-azul">Sistema</span>
+                                </td>
+                                <td>
+                                    <span>Sistema Atmos</span>
+                                </td>
+                                <td>
+                                    <button class="btn-detalhes" onclick="baixarServidor()">Baixar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RelatorioManualAtmos-24-04-2026-17-29.pdf
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>24/04/2026 17:29:13</span>
+                                </td>
+                                <td>
+                                    <span class="etiqueta etiqueta-roxo" >Colaborador</span>
+                                </td>
+                                <td>
+                                    <span>Funcionario Atmos</span>
+                                </td>
+                                <td>
+                                    <button class="btn-detalhes" onclick="baixarServidor()">Baixar</button>
                                 </td>
                             </tr>
 
@@ -293,6 +367,58 @@
 <script src="../assets/javascript/datetime.js"></script>
 <script src="../assets/javascript/menu.js"></script>
 <script src="../assets/javascript/sessao.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
+function baixarServidor() {
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    // Título
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.text("Relatório ATMOS", 20, 20);
+    doc.setLineWidth(0.5);
+    doc.line(20, 25, 190, 25);
+
+    // Conteúdo
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+
+    doc.text("Nome: RelatorioAtmos-26-04-2026-19-54.pdf", 20, 40);
+    doc.text("Data: 26/04/2026 19:54:30", 20, 50);
+    doc.text("Tipo: Sistema", 20, 60);
+    doc.text("Responsável: Sistema Atmos", 20, 70);
+
+    // Rodapé
+    doc.setFontSize(10);
+    doc.text("Gerado automaticamente pelo sistema ATMOS", 20, 280);
+
+    // Download
+    doc.save("relatorio-atmos.pdf");
+}
+
+function abrirEditorRelatorio() {
+    document.getElementById("editorModal").style.display = "block";
+}
+
+function fecharEditor() {
+    document.getElementById("editorModal").style.display = "none";
+}
+
+function exportarRelatorioPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const conteudo = document.getElementById("editorTexto").innerText;
+
+    const linhas = doc.splitTextToSize(conteudo, 170);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+
+    doc.text(linhas, 20, 20);
+
+    doc.save("relatorio-personalizado.pdf");
+}
 </script>
