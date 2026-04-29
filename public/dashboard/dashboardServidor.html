@@ -19,7 +19,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
-
+  <script src="../assets/javascript/erros.js"></script>
 </head>
 
 <body>
@@ -189,7 +189,7 @@
         </div>
 
         <div class="acoes">
-          <button class="btn-adicionar" onclick="adicionarServidor()">
+          <button id="button_adcServidor" class="btn-adicionar" onclick="adicionarServidor()">
             <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">
             NOVO SERVIDOR
           </button>
@@ -542,17 +542,13 @@
     var idEmpresaVar = sessionStorage.FKEMPRESA;
     var servidorStatusVar = 'Ativo'
 
-    const variaveisCadastroServidor = [
-      servidorNomeVar,
-      servidorIdentificacaoVar,
-      servidorIpVar,
-      servidorSoVar,
-      idEmpresaVar,
-      servidorStatusVar
-    ]
-
-    if (isNuloOuVazio(variaveisCadastroServidor)) {
-      alert("Nenhum campo pode estar vazio!");
+    if (servidorNomeVar == "" ||
+      servidorIdentificacaoVar == "" ||
+      servidorIpVar == "" ||
+      servidorSoVar == ""
+    ) {
+      mostrarErroDash("Preencha todos os campos CORRETAMENTE para finalizar o cadastro do servidor!")
+      return;
     }
 
     fetch("/servidores/cadastrarServidor", {
@@ -570,25 +566,20 @@
       .then(function (resposta) {
         if (resposta.ok) {
           cancerCadServidor();
-          alert("Servidor cadastrado com sucesso!")
-          window.location.reload()
+          mostrarSucessoDash("Servidor cadastrado com sucesso!")
+          setTimeout(function () {
+            window.location.reload()
+          }, 2500);
+
         } else {
+          mostrarErroDash("Erro ao cadastrar servidor!")
           throw "Erro de cadastro de servidor";
-          alert("Erro ao cadastrar servidor!")
         }
       })
       .catch(function (resposta) {
         console.log(`#Erro: ${resposta}`);
       })
     return false;
-  }
-
-  function isNuloOuVazio(listaStrings) {
-    var retorno = false;
-    listaStrings.forEach(
-      (string) => (retorno = string == null || string == ""),
-    );
-    return retorno;
   }
 
 

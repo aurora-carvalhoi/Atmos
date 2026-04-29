@@ -458,6 +458,7 @@ a {
 .carousel-track-container {
     overflow: hidden;
     position: relative;
+    padding: 3vh;
 }
 
 .carousel-track {
@@ -541,11 +542,11 @@ a {
 }
 
 .carousel-btn.prev {
-    left: 0;
+    left: 10px;
 }
 
 .carousel-btn.next {
-    right: 0;
+    right: 10px;
 }
 
 .carousel-indicators-custom {
