@@ -30,12 +30,14 @@ function validarSessao() {
 
         var menu = document.getElementById('siderbar')
         var menuMobile = document.getElementById('menu-mobile')
+        var botaoNovoServidor = document.getElementById("button_adcServidor");
         if(tipousuario == 'Gestor'){
             menu.classList.add('sidebar-gestor')
             menuMobile.classList.add('menu-container-gestor')  
         }else{
             menu.classList.add('sidebar-contribuidor')
             menuMobile.classList.add('menu-container-contribuidor')  
+            botaoNovoServidor.style.display = "none";
         }
         
     } else {

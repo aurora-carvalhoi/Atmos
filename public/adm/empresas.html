@@ -123,7 +123,7 @@
 
         <div class="campo">
             <label>CEP</label>
-            <input id="input_cep" maxlength="9" onblur="buscarCEP()" placeholder="00000-000">
+            <input id="input_cep" maxlength="9" oninput="formatarCEP(this)" placeholder="00000-000">
         </div>
 
         <div class="campo">
@@ -198,6 +198,19 @@
     })
   }
 
+  function formatarCEP(input) {
+  let valor = input.value.replace(/\D/g, "");
+  valor = valor.substring(0, 8);
+  if (valor.length > 5) {
+    valor = valor.replace(/^(\d{5})(\d)/, "$1-$2");
+  }
+  input.value = valor;
+  if (valor.length === 9) {
+    buscarCEP();
+  }
+}
+
+
   function formatarCNPJ(input) {
     let valor = input.value.replace(/\D/g, "");
 
@@ -232,10 +245,10 @@
     input.value = input.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
   }
 
- function buscarCEP() {
+function buscarCEP() {
     var cep = input_cep.value.replace(/\D/g, "");
 
-    if (cep.length != 8) return;
+    if (cep.length !== 8) return;
 
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
         .then(res => res.json())
@@ -244,11 +257,12 @@
                 alert("CEP não encontrado");
                 return;
             }
-            input_logradouro.value = dados.logradouro;
-            input_bairro.value = dados.bairro;
-            input_cidade.value = dados.localidade;
-            input_uf.value = dados.uf;
-            
+
+            input_logradouro.value = dados.logradouro || "";
+            input_bairro.value = dados.bairro || "";
+            input_cidade.value = dados.localidade || "";
+            input_uf.value = dados.uf || "";
+
             document.getElementById("input_numero").focus();
         })
         .catch(err => console.error("Erro ao buscar CEP:", err));
@@ -315,8 +329,7 @@ function cadastrarEmpresa() {
         if (res.ok) {
           mostrarSucesso("Empresa cadastrada com sucesso!");
           setTimeout(function () {
-              const popup = document.getElementById("companyModal");
-              if (popup) popup.remove();
+            window.location.reload()
             }, 2500);
         } else {
             mostrarErro("Erro ao cadastrar empresa!");
