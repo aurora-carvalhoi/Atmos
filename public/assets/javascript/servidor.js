@@ -97,23 +97,23 @@ function trocarKpi(kpi) {
   var legenda2 = document.getElementById('conteudo_recursos_legenda_2')
   var legenda3 = document.getElementById('conteudo_recursos_legenda_3')
   // conteudo_recursos_legenda_1
-  legenda1.innerText = 'Percentil'
+  legenda1.innerText = 'Qtd. Alertas'
   legenda2.innerText = 'Pico Min.'
   legenda3.innerText = 'Pico Max.'
   switch (kpi) {
     case "cpu":
-      kpi1.innerText = '30%'
+      kpi1.innerText = '1'
       kpi2.innerText = '10%'
       kpp3.innerText = '50%'
       break;
     case "ram": {
-      kpi1.innerText = '70%'
+      kpi1.innerText = '1'
       kpi2.innerText = '60%'
       kpp3.innerText = '75%'
       break;
     }
     case "disco": {
-      kpi1.innerText = '60%'
+      kpi1.innerText = '0'
       kpi2.innerText = '50%'
       kpp3.innerText = '90%'
       break;
@@ -129,7 +129,7 @@ function listarServidor() {
     // var ultimoValor = 100 - 1
     listaServidores += `
         <tr>
-                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
+                <td><span class="etiqueta-bold etiqueta-verde">● Operando</span></td>
                 <td><span class="nome-servidor">${servidor.hostname.toUpperCase()}</span>
                   <span class="servidor-id">#${servidor.host_id}</span>
                 </td>
@@ -259,11 +259,11 @@ function exibirDetalhesServidor(idServidor) {
   document.getElementById('modal_cabecalho_indicador').innerText = 'Servidor | ' + servidor.host_id
   document.getElementById('modal_detalhe_nome_servidor').innerText = servidor.hostname
   // Metricas
-  document.getElementById('modal_detalhe_uso_cpu').innerText = servidor.metricas.cpu_percent[ultimoValor] + '%'
-  document.getElementById('modal_detalhe_uso_ram').innerText = servidor.metricas.ram_perc[ultimoValor] + '%'
+  document.getElementById('modal_detalhe_uso_cpu').innerText = servidor.metricas.cpu_percentil_maquina + '%'
+  document.getElementById('modal_detalhe_uso_ram').innerText = servidor.metricas.ram_percentil_maquina + '%'
   document.getElementById('modal_detalhe_uso_disco').innerText = servidor.metricas.disco_usado[ultimoValor] + 'Gb'
-  document.getElementById('modal_detalhe_preenchimento_cpu').style.width = `${servidor.metricas.cpu_percent[ultimoValor]}%`
-  document.getElementById('modal_detalhe_preenchimento_ram').style.width = `${servidor.metricas.ram_perc[ultimoValor]}%`
+  document.getElementById('modal_detalhe_preenchimento_cpu').style.width = `${servidor.metricas.cpu_percentil_maquina}%`
+  document.getElementById('modal_detalhe_preenchimento_ram').style.width = `${servidor.metricas.ram_percentil_maquina}%`
   document.getElementById('modal_detalhe_preenchimento_disco').style.width = `${servidor.metricas.disco_porcentagem[ultimoValor]}%`
   // infos adicionais 
   document.getElementById('modal_info_processos').innerText = servidor.metricas.processos[ultimoValor]
@@ -325,7 +325,7 @@ function buscarServidorPorNome(texto) {
       ) {
         listaServidores += `
         <tr>
-                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
+                <td><span class="etiqueta-bold etiqueta-verde">● Operando</span></td>
                 <td><span class="nome-servidor">${servidor.hostname.toUpperCase()}</span>
                   <span class="servidor-id">#${servidor.host_id}</span>
                 </td>
@@ -358,7 +358,7 @@ function buscarServidorPorNome(texto) {
                 <td>42h13min</td>
                 <td>
                   <button class="btn-detalhes" onclick="detalhesServidor(${i})">Detalhes</button>
-                  <button class="btn-remover" onclick="removerServidor(${i})">Remover</button>
+                  
                 </td>
               </tr>
         `
