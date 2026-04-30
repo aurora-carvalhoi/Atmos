@@ -374,14 +374,12 @@ function baixarServidor() {
 
     const doc = new jsPDF();
 
-    // Título
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
     doc.text("Relatório ATMOS", 20, 20);
     doc.setLineWidth(0.5);
     doc.line(20, 25, 190, 25);
 
-    // Conteúdo
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
 
@@ -389,12 +387,8 @@ function baixarServidor() {
     doc.text("Data: 26/04/2026 19:54:30", 20, 50);
     doc.text("Tipo: Sistema", 20, 60);
     doc.text("Responsável: Sistema Atmos", 20, 70);
-
-    // Rodapé
     doc.setFontSize(10);
     doc.text("Gerado automaticamente pelo sistema ATMOS", 20, 280);
-
-    // Download
     doc.save("relatorio-atmos.pdf");
 }
 
