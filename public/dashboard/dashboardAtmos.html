@@ -37,6 +37,24 @@
   <script src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"></script>
 </head>
 
+<div id="editorModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999;">
+    
+    <div style="background:#fff; width:80%; max-width:900px; margin:5% auto; padding:20px; border-radius:10px;">
+        
+        <h2>Criar Relatório</h2>
+
+        <div id="editorTexto" contenteditable="true"
+            style="border:1px solid #ccc; min-height:300px; padding:10px; margin-top:10px;">
+        </div>
+
+        <div style="margin-top:15px; display:flex; gap:10px;">
+            <button onclick="exportarRelatorioPDF()">Exportar PDF</button>
+            <button onclick="fecharEditor()">Fechar</button>
+        </div>
+
+    </div>
+</div>
+
 <body>
   <nav class="sidebar" id="siderbar">
     <div class="logo-container">
@@ -199,10 +217,8 @@
           <span>Visão consolidada da Infraestrutura em tempo real</span>
         </div>
         <div class="acoes">
-
-          <button class="btn-azul">
-            <img src="../assets/images/icones/export.svg" alt="export icon">
-            EXPORTAR
+          <button class="btn-azul" onclick="abrirEditorRelatorio()">
+            <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">RELATÓRIO
           </button>
         </div>
       </div>
@@ -488,6 +504,31 @@
     var modal = document.getElementById("modal")
     modal.style.display = "none"
   }
+
+  
+  function abrirEditorRelatorio() {
+    document.getElementById("editorModal").style.display = "block";
+  }
+
+  function fecharEditor() {
+    document.getElementById("editorModal").style.display = "none";
+  }
+
+  function exportarRelatorioPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const conteudo = document.getElementById("editorTexto").innerText;
+
+    const linhas = doc.splitTextToSize(conteudo, 170);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+
+    doc.text(linhas, 20, 20);
+
+    doc.save("relatorio-personalizado.pdf");
+  }
 </script>
 
 <script type="module">
@@ -504,5 +545,4 @@
   metricaKpi.addEventListener('change', () => {
     trocarKpi(metricaKpi.value)
   })
-
 </script>
