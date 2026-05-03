@@ -214,10 +214,6 @@
         letter-spacing: .04em;
     }
 
-    /* .tabela-relatorio td span {
-        color: #243042;
-    } */
-
     .nome-pessoa {
         display: flex;
         flex-direction: column;
@@ -267,52 +263,7 @@
         align-items: start;
     }
 
-    .heatmap-rodape {
-        display: flex;
-        flex-direction: column;
-        gap: .8rem;
-        align-items: center;
-    }
-
-    .heatmap-rodape text {
-        font-size: 15px;
-    }
-
-    .heatmap-legenda {
-        display: flex;
-        align-items: center;
-        gap: .8rem;
-        color: var(--color-opaque);
-        font-size: 12px;
-        flex-wrap: wrap;
-    }
-
-    .heatmap-legenda span {
-        display: inline-flex;
-        align-items: center;
-        gap: .35rem;
-    }
-
-    .heatmap-legenda span::before {
-        content: "";
-        width: 10px;
-        height: 10px;
-        border-radius: 3px;
-        background: #f7f9fc;
-        border: 1px solid #e6ebf2;
-        display: inline-block;
-    }
-
-    .heatmap-legenda span:nth-child(2)::before {
-        background: #dce8ff;
-        border-color: #dce8ff;
-    }
-
-    .heatmap-legenda span:nth-child(3)::before {
-        background: #8fb1ff;
-        border-color: #8fb1ff;
-    }
-
+   
     .grade-equipe {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -465,6 +416,91 @@
         background-color: #ddedff;
         border-color: #0349A750;
     }
+
+     .painel-serv {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .btn-detalhes {
+        border-color: var(--color-blue);
+        color: var(--color-blue);
+    }
+
+    table {
+        width: 1100px;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background-color: #f9f8fd;
+        border-collapse: collapse;
+        border: none;
+    }
+
+    th {
+
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 0.75rem;
+        color: #8a8f98;
+        text-align: center;
+        padding: 1rem 1px;
+        font-weight: 700;
+    }
+
+    td {
+        padding: .5rem;
+        border-bottom: 1px solid #ececec;
+        vertical-align: middle;
+        font-size: 0.75rem;
+        text-align: center;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .nome-servidor {
+        font-weight: 600;
+    }
+
+    .servidor-id {
+        color: #9aa0a6;
+        margin-left: 0.3rem;
+    }
+
+    .container-barra {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .barra {
+        width: 4.5rem;
+        height: 0.45rem;
+        background: #e8edf3;
+        border-radius: 999px;
+        overflow: hidden;
+    }
+
+    .preenchimento {
+        height: 100%;
+        border-radius: 999px;
+        background-color: #3879fc;
+    }
+
+    table button {
+        padding: 0.45rem 0.9rem;
+        border-radius: 5px;
+        border: 1px solid #e3e7ed;
+        background: white;
+        font-weight: 600;
+        cursor: pointer;
+        margin-bottom: 5px;
+        transition: .3s ease-in;
+    }
+
 
 }
 
