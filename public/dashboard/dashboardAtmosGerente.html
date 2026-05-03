@@ -9,10 +9,9 @@
   <title>Dashboard - Atmos</title>
 
   <!-- Styles -->
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardServidores.css">
   <link rel="stylesheet" href="../assets/css/dashboard.css">
   <link rel="stylesheet" href="../assets/css/dashboard/dashboardAtmosGerente.css">
-
-  <!-- Script -->
 
   <!-- Flavicon -->
   <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
@@ -208,7 +207,6 @@
       </div>
     </header>
 
-
     <section class="section-kpis">
       <div class="secao-kpis">
         <div class="titulos-kpi">
@@ -217,24 +215,24 @@
         </div>
         <div class="conjunto-kpis">
           <div class="kpi">
-            <h4>Colaboradores</h4>
-            <p id="kpi_1">5</p>
-            <span>Vinculados à empresa</span>
+            <h4>Servidores</h4>
+            <p id="kpi_1">6</p>
+            <span>Total de Servidores</span>
           </div>
           <div class="kpi">
-            <h4>Ativos</h4>
-            <p id="kpi_2">5</p>
-            <span>Com acesso liberado</span>
+            <h4>Em risco</h4>
+            <p id="kpi_2" style="color: red">2</p>
+            <span>Com status de atenção</span>
           </div>
           <div class="kpi">
-            <h4>Inativos</h4>
-            <p id="kpi_3">5</p>
-            <span>Exigem revisão</span>
+            <h4>Críticos</h4>
+            <p id="kpi_3" style="color: red">2</p>
+            <span>Com 1 ou mais componentes</span>
           </div>
           <div class="kpi">
-            <h4>Atualizados 30D</h4>
-            <p id="kpi_4">5</p>
-            <span>Cadastros ou alteração</span>
+            <h4>?</h4>
+            <p id="kpi_4">?</p>
+            <span>?</span>
           </div>
         </div>
       </div>
@@ -338,27 +336,188 @@
     </section>
 
     <section class="grade-secundaria">
-      <div class="painel painel-heatmap">
+      <div class="painel">
         <div class="cabecalho-painel">
           <div>
-            <h3>Mapa de atividade</h3>
-            <span>Volume diário com base nas datas reais de cadastro e atualização</span>
+            <h3>Servidores em atenção</h3>
+            <span>Servidores que necessitam de melhoria ou ajuste</span>
           </div>
         </div>
-        <div class="heatmap-rodape">
-          <div id="heatmap"></div>
-          <div class="legende-heatmap">
-            <span>Menos</span>
-            <div id="legenda-heatmap"></div>
-            <span>Mais</span>
-          </div>
+        <div class="painel-serv">
+          <table class="tabela-servidores">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Nome</th>
+                <th>CPU</th>
+                <th>RAM</th>
+                <th>Disco</th>
+                <th>Melhoria</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabela_relatorios_gestor">
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-vermelha">● Critico</span></td>
+                <td><span class="nome-servidor">LAPTOP-LUANA</span>
+                  <span class="servidor-id">#luana</span>
+                </td>
+
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 48.08%; background: #3879fc"></div>
+                    </div>
+                    <span>48.08%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 93.34%; background: #fc3838"></div>
+                    </div>
+                    <span>93.34%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 89%; background: #fcd838"></div>
+                    </div>
+                    <span> 89%</span>
+                  </div>
+                </td>
+                <td>RAM - DISCO</td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhesServidor(5)">Detalhes</button>
+                  <button class="btn-azul" onclick="baixarRelatorio()">Relatorio</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(5)">Remover</button> -->
+                </td>
+              </tr>
+
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-vermelha">● Critico</span></td>
+                <td><span class="nome-servidor">LAPTOP-LUIZ</span>
+                  <span class="servidor-id">#Luiz</span>
+                </td>
+
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 15.8%; background: #3879fc"></div>
+                    </div>
+                    <span>15.8%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 92.23%; background: #fc3838"></div>
+                    </div>
+                    <span>92.23%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 78.7%; background: #3879fc"></div>
+                    </div>
+                    <span> 78.7%</span>
+                  </div>
+                </td>
+                <td>RAM</td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhesServidor(2)">Detalhes</button>
+                  <button class="btn-azul" onclick="baixarRelatorio()">Relatorio</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(2)">Remover</button> -->
+                </td>
+              </tr>
+
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
+                <td><span class="nome-servidor">LAPTOP-NZ13</span>
+                  <span class="servidor-id">#kaio</span>
+                </td>
+
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 14.3%; background: #fcd838"></div>
+                    </div>
+                    <span>14.3%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 75.54%; background: #fcd838"></div>
+                    </div>
+                    <span>75.54%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 74.2%; background: #3879fc"></div>
+                    </div>
+                    <span> 74.2%</span>
+                  </div>
+                </td>
+                <td>CPU - RAM</td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhesServidor(4)">Detalhes</button>
+                  <button class="btn-azul" onclick="baixarRelatorio()">Relatorio</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(4)">Remover</button> -->
+                </td>
+              </tr>
+
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
+                <td><span class="nome-servidor">LAPTOP-MATHEUS</span>
+                  <span class="servidor-id">#Matheus</span>
+                </td>
+
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 9.72%; background: #fcd838"></div>
+                    </div>
+                    <span>9.72%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 68.91%; background: #3879fc"></div>
+                    </div>
+                    <span>68.91%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 74.9%; background: #3879fc"></div>
+                    </div>
+                    <span> 74.9%</span>
+                  </div>
+                </td>
+                <td>CPU</td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhesServidor(3)">Detalhes</button>
+                  <button class="btn-azul" onclick="baixarRelatorio()">Relatorio</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(3)">Remover</button> -->
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <div class="painel painel-equipe">
+      <div class="painel">
         <div class="cabecalho-painel">
           <div>
-            <h3>Resumo da equipe</h3>
+            <h3>Resumo de servidores</h3>
             <span>Cartões compactos com o status atual</span>
           </div>
         </div>
@@ -386,9 +545,124 @@
 
     <div class="erro-painel" id="dashboard_erro"></div>
   </main>
-</body>
 
-</html>
+  <div class="fundoModal" id="modalDetalhes">
+    <div class="modal modalDetalhes">
+      <!-- Topo do modal -->
+      <header>
+        <!-- Titulo e subtitulo -->
+        <div>
+          <h2>Detalhes do Servidor</h2>
+          <span class="subTitulo" id="modal_cabecalho_indicador">Servidor | SRV-PROD-01</span>
+        </div>
+        <!-- botão de sair -->
+        <div>
+          <button onclick="fecharModal(0)">
+            X
+          </button>
+        </div>
+      </header>
+
+      <div class="conteudo">
+
+        <!-- Parte das metricas -->
+        <div class="infos">
+          <!-- Informações do servidor -->
+          <div class="servidor">
+            <h4>Detalhes dos Recursos</h4>
+            <span>Informações gerais do servidor</span>
+            <div class="desc">
+              <div class="icon">
+                <img src="" alt="#">
+              </div>
+              <div>
+                <h2 id="modal_detalhe_nome_servidor">Nome Servidor</h2>
+                <span>Ubunto 22.04 - PI: 10.0.1.10 - ID: #001</span>
+              </div>
+              <div class="area-status">
+                <div class="status">
+                  <span>● Online</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- metricas -->
+          <div class="metricas">
+            <!-- componente/metrica - porcentagem > Barrinha -->
+            <div>
+              <div class="infos-metricas">
+                <span class="metrica">Percentil CPU</span>
+                <span class="porcentagem" id="modal_detalhe_uso_cpu">--</span>
+              </div>
+              <div class="barra">
+                <div class="preenchimento" id="modal_detalhe_preenchimento_cpu"></div>
+              </div>
+            </div>
+            <div>
+              <div class="infos-metricas">
+                <span class="metrica">Percentil RAM</span>
+                <span class="porcentagem" id="modal_detalhe_uso_ram">--</span>
+              </div>
+              <div class="barra">
+                <div class="preenchimento" id="modal_detalhe_preenchimento_ram"></div>
+              </div>
+            </div>
+            <div>
+              <div class="infos-metricas">
+                <span class="metrica">Armazenamento Disco</span>
+                <span class="porcentagem" id="modal_detalhe_uso_disco">---</span>
+              </div>
+              <div class="barra">
+                <div class="preenchimento" id="modal_detalhe_preenchimento_disco"></div>
+              </div>
+            </div>
+            <div>
+              <!-- <div class="infos-metricas">
+                <span class="metrica">--</span>
+                <span class="porcentagem">--</span>
+              </div>
+              <div class="barra">
+                <div class=""></div>
+              </div> -->
+            </div>
+
+          </div>
+          <!-- Infos adicionais -->
+          <div class="infosAdicionais">
+            <!-- Card de infos adicionais  -->
+            <div class="card">
+              <p class="legenda">Disco tota</p>
+              <p class="valor" id="modal_info_disco"> -- </p>
+            </div>
+
+            <div class="card">
+              <p class="legenda">Temperatura</p>
+              <p class="valor" style="color: #31D642" id="modal_info_temperatura">54°C</p>
+            </div>
+
+            <div class="card">
+              <p class="legenda">Processos</p>
+              <p class="valor" id="modal_info_processos">218</p>
+            </div>
+
+            <div class="card">
+              <p class="legenda">Conexão TCP</p>
+              <p class="valor" id="modal_info_conexao_tcp">1,432</p>
+            </div>
+          </div>
+        </div>
+        <div class="graficos">
+          <div>
+            <canvas id="perfomaInfra" class="graf-infraestrutura"></canvas>
+          </div>
+          <div>
+            <canvas id="perfomaInfra2" class="graf-infraestrutura"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </body>
 
 </html>
@@ -565,6 +839,18 @@
         listaColaboradores.innerHTML = tabelaColaboradoresCadastrados;
       });
   }
-  listarUsuario()
+  // listarUsuario()
+   function fecharModal(tipoModal) {
+    const modal = document.getElementsByClassName("fundoModal")
+    modal[tipoModal].style.display = 'none';
+  }
 
+
+</script>
+
+
+
+<script type="module">
+  import {criarGraficos} from "../assets/javascript/servidor.js"
+  criarGraficos()
 </script>

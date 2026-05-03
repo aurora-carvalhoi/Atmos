@@ -211,14 +211,14 @@
             <span>Total de servidores</span>
           </div>
           <div class="kpi">
-            <h4>Servidores Ativos</h4>
-            <p>6</p>
-            <span>Servidores ativos</span>
+            <h4>Servidores Criticos</h4>
+            <p class="kpi-vermelho">2</p>
+            <span>Servidores em status Crítico</span>
           </div>
           <div class="kpi">
-            <h4>Alertas</h4>
-            <p class="kpi-vermelho">0</p>
-            <span>Alertas atuais</span>
+            <h4>Alertas Atuais</h4>
+            <p class="kpi-vermelho">4</p>
+            <span>Status "Atenção" ou "Crítico" </span>
           </div>
           <div class="kpi">
             <h4>Incidentes Registrados</h4>
@@ -270,11 +270,245 @@
               </tr>
             </thead>
             <tbody id="tabela_lista_servidor">
-              <tr>
+              <!-- <tr>
                 <td>
                   <h4>Nenhum servidor encontrado</h4>
                 </td>
+              </tr> -->
+            <tbody id="tabela_lista_servidor">
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-vermelha">● Critico</span></td>
+                <td><span class="nome-servidor">LAPTOP-LUANA</span>
+                  <span class="servidor-id">#luana</span>
+                </td>
+                <td><span class="end-ip">10.0.0.1</span></td>
+                <td><span class="nome-so">Ubuntu 22.04</span></td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 48.08%; background: #3879fc"></div>
+                    </div>
+                    <span>48.08%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 93.34%; background: #fc3838"></div>
+                    </div>
+                    <span>93.34%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 89%; background: #fcd838"></div>
+                    </div>
+                    <span> 89%</span>
+                  </div>
+                </td>
+                <td>42h13min</td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhesServidor(5)">Detalhes</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(5)">Remover</button> -->
+                </td>
               </tr>
+
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-vermelha">● Critico</span></td>
+                <td><span class="nome-servidor">LAPTOP-LUIZ</span>
+                  <span class="servidor-id">#Luiz</span>
+                </td>
+                <td><span class="end-ip">10.0.0.1</span></td>
+                <td><span class="nome-so">Ubuntu 22.04</span></td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 15.8%; background: #3879fc"></div>
+                    </div>
+                    <span>15.8%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 92.23%; background: #fc3838"></div>
+                    </div>
+                    <span>92.23%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 78.7%; background: #3879fc"></div>
+                    </div>
+                    <span> 78.7%</span>
+                  </div>
+                </td>
+                <td>42h13min</td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhesServidor(2)">Detalhes</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(2)">Remover</button> -->
+                </td>
+              </tr>
+              
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
+                <td><span class="nome-servidor">LAPTOP-NZ13</span>
+                  <span class="servidor-id">#kaio</span>
+                </td>
+                <td><span class="end-ip">10.0.0.1</span></td>
+                <td><span class="nome-so">Ubuntu 22.04</span></td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 14.3%; background: #fcd838"></div>
+                    </div>
+                    <span>14.3%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 75.54%; background: #fcd838"></div>
+                    </div>
+                    <span>75.54%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 74.2%; background: #3879fc"></div>
+                    </div>
+                    <span> 74.2%</span>
+                  </div>
+                </td>
+                <td>42h13min</td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhesServidor(4)">Detalhes</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(4)">Remover</button> -->
+                </td>
+              </tr>
+
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
+                <td><span class="nome-servidor">LAPTOP-MATHEUS</span>
+                  <span class="servidor-id">#Matheus</span>
+                </td>
+                <td><span class="end-ip">10.0.0.1</span></td>
+                <td><span class="nome-so">Ubuntu 22.04</span></td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 9.72%; background: #fcd838"></div>
+                    </div>
+                    <span>9.72%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 68.91%; background: #3879fc"></div>
+                    </div>
+                    <span>68.91%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 74.9%; background: #3879fc"></div>
+                    </div>
+                    <span> 74.9%</span>
+                  </div>
+                </td>
+                <td>42h13min</td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhesServidor(3)">Detalhes</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(3)">Remover</button> -->
+                </td>
+              </tr>
+
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-verde">● Operando</span></td>
+                <td><span class="nome-servidor">LAPTOP-ANDERSON</span>
+                  <span class="servidor-id">#Anderson</span>
+                </td>
+                <td><span class="end-ip">10.0.0.1</span></td>
+                <td><span class="nome-so">Ubuntu 22.04</span></td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 15.12%; background: #3879fc"></div>
+                    </div>
+                    <span>15.12%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 69.2%; background: #3879fc"></div>
+                    </div>
+                    <span>69.2%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 75.1%; background: #3879fc"></div>
+                    </div>
+                    <span> 75.1%</span>
+                  </div>
+                </td>
+                <td>42h13min</td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhesServidor(0)">Detalhes</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(0)">Remover</button> -->
+                </td>
+              </tr>
+
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-verde">● Operando</span></td>
+                <td><span class="nome-servidor">LAPTOP-AURORA</span>
+                  <span class="servidor-id">#Aurora</span>
+                </td>
+                <td><span class="end-ip">10.0.0.1</span></td>
+                <td><span class="nome-so">Ubuntu 22.04</span></td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 24.09%; background: #3879fc"></div>
+                    </div>
+                    <span>24.09%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 64%; background: #3879fc"></div>
+                    </div>
+                    <span>64%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 78.9%; background: #3879fc"></div>
+                    </div>
+                    <span> 78.9%</span>
+                  </div>
+                </td>
+                <td>42h13min</td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhesServidor(1)">Detalhes</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(1)">Remover</button> -->
+                </td>
+              </tr>
+
+            </tbody>
+            <tbody id="tabela_lista_servidor">
+
+            </tbody>
+
             </tbody>
 
           </table>
@@ -504,13 +738,13 @@
 
 <script type="module">
   import { listarServidor, criarGraficos, buscarServidorPorNome } from "../assets/javascript/servidor.js"
-  listarServidor()
+  // listarServidor()
   criarGraficos()
 
-  const buscarPorNome = document.getElementById('input_busca_por_nome')
-  buscarPorNome.addEventListener('input', () => {
-    buscarServidorPorNome(buscarPorNome.value.toLowerCase().trim())
-  })
+  // const buscarPorNome = document.getElementById('input_busca_por_nome')
+  // buscarPorNome.addEventListener('input', () => {
+  //   buscarServidorPorNome(buscarPorNome.value.toLowerCase().trim())
+  // })
 
 </script>
 
