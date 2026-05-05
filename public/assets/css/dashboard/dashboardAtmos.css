@@ -30,7 +30,6 @@
         font-family: var(--font-default);
         font-weight: 500;
         font-size: 13px;
-        color: var(--color-opaque);
     }
 
     .card-gfc-infraestrutura,
@@ -46,9 +45,11 @@
     }
 
     .card-servidores,
-    .card-status-servidores {
-        height: 300px;
-
+    .card-feed-alertas {
+        height: 375px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .ver-mais,
@@ -68,40 +69,106 @@
         margin-top: 1vh;
     }
 
-    .conteudo-feed,
+    /* Lista de servidores */
     .conteudo-servidor {
-        height: 70%;
+        height: 80%;
         overflow-y: auto;
     }
 
-    .alerta {
-        width: 100%;
-        border-radius: 3px;
-        display: flex;
-        padding: 5px 10px;
-        margin-bottom: 5px;
-        border: solid 1px;
+    table {
+        width: 1250px;
+        border-collapse: collapse;
     }
 
-    .alerta .tipo-alerta {
-        width: 15px;
+    thead {
+        background-color: #f9f8fd;
+        border-collapse: collapse;
+        border: none;
+    }
+
+    th {
+
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 0.75rem;
+        color: #8a8f98;
+        text-align: center;
+        padding: 1rem 1px;
+        font-weight: 700;
+    }
+
+    td {
+        padding: .5rem;
+        border-bottom: 1px solid #ececec;
+        vertical-align: middle;
+        font-size: 0.75rem;
+        text-align: center;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .nome-servidor {
+        font-weight: 600;
+    }
+
+    .servidor-id {
+        color: #9aa0a6;
+        margin-left: 0.3rem;
+    }
+
+    .container-barra {
         display: flex;
         align-items: center;
+        gap: 0.6rem;
     }
 
-    .alerta .bolinha-alerta {
-        width: 10px;
-        height: 10px;
-        border-radius: 100%;
+    .barra {
+        width: 4.5rem;
+        height: 0.45rem;
+        background: #e8edf3;
+        border-radius: 999px;
+        overflow: hidden;
     }
 
-    .alerta-emergencia {
-        background: #FF808035;
-        border: #F7B8A830;
+    .preenchimento {
+        height: 100%;
+        border-radius: 999px;
+        background-color: #3879fc;
     }
 
-    .bolinha-emergencia {
-        background-color: #FA1616;
+    table button {
+        padding: 0.45rem 0.9rem;
+        border-radius: 5px;
+        border: 1px solid #e3e7ed;
+        background: white;
+        font-weight: 600;
+        cursor: pointer;
+        margin-bottom: 5px;
+        transition: .3s ease-in;
+    }
+
+    .btn-detalhes {
+        border-color: var(--color-blue);
+        color: var(--color-blue);
+    }
+
+    .btn-detalhes:hover {
+        background-color: #004bad2b;
+    }
+
+
+/* Incidentestes */
+    .tabela-incidentes {
+        width: 100%;
+        overflow-y: auto;
+        height: 80%;
+    }
+
+    .tabela-incidentes table {
+        width: 100%;
+        height: 300px;
     }
 
     /* Heatmap */
@@ -280,6 +347,10 @@
         font-weight: 700;
         color: var(--color-opaque2);
     }
+
+
+
+
 }
 
 @media screen and (max-width: 1275px) {

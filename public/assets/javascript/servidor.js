@@ -51,12 +51,12 @@ function listarResumoServidores() {
   `
 
   }
-  document.getElementById('resulmoServidores').innerHTML = servidores
+  // document.getElementById('resulmoServidores').innerHTML = servidores
   document.getElementById('select_lista_servidores').innerHTML = listaServidores
 }
 
 function graficoResulmoServidores() {
-  var servidor = dataClient.hosts[0]
+  var servidor = dataClient.hosts[5]
   let data = [];
   for (var i = 0; i <= ultimoValor; i++) {
     data[i] = new Date(servidor.metricas.datahora[i]).toLocaleTimeString()
