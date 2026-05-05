@@ -48,6 +48,45 @@
         font-size: 12px;
     }
 
+    .caixa-alertas {
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .kpi-incidente {
+        min-width: 0;
+        width: 13rem;
+        background: #f9f8fd;
+        border: 1px solid #e7ebf1;
+        border-radius: 12px;
+        height: 8rem;
+        box-shadow: none;
+    }
+
+    .kpi-incidente h4 {
+        margin: 5px;
+        color: #1b1b1b7e;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .kpi-incidente p {
+        text-align: center;
+        margin: 1.5rem 0 .2rem;
+        font-size: 40px;
+        line-height: 1;
+        font-weight: bold;
+    }
+
+    .kpi-incidente span {
+        color: var(--color-opaque);
+        font-size: 12px;
+    }
+
+
     .grade-principal,
     .grade-secundaria {
         display: grid;
@@ -364,8 +403,23 @@
         color: #9d2026;
     }
 
-    .legende-heatmap {
+    .conteudo-heatmap{
         display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #heatmap text{
+        font-size: 1rem;
+        opacity: 80%;
+        font-weight: 500;
+    }
+
+    .legende-heatmap {
+        margin-top: 20px;
+        display: flex;
+        font-size: 1rem;
         align-items: center;
         justify-content: space-evenly;
         width: 250px;
@@ -474,6 +528,21 @@
         display: flex;
         align-items: center;
         gap: 0.6rem;
+    }
+
+    .card-heat-map h3{
+        color: #004aad;
+    }
+
+    .card-heat-map span{
+        display: block;
+        margin-top: .2rem;
+        color: var(--color-opaque);
+        font-size: 13px;
+    }
+
+    .semPaddingBottom{
+        padding-bottom: 0;
     }
 
     .barra {
