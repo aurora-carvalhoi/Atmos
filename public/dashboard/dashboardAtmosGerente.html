@@ -10,8 +10,8 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="../assets/css/dashboard/dashboardServidores.css">
-  <link rel="stylesheet" href="../assets/css/dashboard.css">
   <link rel="stylesheet" href="../assets/css/dashboard/dashboardAtmosGerente.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
 
   <!-- Flavicon -->
   <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
@@ -29,11 +29,13 @@
 
   <!-- HeatMap -->
   <link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css">
+  <script src="https://unpkg.com/dayjs@1/locale/pt-br.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js"></script>
   <script src="https://unpkg.com/cal-heatmap/dist/plugins/LegendLite.min.js"></script>
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"></script>
+  <script>dayjs.locale('pt-br');</script>
 </head>
 
 <body>
@@ -242,100 +244,29 @@
       <div class="painel painel-alertas">
         <div class="cabecalho-painel">
           <div>
-            <h3>Alertas</h3>
-            <span>Exceções que pedem atenção imediata</span>
+            <h3>Incidentes</h3>
+            <span></span>
           </div>
         </div>
-        <div class="lista-alertas" id="lista_alertas_gestor">
-          <div class="card-alerta alerta-medio">
-            <h4>CPU: SRV-PROD-02</h4>
-            <span>CPU do servidor SRV-PROD-02 está em 80%, alto risco para o sistema</span>
-            <p>23/04/2026</p>
+        <div class="caixa-alertas" id="lista_alertas_gestor">
+          <div class="kpi-incidente etiqueta-amarela ">
+            <h4>Em andamento</h4>
+            <p id="kpi_1">3</p>
           </div>
-          <div class="card-alerta alerta-auto">
-            <h4>Disco: SRV-PROD-02</h4>
-            <span>Disco do servidor: SRV-PROD-02 está em 98%, baixa capacidade de armazenamento no sistemas</span>
-            <p>23/04/2026</p>
+          <div class="kpi-incidente etiqueta-vermelho">
+            <h4>Pendentes</h4>
+            <p id="kpi_1">5</p>
           </div>
-        </div>
-      </div>
-
-      <div class="painel painel-relatorios">
-        <div class="cabecalho-painel cabecalho-painel-flex">
-          <div>
-            <h3>Relatórios</h3>
-            <span>Recorte por período com exportação CSV</span>
+          <div class="kpi-incidente etiqueta-azul">
+            <h4>Incidentes</h4>
+            <p id="kpi_1">14</p>
           </div>
-          <div class="acoes-painel">
-            <select id="filtro_relatorios" class="filtro-relatorios">
-              <option value="7" selected>Últimos 7 dias</option>
-              <option value="15">Últimos 15 dias</option>
-              <option value="30">Últimos 30 dias</option>
-              <option value="90">Últimos 90 dias</option>
-            </select>
-            <button class="btn-secundario" id="btn_exportar_relatorios" type="button">Baixar CSV</button>
+          <div class="kpi-incidente etiqueta-verde">
+            <h4>Resolvidos</h4>
+            <p id="kpi_1">6</p>
           </div>
-        </div>
-
-        <div class="tabela-wrap">
-          <table class="tabela-relatorio">
-            <thead>
-              <tr>
-                <th>Nome Identificacao</th>
-                <th>Tipo Responsavel</th>
-                <th>Status Operacional</th>
-                <th>Data</th>
-              </tr>
-            </thead>
-            <tbody id="tabela_relatorios_gestor">
-              <tr>
-                <td>
-                  <div class="nome-pessoa">
-                    <strong onclick="">RelatorioAtmos-26-04-2026-19-54.pdf</strong>
-                  </div>
-                </td>
-                <td><span style="font-weight: 700;" class="etiqueta etiqueta-azul">Sistema</span></td>
-                <td><span style="font-weight: 700;" class="etiqueta etiqueta-verde">Operando</span></td>
-                <td><span>26/04/2026 19:54:30</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="nome-pessoa">
-                    <strong onclick="">RelatorioAtmos-26-04-2026-10-07.pdf</strong>
-                  </div>
-                </td>
-                <td><span style="font-weight: 700;" class="etiqueta etiqueta-azul">Sistema</span></td>
-                <td><span style="font-weight: 700;" class="etiqueta etiqueta-laranja">Atenção</span></td>
-                <td><span>26/04/2026 10:07:49</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="nome-pessoa">
-                    <strong onclick="">RelatorioAtmos-25-04-2026-21-34.pdf</strong>
-                  </div>
-                </td>
-                <td><span style="font-weight: 700;" class="etiqueta etiqueta-azul">Sistema</span></td>
-                <td><span style="font-weight: 700;" class="etiqueta etiqueta-vermelho">Critico</span></td>
-                <td><span>25/04/2026 21:34:57</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="nome-pessoa">
-                    <strong onclick="">RelatorioManualAtmos-24-04-2026-17-29.pdf</strong>
-                  </div>
-                </td>
-                <td><span style="font-weight: 700;" class="etiqueta etiqueta-roxo">Colaborador</span></td>
-                <td><span style="font-weight: 700;" class="etiqueta etiqueta-verde">Operando</span></td>
-                <td><span>24/04/2026 17:29:13</span></td>
-              </tr>
-
-            </tbody>
-          </table>
         </div>
       </div>
-    </section>
-
-    <section class="grade-secundaria">
       <div class="painel">
         <div class="cabecalho-painel">
           <div>
@@ -514,31 +445,64 @@
         </div>
       </div>
 
-      <div class="painel">
-        <div class="cabecalho-painel">
+    </section>
+
+
+    <section class="grade-secundaria">
+      <div class="painel painel-relatorios">
+        <div class="cabecalho-painel cabecalho-painel-flex">
           <div>
-            <h3>Resumo de servidores</h3>
-            <span>Cartões compactos com o status atual</span>
+            <h3>Servidores que tendem a ter problemas</h3>
+            <span>Recorte por período com exportação CSV</span>
+          </div>
+          <div class="acoes-painel">
+            <select id="filtro_relatorios" class="filtro-relatorios">
+              <option value="7" selected>Últimos 7 dias</option>
+              <option value="15">Últimos 15 dias</option>
+              <option value="30">Últimos 30 dias</option>
+              <option value="90">Últimos 90 dias</option>
+            </select>
           </div>
         </div>
-        <div class="grade-equipe" id="lista_equipe_cards">
-          <article class="cartao-equipe">
-            <div class="cartao-topo">
-              <div class="avatar">ML</div>
-              <div>
-                <h4> nome </h4>
-                <span> textoSeguro(colaborador.email, 'Sem e-mail')</span>
-              </div>
-            </div>
-            <div class="cartao-badges">
-              <span class="badge  classeDaBadgeTipo(tipo)"> tipo</span>
-              <span class="badge  classesDeStatus(status)"> status</span>
-            </div>
-            <div class="cartao-meta">
-              <span><strong>Setor:</strong> setor</span>
-              <span><strong>Última atualização:</strong> ultima</span>
-            </div>
-          </article>
+
+        <div class="tabela-wrap">
+          <table class="tabela-relatorio">
+            <thead>
+              <tr>
+                <th>Servidores</th>
+                <th>Qtd Alertas</th>
+                <th>Componente crítico</th>
+                <th>Baixar</th>
+              </tr>
+            </thead>
+            <tbody id="tabela_relatorios_gestor">
+              <tr>
+                <td>
+                  <div class="nome-pessoa">
+                    <strong onclick="">LAPTOP-MATHEUS</strong>
+                  </div>
+                </td>
+                <td><span style="font-weight: 700;" class="etiqueta etiqueta-vermelha">4</span></td>
+                <td><span style="font-weight: 700;">CPU</span></td>
+                <td>
+                  <button>Gerar Relatório</button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card card-heat-map painel semPaddingBottom">
+        <h3>Perfomance de Infraestrutura</h3>
+        <span>Mapa de quantidade de incidentes registrados</span>
+        <div class="conteudo conteudo-heatmap">
+          <div id="heatmap"></div>
+          <div class="legende-heatmap">
+            <span>Menos</span>
+            <div id="legenda-heatmap"></div>
+            <span>Mais</span>
+          </div>
         </div>
       </div>
     </section>
@@ -673,32 +637,45 @@
 
 <!-- Heatmap -->
 <script>
+  const hoje = new Date();
+  const inicio = new Date(hoje.getFullYear(), hoje.getMonth() - 1, 1);
   const cal = new CalHeatmap();
   const data = [
-    { date: '2026-04-11', value: 1 },
-    { date: '2026-04-10', value: 0 },
-    { date: '2026-04-09', value: 3 },
-    { date: '2026-04-08', value: 4 },
-    { date: '2026-04-07', value: 5 },
-    { date: '2026-04-06', value: 1 },
+    { date: '2026-05-02', value: 1 },
+    { date: '2026-05-06', value: 2 },
+    { date: '2026-05-05', value: 3 },
+    { date: '2026-05-07', value: 2 },
+    { date: '2026-05-15', value: 1 },
+    { date: '2026-05-19', value: 5 },
+    { date: '2026-05-18', value: 1 },
+    { date: '2026-05-25', value: 1 },
+
   ];
   cal.paint({
     itemSelector: "#heatmap",
+    /*     date: {
+          start: inicio,
+          max: hoje // impede ir pra frente
+        }, */
     range: 1,
-    verticalOrientation: true,
+    verticalOrientation: false,
     gutter: 0,
     animationDuration: false,
     domain: {
-      label: { position: 'top' },
-      type: 'month',
+        type: 'month',
+        gutter: 10,
+        label: {
+          position: 'top',
+          text: (date) => dayjs(date).format('MMMM YYYY')
+        }
     },
     subDomain: {
       type: 'xDay',
-      radius: 5,
-      gutter: 5,
-      width: 50,
-      height: 30,
-      label: 'DD'
+      radius: 2,
+      gutter: 4,
+      width: 55,
+      height: 40,
+      label: "DD"
     },
     data: {
       source: data,
@@ -721,7 +698,6 @@
               (value ? value + ' Incidentes' : 'Sem Incidentes') +
               ' em ' +
               formatarData(dayjsDate)
-              // new Date(dayjsDate).toDateString()
             );
           },
         },
@@ -731,8 +707,8 @@
         {
           radius: 3,
           itemSelector: '#legenda-heatmap',
-          width: 13,
-          height: 13,
+          width: 18,
+          height: 18,
         }
       ],
 
@@ -840,7 +816,7 @@
       });
   }
   // listarUsuario()
-   function fecharModal(tipoModal) {
+  function fecharModal(tipoModal) {
     const modal = document.getElementsByClassName("fundoModal")
     modal[tipoModal].style.display = 'none';
   }
@@ -851,6 +827,6 @@
 
 
 <script type="module">
-  import {criarGraficos} from "../assets/javascript/servidor.js"
+  import { criarGraficos } from "../assets/javascript/servidor.js"
   criarGraficos()
 </script>
