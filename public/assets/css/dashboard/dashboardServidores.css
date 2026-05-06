@@ -483,6 +483,11 @@
   .acoesModal .btn-vermelho:hover {
     background-color: #b73636;
   }
+
+  .fundoModal .modalDetalhes {
+    height: 80%;
+    overflow-y: auto;
+  }
 }
 
 @media screen and (max-width: 1530px) {

@@ -2,6 +2,7 @@ function abrirModalEmpresa() {
   var modal = document.getElementById('companyModal');
   if (modal) {
     modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
 }
 
