@@ -7,6 +7,8 @@
   <title>Dashboard - Servidor</title>
   <link rel="stylesheet" href="../assets/css/dashboard.css">
   <link rel="stylesheet" href="../assets/css/dashboard/dashboardAlertas.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardAtmosGerente.css">
+
   <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
 
 
@@ -220,16 +222,165 @@
     </section>
     <section>
       <div class="container">
-        <div class="card-alerta alerta-medio">
-          <h4>CPU: SRV-PROD-02</h4>
-          <span>CPU do servidor SRV-PROD-02 está em 80%, alto risco para o sistema</span>
-          <p>23/04/2026</p>
-        </div>
-        <div class="card-alerta alerta-auto">
-          <h4>Disco: SRV-PROD-02</h4>
-          <span>Disco do servidor: SRV-PROD-02 está em 98%, baixa capacidade de armazenamento no sistemas</span>
-          <p>23/04/2026</p>
-        </div>
+        <table class="tabela-servidores">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Servidor</th>
+              <th>Nivel</th>
+              <th>Componente</th>
+              <th>Data</th>
+              <th>Trocar Status></th>
+            </tr>
+          </thead>
+          <tbody id="tabela_relatorios_gestor">
+            <tr>
+              <td><span class="etiqueta-bold etiqueta-vermelha">● ERRO</span></td>
+              <td><span class="nome-servidor">LAPTOP-LUANA</span>
+                <span class="servidor-id">#luana</span>
+              </td>
+
+              <td>
+                <div>
+                  <span class="etiqueta etiqueta-vermelha">Alto</span>
+                </div>
+              </td>
+              <td>
+                <div class="container-barra">
+                  <span>CPU</span>
+                </div>
+              </td>
+              <td>
+                <div class="container-barra">
+                  <span>20/04/2026 18:40:38</span>
+                </div>
+              </td>
+              <td>
+                <select class="etiqueta" onchange="trocarCor(this)">
+                  <option value="vermelho">Pendente</option>
+                  <option value="amarelo">Em andamento</option>
+                  <option value="verde">Resolvido</option>
+                </select>
+              </td>
+            </tr>
+                        <tr>
+              <td><span class="etiqueta-bold etiqueta-vermelha">● ERRO</span></td>
+              <td><span class="nome-servidor">LAPTOP-LUANA</span>
+                <span class="servidor-id">#luana</span>
+              </td>
+
+              <td>
+                <div>
+                  <span class="etiqueta etiqueta-laranja">Medio</span>
+                </div>
+              </td>
+              <td>
+                <div class="container-barra">
+                  <span>RAM</span>
+                </div>
+              </td>
+              <td>
+                <div class="container-barra">
+                  <span>20/04/2026 19:47:90</span>
+                </div>
+              </td>
+              <td>
+                <select class="etiqueta" onchange="trocarCor(this)">
+                  <option value="vermelho">Pendente</option>
+                  <option value="amarelo">Em andamento</option>
+                  <option value="verde">Resolvido</option>
+                </select>
+              </td>
+            </tr>
+                        <tr>
+              <td><span class="etiqueta-bold etiqueta-vermelha">● ERRO</span></td>
+              <td><span class="nome-servidor">LAPTOP-LUIZ</span>
+                <span class="servidor-id">#luiz</span>
+              </td>
+
+              <td>
+                <div>
+                  <span class="etiqueta etiqueta-laranja">Medio</span>
+                </div>
+              </td>
+              <td>
+                <div class="container-barra">
+                  <span>CPU</span>
+                </div>
+              </td>
+              <td>
+                <div class="container-barra">
+                  <span>20/04/2026 18:40:38</span>
+                </div>
+              </td>
+              <td>
+                <select class="etiqueta" onchange="trocarCor(this)">
+                  <option value="vermelho">Pendente</option>
+                  <option value="amarelo">Em andamento</option>
+                  <option value="verde">Resolvido</option>
+                </select>
+              </td>
+            </tr>
+                        <tr>
+              <td><span class="etiqueta-bold etiqueta-vermelha">● ERRO</span></td>
+              <td><span class="nome-servidor">LAPTOP-MATHEUS</span>
+                <span class="servidor-id">#matheus</span>
+              </td>
+
+              <td>
+                <div>
+                  <span class="etiqueta etiqueta-amarela">Baixo</span>
+                </div>
+              </td>
+              <td>
+                <div class="container-barra">
+                  <span>DISCO</span>
+                </div>
+              </td>
+              <td>
+                <div class="container-barra">
+                  <span>20/04/2026 12:05:50</span>
+                </div>
+              </td>
+              <td>
+                <select class="etiqueta" onchange="trocarCor(this)">
+                  <option value="vermelho">Pendente</option>
+                  <option value="amarelo">Em andamento</option>
+                  <option value="verde">Resolvido</option>
+                </select>
+              </td>
+            </tr>
+                        <tr>
+              <td><span class="etiqueta-bold etiqueta-vermelha">● ERRO</span></td>
+              <td><span class="nome-servidor">LAPTOP-LUIZ</span>
+                <span class="servidor-id">#luiz</span>
+              </td>
+
+              <td>
+                <div>
+                  <span class="etiqueta etiqueta-amarela">Baixo</span>
+                </div>
+              </td>
+              <td>
+                <div class="container-barra">
+                  <span>DISCO</span>
+                </div>
+              </td>
+              <td>
+                <div class="container-barra">
+                  <span>20/04/2026 21:59:42</span>
+                </div>
+              </td>
+              <td>
+                <select class="etiqueta" onchange="trocarCor(this)">
+                  <option value="vermelho">Pendente</option>
+                  <option value="amarelo">Em andamento</option>
+                  <option value="verde">Resolvido</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
   </main>
@@ -244,4 +395,16 @@
 <script>
   usuarionome.innerHTML = sessionStorage.NOME_USUARIO
   usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+
+  function trocarCor(select) {
+    select.classList.remove('etiqueta-vermelha', 'etiqueta-amarela', 'etiqueta-verde');
+
+    if (select.value === 'vermelho') {
+      select.classList.add('etiqueta-vermelha');
+    } else if (select.value === 'amarelo') {
+      select.classList.add('etiqueta-amarela');
+    } else if (select.value === 'verde') {
+      select.classList.add('etiqueta-verde');
+    }
+  }
 </script>
