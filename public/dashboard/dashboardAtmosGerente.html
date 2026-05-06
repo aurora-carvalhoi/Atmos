@@ -64,8 +64,14 @@
             <span>Home</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item area-contribuidor">
           <a href="./dashboardAlertas.html">
+            <img src="../assets/images/alert.svg" class="icon" alt="">
+            <span>Alertas</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardAlertasGerente.html">
             <img src="../assets/images/alert.svg" class="icon" alt="">
             <span>Alertas</span>
           </a>
@@ -126,12 +132,20 @@
                 <span>Home</span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item area-contribuidor">
               <a href="./dashboardAlertas.html">
                 <img src="../assets/images/alert.svg" class="icon" alt="">
                 <span>Alertas</span>
               </a>
             </li>
+
+            <li class="nav-item area-gestor">
+              <a href="./dashboardAlertasGerente.html">
+                <img src="../assets/images/alert.svg" class="icon" alt="">
+                <span>Alertas</span>
+              </a>
+            </li>
+
             <li class="nav-item area-gestor">
               <a href="./dashboardRelatorios.html">
                 <img src="../assets/images/documentos.svg" class="icon" alt="">
@@ -180,6 +194,8 @@
     </div>
 
   </nav>
+
+
   <main>
     <header>
       <div class="infos">
@@ -232,9 +248,9 @@
             <span>Com 1 ou mais componentes</span>
           </div>
           <div class="kpi">
-            <h4>?</h4>
-            <p id="kpi_4">?</p>
-            <span>?</span>
+            <h4>Servidor mais instavel</h4>
+            <p id="kpi_4" style="font-size: 20px;">LAPTOP-LUANA</p>
+            <span>Com maior quantidade de incidentes</span>
           </div>
         </div>
       </div>
@@ -519,7 +535,7 @@
       </div>
       <div class="card card-heat-map painel semPaddingBottom">
         <h3>Perfomance de Infraestrutura</h3>
-        <span>Mapa de quantidade de incidentes registrados</span>
+        <span>Mapa de quantidade de incidentes registrados no último mês</span>
         <div class="conteudo conteudo-heatmap">
           <div id="heatmap"></div>
           <div class="legende-heatmap">
@@ -662,7 +678,7 @@
 <!-- Heatmap -->
 <script>
   const hoje = new Date();
-  const inicio = new Date(hoje.getFullYear(), hoje.getMonth() - 1, 1);
+  const inicio = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
   const cal = new CalHeatmap();
   const data = [
     { date: '2026-05-02', value: 1 },
@@ -677,10 +693,10 @@
   ];
   cal.paint({
     itemSelector: "#heatmap",
-    /*     date: {
-          start: inicio,
-          max: hoje // impede ir pra frente
-        }, */
+    date: {
+      start: inicio,
+      max: hoje // impede ir pra frente
+    },
     range: 1,
     verticalOrientation: false,
     gutter: 0,

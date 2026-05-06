@@ -56,7 +56,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="./dashboardAlertas.html">
+          <a href="./dashboardAlertasGerente.html">
             <img src="../assets/images/alert.svg" class="icon" alt="">
             <span>Alertas</span>
           </a>
@@ -118,7 +118,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="./dashboardAlertas.html">
+              <a href="./dashboardAlertasGerente.html">
                 <img src="../assets/images/alert.svg" class="icon" alt="">
                 <span>Alertas</span>
               </a>
@@ -202,7 +202,7 @@
         </div>
       </div>
     </header>
-
+<!-- 
     <section class="section-kpis">
       <div class="secao-kpis">
         <div class="titulos-kpi">
@@ -252,7 +252,7 @@
 
         </div>
       </div>
-    </section>
+    </section> -->
 
     <section>
       <div class="filtros-busca">
@@ -555,89 +555,89 @@
 <!-- Graficos -->
 <script>
   // grafico de distribuição dos usuários
-  const distribuicaoUsuarios = document.getElementById("distribuicaoUsuarios")
-  new Chart(distribuicaoUsuarios, {
-    type: 'doughnut',
-    data: {
-      labels: ['Gestor', 'Analista'],
-      datasets: [{
-        label: 'Quantidade',
-        data: [6, 28],
-        borderWidth: 1,
-        backgroundColor: ["#00367A", "#0093CA"]
-      }],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: {
-            display: false
-          },
-          border: {
-            display: false,
-          },
-          ticks: {
-            display: false
-          }
-        },
-        x: {
-          grid: {
-            display: false
-          },
-          border: {
-            display: false
-          },
-          ticks: {
-            display: false
-          }
-        }
-      },
-      cutout: "70%",
-      responsive: true,
-      maintainAspectRatio: false
-    }
-  });
+  // const distribuicaoUsuarios = document.getElementById("distribuicaoUsuarios")
+  // new Chart(distribuicaoUsuarios, {
+  //   type: 'doughnut',
+  //   data: {
+  //     labels: ['Gestor', 'Analista'],
+  //     datasets: [{
+  //       label: 'Quantidade',
+  //       data: [6, 28],
+  //       borderWidth: 1,
+  //       backgroundColor: ["#00367A", "#0093CA"]
+  //     }],
+  //   },
+  //   options: {
+  //     scales: {
+  //       y: {
+  //         beginAtZero: true,
+  //         grid: {
+  //           display: false
+  //         },
+  //         border: {
+  //           display: false,
+  //         },
+  //         ticks: {
+  //           display: false
+  //         }
+  //       },
+  //       x: {
+  //         grid: {
+  //           display: false
+  //         },
+  //         border: {
+  //           display: false
+  //         },
+  //         ticks: {
+  //           display: false
+  //         }
+  //       }
+  //     },
+  //     cutout: "70%",
+  //     responsive: true,
+  //     maintainAspectRatio: false
+  //   }
+  // });
 
   // Grafico Crescimento de Usuários
-  const crescimentoUsuario = document.getElementById("crescimentoUsuario")
-  new Chart(crescimentoUsuario,
-    {
-      data: {
-        datasets: [
-          {
-            label: 'Usuários Ativos',
-            data: [12, 15, 20, 25, 30, 35],
-            type: 'line',
-            borderColor: '#00367A',
-            order: 1,
-            tension: 0.2,
-          }, {
-            label: 'Cadastros Novos',
-            data: [4, 4, 4, 6, 4, 3],
-            type: 'line',
-            borderColor: '#0093CA',
-            order: 2,
-            borderDash: [5, 5],
-            tension: 0.2,
-          },
+  // const crescimentoUsuario = document.getElementById("crescimentoUsuario")
+  // new Chart(crescimentoUsuario,
+  //   {
+  //     data: {
+  //       datasets: [
+  //         {
+  //           label: 'Usuários Ativos',
+  //           data: [12, 15, 20, 25, 30, 35],
+  //           type: 'line',
+  //           borderColor: '#00367A',
+  //           order: 1,
+  //           tension: 0.2,
+  //         }, {
+  //           label: 'Cadastros Novos',
+  //           data: [4, 4, 4, 6, 4, 3],
+  //           type: 'line',
+  //           borderColor: '#0093CA',
+  //           order: 2,
+  //           borderDash: [5, 5],
+  //           tension: 0.2,
+  //         },
 
-        ],
-        labels: ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar']
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    }
-  )
+  //       ],
+  //       labels: ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar']
+  //     },
+  //     options: {
+  //       responsive: true,
+  //       maintainAspectRatio: false
+  //     }
+  //   }
+  // )
 
-  function graficoDistribuicao(qtdGestor, qtdAnalista) {
-    var graficoDistribuicao = Chart.getChart('distribuicaoUsuarios')
-    graficoDistribuicao.data.datasets[0].data[0] = qtdGestor
-    graficoDistribuicao.data.datasets[0].data[1] = qtdAnalista
-    graficoDistribuicao.update()
-  }
+  // function graficoDistribuicao(qtdGestor, qtdAnalista) {
+  //   var graficoDistribuicao = Chart.getChart('distribuicaoUsuarios')
+  //   graficoDistribuicao.data.datasets[0].data[0] = qtdGestor
+  //   graficoDistribuicao.data.datasets[0].data[1] = qtdAnalista
+  //   graficoDistribuicao.update()
+  // }
 
 </script>
 
@@ -1019,11 +1019,11 @@
           `;
         }
         // document.getElementById('select_cad_supervisor').innerHTML = superiores
-        kpi_1.innerText = totalMembrosAtivos
-        kpi_2.innerText = totalMembrosInativos
-        kpi_3.innerText = membrosAdicionados
-        kpi_4.innerText = qtdSupervisor
-        graficoDistribuicao(qtdGestor, qtdAnalista)
+        // kpi_1.innerText = totalMembrosAtivos
+        // kpi_2.innerText = totalMembrosInativos
+        // kpi_3.innerText = membrosAdicionados
+        // kpi_4.innerText = qtdSupervisor
+        // graficoDistribuicao(qtdGestor, qtdAnalista)
         listaColaboradores.innerHTML = tabelaColaboradoresCadastrados;
       });
   }
