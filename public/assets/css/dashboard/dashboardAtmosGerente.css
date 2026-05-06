@@ -3,6 +3,37 @@
 
 @media screen {
 
+    .tabela-problema .tabela_problemas_gestor {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .tabela-problema h2 {
+        color: rgba(0, 0, 0, 0.816);
+        font-weight: 700;
+        border: 1px black
+    }
+
+    .tabela-problema button {
+        background-color: rgb(235, 235, 235);
+        border: 10px;
+        border-radius: 10px;
+    }
+    .tabela-problema button:hover {
+        background-color: rgb(207, 207, 207);
+    }
+
+    .tabela-problema th,
+    .tabela-problema td {
+        padding: 2px 4px;
+        color: rgba(0, 0, 0, 0.529);
+    }
+
+    .tabela-problema {
+        width: 100%;
+        table-layout: fixed;
+    }
+
     .section-kpis {
         display: block;
         margin-bottom: 1rem;
@@ -302,7 +333,7 @@
         align-items: start;
     }
 
-   
+
     .grade-equipe {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -403,14 +434,14 @@
         color: #9d2026;
     }
 
-    .conteudo-heatmap{
+    .conteudo-heatmap {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    #heatmap text{
+    #heatmap text {
         font-size: 1rem;
         opacity: 80%;
         font-weight: 500;
@@ -471,7 +502,7 @@
         border-color: #0349A750;
     }
 
-     .painel-serv {
+    .painel-serv {
         width: 100%;
         overflow-x: auto;
     }
@@ -530,18 +561,18 @@
         gap: 0.6rem;
     }
 
-    .card-heat-map h3{
+    .card-heat-map h3 {
         color: #004aad;
     }
 
-    .card-heat-map span{
+    .card-heat-map span {
         display: block;
         margin-top: .2rem;
         color: var(--color-opaque);
         font-size: 13px;
     }
 
-    .semPaddingBottom{
+    .semPaddingBottom {
         padding-bottom: 0;
     }
 
