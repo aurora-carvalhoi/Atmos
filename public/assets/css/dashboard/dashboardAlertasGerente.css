@@ -200,6 +200,28 @@
     .card-alerta {
         height: 425px;
     }
+}
+.kpi.alerta {
+    cursor: pointer;
+    transition: transform 0.5s ease,
+                opacity 0.5s ease,
+                outline 0.5s ease;
+}
 
+.kpi.alerta:hover {
+    transform: scale(1.06);
+}
 
+.kpi-ativo {
+    opacity: 1 !important;
+}
+
+.alerta-alto {
+    background-color: #ffdada;
+    border: solid 1px;
+    border-color: #C5373E;
+}
+
+.alerta-alto h4 {
+    color: #C5373E;
 }
