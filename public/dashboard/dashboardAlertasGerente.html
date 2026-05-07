@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="../assets/css/dashboard/dashboardAlertasGerente.css">
   <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
 
-
   <!-- ChartJS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -24,7 +23,7 @@
 </head>
 
 <body>
-   <nav class="sidebar" id="siderbar">
+  <nav class="sidebar" id="siderbar">
     <div class="logo-container">
       <a href="./dashboardAtmos.html" class="logo">
         <div class="cicle"></div>
@@ -123,14 +122,12 @@
                 <span>Alertas</span>
               </a>
             </li>
-
             <li class="nav-item nav-item-active area-gestor">
               <a href="./dashboardAlertasGerente.html">
                 <img src="../assets/images/alert.svg" class="icon" alt="">
                 <span>Alertas</span>
               </a>
             </li>
-
             <li class="nav-item area-gestor">
               <a href="./dashboardRelatorios.html">
                 <img src="../assets/images/documentos.svg" class="icon" alt="">
@@ -198,7 +195,6 @@
       </div>
 
       <div class="tela">
-
         <div>
           <h1>Alertas do Sistema</h1>
           <span>Visualização das ultimas ocorrencias do sistema</span>
@@ -213,19 +209,19 @@
           <h4>Informalçoes sobre as categorias</h4>
         </div>
         <div class="conjunto-kpis">
-          <div class="kpi alerta alerta-auto">
-            <h4>Alto</h5>
-              <span>Alertas que tem grande impacto no servidor, risco de interrução inesperada</span>
+          <div class="kpi alerta alerta-alto" filtro="alto">
+            <h4>Alto</h4>
+            <span>Alertas que tem grande impacto no servidor, risco de interrução inesperada</span>
           </div>
-          <div class="kpi alerta alerta-medio">
+          <div class="kpi alerta alerta-medio" filtro="medio">
             <h4>Médio</h4>
             <span>Alertas que tem grande impacto no servidor, risco de travamento ou instabilidades</span>
           </div>
-          <div class="kpi alerta alerta-baixo">
+          <div class="kpi alerta alerta-baixo" filtro="baixo">
             <h4>Baixo</h4>
             <span>Alerta de monitoramento, os parametros do servidor servidor estão na zona de risco</span>
           </div>
-          <div class="kpi alerta alerta-atualizacao">
+          <div class="kpi alerta alerta-atualizacao" filtro="atualizacao">
             <h4>Atualização/Resolvido</h4>
             <span>Aviso sobre adição, alteração ou remoção de usuários ou servidores do sistema ou correção de
               incidente</span>
@@ -233,34 +229,27 @@
         </div>
       </div>
     </section>
+
     <section>
       <div class="container">
-        <div class="card-alerta">
+
+        <!-- ALTO -->
+        <div class="card-alerta" nivel="alto">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-LUANA</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-vermelha">Pendente</span>
-            </div>
+            <div><span class="etiqueta etiqueta-vermelha">Pendente</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo-alto">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 11:10:00</p>
               </div>
               <div class="area-data conteudo conteudo-alto">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>--</p>
               </div>
             </div>
@@ -270,47 +259,29 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-alto">
-              <span>Uso crítico de memória RAM</span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo-alto">
-              <span>Nenhuma registrada</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-alto"><span>Uso crítico de memória RAM</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo-alto"><span>Nenhuma registrada</span></div>
           </div>
         </div>
 
-        <div class="card-alerta">
+        <div class="card-alerta" nivel="alto">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-LUIZ</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-vermelha">Pendente</span>
-            </div>
+            <div><span class="etiqueta etiqueta-vermelha">Pendente</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo-alto">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 11:05:00</p>
               </div>
               <div class="area-data conteudo conteudo-alto">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>--</p>
               </div>
             </div>
@@ -320,47 +291,29 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-alto">
-              <span>Uso crítico de memória RAM</span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo-alto">
-              <span>Nenhuma registrada</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-alto"><span>Uso crítico de memória RAM</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo-alto"><span>Nenhuma registrada</span></div>
           </div>
         </div>
 
-        <div class="card-alerta">
+        <div class="card-alerta" nivel="alto">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-LUANA</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-vermelha">Pendente</span>
-            </div>
+            <div><span class="etiqueta etiqueta-vermelha">Pendente</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo-alto">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 10:50:00</p>
               </div>
               <div class="area-data conteudo conteudo-alto">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>--</p>
               </div>
             </div>
@@ -370,47 +323,30 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-alto">
-              <span> Espaço em disco acima do limite seguro</span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo-alto">
-              <span>Nenhuma registrada</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-alto"><span>Espaço em disco acima do limite seguro</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo-alto"><span>Nenhuma registrada</span></div>
           </div>
         </div>
 
-        <div class="card-alerta">
+        <!-- MÉDIO -->
+        <div class="card-alerta" nivel="medio">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-NZ13</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-vermelha">Pendente</span>
-            </div>
+            <div><span class="etiqueta etiqueta-vermelha">Pendente</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo-medio">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 10:30:00</p>
               </div>
               <div class="area-data conteudo conteudo-medio">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>--</p>
               </div>
             </div>
@@ -420,47 +356,29 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-medio">
-              <span>Alto número de processos ativos</span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo-medio">
-              <span>Nenhuma registrada</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-medio"><span>Alto número de processos ativos</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo-medio"><span>Nenhuma registrada</span></div>
           </div>
         </div>
 
-        <div class="card-alerta">
+        <div class="card-alerta" nivel="medio">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-MATHEUS</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-laranja">Antamento</span>
-            </div>
+            <div><span class="etiqueta etiqueta-laranja">Andamento</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo-medio">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 10:55:00</p>
               </div>
               <div class="area-data conteudo conteudo-medio">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>05/05/2026, 11:10:50</p>
               </div>
             </div>
@@ -470,47 +388,29 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-medio">
-              <span>Crescimento de uso de memória</span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo-medio">
-              <span>Nenhuma registrada</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-medio"><span>Crescimento de uso de memória</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo-medio"><span>Nenhuma registrada</span></div>
           </div>
         </div>
 
-        <div class="card-alerta">
+        <div class="card-alerta" nivel="medio">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-NZ13</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-laranja">Antamento</span>
-            </div>
+            <div><span class="etiqueta etiqueta-laranja">Andamento</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo-medio">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 10:40:00</p>
               </div>
               <div class="area-data conteudo conteudo-medio">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>05/05/2026, 10:57:22</p>
               </div>
             </div>
@@ -520,47 +420,30 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-medio">
-              <span>Crescimento de uso de memória</span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo-medio">
-              <span>Nenhuma registrada</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-medio"><span>Crescimento de uso de memória</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo-medio"><span>Nenhuma registrada</span></div>
           </div>
         </div>
 
-        <div class="card-alerta">
+        <!-- ATUALIZAÇÃO -->
+        <div class="card-alerta" nivel="atualizacao">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-ANDERSON</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-azul">Resolvido</span>
-            </div>
+            <div><span class="etiqueta etiqueta-azul">Resolvido</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 09:50:00</p>
               </div>
               <div class="area-data conteudo conteudo">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>05/05/2026, 10:05:00</p>
               </div>
             </div>
@@ -570,47 +453,29 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-medio">
-              <span>Uso da CPU passando dos limites previstos</span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo">
-              <span>Pico de uso da CPU controlado</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-medio"><span>Uso da CPU passando dos limites previstos</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo"><span>Pico de uso da CPU controlado</span></div>
           </div>
         </div>
 
-        <div class="card-alerta">
+        <div class="card-alerta" nivel="atualizacao">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-AURORA</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-azul">Resolvido</span>
-            </div>
+            <div><span class="etiqueta etiqueta-azul">Resolvido</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 09:30:00</p>
               </div>
               <div class="area-data conteudo conteudo">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>05/05/2026, 09:50:00</p>
               </div>
             </div>
@@ -620,47 +485,29 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-medio">
-              <span>Crescimento de uso de memória</span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo">
-              <span>Ajuste de uso de memória</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-medio"><span>Crescimento de uso de memória</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo"><span>Ajuste de uso de memória</span></div>
           </div>
         </div>
 
-        <div class="card-alerta">
+        <div class="card-alerta" nivel="atualizacao">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-LUANA</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-azul">Resolvido</span>
-            </div>
+            <div><span class="etiqueta etiqueta-azul">Resolvido</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 09:10:00</p>
               </div>
               <div class="area-data conteudo conteudo">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>05/05/2026, 09:35:00</p>
               </div>
             </div>
@@ -670,47 +517,29 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-medio">
-              <span>Quantidade de conexões TCP fora do padrão esperado </span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo">
-              <span>Estabilização de conexões TCP</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-medio"><span>Quantidade de conexões TCP fora do padrão esperado</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo"><span>Estabilização de conexões TCP</span></div>
           </div>
         </div>
 
-        <div class="card-alerta">
+        <div class="card-alerta" nivel="atualizacao">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-LUIZ</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-azul">Resolvido</span>
-            </div>
+            <div><span class="etiqueta etiqueta-azul">Resolvido</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 08:50:00</p>
               </div>
               <div class="area-data conteudo conteudo">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>05/05/2026, 09:20:00</p>
               </div>
             </div>
@@ -720,47 +549,29 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-alto">
-              <span>Alto número de processos ativos </span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo">
-              <span>Limpeza de processos em excesso</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-alto"><span>Alto número de processos ativos</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo"><span>Limpeza de processos em excesso</span></div>
           </div>
         </div>
 
-        <div class="card-alerta">
+        <div class="card-alerta" nivel="atualizacao">
           <div class="topo-card">
             <div class="infos">
-              <div>
-                <img src="../assets/images/server.svg" alt="#">
-              </div>
+              <div><img src="../assets/images/server.svg" alt="#"></div>
               <h3>laptop-MATHEUS</h3>
             </div>
-            <div>
-              <span class="etiqueta etiqueta-azul">Resolvido</span>
-            </div>
+            <div><span class="etiqueta etiqueta-azul">Resolvido</span></div>
           </div>
           <div class="infos-principais">
             <div class="datas">
               <div class="area-data conteudo conteudo">
-                <span>
-                  <img src="" alt="">
-                  DATA DO ALERTA
-                </span>
+                <span>DATA DO ALERTA</span>
                 <p>05/05/2026, 08:30:00</p>
               </div>
               <div class="area-data conteudo conteudo">
-                <span>
-                  <img src="" alt="">
-                  ÚLTIMA ATUALIZAÇÃO
-                </span>
+                <span>ÚLTIMA ATUALIZAÇÃO</span>
                 <p>05/05/2026, 09:05:00</p>
               </div>
             </div>
@@ -770,18 +581,10 @@
             </div>
           </div>
           <div class="descricao">
-            <div class="topicos">
-              <span>Descrição: </span>
-            </div>
-            <div class="conteudo conteudo-medio">
-              <span>Espaço em disco acima do limite seguro</span>
-            </div>
-            <div class="topicos">
-              <span>Observações: </span>
-            </div>
-            <div class="conteudo conteudo">
-              <span>Otimização de uso de disco</span>
-            </div>
+            <div class="topicos"><span>Descrição: </span></div>
+            <div class="conteudo conteudo-medio"><span>Espaço em disco acima do limite seguro</span></div>
+            <div class="topicos"><span>Observações: </span></div>
+            <div class="conteudo conteudo"><span>Otimização de uso de disco</span></div>
           </div>
         </div>
 
@@ -791,12 +594,40 @@
 </body>
 
 </html>
+
 <!-- Scripts Funcionais -->
 <script src="../assets/javascript/datetime.js"></script>
 <script src="../assets/javascript/menu.js"></script>
 <script src="../assets/javascript/sessao.js"></script>
 
 <script>
-  usuarionome.innerHTML = sessionStorage.NOME_USUARIO
-  usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+  usuarionome.innerHTML = sessionStorage.NOME_USUARIO;
+  usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO;
+  
+function filtrar() {
+  var filtroAtivo = "";
+  var kpis = document.querySelectorAll(".kpi.alerta");
+  var cards = document.querySelectorAll(".card-alerta");
+  for (var i = 0; i < kpis.length; i++) {
+    kpis[i].onclick = function () {
+      var nivel = this.getAttribute("filtro");
+      if (filtroAtivo == nivel) {
+        filtroAtivo = "";
+        for (var j = 0; j < cards.length; j++) {
+          cards[j].style.display = "block";
+        }
+      } else {
+        filtroAtivo = nivel;
+        for (var j = 0; j < cards.length; j++) {
+          if (cards[j].getAttribute("nivel") == nivel) {
+            cards[j].style.display = "block";
+          } else {
+            cards[j].style.display = "none";
+          }
+        }
+      }
+    };
+  }
+}
+filtrar();
 </script>
