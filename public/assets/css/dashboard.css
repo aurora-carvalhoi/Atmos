@@ -591,11 +591,19 @@ body {
 
 /* Desktop */
 @media screen and (min-width: 1024px) {
+    body {
+        overflow: hidden;
+    }
+
     main {
-        width: 85%;
+        flex: 1;
+        min-width: 0;
         padding: 0px 2%;
         display: flex;
         flex-direction: column;
+        transition: margin-left 0.3s ease;
+        overflow-y: auto;
+        height: 100vh;
     }
 
     .sidebar {
@@ -608,6 +616,115 @@ body {
         border-right: 3px solid var(--color-blue1);
         position: sticky;
         top: 0;
+        overflow: hidden;
+        transition: width 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .sidebar.mini {
+        width: 68px;
+    }
+
+    .sidebar-expandida {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background-color: var(--color-blue1, #3879FC);
+        border: none;
+        cursor: pointer;
+        color: white;
+        flex-shrink: 0;
+        transition: transform 0.3s ease, background-color 0.2s ease;
+        margin-left: auto;
+    }
+
+    .sidebar-expandida:hover {
+        background-color: #1e59d0;
+    }
+
+    .sidebar.mini .sidebar-expandida {
+        transform: rotate(180deg);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sidebar-expandida svg {
+        width: 16px;
+        height: 16px;
+        fill: none;
+        stroke: white;
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .sidebar.mini .logo-container {
+        justify-content: center;
+        padding: 20px 10px;
+    }
+
+    .sidebar.mini .logo span,
+    .sidebar.mini .logo-text {
+        display: none;
+    }
+
+    .sidebar.mini .logo .cicle {
+        width: 14px;
+        height: 14px;
+        margin-right: 0;
+    }
+
+    .sidebar.mini .nav-item a span,
+    .sidebar.mini .nav-category,
+    .sidebar.mini .info-user h3,
+    .sidebar.mini .info-user h5,
+    .sidebar.mini .info-user div:last-child {
+        display: none;
+    }
+
+    .sidebar.mini .nav-item a {
+        justify-content: center;
+        padding: 15px 0;
+    }
+
+    .sidebar.mini .icon {
+        margin-right: 0;
+    }
+
+    .sidebar.mini .info-user {
+        justify-content: center;
+        padding: 12px 0;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .sidebar.mini .nav-item {
+        position: relative;
+    }
+
+    .sidebar.mini .nav-item a::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        left: 68px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #1a1a2e;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 13px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 1000;
+        transition: opacity 0.2s ease;
+    }
+
+    .sidebar.mini .nav-item a:hover::after {
+        opacity: 1;
     }
 
     .sidebar-contribuidor {
@@ -635,8 +752,12 @@ body {
     }
 
     .logo-container {
-        padding: 30px 20px;
+        padding: 20px 20px;
         border-bottom: solid 3px var(--color-blue1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
     }
 
     .logo {
