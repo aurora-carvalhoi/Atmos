@@ -1,0 +1,291 @@
+  <!DOCTYPE html>
+  <html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Servidor</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardAlertas.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardAtmosGerente.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardAnalisePreditiva.css">
+
+
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+
+    <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+
+  </head>
+
+  <body>
+    <nav class="sidebar" id="siderbar">
+      <div class="logo-container">
+        <a href="./dashboardAtmos.html" class="logo">
+          <div class="cicle"></div>
+          <span>ATMOS</span>
+        </a>
+      </div>
+
+      <ul class="nav-links">
+        <ul>
+          <li class="nav-category">
+            <span>PRINCIPAL</span>
+          </li>
+          <li class="nav-item area-contribuidor">
+            <a href="./dashboardAtmos.html">
+              <img src="../assets/images/pc.svg" class="icon" alt="">
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item area-gestor">
+            <a href="./dashboardAtmosGerente.html">
+              <img src="../assets/images/pc.svg" class="icon" alt="">
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item nav-item-active">
+            <a href="./dashboardAlertas.html">
+              <img src="../assets/images/alert.svg" class="icon" alt="">
+              <span>Alertas</span>
+            </a>
+          </li>
+          <li class="nav-item area-gestor">
+            <a href="./dashboardRelatorios.html">
+              <img src="../assets/images/documentos.svg" class="icon" alt="">
+              <span>Relatorios</span>
+            </a>
+          </li>
+        </ul>
+        <ul>
+          <li class="nav-category">
+            <span>INFRAESTRUTURA</span>
+          </li>
+          <li class="nav-item">
+            <a href="./dashboardServidor.html">
+              <img src="../assets/images/server.svg" class="icon" alt="">
+              <span>Servidores</span>
+            </a>
+          </li>
+          <li class="nav-item area-gestor">
+            <a href="./dashboardEquipe.html">
+              <img src="../assets/images/user.svg" class="icon" alt="">
+              <span>Equipe</span>
+            </a>
+          </li>
+        </ul>
+      </ul>
+
+      <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
+        <div class="img-user" id="usarioimagem">
+          <img alt="A">
+        </div>
+        <div>
+          <h3><span id="usuarionome">usuário</span></h3>
+          <h5><span id="usuarioemail">email</span></h3>
+        </div>
+      </div>
+
+      <!--Menu mobile-->
+      <div class="menu" style="display: none" id="menu">
+        <div class="menu-container" id="menu-mobile">
+          <ul>
+            <ul>
+              <li class="nav-category">
+                <span>PRINCIPAL</span>
+              </li>
+              <li class="nav-item area-contribuidor">
+                <a href="./dashboardAtmos.html">
+                  <img src="../assets/images/pc.svg" class="icon" alt="">
+                  <span>Home</span>
+                </a>
+              </li>
+              <li class="nav-item area-gestor">
+                <a href="./dashboardAtmosGerente.html">
+                  <img src="../assets/images/pc.svg" class="icon" alt="">
+                  <span>Home</span>
+                </a>
+              </li>
+              <li class="nav-item nav-item-active">
+                <a href="./dashboardAlertas.html">
+                  <img src="../assets/images/alert.svg" class="icon" alt="">
+                  <span>Alertas</span>
+                </a>
+              </li>
+              <li class="nav-item area-gestor">
+                <a href="./dashboardRelatorios.html">
+                  <img src="../assets/images/documentos.svg" class="icon" alt="">
+                  <span>Relatorios</span>
+                </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="nav-category">
+                <span>INFRAESTRUTURA</span>
+              </li>
+              <li class="nav-item">
+                <a href="./dashboardServidor.html">
+                  <img src="../assets/images/server.svg" class="icon" alt="">
+                  <span>Servidores</span>
+                </a>
+              </li>
+              <li class="nav-item area-gestor">
+                <a href="./dashboardEquipe.html">
+                  <img src="../assets/images/user.svg" class="icon" alt="">
+                  <span>Equipe</span>
+                </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="nav-category">
+                <span>Usuário</span>
+              </li>
+              <li class="nav-item ">
+                <a href="./dashboardPerfil.html">
+                  <img src="../assets/images/user.svg" class="icon" alt="">
+                  <span>Perfil</span>
+                </a>
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+      <!-- Menu Icon -->
+      <div class="container-menu">
+        <div class="menu-icon" id="menu-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+    </nav>
+    <div class="principal">
+
+        <div class="topo">
+            <div class="caminho">
+                <span>Infraestrutura</span>
+                <span>›</span>
+                <span class="ativo">Análise Preditiva</span>
+            </div>
+            <div class="topo-direita">
+                <div class="emblema-sistema"><span></span> Sistema Operacional</div>
+                <div class="topo-hora" id="relogio">—</div>
+            </div>
+        </div>
+
+        <div class="conteudo">
+
+            <div class="cabecalho-pagina">
+                <h1>Análise Preditiva de Temperatura</h1>
+                <p>Acompanhe como o uso da CPU influencia a temperatura do servidor e identifique riscos antes que
+                    afetem o desempenho.</p>
+            </div>
+
+            <div class="grade-servidor">
+
+                <div class="campo-servidor">
+                    <h1 class="campo-rotulo">Servidor:</h1>
+                    <div class="campo-valor" id="nome-servidor">SRV-METEOROLOGIA-01</div>
+                </div>
+
+                <div class="campo-servidor">
+                    <h1 class="campo-rotulo">Status:</h1>
+                    <div class="campo-status" id="emblema-status">—</div>
+                </div>
+
+            </div>
+
+            <div class="grade-kpi">
+
+                <div class="cartao-kpi" id="cartao-temp-atual">
+                    <h3>Temperatura Atual</h3>
+                    <div class="kpi-valor" id="valor-temp-atual">—</div>
+                    <div class="kpi-descricao">Temperatura medida no momento</div>
+                </div>
+
+                <div class="cartao-kpi" id="cartao-temp-prev">
+                    <h3>Temperatura Prevista</h3>
+                    <div class="kpi-valor" id="valor-temp-prev">—</div>
+                    <div class="kpi-descricao">Baseada no comportamento típico da CPU (p90)</div>
+                </div>
+
+                <div class="cartao-kpi" id="cartao-cpu">
+                    <h3>Uso de CPU (p90)</h3>
+                    <div class="kpi-valor" id="valor-cpu">—</div>
+                    <div class="kpi-descricao">90% das leituras ficam abaixo deste valor</div>
+                </div>
+
+            </div>
+
+            <div class="cartao-secao">
+                <div class="secao-titulo">Relação CPU × Temperatura</div>
+                <div class="secao-subtitulo">Regressão linear baseada nos dados coletados</div>
+                <div class="grafico-wrapper">
+                    <canvas id="grafico"></canvas>
+                </div>
+                <div class="interpretacao">
+                    <h4>Interpretação</h4>
+                    <p id="texto-interpretacao">Aguardando dados...</p>
+                </div>
+            </div>
+
+            <div id="bloco-recomendacoes" class="cartao-secao" style="display:none">
+                <div class="secao-titulo">Recomendações</div>
+                <div class="secao-subtitulo">Ações sugeridas com base no status atual do servidor</div>
+                <div class="grade-recomendacoes" id="grade-rec"></div>
+            </div>
+
+            <div id="bloco-estavel" style="display:none">
+                <div class="banner-estavel">
+                    <div class="banner-estavel-icone">✅</div>
+                    <div>
+                        <h4>Servidor estável</h4>
+                        <p>Operando dentro dos parâmetros normais. Nenhuma ação necessária no momento.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </body>
+
+  </html>
+  <!-- Scripts Funcionais -->
+  <script src="../assets/javascript/datetime.js"></script>
+  <script src="../assets/javascript/menu.js"></script>
+  <script src="../assets/javascript/sessao.js"></script>
+
+  <script>
+    usuarionome.innerHTML = sessionStorage.NOME_USUARIO
+    usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+
+    function trocarCor(select) {
+      select.classList.remove('etiqueta-vermelha', 'etiqueta-amarela', 'etiqueta-verde');
+
+      if (select.value === 'vermelho') {
+        select.classList.add('etiqueta-vermelha');
+      } else if (select.value === 'amarelo') {
+        select.classList.add('etiqueta-amarela');
+      } else if (select.value === 'verde') {
+        select.classList.add('etiqueta-verde');
+      }
+    }
+
+      window.onload = function() {
+    var selects = document.querySelectorAll('select.etiqueta');
+
+    for (var i = 0; i < selects.length; i++) {
+      trocarCor(selects[i]);
+    }
+  }
+  
