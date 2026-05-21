@@ -619,10 +619,13 @@ body {
         overflow: hidden;
         transition: width 0.3s ease;
         flex-shrink: 0;
+        z-index: 100;
     }
 
     .sidebar.mini {
         width: 68px;
+        z-index: 100;
+
     }
 
     .sidebar-expandida {
@@ -639,16 +642,22 @@ body {
         flex-shrink: 0;
         transition: transform 0.3s ease, background-color 0.2s ease;
         margin-left: auto;
+        z-index: 100;
+
     }
 
     .sidebar-expandida:hover {
         background-color: #1e59d0;
+        z-index: 100;
+
     }
 
     .sidebar.mini .sidebar-expandida {
         transform: rotate(180deg);
         margin-left: auto;
         margin-right: auto;
+        z-index: 100;
+
     }
 
     .sidebar-expandida svg {
@@ -659,22 +668,30 @@ body {
         stroke-width: 2.5;
         stroke-linecap: round;
         stroke-linejoin: round;
+        z-index: 100;
+
     }
 
     .sidebar.mini .logo-container {
         justify-content: center;
         padding: 20px 10px;
+        z-index: 100;
+
     }
 
     .sidebar.mini .logo span,
     .sidebar.mini .logo-text {
         display: none;
+        z-index: 100;
+
     }
 
     .sidebar.mini .logo .cicle {
         width: 14px;
         height: 14px;
         margin-right: 0;
+        z-index: 100;
+
     }
 
     .sidebar.mini .nav-item a span,
@@ -683,15 +700,21 @@ body {
     .sidebar.mini .info-user h5,
     .sidebar.mini .info-user div:last-child {
         display: none;
+        z-index: 100;
+
     }
 
     .sidebar.mini .nav-item a {
         justify-content: center;
         padding: 15px 0;
+        z-index: 100;
+
     }
 
     .sidebar.mini .icon {
         margin-right: 0;
+        z-index: 100;
+
     }
 
     .sidebar.mini .info-user {
@@ -699,10 +722,14 @@ body {
         padding: 12px 0;
         margin-left: 8px;
         margin-right: 8px;
+        z-index: 100;
+
     }
 
     .sidebar.mini .nav-item {
         position: relative;
+        z-index: 100;
+
     }
 
     .sidebar.mini .nav-item a::after {
@@ -721,30 +748,44 @@ body {
         pointer-events: none;
         z-index: 1000;
         transition: opacity 0.2s ease;
+        z-index: 100;
+
     }
 
     .sidebar.mini .nav-item a:hover::after {
         opacity: 1;
+        z-index: 100;
+
     }
 
     .sidebar-contribuidor {
         background-color: var(--color-nav-contribuidor);
+        z-index: 100;
+
     }
 
     .sidebar-contribuidor span {
+        z-index: 100;
+
         color: white;
     }
 
     .sidebar-contribuidor .area-contribuidor {
         display: block;
+        z-index: 100;
+
     }
 
     .sidebar-contribuidor .area-gestor {
         display: none;
+        z-index: 100;
+
     }
 
     .sidebar-gestor .area-gestor {
         display: block;
+        z-index: 100;
+
     }
 
     .sidebar-gestor .area-contribuidor {
