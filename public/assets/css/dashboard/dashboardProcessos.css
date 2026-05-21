@@ -2,6 +2,14 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
 :root {
   --cor-fundo: #f5f6f8;
   --cor-azul: #00367a;
@@ -12,18 +20,19 @@
   --menu-lateral-aberto: clamp(210px, 15vw, 260px);
   --menu-lateral-fechado: 72px;
   --largura-menu-lateral: var(--menu-lateral-aberto);
-  --espaco-pagina-x: clamp(16px, 1.8vw, 28px);
-  --espaco-pagina-y: clamp(16px, 2vh, 24px);
-  --espaco-entre-containers: clamp(16px, 1.8vw, 24px);
+  --espaco-pagina-x: clamp(5px, 0.6vw, 10px);
+  --espaco-pagina-y: clamp(5px, 0.6vh, 10px);
+  --espaco-entre-containers: clamp(8px, 1.6vw, 24px);
 }
 
 body {
-  margin: 0;
   display: flex;
   height: 100vh;
+
   overflow: hidden;
+
   background-color: var(--cor-fundo);
- font-family:"Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 h1,
@@ -39,25 +48,12 @@ body.menu_fechado {
 
 /* MENU LATERAL */
 
-@media (max-width: 900px) {
-  #div_cabecalho_lateral,
-  .sidebar,
-  #siderbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    height: 100vh;
-  }
-}
-
 #div_cabecalho_lateral {
   width: var(--largura-menu-lateral);
   height: 100vh;
   flex: 0 0 var(--largura-menu-lateral);
   overflow: hidden;
   z-index: 100;
-  flex-shrink: 0;
-
 }
 
 #div_minimizada {
@@ -70,15 +66,17 @@ body.menu_fechado {
   border-right: 0 solid transparent;
   z-index: 100;
   flex-shrink: 0;
-
 }
 
-/* CONTEÚDO PRINCIPAL */
+/* CONTEUDO PRINCIPAL */
 
 #div_conteudo_principal {
-  width: calc(100% - var(--largura-menu-lateral));
-  height: 100vh;
+  flex: 1 1 auto;
+
+  width: auto;
   min-width: 0;
+
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -93,10 +91,10 @@ body.menu_fechado {
 
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 5px;
 
-  margin-top: var(--espaco-pagina-y);
-  margin-left: var(--espaco-pagina-x);
+  margin-top: -5px;
+  margin-left: -2px;
 }
 
 #btn_return {
@@ -128,6 +126,7 @@ body.menu_fechado {
 }
 
 #div_textos_title {
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
@@ -138,6 +137,7 @@ body.menu_fechado {
   color: var(--cor-azul);
   font-size: clamp(1.2rem, 1.8vw, 1.55rem);
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 #div_textos_title p {
@@ -145,22 +145,31 @@ body.menu_fechado {
 
   color: gray;
   font-size: 0.92rem;
+  overflow-wrap: anywhere;
 }
 
-/* ÁREA PRINCIPAL */
+/* AREA PRINCIPAL */
 
 #div_area_conteudo {
-  flex: 1;
+  flex: 1 1 auto;
+
+  max-width: 100%;
+
+  min-width: 0;
   min-height: 0;
 
   display: flex;
   gap: var(--espaco-entre-containers);
 
   margin-top: var(--espaco-pagina-y);
-  padding: 0 var(--espaco-pagina-x) var(--espaco-pagina-y)
-    var(--espaco-pagina-x);
 
-  overflow: hidden;
+  padding:
+    0
+    var(--espaco-pagina-x)
+    calc(var(--espaco-pagina-y) + 24px);
+
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .container_padrao {
@@ -175,7 +184,11 @@ body.menu_fechado {
 
 #div_container_processList {
   flex: 0 0 37%;
-  min-width: 0;
+  min-width: 280px;
+  max-width: 460px;
+
+  max-height: 100vh;
+  height: auto;
 
   display: flex;
   flex-direction: column;
@@ -186,8 +199,7 @@ body.menu_fechado {
 #div_registrados {
   flex-shrink: 0;
 
-  padding: clamp(10px, 1.4vh, 16px) 14px clamp(8px, 1.2vh, 12px)
-    14px;
+  padding: clamp(10px, 1.4vh, 16px) 14px clamp(8px, 1.2vh, 12px);
 }
 
 #div_registrados h3 {
@@ -199,7 +211,7 @@ body.menu_fechado {
 }
 
 #div_registrados p {
-  margin: 2px 0 0 0;
+  margin: 2px 0 0;
 
   color: gray;
   font-size: 0.88rem;
@@ -212,12 +224,12 @@ body.menu_fechado {
   display: flex;
   flex-direction: column;
 
-  padding: 0 14px 14px 14px;
+  padding: 0 14px 14px;
   overflow: hidden;
 }
 
 #div_infoServidor {
-  height: clamp(52px, 6.5vh, 66px);
+  min-height: clamp(52px, 6.5vh, 66px);
   flex-shrink: 0;
 
   display: flex;
@@ -369,7 +381,7 @@ body.menu_fechado {
 /* DASHBOARD */
 
 #div_dashboardProcessos {
-  flex: 1;
+  flex: 1 1 0;
   min-width: 0;
 
   display: flex;
@@ -383,8 +395,7 @@ body.menu_fechado {
 }
 
 #div_processName {
-  padding: clamp(12px, 1.6vh, 18px) clamp(14px, 1.4vw, 20px) 0
-    clamp(14px, 1.4vw, 20px);
+  padding: clamp(12px, 1.6vh, 18px) clamp(14px, 1.4vw, 20px) 0;
 }
 
 #titulo_nomeProcesso {
@@ -393,21 +404,24 @@ body.menu_fechado {
   color: var(--cor-azul);
   font-size: clamp(1.1rem, 1.8vw, 1.4rem);
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 #nomeProcesso {
-  margin: 2px 0 0 0;
+  margin: 2px 0 0;
 
   color: gray;
   font-size: 0.9rem;
+  overflow-wrap: anywhere;
 }
 
 #div_grafico {
-  width: calc(100% - clamp(44px, 5vw, 70px));
+  width: calc(100% - clamp(34px, 4vw, 56px));
   height: clamp(120px, 22vh, 210px);
 
-  margin: clamp(10px, 1.6vh, 18px) auto 0 auto;
-  margin-left: clamp(34px, 4vw, 56px);
+  margin-top: clamp(10px, 1.6vh, 18px);
+  margin-right: auto;
+  margin-left: clamp(24px, 3vw, 44px);
 
   overflow: visible;
 }
@@ -452,27 +466,34 @@ body.menu_fechado {
 /* KPIS */
 
 #div_posicao_kpis {
-  flex: 1;
-  width: calc(100% - clamp(28px, 4vw, 60px));
+  flex: 1 1 auto;
+
+  width: calc(100% - clamp(24px, 3vw, 48px));
+
   min-height: 0;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
   gap: clamp(12px, 1.6vw, 20px);
 
-  margin: clamp(14px, 2vh, 24px) auto clamp(14px, 2vh, 24px) auto;
+  margin: clamp(14px, 2vh, 24px) auto;
+
+  overflow: hidden;
 }
 
 .container_kpis {
   position: relative;
-  min-height: 0;
+  min-width: 0;
+  min-height: 120px;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   padding: clamp(10px, 1.2vw, 14px) clamp(12px, 1.6vw, 22px)
-    clamp(10px, 1.4vw, 16px) clamp(12px, 1.6vw, 22px);
+    clamp(10px, 1.4vw, 16px);
 }
 
 .div_nomekpi {
@@ -491,6 +512,7 @@ body.menu_fechado {
 
   font-size: clamp(2.8rem, 5.5vw, 6.5rem);
   font-weight: bold;
+  line-height: 1;
 }
 
 .kpi_azul {
@@ -521,18 +543,28 @@ body.menu_fechado {
 
 /* RESPONSIVIDADE */
 
-@media (max-height: 720px) {
+/* regras globais importantes para permitir scroll */
+
+/* evita travamento por containers flex */
+
+/* telas baixas desktop */
+@media (max-height: 720px) and (min-width: 901px) {
+
   #div_processTitle {
-    margin-top: 12px;
+    margin-top: 8px;
   }
 
   #div_area_conteudo {
-    margin-top: 12px;
-    padding-bottom: 12px;
+    margin-top: 10px;
+    padding-bottom: 16px;
+    max-height: 100vh;
+
+    height: auto;
+    min-height: fit-content;
   }
 
   #div_infoServidor {
-    height: 50px;
+    min-height: 50px;
   }
 
   .div_itemProcesso {
@@ -547,72 +579,198 @@ body.menu_fechado {
   #div_posicao_kpis {
     gap: 10px;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .div_conteudo_kpi {
     font-size: clamp(2.4rem, 5vw, 4.5rem);
   }
+
+  .sidebar,
+  #siderbar {
+    z-index: 1000;
+    position: absolute;
+  }
 }
 
-@media (max-width: 1100px) {
+/* Tablet horizontal / desktop estreito */
+@media (min-width: 901px) and (max-width: 1100px) {
+
   #div_area_conteudo {
-    overflow-y: auto;
+
+    gap: 12px;
+
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-bottom: 20px;
+
+    height: auto;
+    min-height: fit-content;
+
+    flex: 1 1 auto;
   }
 
   #div_container_processList {
-    flex-basis: 38%;
+    flex: 0 0 34%;
+
+    min-width: 250px;
+    max-width: 340px;
+  }
+
+  #div_dashboardProcessos {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  #div_grafico {
+    width: calc(100% - 32px);
+    margin-left: 24px;
+  }
+
+  #div_posicao_kpis {
+    width: calc(100% - 20px);
+
+    gap: 12px;
+  }
+
+  .div_conteudo_kpi {
+    font-size: clamp(2.4rem, 5vw, 5.2rem);
+  }
+
+  .sidebar,
+  #siderbar {
+    z-index: 1000;
+    position: fixed;
   }
 }
 
+/* Tablet vertical e mobile */
 @media (max-width: 900px) {
-  :root {
-    --largura-menu-lateral: 64px;
-  }
 
   body {
-    overflow: auto;
+    height: auto;
+    min-height: 100vh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    -webkit-overflow-scrolling: touch;
   }
 
   #div_conteudo_principal {
-    display: flex;
     height: auto;
     min-height: 100vh;
+
     overflow: visible;
   }
 
   #div_area_conteudo {
-    height: auto;
+
+    display: flex;
     flex-direction: column;
+
+    align-items: center;
+
+    gap: 14px;
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding:
+      0
+      var(--espaco-pagina-x)
+      28px;
+
+    height: auto;
+    min-height: fit-content;
+
+    flex: 1 1 auto;
+
     overflow: visible;
   }
 
-  #div_container_processList,
-  #div_dashboardProcessos {
-    width: 100%;
-    flex: none;
-  }
-
+  /* lista em cima */
   #div_container_processList {
-    height: 400px;
+
+    width: 100%;
+    max-width: 720px;
+
+    min-width: 0;
+
+    order: 1;
+
+    height: auto;
+    max-height: none;
+
+    overflow: visible;
   }
 
+  /* dashboard embaixo */
   #div_dashboardProcessos {
-    min-height: 720px;
-  }
-}
 
-@media (max-width: 600px) {
+    width: 100%;
+    max-width: 720px;
+
+    min-width: 0;
+
+    order: 2;
+
+    height: auto;
+
+    overflow: visible;
+  }
+
+  #div_infoServidor {
+    height: 50px;
+  }
+
+  .div_itemProcesso {
+    height: 44px;
+    margin-bottom: 8px;
+  }
+
+  #div_grafico {
+
+    width: calc(100% - 28px);
+
+    height: 100px;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   #div_posicao_kpis {
+
+    width: 100%;
+
+    display: grid;
     grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    height: auto;
+    min-height: fit-content;
+
+    flex: 0 0 auto;
+
+    overflow: visible;
   }
 
-  #div_dashboardProcessos {
-    min-height: 920px;
+  .container_kpis {
+    min-height: 140px;
   }
 
-  #div_textoServidor {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0;
+  .div_conteudo_kpi {
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+  }
+
+  .sidebar,
+  #siderbar {
+    z-index: 1000;
+    position: fixed;
   }
 }
