@@ -215,9 +215,12 @@
           </div>
 
           <div class="cartao-kpi" id="cartao-temp-prev">
-            <h3>Temperatura Prevista</h3>
+            <h3>Temperatura Prevista + 1 hora</h3>
             <div class="kpi-valor" id="valor-temp-prev">—</div>
-            <div class="kpi-descricao">Temperatura prevista para o momento</div>
+            <div class="kpi-faixa">
+              <span class="normal">Faixa Normal: 45°C</span>
+              <span class="critico">Limite Crítico: 85°C</span>
+            </div>
           </div>
 
           <div class="cartao-kpi" id="cartao-cpu">
@@ -283,7 +286,7 @@
           <div class="grafico-wrapper">
             <canvas id="graficoComparacao"></canvas>
           </div>
-     
+
           <div class="mini-interpretacao" id="bloco-desvio">
 
             <div class="mini-icone" id="icone-desvio">
@@ -293,7 +296,7 @@
             <div>
 
               <h4>
-                Desvio térmico
+                Tendência
               </h4>
 
               <p id="texto-desvio">
