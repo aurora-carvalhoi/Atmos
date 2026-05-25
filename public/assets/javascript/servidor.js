@@ -3,507 +3,428 @@ async function buscarClient() {
   const data = await res.json()
   return data
 }
+
 const dataClient = await buscarClient()
-const ultimoValor = (dataClient.resumo.total_registros / dataClient.resumo.hosts_ativos) - 1
+const totalRegistros = dataClient.resumo.total_registros
+const hostsAtivos = dataClient.resumo.hosts_ativos
+const indiceUltimaLeitura = (totalRegistros / hostsAtivos) - 1
 
-const listaEtiquetas = [
-  "etiqueta-verde",
-  "etiqueta-amarela",
-  "etiqueta-vermelha"
-]
-const listaStatus = [
-  "Operando",
-  "Atenção",
-  "Critico",
-]
-const listaCoresBarras = [
-  "#3879fc",
-  "#fcd838",
-  "#fc3838",
-]
+const classesPorStatus = ["etiqueta-verde", "etiqueta-amarela", "etiqueta-vermelha"]
+const textosPorStatus = ["Oper.", "Aten.", "Crit."]
+const coresPorNivel = ["#3879fc", "#f59e0b", "#dc2626"]
 
-// OverView
-function listarResumoServidores() {
-  var servidores = ''
-  var listaServidores = ''
-  for (var i = 0; i < dataClient.resumo.hosts_ativos; i++) {
-    var servidor = dataClient.hosts[i]
-    servidores += `
-     <div class="servidor" >   
-      <div class="indentificador">
-        <div></div>
-        <h3>${servidor.hostname}</h3>
-      </div>
-      <div class="infos">
-        <span>10.0.1.30</span>
-        <span>Ubuntu 22</span>
-      </div>
-      <div class="recursos">
-        <span>CPU - ${servidor.metricas.cpu_percent[ultimoValor]}%</span>
-        <span>RAM - ${servidor.metricas.ram_perc[ultimoValor]}%</span>
-        <span>DISCO - ${servidor.metricas.disco_porcentagem[ultimoValor]}%</span>
-      </div>  
-     </div>
-  `
+//LIMITE
+const LIMITES_ALERTA = {
+  cpu: { atencao: 80, critico: 90 },
+  ram: { atencao: 75, critico: 90 },
+  disco: { atencao: 85, critico: 95 },
+  temp: { atencao: 85, critico: 95 }
+}
 
-    listaServidores += `
-    <option value="${i}">${servidor.hostname}</option>
-  `
-
+function nivelBarra(valor, tipo) {
+  if (valor >= LIMITES_ALERTA[tipo].critico) {
+    return 2
   }
-  // document.getElementById('resulmoServidores').innerHTML = servidores
-  document.getElementById('select_lista_servidores').innerHTML = listaServidores
-}
-
-function graficoResulmoServidores() {
-  var servidor = dataClient.hosts[5]
-  let data = [];
-  for (var i = 0; i <= ultimoValor; i++) {
-    data[i] = new Date(servidor.metricas.datahora[i]).toLocaleTimeString()
+  if (valor >= LIMITES_ALERTA[tipo].atencao) {
+    return 1
   }
-  const perfomaInfra = document.getElementById("perfomaInfra")
-  new Chart(perfomaInfra,
-    {
-      data: {
-        datasets: [
-          {
-            label: 'RAM (%)',
-            data: servidor.metricas.ram_perc,
-            type: 'line',
-            order: 1,
-            tension: 0.2,
-          }, {
-            label: 'CPU (%)',
-            data: servidor.metricas.cpu_percent,
-            type: 'line',
-            order: 2,
-            tension: 0.2,
-          }
-        ],
-        labels: data,
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scale: {
-          x: {
-            ticks: {
-              maxTicksLimit: 10
-            }
-          }
-        }
-      }
-    }
-  )
+  return 0
 }
 
-function trocarGrafico(idServidor) {
-  const servidor = dataClient.hosts[idServidor]
-  var graficoPorcentagens = Chart.getChart('perfomaInfra')
-  graficoPorcentagens.data.datasets[0].data = servidor.metricas.ram_perc
-  graficoPorcentagens.data.datasets[1].data = servidor.metricas.cpu_percent
-  graficoPorcentagens.update()
-}
-
-function trocarKpi(kpi) {
-  var kpi1 = document.getElementById('conteudo_recursos_kpi_1')
-  var kpi2 = document.getElementById('conteudo_recursos_kpi_2')
-  var kpp3 = document.getElementById('conteudo_recursos_kpi_3')
-  var legenda1 = document.getElementById('conteudo_recursos_legenda_1')
-  var legenda2 = document.getElementById('conteudo_recursos_legenda_2')
-  var legenda3 = document.getElementById('conteudo_recursos_legenda_3')
-  // conteudo_recursos_legenda_1
-  legenda1.innerText = 'Qtd. Alertas'
-  legenda2.innerText = 'Pico Min.'
-  legenda3.innerText = 'Pico Max.'
-  switch (kpi) {
-    case "cpu":
-      kpi1.innerText = '1'
-      kpi2.innerText = '10%'
-      kpp3.innerText = '50%'
-      break;
-    case "ram": {
-      kpi1.innerText = '1'
-      kpi2.innerText = '60%'
-      kpp3.innerText = '75%'
-      break;
-    }
-    case "disco": {
-      kpi1.innerText = '0'
-      kpi2.innerText = '50%'
-      kpp3.innerText = '90%'
-      break;
-    }
-  }
-}
-
-// Servidores 
+//Lista de Servidores
 function listarServidor() {
-  var linhaServidor = ''
-  var listaCriticos = ''
-  var listaAtencao = ''
-  var listaOperando = ''
+  var linhasCriticos = ''
+  var linhasAtencao = ''
+  var linhasOperando = ''
 
-  for (var i = 0; i < dataClient.resumo.hosts_ativos; i++) {
+  for (var i = 0; i < hostsAtivos; i++) {
     var servidor = dataClient.hosts[i]
-    var dados = servidor.metricas
+    var metricas = servidor.metricas
+
+    var nivelCpu = nivelBarra(metricas.cpu_percentil_maquina, 'cpu')
+    var nivelRam = nivelBarra(metricas.ram_percentil_maquina, 'ram')
+    var nivelDisco = nivelBarra(metricas.disco_porcentagem[indiceUltimaLeitura], 'disco')
+
     var statusServidor = 0
-    var barraCpu = 0
-    var barraRam = 0
-    var barraDisco = 0
-    // Valida Atenção
-    if (
-      // pico maximo
-      dados.cpu_percentil_maquina >= 80 ||  // 90%
-      dados.ram_percentil_maquina >= 75 ||  // 90 %
-      dados.disco_porcentagem[ultimoValor] >= 85 ||// 90%
-      // pico minimo
-      dados.cpu_percentil_maquina < 10 || 
-      dados.ram_percentil_maquina < 30 ||
-      dados.disco_porcentagem[ultimoValor] < 40 
-    ) {
-      if (dados.cpu_percent[ultimoValor] >= 80 || dados.cpu_percent[ultimoValor] < 10) {
-        barraCpu = 1
-      } 
-      if (dados.ram_perc[ultimoValor] >= 75 || dados.ram_perc[ultimoValor] < 30) {
-        barraRam = 1
-      }
-      if (dados.disco_porcentagem[ultimoValor] >= 85 || dados.disco_porcentagem[ultimoValor] < 40 ) {
-        barraDisco = 1
-      }
+    if (nivelCpu >= 1 || nivelRam >= 1 || nivelDisco >= 1) {
       statusServidor = 1
     }
-
-    if (dados.cpu_percentil_maquina >= 90 || dados.cpu_percent[ultimoValor] >= 90 ||  // 90%
-      dados.ram_percentil_maquina >= 90 || dados.ram_perc[ultimoValor] >= 90 || // 90 %
-      dados.disco_porcentagem[ultimoValor] >= 95 // 90%
-    ) {
+    if (nivelCpu >= 2 || nivelRam >= 2 || nivelDisco >= 2) {
       statusServidor = 2
-      if (dados.cpu_percent[ultimoValor] >= 90) {
-        barraCpu = 2
-      } 
-      if (dados.ram_perc[ultimoValor] >= 90) {
-        barraRam = 2
-      }
-      if (dados.disco_porcentagem[ultimoValor] >= 95) {
-        barraDisco = 2
-      }
     }
 
-    linhaServidor = `
-        <tr>
-          <td><span class="etiqueta-bold ${listaEtiquetas[statusServidor]}">● ${listaStatus[statusServidor]}</span></td>
-          <td><span class="nome-servidor">${servidor.hostname.toUpperCase()}</span>
-            <span class="servidor-id">#${servidor.host_id}</span>
-          </td>
-          <td><span class="end-ip">10.0.0.1</span></td>
-          <td><span class="nome-so">Ubuntu 22.04</span></td>
-          <td>
-            <div class="container-barra">
-              <div class="barra">
-                <div class="preenchimento" style="width: ${servidor.metricas.cpu_percentil_maquina}%; background: ${listaCoresBarras[barraCpu]}"></div>
-              </div>
-              <span>${servidor.metricas.cpu_percentil_maquina}%</span>
-            </div>
-          </td>
-          <td>
-            <div class="container-barra">
-              <div class="barra">
-                  <div class="preenchimento" style="width: ${servidor.metricas.ram_percentil_maquina}%; background: ${listaCoresBarras[barraRam]}"></div>
-              </div>
-              <span>${servidor.metricas.ram_percentil_maquina}%</span>
-            </div>
-          </td>
-          <td>
-            <div class="container-barra">
-              <div class="barra">
-                <div class="preenchimento" style="width: ${servidor.metricas.disco_porcentagem[ultimoValor]}%; background: ${listaCoresBarras[barraDisco]}"></div>
-              </div>
-              <span> ${servidor.metricas.disco_porcentagem[ultimoValor]}%</span>
-            </div>
-          </td>
-          <td>42h13min</td>
-          <td>
-            <button class="btn-detalhes" onclick="detalhesServidor(${i})">Detalhes</button>
-            <!-- <button class="btn-remover" onclick="removerServidor(${i})">Remover</button> -->
-          </td>
-        </tr>
-        `
+    var linhaServidor = `
+      <tr onclick="selecionarServidor(this, ${i})">
+        <td><span class="etiqueta-bold ${classesPorStatus[statusServidor]}">● <span class="status-texto">${textosPorStatus[statusServidor]}</span></span></td>
+        <td>
+          <span class="nome-servidor">${servidor.hostname.toUpperCase()}</span>
+          <span class="servidor-id">#${servidor.host_id}</span>
+        </td>
+        <td class="coluna-extra"><span class="end-ip coluna-extra">10.0.0.1</span></td>
+        <td class="coluna-extra"><span class="nome-so coluna-extra">Ubuntu 22.04</span></td>
+        <td>
+          <div class="container-barra">
+            <div class="barra"><div class="preenchimento" style="width:${metricas.cpu_percentil_maquina}%;background:${coresPorNivel[nivelCpu]}"></div></div>
+            <span>${metricas.cpu_percentil_maquina}%</span>
+          </div>
+        </td>
+        <td>
+          <div class="container-barra">
+            <div class="barra"><div class="preenchimento" style="width:${metricas.ram_percentil_maquina}%;background:${coresPorNivel[nivelRam]}"></div></div>
+            <span>${metricas.ram_percentil_maquina}%</span>
+          </div>
+        </td>
+        <td>
+          <div class="container-barra">
+            <div class="barra"><div class="preenchimento" style="width:${metricas.disco_porcentagem[indiceUltimaLeitura]}%;background:${coresPorNivel[nivelDisco]}"></div></div>
+            <span>${metricas.disco_porcentagem[indiceUltimaLeitura]}%</span>
+          </div>
+        </td>
+        <td class="coluna-extra">42h13min</td>
+      </tr>
+    `
+
     if (statusServidor == 2) {
-      listaCriticos += linhaServidor
+      linhasCriticos += linhaServidor
     } else if (statusServidor == 1) {
-      listaAtencao += linhaServidor
+      linhasAtencao += linhaServidor
     } else {
-      listaOperando += linhaServidor
+      linhasOperando += linhaServidor
     }
   }
-  var tabela = 
-  document.getElementById("tabela_lista_servidor").innerHTML = listaCriticos + listaAtencao + listaOperando
+
+  const tabelaBody = document.getElementById("tabela_lista_servidor")
+  if (tabelaBody) {
+    tabelaBody.innerHTML = linhasCriticos + linhasAtencao + linhasOperando
+  }
 }
 
+// Gráfico
 function criarGraficos() {
-  const perfomaInfra = document.getElementById("perfomaInfra")
-  const perfomaInfra2 = document.getElementById("perfomaInfra2")
-  new Chart(perfomaInfra,
-    {
-      data: {
-        datasets: [
-          {
-            label: 'RAM (%)',
-            data: [],
-            type: 'line',
-            order: 1,
-            tension: 0.2,
-            borderColor: '#36A2EB',
-            backgroundColor: '#9BD0F5',
-          }, {
-            label: 'CPU (%)',
-            data: [],
-            type: 'line',
-            order: 2,
-            tension: 0.2,
-            borderColor: '#36eb75',
-            backgroundColor: '#9bf5ad',
-          },
-          {
-            label: 'Disco (%)',
-            data: [],
-            type: 'line',
-            order: 2,
-            tension: 0.2,
-            borderColor: '#eba036',
-            backgroundColor: '#f5df9b',
+  const canvasGrafico = document.getElementById("perfomaInfra")
+  if (!canvasGrafico) {
+    return
+  }
+
+  new Chart(canvasGrafico, {
+    data: {
+      datasets: [
+        {
+          label: 'RAM (%)',
+          data: [],
+          type: 'line',
+          order: 1,
+          tension: 0.2,
+          borderColor: '#36A2EB',
+          backgroundColor: '#9BD0F530',
+          yAxisID: 'yPercent',
+        },
+        {
+          label: 'CPU (%)',
+          data: [],
+          type: 'line',
+          order: 2,
+          tension: 0.2,
+          borderColor: '#22c55e',
+          backgroundColor: '#86efac30',
+          yAxisID: 'yPercent',
+        },
+        {
+          label: 'Disco (%)',
+          data: [],
+          type: 'line',
+          order: 3,
+          tension: 0.2,
+          borderColor: '#f59e0b',
+          backgroundColor: '#fde68a30',
+          yAxisID: 'yPercent',
+        },
+        {
+          label: 'Processos',
+          data: [],
+          type: 'line',
+          order: 4,
+          tension: 0.2,
+          borderColor: '#8b5cf6',
+          backgroundColor: '#c4b5fd30',
+          yAxisID: 'yProcessos',
+        }
+      ],
+      labels: [],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          labels: {
+            font: { size: 10, family: 'Barlow' },
+            boxWidth: 12,
+            padding: 10
           }
-        ],
-        labels: [],
+        }
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scale: {
-          x: {
-            ticks: {
-              maxTicksLimit: 10
-            }
-          }
+      scales: {
+        x: {
+          ticks: { maxTicksLimit: 8, font: { size: 9 } },
+          grid: { color: '#f0f0f0' }
+        },
+        yPercent: {
+          type: 'linear',
+          position: 'left',
+          min: 0,
+          max: 100,
+          ticks: { font: { size: 9 }, callback: v => v + '%' },
+          grid: { color: '#f0f0f0' }
+        },
+        yProcessos: {
+          type: 'linear',
+          position: 'right',
+          ticks: { font: { size: 9 } },
+          grid: { drawOnChartArea: false }
         }
       }
     }
-  )
-
-  new Chart(perfomaInfra2,
-    {
-      data: {
-        datasets: [
-          {
-            label: 'Processos',
-            data: [],
-            type: 'line',
-            order: 1,
-            tension: 0.2,
-            borderColor: '#8e36eb',
-            backgroundColor: '#b69bf5',
-          }
-        ],
-        labels: [],
-
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scale: {
-          x: {
-            ticks: {
-              maxTicksLimit: 10
-            }
-          }
-        }
-      }
-    }
-  )
+  })
 }
 
+// ── Detalhe do servidor selecionado
 function exibirDetalhesServidor(idServidor) {
   var servidor = dataClient.hosts[idServidor]
-  var dados = servidor.metricas
-  var barraCpu = 0
-  var barraRam = 0
-  var barraDisco = 0
-  if (
-      // pico maximo
-      dados.cpu_percentil_maquina >= 80 ||  // 90%
-      dados.ram_percentil_maquina >= 75 ||  // 90 %
-      dados.disco_porcentagem[ultimoValor] >= 85 ||// 90%
-      // pico minimo
-      dados.cpu_percentil_maquina < 10 || 
-      dados.ram_percentil_maquina < 30 ||
-      dados.disco_porcentagem[ultimoValor] < 40 
-    ) {
-      if (dados.cpu_percent[ultimoValor] >= 80 || dados.cpu_percent[ultimoValor] < 10) {
-        barraCpu = 1
-      } 
-      if (dados.ram_perc[ultimoValor] >= 75 || dados.ram_perc[ultimoValor] < 30) {
-        barraRam = 1
-      }
-      if (dados.disco_porcentagem[ultimoValor] >= 85 || dados.disco_porcentagem[ultimoValor] < 40 ) {
-        barraDisco = 1
-      }
+  var metricas = servidor.metricas
+
+  var valorCpu = metricas.cpu_percentil_maquina
+  var valorRam = metricas.ram_percentil_maquina
+  var valorDisco = metricas.disco_porcentagem[indiceUltimaLeitura]
+
+  var nivelCpu = nivelBarra(valorCpu, 'cpu')
+  var nivelRam = nivelBarra(valorRam, 'ram')
+  var nivelDisco = nivelBarra(valorDisco, 'disco')
+
+  // Header
+  const elNomeServidor = document.getElementById('modal_detalhe_nome_servidor')
+  const elIndicador = document.getElementById('modal_cabecalho_indicador')
+  if (elNomeServidor) {
+    elNomeServidor.innerText = servidor.hostname
+  }
+  if (elIndicador) {
+    elIndicador.innerText = 'Servidor | ' + servidor.host_id
+  }
+
+  // Valores dos KPIs
+  const elValorCpu = document.getElementById('modal_detalhe_uso_cpu')
+  const elValorRam = document.getElementById('modal_detalhe_uso_ram')
+  const elValorDisco = document.getElementById('modal_detalhe_uso_disco')
+  if (elValorCpu) { elValorCpu.innerText = valorCpu + '%' }
+  if (elValorRam) { elValorRam.innerText = valorRam + '%' }
+  if (elValorDisco) { elValorDisco.innerText = metricas.disco_usado[indiceUltimaLeitura] + ' Gb' }
+
+  // Barras de progresso dos KPIs
+  const elBarraCpu = document.getElementById('modal_detalhe_preenchimento_cpu')
+  const elBarraRam = document.getElementById('modal_detalhe_preenchimento_ram')
+  const elBarraDisco = document.getElementById('modal_detalhe_preenchimento_disco')
+
+  if (elBarraCpu) {
+    elBarraCpu.style.width = valorCpu + '%'
+    elBarraCpu.style.background = coresPorNivel[nivelCpu]
+  }
+  if (elBarraRam) {
+    elBarraRam.style.width = valorRam + '%'
+    elBarraRam.style.background = coresPorNivel[nivelRam]
+  }
+  if (elBarraDisco) {
+    elBarraDisco.style.width = valorDisco + '%'
+    elBarraDisco.style.background = coresPorNivel[nivelDisco]
+  }
+
+  // Coloração dos cards por nível
+  function atualizarEstadoCard(idCard, nivel) {
+    const card = document.getElementById(idCard)
+    if (!card) {
+      return
     }
-
-    if (dados.cpu_percentil_maquina >= 90 || dados.cpu_percent[ultimoValor] >= 90 ||  // 90%
-      dados.ram_percentil_maquina >= 90 || dados.ram_perc[ultimoValor] >= 90 || // 90 %
-      dados.disco_porcentagem[ultimoValor] >= 95 // 90%
-    ) {
-      if (dados.cpu_percentil_maquina >= 90) {
-        barraCpu = 2
-      } 
-      if (dados.ram_percentil_maquina >= 90) {
-        barraRam = 2
-      }
-      if (dados.disco_porcentagem[ultimoValor] >= 95) {
-        barraDisco = 2
-      }
+    card.classList.remove('estado-atencao', 'estado-critico')
+    if (nivel == 1) {
+      card.classList.add('estado-atencao')
     }
+    if (nivel == 2) {
+      card.classList.add('estado-critico')
+    }
+  }
+  atualizarEstadoCard('card_cpu', nivelCpu)
+  atualizarEstadoCard('card_ram', nivelRam)
+  atualizarEstadoCard('card_disco', nivelDisco)
 
+  // Métricas secundárias
+  const elProcessos = document.getElementById('modal_info_processos')
+  const elTemperatura = document.getElementById('modal_info_temperatura')
+  const elDiscoTotal = document.getElementById('modal_info_disco')
+  const elConexoesTcp = document.getElementById('modal_info_conexao_tcp')
 
-  // Nome
-  document.getElementById('modal_cabecalho_indicador').innerText = 'Servidor | ' + servidor.host_id
-  document.getElementById('modal_detalhe_nome_servidor').innerText = servidor.hostname
-  // Metricas
-  document.getElementById('modal_detalhe_uso_cpu').innerText = servidor.metricas.cpu_percentil_maquina + '%'
-  document.getElementById('modal_detalhe_uso_ram').innerText = servidor.metricas.ram_percentil_maquina + '%'
-  document.getElementById('modal_detalhe_uso_disco').innerText = servidor.metricas.disco_usado[ultimoValor] + 'Gb'
- 
-  document.getElementById('modal_detalhe_preenchimento_cpu').style.width = `${servidor.metricas.cpu_percentil_maquina}%`
-  document.getElementById('modal_detalhe_preenchimento_ram').style.width = `${servidor.metricas.ram_percentil_maquina}%`
-  document.getElementById('modal_detalhe_preenchimento_disco').style.width = `${servidor.metricas.disco_porcentagem[ultimoValor]}%`
- 
-  document.getElementById('modal_detalhe_preenchimento_cpu').style.background = listaCoresBarras[barraCpu]
-  document.getElementById('modal_detalhe_preenchimento_ram').style.background = listaCoresBarras[barraRam]
-  document.getElementById('modal_detalhe_preenchimento_disco').style.background =  listaCoresBarras[barraDisco]
+  const quantidadeProcessosAtual = metricas.processos[indiceUltimaLeitura]
+  var quantidadeProcessosAnterior
+  if (indiceUltimaLeitura > 0) {
+    quantidadeProcessosAnterior = metricas.processos[indiceUltimaLeitura - 1]
+  } else {
+    quantidadeProcessosAnterior = quantidadeProcessosAtual
+  }
+  const variacaoProcessos = quantidadeProcessosAtual - quantidadeProcessosAnterior
+  if (elProcessos) {
+    elProcessos.innerText = quantidadeProcessosAtual
+  }
 
-  // infos adicionais 
-  document.getElementById('modal_info_processos').innerText = servidor.metricas.processos[ultimoValor]
-  document.getElementById('modal_info_temperatura').innerHTML = '30' + ' °C'
-  document.getElementById('modal_info_disco').innerText = servidor.metricas.disco_total[ultimoValor] + ' Gb'
-  document.getElementById('modal_info_conexao_tcp').innerText = '1,439'
+  //tendência dos processos
+  const elTendenciaProcessos = document.getElementById('trend_processos')
+  if (elTendenciaProcessos) {
+    if (variacaoProcessos > 0) {
+      elTendenciaProcessos.textContent = '+' + variacaoProcessos
+      elTendenciaProcessos.className = 'mini-trend up'
+    } else if (variacaoProcessos < 0) {
+      elTendenciaProcessos.textContent = '' + variacaoProcessos
+      elTendenciaProcessos.className = 'mini-trend down'
+    } else {
+      elTendenciaProcessos.textContent = ''
+      elTendenciaProcessos.className = 'mini-trend flat'
+    }
+  }
+
+  if (elTemperatura) {
+    elTemperatura.innerHTML = '30 °C'
+    const elDotTemperatura = document.getElementById('dot_temperatura')
+    if (elDotTemperatura) {
+      elDotTemperatura.className = 'mini-status-dot verde'
+      elDotTemperatura.title = 'Normal (≤85°C)'
+    }
+  }
+  if (elDiscoTotal) { elDiscoTotal.innerText = metricas.disco_total[indiceUltimaLeitura] + ' Gb' }
+  if (elConexoesTcp) { elConexoesTcp.innerText = '1,439' }
 }
 
 function exibirGraficos(idServidor) {
-  console.log('sdasd')
   const servidor = dataClient.hosts[idServidor]
+  var rotulosEixoX = []
 
-  let data = [];
-  for (var i = 0; i <= ultimoValor; i++) {
-    data[i] = new Date(servidor.metricas.datahora[i]).toLocaleTimeString()
+  for (var i = 0; i <= indiceUltimaLeitura; i++) {
+    rotulosEixoX[i] = new Date(servidor.metricas.datahora[i]).toLocaleTimeString()
   }
 
-  var graficoPorcentagens = Chart.getChart('perfomaInfra')
-  graficoPorcentagens.data.datasets[0].data = servidor.metricas.ram_perc
-  graficoPorcentagens.data.datasets[1].data = servidor.metricas.cpu_percent
-  graficoPorcentagens.data.datasets[2].data = servidor.metricas.disco_porcentagem
-  graficoPorcentagens.data.labels = data
-
-  var graficoProcessos = Chart.getChart('perfomaInfra2')
-  graficoProcessos.data.datasets[0].data = servidor.metricas.ram_perc
-  graficoProcessos.data.labels = data
+  var grafico = Chart.getChart('perfomaInfra')
+  if (grafico) {
+    grafico.data.datasets[0].data = servidor.metricas.ram_perc
+    grafico.data.datasets[1].data = servidor.metricas.cpu_percent
+    grafico.data.datasets[2].data = servidor.metricas.disco_porcentagem
+    grafico.data.datasets[3].data = servidor.metricas.processos
+    grafico.data.labels = rotulosEixoX
+    grafico.update()
+  }
 }
 
 function detalhesServidor(idServidor) {
-  var modal = document.getElementById("modalDetalhes")
-  modal.style.display = 'flex'
   exibirDetalhesServidor(idServidor)
   exibirGraficos(idServidor)
 }
 
-function removerServidor(idServidor) {
-  var servidor = dataClient.hosts[idServidor]
-  var modal = document.getElementById("modalRemoverServidor")
-  modal.style.display = 'flex'
-  document.getElementById('modal_remover_servidor').innerText = 'Remover Servidor: ' + servidor.hostname + ' - #' + servidor.host_id
+function selecionarServidor(elementoLinha, idServidor) {
+  const todasLinhas = document.querySelectorAll('#tabela_lista_servidor tr')
+  todasLinhas.forEach(function (linha) {
+    linha.classList.remove('tr-selecionada')
+  })
+  elementoLinha.classList.add('tr-selecionada')
+  detalhesServidor(idServidor)
 }
 
-function buscarServidorPorNome(texto) {
-  var tabela = document.getElementById("tabela_lista_servidor")
-  var listaServidores = tabela.innerHTML
-  if (texto == '') {
-    listarServidor()
-  } else {
-    var nomesServidores = []
-    var idServidores = []
-
-    for (var i = 0; i < dataClient.resumo.hosts_ativos; i++) {
-      nomesServidores[i] = dataClient.hosts[i].hostname.toLowerCase()
-      idServidores[i] = dataClient.hosts[i].host_id.toLowerCase()
-    }
-    for (var i = 0; i < dataClient.resumo.hosts_ativos; i++) {
-      var servidor = dataClient.hosts[i]
-      if (
-        servidor.hostname.toLowerCase().includes(texto) ||
-        servidor.host_id.toLowerCase().includes(texto)
-      ) {
-        listaServidores += `
-        <tr>
-                <td><span class="etiqueta-bold etiqueta-verde">● Operando</span></td>
-                <td><span class="nome-servidor">${servidor.hostname.toUpperCase()}</span>
-                  <span class="servidor-id">#${servidor.host_id}</span>
-                </td>
-                <td><span class="end-ip">10.0.0.1</span></td>
-                <td><span class="nome-so">Ubuntu 22.04</span></td>
-                <td>
-                  <div class="container-barra">
-                    <div class="barra">
-                      <div class="preenchimento" style="width: ${servidor.metricas.cpu_percent[ultimoValor]}%"></div>
-                    </div>
-                    <span>${servidor.metricas.cpu_percent[ultimoValor]}%</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="container-barra">
-                    <div class="barra">
-                        <div class="preenchimento" style="width: ${servidor.metricas.ram_perc[ultimoValor]}%"></div>
-                    </div>
-                    <span>${servidor.metricas.ram_perc[ultimoValor]}%</span>
-                  </div>
-                </td>
-                <td>
-                  <div class="container-barra">
-                    <div class="barra">
-                      <div class="preenchimento" style="width: ${servidor.metricas.disco_porcentagem[ultimoValor]}%"></div>
-                    </div>
-                    <span> ${servidor.metricas.disco_porcentagem[ultimoValor]}%</span>
-                  </div>
-                </td>
-                <td>42h13min</td>
-                <td>
-                  <button class="btn-detalhes" onclick="detalhesServidor(${i})">Detalhes</button>
-                  
-                </td>
-              </tr>
-        `
-      }
-    }
-    if (listaServidores == '') {
-      listaServidores = `
-          <tr>
-            <td>
-              <h4>Nenhum servidor encontrado</h4>
-            </td>
-          </tr>
-        `
-    }
-
-    tabela.innerHTML = listaServidores
+function removerServidor(idServidor) {
+  var servidor = dataClient.hosts[idServidor]
+  var modalRemocao = document.getElementById("modalRemoverServidor")
+  if (modalRemocao) {
+    modalRemocao.style.display = 'flex'
+  }
+  const elTituloRemocao = document.getElementById('modal_remover_servidor')
+  if (elTituloRemocao) {
+    elTituloRemocao.innerText = 'Remover Servidor: ' + servidor.hostname + ' - #' + servidor.host_id
   }
 }
 
+function buscarServidorPorNome(textoBusca) {
+  var tabelaBody = document.getElementById("tabela_lista_servidor")
+  if (!tabelaBody) {
+    return
+  }
 
+  if (textoBusca === '') {
+    listarServidor()
+    return
+  }
 
-//  exportar as funções ou tornar visivel para o html globalmente
+  var linhasEncontradas = ''
+
+  for (var i = 0; i < hostsAtivos; i++) {
+    var servidor = dataClient.hosts[i]
+    var nomeCorresponde = servidor.hostname.toLowerCase().includes(textoBusca)
+    var idCorresponde = servidor.host_id.toLowerCase().includes(textoBusca)
+
+    if (nomeCorresponde || idCorresponde) {
+      var metricas = servidor.metricas
+      var nivelCpu = nivelBarra(metricas.cpu_percentil_maquina, 'cpu')
+      var nivelRam = nivelBarra(metricas.ram_percentil_maquina, 'ram')
+      var nivelDisco = nivelBarra(metricas.disco_porcentagem[indiceUltimaLeitura], 'disco')
+
+      var statusServidor = 0
+      if (nivelCpu >= 1 || nivelRam >= 1 || nivelDisco >= 1) {
+        statusServidor = 1
+      }
+      if (nivelCpu >= 2 || nivelRam >= 2 || nivelDisco >= 2) {
+        statusServidor = 2
+      }
+
+      linhasEncontradas += `
+        <tr onclick="selecionarServidor(this, ${i})">
+          <td><span class="etiqueta-bold ${classesPorStatus[statusServidor]}">● ${textosPorStatus[statusServidor]}</span></td>
+          <td><span class="nome-servidor">${servidor.hostname.toUpperCase()}</span><span class="servidor-id">#${servidor.host_id}</span></td>
+          <td class="coluna-extra">10.0.0.1</td>
+          <td class="coluna-extra">Ubuntu 22.04</td>
+          <td>
+            <div class="container-barra">
+              <div class="barra"><div class="preenchimento" style="width:${metricas.cpu_percentil_maquina}%;background:${coresPorNivel[nivelCpu]}"></div></div>
+              <span>${metricas.cpu_percentil_maquina}%</span>
+            </div>
+          </td>
+          <td>
+            <div class="container-barra">
+              <div class="barra"><div class="preenchimento" style="width:${metricas.ram_percentil_maquina}%;background:${coresPorNivel[nivelRam]}"></div></div>
+              <span>${metricas.ram_percentil_maquina}%</span>
+            </div>
+          </td>
+          <td>
+            <div class="container-barra">
+              <div class="barra"><div class="preenchimento" style="width:${metricas.disco_porcentagem[indiceUltimaLeitura]}%;background:${coresPorNivel[nivelDisco]}"></div></div>
+              <span>${metricas.disco_porcentagem[indiceUltimaLeitura]}%</span>
+            </div>
+          </td>
+          <td class="coluna-extra">42h13min</td>
+        </tr>
+      `
+    }
+  }
+
+  if (!linhasEncontradas) {
+    linhasEncontradas = `<tr><td colspan="8"><h4 style="padding:12px;color:#9ca3af">Nenhum servidor encontrado</h4></td></tr>`
+  }
+  tabelaBody.innerHTML = linhasEncontradas
+}
+
+function listarResumoServidores() { }
+function graficoResulmoServidores() { }
+function trocarGrafico() { }
+function trocarKpi() { }
+
 window.detalhesServidor = detalhesServidor
+window.selecionarServidor = selecionarServidor
 window.removerServidor = removerServidor
 window.exibirGraficos = exibirGraficos
+
 export {
   listarServidor, criarGraficos, listarResumoServidores,
-  graficoResulmoServidores, trocarGrafico, trocarKpi, buscarServidorPorNome
+  graficoResulmoServidores, trocarGrafico, trocarKpi, buscarServidorPorNome, detalhesServidor
 }
