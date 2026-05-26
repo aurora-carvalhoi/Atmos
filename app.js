@@ -17,6 +17,7 @@ var app = express();
 
 //var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
+var s3Router = require("./src/routes/s3");
 //var avisosRouter = require("./src/routes/avisos");
 //var medidasRouter = require("./src/routes/medidas");
 var empresasRouter = require("./src/routes/empresas");
@@ -38,6 +39,7 @@ app.use("/empresas", empresasRouter);
 app.use("/funcionarioAtmos", funcionarioAtmosRouter);
 app.use("/servidores", servidoresRouter);
 app.use("/processos", processosRouter);
+app.use("/s3", s3Router);
 
 app.listen(PORTA_APP, function () {
     console.log(`
