@@ -37,7 +37,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/empresas", empresasRouter);
 app.use("/funcionarioAtmos", funcionarioAtmosRouter);
 app.use("/servidores", servidoresRouter);
-app.use
+app.use("/processos", processosRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
