@@ -22,6 +22,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var empresasRouter = require("./src/routes/empresas");
 var funcionarioAtmosRouter = require("./src/routes/funcionarioAtmos");
 var servidoresRouter = require("./src/routes/servidores");
+var processosRouter = require("./src/routes/processos");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,6 +37,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/empresas", empresasRouter);
 app.use("/funcionarioAtmos", funcionarioAtmosRouter);
 app.use("/servidores", servidoresRouter);
+app.use
 
 app.listen(PORTA_APP, function () {
     console.log(`
