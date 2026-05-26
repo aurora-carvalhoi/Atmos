@@ -1,7 +1,6 @@
 @import url("../dashboard.css");
 @import url("../default.css");
 
-/*BASE*/
 button { cursor: pointer !important; }
 
 html, body {
@@ -28,6 +27,7 @@ html, body {
   padding: 10px 20px;
   flex-shrink: 0;
   gap: 12px;
+  margin-bottom: 0;
 }
 
 .dash-header-left { display: flex; flex-direction: column; gap: 2px; }
@@ -819,12 +819,14 @@ input:focus { outline: none; }
 .fundoModal .removerModal { width: 500px; padding-bottom: 10px; }
 .conteudo-remover p { color: var(--color-opaque); font-weight: 500; font-size: 13px; margin-bottom: 8px; }
 
-/*ETIQUETAS (herdadas do dashboard.css)*/
 .amarelo { color: #d6a400 !important; }
 .vermelho { color: red !important; }
 
 /*RESPONSIVO*/
-@media screen and (max-width: 1280px) {
+/* @media screen and (max-width: 1280px) {
+  .dash-body {
+    overflow: visible !important;
+  }
   .kpis-servidor-grid { grid-template-columns: 1fr 1fr; }
   .infos-adicionais-row { grid-template-columns: 1fr 1fr; }
   .grid-kpis { grid-template-columns: 1fr 1fr; }
@@ -846,4 +848,356 @@ input:focus { outline: none; }
   .modal .inputs { flex-direction: column; }
   .modal .inputs .w-50, .modal .inputs .w-30 { width: 100%; margin-top: 5px; }
   .grafico-toggles { flex-wrap: wrap; }
+} */
+
+/* =========================================================
+   RESPONSIVO MOBILE COMPLETO
+========================================================= */
+
+@media screen and (max-width: 768px) {
+
+  html,
+  body {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .dash-main {
+    height: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .dash-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    overflow: visible;
+    min-height: auto;
+  }
+
+  .col-esquerda,
+  .col-direita {
+    width: 100%;
+    flex: none;
+    min-height: auto;
+    overflow: visible;
+  }
+
+  /* VISÃO GERAL VEM PRIMEIRO */
+
+  .col-direita {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bloco-kpis-gerais {
+    order: -1;
+  }
+
+  /* HEADER */
+
+  .dash-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .dash-header-right {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .dash-sys-info {
+    align-items: flex-start;
+  }
+
+  .btn-adicionar {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ALERTAS */
+
+  .faixa-alertas {
+    padding: 8px 12px;
+    align-items: flex-start;
+  }
+
+  .faixa-alertas-lista {
+    max-height: none;
+    overflow: visible;
+  }
+
+  /* SERVIDOR */
+
+  .servidor-cabecalho {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .servidor-ident {
+    width: 100%;
+  }
+
+  .status-badge {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* KPIS */
+
+  .kpis-servidor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .infos-adicionais-row {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  .grid-kpis {
+    grid-template-columns: 2fr;
+  }
+
+  .grid-kpis {
+    width: 200%;
+    grid-template-columns: 2fr;
+  }
+
+  .kpi-card {
+    width: 50%;
+  }
+
+  /* GRÁFICO */
+
+  .bloco-grafico-unificado {
+    height: 380px;
+    min-height: 380px;
+    overflow: hidden;
+  }
+
+  .grafico-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .grafico-toggles {
+    width: 50%;
+    flex-wrap: wrap;
+  }
+
+  .toggle-metrica {
+    padding: 0;
+    background-color: #374151;
+    flex: 1 1;
+    text-align: center;
+  }
+
+  .grafico-wrapper-unico {
+    flex: 1;
+    min-height: 260px;
+  }
+
+  .grafico-wrapper-unico canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* BOTÕES */
+
+  .botoes {
+    flex-direction: column;
+  }
+
+  .acao {
+    width: 100%;
+  }
+
+  /* LISTA */
+
+  .bloco-lista-servidores {
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .lista-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .filtros-inline {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .filtros-inline input,
+  .filtros-inline select,
+  .btn-ver-mais {
+    width: 100%;
+  }
+
+  /* TABELA */
+
+  .tabela-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+  }
+
+  #tabelaServidores {
+    min-width: 700px;
+    width: max-content;
+  }
+
+  table {
+    min-width: 700px;
+    width: max-content;
+  }
+
+  th,
+  td {
+    white-space: nowrap;
+  }
+
+  .tabela-scroll {
+    min-height: 600px
+  }
+  /* MÉTRICAS */
+
+  .div-metrica {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    width: 100%;
+  }
+
+  .div-metrica span {
+    flex: 1 1 calc(50% - 8px);
+  }
+
+  /* MODAIS */
+
+  .fundoModal .modal,
+  .fundoModal .removerModal {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .modal .inputs {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .modal .inputs .w-50,
+  .modal .inputs .w-30 {
+    width: 100%;
+  }
+
+  .acoesModal {
+    flex-direction: column;
+  }
+
+  .acoesModal button {
+    width: 100%;
+  }
+
+    .tabela-servidores {
+    min-height: 600px
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  .dash-body {
+    padding: 8px;
+  }
+
+  .bloco-servidor-header,
+  .bloco-kpis-gerais,
+  .bloco-lista-servidores,
+  .bloco-grafico-unificado,
+  .bloco-botoes-acoes {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+
+
+  .infos-adicionais-row {
+    grid-template-columns: 2fr;
+  }
+
+    .grafico-toggles {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+    .grafico-header {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  .grafico-toggles {
+    grid-template-columns: 2fr;
+  }
+
+  .div-metrica span {
+    flex: 0.5 0.5 50%;
+  }
+
+  .kpi-valor {
+    font-size: 18px;
+  }
+
+  .mini-valor {
+    font-size: 14px;
+  }
+
+  .servidor-ident h2 {
+    font-size: 13px;
+  }
+
+    .kpis-servidor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .infos-adicionais-row {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  .grid-kpis {
+    width: 200%;
+    grid-template-columns: 2fr;
+  }
+
+
+  .kpi-card {
+    width: 50%;
+  }
+
+  .grafico-titulo,
+  .lista-header h4,
+  .bloco-titulo h3 {
+    font-size: 12px;
+  }
+
+  .bloco-grafico-unificado {
+    height: 340px;
+    min-height: 340px;
+  }
+
+  .grafico-wrapper-unico {
+    min-height: 220px;
+  }
 }

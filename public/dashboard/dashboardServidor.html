@@ -111,7 +111,7 @@
     </header>
 
     <!-- FAIXA DE ALERTAS ATIVOS — sempre visível, topo do conteúdo -->
-    <div class="faixa-alertas" id="faixaAlertas">
+<!--<div class="faixa-alertas" id="faixaAlertas">
       <div class="faixa-alertas-left">
         <span class="faixa-alertas-icone">⚠</span>
         <span class="faixa-alertas-titulo">ALERTAS ATIVOS</span>
@@ -124,7 +124,7 @@
         <span class="alerta-pill alerta-pill-baixo">LAPTOP-MATHEUS · DISCO · Baixo</span>
       </div>
       <button class="faixa-alertas-toggle" id="faixaAlertasToggle" onclick="toggleFaixaAlertas()">▲ Ocultar</button>
-    </div>
+    </div> -->
 
     <!-- BODY: 2 COLUNAS -->
     <div class="dash-body">
@@ -286,36 +286,45 @@
               </div>
             </div>
             <div class="kpi-card kpi-card-critico">
-              <div class="kpi-icon kpi-icon-red">2</div>
-              <div class="kpi-info">
-                <span class="kpi-label">Críticos</span>
-                <p class="kpi-valor"><span style="color:#dc2626">2</span><span class="kpi-de-total">/6</span></p>
-                <button class="btn-filtro-kpi" onclick="filtrarStatus('Critico')">↗ Ver críticos</button>
-              </div>
+            <div class="kpi-icon kpi-icon-red" id="kpiCriticosIcon">0</div>                      
+            <div class="kpi-info">
+              <span class="kpi-label">Críticos</span>
+              <p class="kpi-valor">
+                <span id="kpiCriticosValor" style="color:#dc2626">0</span>
+                <span class="kpi-de-total">/<span id="kpiTotalServidores">0</span></span>
+              </p>        
+              <button class="btn-filtro-kpi" onclick="filtrarStatus('Critico')">
+                ↗ Ver críticos
+              </button>
             </div>
-            <div class="kpi-card kpi-card-alerta">
-              <div class="kpi-icon kpi-icon-yellow">4</div>
-              <div class="kpi-info">
-                <span class="kpi-label">Alertas</span>
-                <p class="kpi-valor"><span style="color:#d97706">4</span><span class="kpi-de-total">/6</span></p>
-                <button class="btn-filtro-kpi" onclick="filtrarStatus('Atencao')">↗ Ver alertas</button>
-              </div>
+          </div>  
+          <div class="kpi-card kpi-card-alerta">
+            <div class="kpi-icon kpi-icon-yellow" id="kpiAlertasIcon">0</div> 
+            <div class="kpi-info">
+              <span class="kpi-label">Alertas</span>   
+              <p class="kpi-valor">
+                <span id="kpiAlertasValor" style="color:#d97706">0</span>
+                <span class="kpi-de-total">/<span id="kpiTotalServidores2">0</span></span>
+              </p>          
+              <button class="btn-filtro-kpi" onclick="filtrarStatus('Atencao')">
+                ↗ Ver alertas
+              </button>
             </div>
           </div>
+          </div>
         </div>
-
         <!-- Lista de Servidores -->
         <div class="bloco-lista-servidores">
           <div class="lista-header">
             <h4>Lista de Servidores</h4>
             <div class="filtros-inline">
               <input type="text" id="input_busca_por_nome" placeholder="Buscar por nome ou ID...">
-              <select name="filtroStatus" id="filtroStatus">
-                <option value="">Status</option>
-                <option value="Operando">Operando</option>
-                <option value="Atenção">Atenção</option>
-                <option value="Critico">Crítico</option>
-              </select>
+                <select name="filtroStatus" id="filtroStatus">
+                  <option value="">Status</option>
+                  <option value="Operando">Operando</option>
+                  <option value="Atencao">Atenção</option>
+                  <option value="Critico">Crítico</option>
+                </select>
               <select name="filtroSistema" id="filtroSistema">
                 <option value="">Sistema</option>
                 <option value="Ubuntu">Ubuntu</option>
@@ -331,7 +340,7 @@
           </div>
 
           <div class="tabela-scroll">
-            <table id="tabelaServidores" class="ocultar-extra">
+            <table id="tabelaServidores" class="ocultar-extra tabela-servidores">
               <thead>
                 <tr>
                   <th>Status</th>
@@ -418,11 +427,16 @@
 <script src="../assets/javascript/sessao.js"></script>
 
 <script type="module">
-  import { listarServidor, criarGraficos, buscarServidorPorNome, detalhesServidor } from "../assets/javascript/servidor.js"
-  listarServidor()
-  criarGraficos()
-  detalhesServidor(0)
+  import {listarServidor,criarGraficos,buscarServidorPorNome,detalhesServidor
+  } from "../assets/javascript/servidor.js"
 
+  async function iniciarDashboard() {
+    await listarServidor()
+    atualizarKpis()
+    criarGraficos()
+    detalhesServidor(0)
+  }
+  iniciarDashboard()
   const inputBusca = document.getElementById('input_busca_por_nome')
   if (inputBusca) {
     inputBusca.addEventListener('input', function () {
@@ -478,11 +492,6 @@ function redirecionar() {
   mostrarErroDash("Funcionalidade em desenvolvimento.");
 }
 
-function filtrarStatus(status) {
-  const select = document.getElementById('filtroStatus')
-  if (select) { select.value = status }
-}
-
 // Faixa de alertas toggle
 function toggleFaixaAlertas() {
   const lista = document.getElementById('faixaAlertasLista')
@@ -509,6 +518,85 @@ function toggleMetrica(metrica, btn) {
   ds.hidden = !ds.hidden
   btn.classList.toggle('ativo')
   chart.update()
+}
+
+const selectStatus = document.getElementById('filtroStatus')
+
+selectStatus.addEventListener('change', function () {
+  filtrarStatus(this.value)
+})
+
+function filtrarStatus(status) {
+  const todasLinhas = document.querySelectorAll('#tabela_lista_servidor tr')
+  todasLinhas.forEach(function(linha) {
+    if (!status) {
+      linha.style.display = ''
+      return
+    }
+    const etiqueta = linha.querySelector('.etiqueta-bold')
+    if (!etiqueta) {
+      return
+    }
+    const textoEtiqueta = etiqueta.className
+    let visivel = false
+    if (
+      status == 'Critico' &&
+      textoEtiqueta.includes('etiqueta-vermelha')
+    ) {
+      visivel = true
+    }
+    if (
+      status == 'Atencao' &&
+      (
+        textoEtiqueta.includes('etiqueta-amarela') ||
+        textoEtiqueta.includes('etiqueta-vermelha')
+      )
+    ) {
+      visivel = true
+    }
+    if (
+      status == 'Operando' &&
+      textoEtiqueta.includes('etiqueta-verde')
+    ) {
+      visivel = true
+    }
+    linha.style.display = visivel ? '' : 'none'
+  })
+}
+
+function atualizarKpis() {
+
+  const linhas = document.querySelectorAll('#tabela_lista_servidor tr')
+
+  let criticos = 0
+  let alertas = 0
+  let total = 0
+
+  linhas.forEach(function(linha) {
+    const etiqueta = linha.querySelector('.etiqueta-bold')
+    if (!etiqueta) {
+      return
+    }
+    total++
+
+    const classes = etiqueta.className
+    if (classes.includes('etiqueta-vermelha')) {
+      criticos++
+      alertas++
+    }
+    else if (classes.includes('etiqueta-amarela')) {
+      alertas++
+    }
+  })
+
+  document.getElementById('kpiCriticosIcon').textContent = criticos
+  document.getElementById('kpiCriticosValor').textContent = criticos
+
+  document.getElementById('kpiAlertasIcon').textContent = alertas
+  document.getElementById('kpiAlertasValor').textContent = alertas
+
+  document.getElementById('kpiTotalServidores').textContent = total
+  document.getElementById('kpiTotalServidores2').textContent = total
 }
 
 const btnVerMais = document.getElementById('btnVerMais');

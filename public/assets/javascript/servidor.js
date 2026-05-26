@@ -1,5 +1,5 @@
 async function buscarClient() {
-  const res = await fetch('../assets/javascript/client.json')
+  const res = await fetch('/s3/dados')
   const data = await res.json()
   return data
 }
@@ -13,13 +13,12 @@ const classesPorStatus = ["etiqueta-verde", "etiqueta-amarela", "etiqueta-vermel
 const textosPorStatus = ["Oper.", "Aten.", "Crit."]
 const coresPorNivel = ["#3879fc", "#f59e0b", "#dc2626"]
 
-//LIMITE
 const LIMITES_ALERTA = {
   cpu: { atencao: 80, critico: 90 },
   ram: { atencao: 75, critico: 90 },
   disco: { atencao: 85, critico: 95 },
   temp: { atencao: 85, critico: 95 }
-}
+  }
 
 function nivelBarra(valor, tipo) {
   if (valor >= LIMITES_ALERTA[tipo].critico) {
