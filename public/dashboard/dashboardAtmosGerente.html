@@ -209,48 +209,59 @@
       <!-- Sem responsavel -->
       <div class="d-kpi">
         <p class="titulo">Incidentes Sem Responsáveis</p>
-        <p class="indicador t-vermelho">10</p>
-        <div class="descricao t-vermelho ">
+        <div class="descricao t-cinza">
+          <h3 class="indicador t-vermelho">10</h3>
           <!-- <img src="../assets/images/time.svg" alt=""> -->
-          <p>Mais Antigo: 14h atrás</p>
+          <p>Mais Antigo: <span class="t-vermelho">14h atrás</span></p>
         </div>
       </div>
+      <div class="linha-kpi"></div>
       <!-- Reincidencia -->
       <div class="d-kpi">
         <p class="titulo">Reincidentes nos últimos 90 dias</p>
-        <p class="indicador t-vermelho">9</p>
-        <div class="descricao t-vermelho">
-          <p>3 servidores em atenção de reincidencia</p>
+        <div class="descricao t-cinza">
+          <h3 class="indicador t-vermelho">9</h3>
+          <p><span class="t-vermelho">3 servidores</span> em atenção de reincidencia</p>
         </div>
       </div>
+      <div class="linha-kpi"></div>
+
       <!-- Tempo -->
       <div class="d-kpi">
         <p class="titulo">Tempo médio de resolução</p>
-        <p class="indicador t-laranja">5h</p>
-        <div class="descricao t-laranja">
+        <div class="descricao t-cinza">
+          <h3 class="indicador t-laranja">5h</h3>
           <!-- <img src="../assets/images/seta.svg" alt=""> -->
-          <p>+1h comparado ao mês passado</p>
+          <p><span class="t-laranja">+1h</span> comparado ao mês passado</p>
         </div>
       </div>
+      <div class="linha-kpi"></div>
+
       <!-- Saude -->
       <div class="d-kpi">
         <p class="titulo">Servidores saudáveis</p>
-        <p class="indicador t-verde">5/6</p>
-        <div class="descricao t-verde">
-          <p>80% da infraestrutura funcionando</p>
+        <div class="descricao t-cinza">
+          <h3 class="indicador t-verde">5/6</h3>
+          <p><span class="t-verde">80%</span> da infraestrutura funcionando</p>
         </div>
       </div>
 
     </section>
 
-    <!-- Saúde -->
-    <section class="section-saude">
-      <div class="card-saude">
-        <p class="titulo-card">
-          Saúde da Infraestrutura
+    <section class="section-alerta">
+      <div class="alerta-climatico">
+        <span class="alerta">⚠︎</span>
+        <p>&nbsp&nbsp&nbsp
+          <span class="alerta-destaque">Alerta Climático: </span>
+          Probabilidade de 87% de chuva intensa nas próximas 48 horas, risco de incidentes nos
+          servidores:
+          <span class="alerta-destaque">SERV-PROD-01</span>
         </p>
       </div>
+    </section>
 
+    <!-- Saúde -->
+    <section class="section-saude">
       <div class="card-incidentes">
         <div class="topo-card">
           <p class="titulo-card">
@@ -264,14 +275,96 @@
           <canvas id="grafico-incidente"></canvas>
         </div>
         <div class="card-infos-add">
-          <p class="t-vermelho numero">18</p>
           <div class="desc">
-            <p>Incidentes registrados na semana,
-              <span class="t-vermelho">+2</span> incidentes a cuma do esperado
-            </p>
+            <p> <span class="t-vermelho">18</span> Incidentes registrados na semana &nbsp&nbsp|&nbsp&nbsp <span
+                class="t-vermelho">+2</span> Incidentes a cima do esperado</p>
           </div>
         </div>
       </div>
+
+      <div class="distribuicao">
+        <div class="topo-card">
+          <p class="titulo-card">Distribuição de Incidentes na Equipe</p>
+          <button class="btn-incidente">
+            Ação necessaria
+          </button>
+        </div>
+        <div class="lista-colaborador">
+          <div class="card-colaborador">
+            <div class="infos">
+              <div class="separacao">
+                <p>Matheus Gomes</p>
+                <p class="t-vermelho">8 incidentes</p>
+              </div>
+              <div class="separacao">
+                <div class="barra">
+                  <div class="preenchimento" style="width: 85%; background-color: rgb(255, 88, 88);"></div>
+                  <div class="preenchimento preenchimento-ideial" style="width: 50;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-colaborador">
+            <div class="infos">
+              <div class="separacao">
+                <p>Anna Costa</p>
+                <p>5</p>
+              </div>
+              <div class="separacao">
+                <div class="barra">
+                  <div class="preenchimento" style="width: 50%; background-color: rgb(255, 190, 69);"></div>
+                  <div class="preenchimento preenchimento-ideial"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-colaborador">
+            <div class="infos">
+              <div class="separacao">
+                <p>Pedro Alves</p>
+                <p>3</p>
+              </div>
+              <div class="separacao">
+                <div class="barra">
+                  <div class="preenchimento" style="width: 30%; background-color: #5488f0;"></div>
+                  <div class="preenchimento preenchimento-ideial"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-colaborador">
+            <div class="infos">
+              <div class="separacao">
+                <p>Luiz Vittor</p>
+                <p>1</p>
+              </div>
+              <div class="separacao">
+                <div class="barra">
+                  <div class="preenchimento" style="width: 10%; background-color:rgb(111, 252, 56);"></div>
+                  <div class="preenchimento preenchimento-ideial"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="kpis-adicionais">
+          <div class="kpi-menor">
+            <p class="titulo">Informações sobre resolução</p>
+            <p class="valor">5h e 39min</p>
+            <p class="desc">
+              Tempo estimado para a resolução completa
+            </p>
+          </div>
+          <div class="kpi-maior">
+            <p class="titulo">Informações sobre tempo de resolução</p>
+            <p class="valor t-vermelho">+2h</p>
+            <p class="desc">
+              Em comparação ao periodo de 7 dias atrás
+            </p>
+          </div> -->
+      </div>
+      </div>
+
     </section>
 
     <section class="section-dados">
@@ -368,106 +461,11 @@
 
         </div>
         <!-- Distribuição -->
-        <div class="distribuicao">
-          <div class="topo-card">
-            <p class="titulo-card">Distribuição da Equipe</p>
-            <button class="btn-incidente">
-              Ação necessaria
-            </button>
-          </div>
-          <div class="lista-incidentes">
-            <div class="card-colaborador">
-              <div class="colaborador">
-                <div class="icone" style="background-color: #E88827;">
-                  <span>BL</span>
-                </div>
-              </div>
-              <div class="infos">
-                <div class="separacao">
-                  <p>Brandão Lima</p>
-                  <p class="t-vermelho">8</p>
-                </div>
-                <div class="separacao">
-                  <div class="barra">
-                    <div class="preenchimento" style="width: 85%; background-color: red;"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-colaborador">
-              <div class="colaborador">
-                <div class="icone" style="background-color: #7427e8;">
-                  <span>AC</span>
-                </div>
-              </div>
-              <div class="infos">
-                <div class="separacao">
-                  <p>Anna Costa</p>
-                  <p>5</p>
-                </div>
-                <div class="separacao">
-                  <div class="barra">
-                    <div class="preenchimento" style="width: 50%; background-color: orange;"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-colaborador">
-              <div class="colaborador">
-                <div class="icone" style="background-color: #e82771;">
-                  <span>PA</span>
-                </div>
-              </div>
-              <div class="infos">
-                <div class="separacao">
-                  <p>Pedro Alves</p>
-                  <p>3</p>
-                </div>
-                <div class="separacao">
-                  <div class="barra">
-                    <div class="preenchimento" style="width: 30%; background-color: #3879FC;"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-colaborador">
-              <div class="colaborador">
-                <div class="icone" style="background-color: #27e881;">
-                  <span>LV</span>
-                </div>
-              </div>
-              <div class="infos">
-                <div class="separacao">
-                  <p>Luiz Vittor</p>
-                  <p>1</p>
-                </div>
-                <div class="separacao">
-                  <div class="barra">
-                    <div class="preenchimento" style="width: 10%; background-color:rgb(111, 252, 56)C;"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="kpis-adicionais">
-            <div class="kpi-menor">
-              <p class="titulo">Informações sobre resolução</p>
-              <p class="valor">5h e 39min</p>
-              <p class="desc">
-                Tempo estimado para a resolução completa
-              </p>
-            </div>
-            <div class="kpi-maior">
-              <p class="titulo"><I></I>nformações sobre tempo de resolução</p>
-              <p class="valor t-vermelho">+2h</p>
-              <p class="desc">
-                Em comparação ao periodo de 7 dias atrás
-              </p>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
+
+
 
     <div class="erro-painel" id="dashboard_erro"></div>
   </main>
@@ -600,6 +598,52 @@
 <!-- clima tempo -->
 <script src="../assets/javascript/climaTempo.js   "></script>
 
+<script>
+  function buscarChamadosSemResponsavel() {
+    fetch("/jira/chamadosSemAtribuicao", {
+      method: "GET",
+    })
+      .then((resposta) => resposta.json()
+        .then((dados) => {
+          console.log(dados)
+        })
+      )
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+  function buscarTempoResolucao() {
+    fetch("/jira/buscarTempoResolucao", {
+      method: "GET",
+    })
+      .then((resposta) => resposta.json()
+        .then((dados) => {
+          console.log(dados)
+        })
+      )
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+  function distribuicaoPorContribuidor() {
+    fetch("/jira/distribuicaoPorContribuidor", {
+      method: "GET",
+    })
+      .then((resposta) => resposta.json()
+        .then((dados) => {
+          console.log(dados)
+        })
+      )
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+  buscarChamadosSemResponsavel()
+  buscarTempoResolucao()
+  distribuicaoPorContribuidor()
+</script>
+
+
 <!-- grafico -->
 <script>
   const grafoIncidentes = document.getElementById('grafico-incidente');
@@ -636,26 +680,11 @@
             35, 39, 43, 41, 38, 34, 30, 26, 22, 18
           ],
           borderWidth: 2,
-          tension: 0.4
+          tension: 0.4,
+          backgroundColor: '#63739580',
+          borderColor: "#637395",
+          fill: false,
         },
-
-        {
-          label: 'Incidentes Críticos',
-          data: [
-            3, 4, 5, 4, 6, 7, 6, 8, 9, 8,
-            7, 6, 5, 6, 7, 9, 10, 11, 10, 9,
-            8, 7, 6, 5, 5, 6, 7, 8, 9, 10,
-            12, 13, 12, 11, 10, 9, 8, 7, 6, 5,
-            5, 5, 6, 7, 8, 10, 11, 13, 14, 13,
-            12, 10, 9, 8, 7, 6, 5, 5, 5, 6,
-            7, 8, 10, 12, 13, 15, 14, 13, 11, 10,
-            8, 7, 6, 5, 5, 5, 6, 7, 8, 10,
-            12, 14, 15, 14, 13, 11, 10, 8, 7, 6
-          ],
-          borderWidth: 2,
-          tension: 0.4
-        },
-
         {
           label: 'Incidentes médios e baixos',
           data: [
@@ -670,8 +699,30 @@
             23, 25, 28, 27, 25, 23, 20, 18, 15, 12
           ],
           borderWidth: 2,
-          tension: 0.4
-        }
+          tension: 0.4,
+          backgroundColor: '#1c55d050',
+          borderColor: "#1c55d0",
+          fill: false,
+        },
+        {
+          label: 'Incidentes Críticos',
+          data: [
+            3, 4, 5, 4, 6, 7, 6, 8, 9, 8,
+            7, 6, 5, 6, 7, 9, 10, 11, 10, 9,
+            8, 7, 6, 5, 5, 6, 7, 8, 9, 10,
+            12, 13, 12, 11, 10, 9, 8, 7, 6, 5,
+            5, 5, 6, 7, 8, 10, 11, 13, 14, 13,
+            12, 10, 9, 8, 7, 6, 5, 5, 5, 6,
+            7, 8, 10, 12, 13, 15, 14, 13, 11, 10,
+            8, 7, 6, 5, 5, 5, 6, 7, 8, 10,
+            12, 14, 15, 14, 13, 11, 10, 8, 7, 6
+          ],
+          borderWidth: 2,
+          tension: 0.4,
+          backgroundColor: '#052d9c90',
+          borderColor: "#052d9c",
+          fill: false,
+        },
       ]
     },
     options: {
