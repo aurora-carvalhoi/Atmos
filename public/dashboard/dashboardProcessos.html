@@ -1,0 +1,348 @@
+  <!DOCTYPE html>
+  <html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Servidor</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardProcessos.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardAlertas.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardAtmosGerente.css">
+
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+
+    <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+
+  </head>
+
+  <body>
+    <nav class="sidebar" id="siderbar">
+      <div class="logo-container">
+        <a href="./dashboardAtmos.html" class="logo">
+          <div class="cicle"></div>
+          <span>ATMOS</span>
+        </a>
+      </div>
+
+      <ul class="nav-links">
+        <ul>
+          <li class="nav-category">
+            <span>PRINCIPAL</span>
+          </li>
+          <li class="nav-item area-contribuidor">
+            <a href="./dashboardAtmos.html">
+              <img src="../assets/images/pc.svg" class="icon" alt="">
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item area-gestor">
+            <a href="./dashboardAtmosGerente.html">
+              <img src="../assets/images/pc.svg" class="icon" alt="">
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item nav-item-active">
+            <a href="./dashboardAlertas.html">
+              <img src="../assets/images/alert.svg" class="icon" alt="">
+              <span>Alertas</span>
+            </a>
+          </li>
+          <li class="nav-item area-gestor">
+            <a href="./dashboardRelatorios.html">
+              <img src="../assets/images/documentos.svg" class="icon" alt="">
+              <span>Relatorios</span>
+            </a>
+          </li>
+        </ul>
+        <ul>
+          <li class="nav-category">
+            <span>INFRAESTRUTURA</span>
+          </li>
+          <li class="nav-item">
+            <a href="./dashboardServidor.html">
+              <img src="../assets/images/server.svg" class="icon" alt="">
+              <span>Servidores</span>
+            </a>
+          </li>
+          <li class="nav-item area-gestor">
+            <a href="./dashboardEquipe.html">
+              <img src="../assets/images/user.svg" class="icon" alt="">
+              <span>Equipe</span>
+            </a>
+          </li>
+        </ul>
+      </ul>
+
+      <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
+        <div class="img-user" id="usarioimagem">
+          <img alt="A">
+        </div>
+        <div>
+          <h3><span id="usuarionome">usuário</span></h3>
+          <h5><span id="usuarioemail">email</span></h3>
+        </div>
+      </div>
+
+      <!--Menu mobile-->
+      <div class="menu" style="display: none" id="menu">
+        <div class="menu-container" id="menu-mobile">
+          <ul>
+            <ul>
+              <li class="nav-category">
+                <span>PRINCIPAL</span>
+              </li>
+              <li class="nav-item area-contribuidor">
+                <a href="./dashboardAtmos.html">
+                  <img src="../assets/images/pc.svg" class="icon" alt="">
+                  <span>Home</span>
+                </a>
+              </li>
+              <li class="nav-item nav-item-active">
+                <a href="./dashboardAlertas.html">
+                  <img src="../assets/images/alert.svg" class="icon" alt="">
+                  <span>Alertas</span>
+                </a>
+              </li>
+              <li class="nav-item area-gestor">
+                <a href="./dashboardRelatorios.html">
+                  <img src="../assets/images/documentos.svg" class="icon" alt="">
+                  <span>Relatorios</span>
+                </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="nav-category">
+                <span>INFRAESTRUTURA</span>
+              </li>
+              <li class="nav-item">
+                <a href="./dashboardServidor.html">
+                  <img src="../assets/images/server.svg" class="icon" alt="">
+                  <span>Servidores</span>
+                </a>
+              </li>
+            </ul>
+            <ul>
+              <li class="nav-category">
+                <span>Usuário</span>
+              </li>
+              <li class="nav-item ">
+                <a href="./dashboardPerfil.html">
+                  <img src="../assets/images/user.svg" class="icon" alt="">
+                  <span>Perfil</span>
+                </a>
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+      <!-- Menu Icon -->
+      <div class="container-menu">
+        <div class="menu-icon" id="menu-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <main id="div_conteudo_principal">
+    <header id="div_processTitle">
+      <button id="btn_return" type="button" aria-label="Voltar">
+        <img src="../assets/images/icones/Forma_returnArrow.svg" alt="" />
+      </button>
+
+      <div id="div_textos_title">
+        <h2>Detalhes dos Processos</h2>
+        <p>Servidor | SRV-PROD-01</p>
+      </div>
+    </header>
+
+    <section id="div_area_conteudo">
+      <section id="div_container_processList" class="container_padrao">
+        <div id="div_registrados">
+          <h3>Processos Registrados</h3>
+          <p>Informações gerais dos processos</p>
+        </div>
+
+        <div id="div_processos">
+          <div id="div_infoServidor">
+            <div id="div_icone_servidor" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <div id="div_textoServidor">
+              <h2>SRV-PROD-01</h2>
+              <p>| Total Processos: 212</p>
+            </div>
+
+            <button id="btn_ordernar" type="button" aria-label="Ordenar processos">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+
+          <div id="div_linhaSeparadora"></div>
+
+          <div id="div_listaProcessos">
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+            <div class="div_itemProcesso"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="div_dashboardProcessos" class="container_padrao">
+        <div id="div_container_grafico">
+          <div id="div_processName">
+            <h3 id="titulo_nomeProcesso">Nome do processo:</h3>
+            <p id="nomeProcesso">Process_Name</p>
+          </div>
+
+          <div id="div_grafico">
+            <svg id="svg_grafico" viewBox="0 0 600 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+              aria-label="Gráfico de consumo do processo">
+              <defs>
+                <linearGradient id="gradienteGrafico" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3977f3" stop-opacity="0.18" />
+                  <stop offset="100%" stop-color="#3977f3" stop-opacity="0.01" />
+                </linearGradient>
+              </defs>
+
+              <g class="linhas_grafico">
+                <line x1="0" y1="20" x2="600" y2="20" />
+                <line x1="0" y1="56" x2="600" y2="56" />
+                <line x1="0" y1="92" x2="600" y2="92" />
+                <line x1="0" y1="128" x2="600" y2="128" />
+                <line x1="0" y1="164" x2="600" y2="164" />
+              </g>
+
+              <text x="-8" y="24" text-anchor="end" dominant-baseline="middle">
+                100
+              </text>
+              <text x="-8" y="60" text-anchor="end" dominant-baseline="middle">
+                80
+              </text>
+              <text x="-8" y="96" text-anchor="end" dominant-baseline="middle">
+                60
+              </text>
+              <text x="-8" y="132" text-anchor="end" dominant-baseline="middle">
+                40
+              </text>
+              <text x="-8" y="168" text-anchor="end" dominant-baseline="middle">
+                20
+              </text>
+
+              <path class="area_grafico"
+                d="M0,110 L40,92 L80,56 L120,74 L160,110 L200,92 L240,92 L280,56 L320,83 L360,83 L400,92 L440,92 L480,74 L520,83 L560,47 L600,38 L600,180 L0,180 Z" />
+
+              <path class="linha_grafico"
+                d="M0,110 L40,92 L80,56 L120,74 L160,110 L200,92 L240,92 L280,56 L320,83 L360,83 L400,92 L440,92 L480,74 L520,83 L560,47 L600,38" />
+
+              <g class="pontos_grafico">
+                <circle cx="0" cy="110" r="4" />
+                <circle cx="40" cy="92" r="4" />
+                <circle cx="80" cy="56" r="4" />
+                <circle cx="120" cy="74" r="4" />
+                <circle cx="160" cy="110" r="4" />
+                <circle cx="200" cy="92" r="4" />
+                <circle cx="240" cy="92" r="4" />
+                <circle cx="280" cy="56" r="4" />
+                <circle cx="320" cy="83" r="4" />
+                <circle cx="360" cy="83" r="4" />
+                <circle cx="400" cy="92" r="4" />
+                <circle cx="440" cy="92" r="4" />
+                <circle cx="480" cy="74" r="4" />
+                <circle cx="520" cy="83" r="4" />
+                <circle cx="560" cy="47" r="4" />
+                <circle cx="600" cy="38" r="4" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div id="div_posicao_kpis">
+          <div id="div_container_kpi_1" class="container_kpis container_padrao">
+            <div class="div_nomekpi">Sub-Processos</div>
+            <div class="div_conteudo_kpi kpi_azul">4</div>
+          </div>
+
+          <div id="div_container_kpi_2" class="container_kpis container_padrao">
+            <div class="div_nomekpi">Consumo de cpu</div>
+            <div class="div_conteudo_kpi kpi_verde">0.12</div>
+            <div class="div_unidadeMedida">%</div>
+          </div>
+
+          <div id="div_container_kpi_3" class="container_kpis container_padrao">
+            <div class="div_nomekpi">Consumo de ram</div>
+            <div class="div_conteudo_kpi kpi_rosa">244</div>
+            <div class="div_unidadeMedida">Mb</div>
+          </div>
+
+          <div id="div_container_kpi_4" class="container_kpis container_padrao">
+            <div class="div_nomekpi">Consumo de disco</div>
+            <div class="div_conteudo_kpi kpi_cinza">0.3</div>
+            <div class="div_unidadeMedida">Mb/s</div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+    
+  </body>
+
+  </html>
+  <!-- Scripts Funcionais -->
+  <script src="../assets/javascript/datetime.js"></script>
+  <script src="../assets/javascript/menu.js"></script>
+  <script src="../assets/javascript/sessao.js"></script>
+
+  <script>
+    usuarionome.innerHTML = sessionStorage.NOME_USUARIO
+    usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+
+    function trocarCor(select) {
+      select.classList.remove('etiqueta-vermelha', 'etiqueta-amarela', 'etiqueta-verde');
+
+      if (select.value === 'vermelho') {
+        select.classList.add('etiqueta-vermelha');
+      } else if (select.value === 'amarelo') {
+        select.classList.add('etiqueta-amarela');
+      } else if (select.value === 'verde') {
+        select.classList.add('etiqueta-verde');
+      }
+    }
+
+      window.onload = function() {
+    var selects = document.querySelectorAll('select.etiqueta');
+
+    for (var i = 0; i < selects.length; i++) {
+      trocarCor(selects[i]);
+    }
+  }
+  </script>

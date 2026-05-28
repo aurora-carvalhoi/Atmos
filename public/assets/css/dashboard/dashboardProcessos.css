@@ -1,0 +1,776 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+:root {
+  --cor-fundo: #f5f6f8;
+  --cor-azul: #00367a;
+  --cor-azul-botao: #3977f3;
+  --cor-borda: #e5e8ef;
+  --cor-sombra: 0 6px 18px #1f29371f;
+  --raio-container: 7px;
+  --menu-lateral-aberto: clamp(210px, 15vw, 260px);
+  --menu-lateral-fechado: 72px;
+  --largura-menu-lateral: var(--menu-lateral-aberto);
+  --espaco-pagina-x: clamp(5px, 0.6vw, 10px);
+  --espaco-pagina-y: clamp(5px, 0.6vh, 10px);
+  --espaco-entre-containers: clamp(8px, 1.6vw, 24px);
+}
+
+body {
+  display: flex;
+  height: 100vh;
+
+  overflow: hidden;
+
+  background-color: var(--cor-fundo);
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+p {
+  font-family: inherit;
+}
+
+body.menu_fechado {
+  --largura-menu-lateral: var(--menu-lateral-fechado);
+}
+
+/* MENU LATERAL */
+
+#div_cabecalho_lateral {
+  width: var(--largura-menu-lateral);
+  height: 100vh;
+  flex: 0 0 var(--largura-menu-lateral);
+  overflow: hidden;
+  z-index: 100;
+}
+
+#div_minimizada {
+  width: var(--menu-lateral-fechado);
+  height: 100%;
+}
+
+.menu_lateral,
+.menu_lateral_minimizada {
+  border-right: 0 solid transparent;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+/* CONTEUDO PRINCIPAL */
+
+#div_conteudo_principal {
+  flex: 1 1 auto;
+
+  width: auto;
+  min-width: 0;
+
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+/* HEADER */
+
+#div_processTitle {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: -5px;
+  margin-left: -2px;
+}
+
+#btn_return {
+  width: clamp(36px, 3.5vw, 46px);
+  height: clamp(36px, 3.5vw, 46px);
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  border-radius: var(--raio-container);
+
+  background-color: var(--cor-azul-botao);
+  color: white;
+  cursor: pointer;
+
+  transition: background-color 0.2s;
+}
+
+#btn_return:hover {
+  background-color: #000c5c;
+}
+
+#btn_return img {
+  width: clamp(24px, 2.6vw, 32px);
+  height: clamp(24px, 2.6vw, 32px);
+}
+
+#div_textos_title {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#div_textos_title h2 {
+  margin: 0;
+
+  color: var(--cor-azul);
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+#div_textos_title p {
+  margin: 0;
+
+  color: gray;
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+
+/* AREA PRINCIPAL */
+
+#div_area_conteudo {
+  flex: 1 1 auto;
+
+  max-width: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  gap: var(--espaco-entre-containers);
+
+  margin-top: var(--espaco-pagina-y);
+
+  padding:
+    0
+    var(--espaco-pagina-x)
+    calc(var(--espaco-pagina-y) + 24px);
+
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.container_padrao {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-container);
+  box-shadow: var(--cor-sombra);
+
+  background-color: white;
+}
+
+/* LISTA PROCESSOS */
+
+#div_container_processList {
+  flex: 0 0 37%;
+  min-width: 280px;
+  max-width: 460px;
+
+  max-height: 100vh;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+#div_registrados {
+  flex-shrink: 0;
+
+  padding: clamp(10px, 1.4vh, 16px) 14px clamp(8px, 1.2vh, 12px);
+}
+
+#div_registrados h3 {
+  margin: 0;
+
+  color: var(--cor-azul);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 700;
+}
+
+#div_registrados p {
+  margin: 2px 0 0;
+
+  color: gray;
+  font-size: 0.88rem;
+}
+
+#div_processos {
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 14px 14px;
+  overflow: hidden;
+}
+
+#div_infoServidor {
+  min-height: clamp(52px, 6.5vh, 66px);
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding-bottom: 8px;
+}
+
+#div_icone_servidor {
+  width: clamp(40px, 3vw, 50px);
+  height: clamp(40px, 3vw, 50px);
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+
+  padding: 9px 8px;
+
+  border-radius: var(--raio-container);
+  background-color: #bfd7ff;
+}
+
+#div_icone_servidor span {
+  position: relative;
+  height: 11px;
+  border-radius: 1px;
+  background-color: #3977f3;
+}
+
+#div_icone_servidor span::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 6px;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+  background-color: #bfd7ff;
+}
+
+#div_textoServidor {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#div_textoServidor h2 {
+  margin: 0;
+
+  color: #595959;
+  font-size: clamp(1.1rem, 1.5vw, 1.6rem);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+#div_textoServidor p {
+  margin: 0;
+
+  color: #000;
+  font-size: clamp(0.88rem, 1.05vw, 1.1rem);
+  white-space: nowrap;
+}
+
+#btn_ordernar {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3px;
+
+  border: none;
+  border-radius: 7px;
+
+  background-color: #bdbdbd;
+  cursor: pointer;
+}
+
+#btn_ordernar span {
+  width: 16px;
+  height: 3px;
+
+  border-radius: 4px;
+  background-color: #666666;
+}
+
+#btn_ordernar span:nth-child(2) {
+  width: 11px;
+}
+
+#btn_ordernar span:nth-child(3) {
+  width: 6px;
+}
+
+#div_linhaSeparadora {
+  width: 100%;
+  height: 2px;
+  flex-shrink: 0;
+
+  margin-bottom: 10px;
+
+  background-color: #e0e0e0;
+}
+
+#div_listaProcessos {
+  flex: 1;
+  min-height: 0;
+
+  padding-right: 4px;
+
+  overflow-y: auto;
+}
+
+#div_listaProcessos::-webkit-scrollbar {
+  width: 8px;
+}
+
+#div_listaProcessos::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #efefef;
+}
+
+#div_listaProcessos::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #a0a0a0;
+}
+
+.div_itemProcesso {
+  height: clamp(46px, 6vh, 62px);
+
+  margin-bottom: clamp(8px, 1.2vh, 12px);
+
+  border-radius: var(--raio-container);
+  background-color: #dfe3ef;
+}
+
+/* DASHBOARD */
+
+#div_dashboardProcessos {
+  flex: 1 1 0;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+#div_container_grafico {
+  flex-shrink: 0;
+}
+
+#div_processName {
+  padding: clamp(12px, 1.6vh, 18px) clamp(14px, 1.4vw, 20px) 0;
+}
+
+#titulo_nomeProcesso {
+  margin: 0;
+
+  color: var(--cor-azul);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+#nomeProcesso {
+  margin: 2px 0 0;
+
+  color: gray;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+#div_grafico {
+  width: calc(100% - clamp(34px, 4vw, 56px));
+  height: clamp(120px, 22vh, 210px);
+
+  margin-top: clamp(10px, 1.6vh, 18px);
+  margin-right: auto;
+  margin-left: clamp(24px, 3vw, 44px);
+
+  overflow: visible;
+}
+
+#svg_grafico {
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+}
+
+#svg_grafico text {
+  fill: #a5a8b2;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.linhas_grafico line {
+  stroke: #ecf0f7;
+  stroke-width: 1.5;
+}
+
+.area_grafico {
+  fill: url(#gradienteGrafico);
+}
+
+.linha_grafico {
+  fill: none;
+  stroke: #1d5d9f;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3.5;
+}
+
+.pontos_grafico circle {
+  fill: #0f56a8;
+  stroke: #1d5d9f;
+  stroke-width: 2;
+}
+
+/* KPIS */
+
+#div_posicao_kpis {
+  flex: 1 1 auto;
+
+  width: calc(100% - clamp(24px, 3vw, 48px));
+
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: clamp(12px, 1.6vw, 20px);
+
+  margin: clamp(14px, 2vh, 24px) auto;
+
+  overflow: hidden;
+}
+
+.container_kpis {
+  position: relative;
+  min-width: 0;
+  min-height: 120px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: clamp(10px, 1.2vw, 14px) clamp(12px, 1.6vw, 22px)
+    clamp(10px, 1.4vw, 16px);
+}
+
+.div_nomekpi {
+  color: gray;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.8rem, 1.15vw, 0.95rem);
+  font-weight: bold;
+}
+
+.div_conteudo_kpi {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: clamp(2.8rem, 5.5vw, 6.5rem);
+  font-weight: bold;
+  line-height: 1;
+}
+
+.kpi_azul {
+  color: #b0b5ff;
+}
+
+.kpi_verde {
+  color: #aceca4;
+}
+
+.kpi_rosa {
+  color: #f6aaad;
+}
+
+.kpi_cinza {
+  color: #b5b5b5;
+}
+
+.div_unidadeMedida {
+  position: absolute;
+  right: clamp(10px, 1.4vw, 18px);
+  bottom: clamp(4px, 0.8vh, 8px);
+
+  color: gray;
+  font-size: clamp(1rem, 1.8vw, 1.9rem);
+  font-weight: bold;
+}
+
+/* RESPONSIVIDADE */
+
+/* regras globais importantes para permitir scroll */
+
+/* evita travamento por containers flex */
+
+/* telas baixas desktop */
+@media (max-height: 720px) and (min-width: 901px) {
+
+  #div_processTitle {
+    margin-top: 8px;
+  }
+
+  #div_area_conteudo {
+    margin-top: 10px;
+    padding-bottom: 16px;
+    max-height: 100vh;
+
+    height: auto;
+    min-height: fit-content;
+  }
+
+  #div_infoServidor {
+    min-height: 50px;
+  }
+
+  .div_itemProcesso {
+    height: 44px;
+    margin-bottom: 8px;
+  }
+
+  #div_grafico {
+    height: 100px;
+  }
+
+  #div_posicao_kpis {
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .div_conteudo_kpi {
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+  }
+
+  .sidebar,
+  #siderbar {
+    z-index: 1000;
+    position: absolute;
+  }
+}
+
+/* Tablet horizontal / desktop estreito */
+@media (min-width: 901px) and (max-width: 1100px) {
+
+  #div_area_conteudo {
+
+    gap: 12px;
+
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-bottom: 20px;
+
+    height: auto;
+    min-height: fit-content;
+
+    flex: 1 1 auto;
+  }
+
+  #div_container_processList {
+    flex: 0 0 34%;
+
+    min-width: 250px;
+    max-width: 340px;
+  }
+
+  #div_dashboardProcessos {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  #div_grafico {
+    width: calc(100% - 32px);
+    margin-left: 24px;
+  }
+
+  #div_posicao_kpis {
+    width: calc(100% - 20px);
+
+    gap: 12px;
+  }
+
+  .div_conteudo_kpi {
+    font-size: clamp(2.4rem, 5vw, 5.2rem);
+  }
+
+  .sidebar,
+  #siderbar {
+    z-index: 1000;
+    position: fixed;
+  }
+}
+
+/* Tablet vertical e mobile */
+@media (max-width: 900px) {
+
+  body {
+    height: auto;
+    min-height: 100vh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #div_conteudo_principal {
+    height: auto;
+    min-height: 100vh;
+
+    overflow: visible;
+  }
+
+  #div_area_conteudo {
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 14px;
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding:
+      0
+      var(--espaco-pagina-x)
+      28px;
+
+    height: auto;
+    min-height: fit-content;
+
+    flex: 1 1 auto;
+
+    overflow: visible;
+  }
+
+  /* lista em cima */
+  #div_container_processList {
+
+    width: 100%;
+    max-width: 720px;
+
+    min-width: 0;
+
+    order: 1;
+
+    height: auto;
+    max-height: none;
+
+    overflow: visible;
+  }
+
+  /* dashboard embaixo */
+  #div_dashboardProcessos {
+
+    width: 100%;
+    max-width: 720px;
+
+    min-width: 0;
+
+    order: 2;
+
+    height: auto;
+
+    overflow: visible;
+  }
+
+  #div_infoServidor {
+    height: 50px;
+  }
+
+  .div_itemProcesso {
+    height: 44px;
+    margin-bottom: 8px;
+  }
+
+  #div_grafico {
+
+    width: calc(100% - 28px);
+
+    height: 100px;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #div_posicao_kpis {
+
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    height: auto;
+    min-height: fit-content;
+
+    flex: 0 0 auto;
+
+    overflow: visible;
+  }
+
+  .container_kpis {
+    min-height: 140px;
+  }
+
+  .div_conteudo_kpi {
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+  }
+
+  .sidebar,
+  #siderbar {
+    z-index: 1000;
+    position: fixed;
+  }
+}
