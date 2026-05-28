@@ -2,24 +2,42 @@ const procesosModel = require("../models/processoModel");
 const s3Service = require("../services/s3Services");
 
 
-function buscar(req, res){
-    res.json({
-        "message": "funcionou!"
-    });
-}
-
 
 async function listarProcessos(req, res) {
 
   try {
 
-    const key =
-      "client/empresaX/snapshot_1779932998.json";
+    const server =
+      req.query.server;
 
-    const dados = await s3Service.buscarJson(
-      process.env.BUCKET_NAME,
-      key
-    );
+    const empresa =
+      req.query.empresa;
+
+    if (!server) {
+
+      return res.status(400).json({
+        erro: "Servidor não informado"
+      });
+
+    }
+
+    if (!empresa) {
+
+      return res.status(400).json({
+        erro: "Empresa não informada"
+      });
+
+    }
+
+    const key =
+
+      `client/${empresa}/processos/servidor/${server}/snapshot_${server}.json`;
+
+    const dados =
+      await s3Service.buscarJson(
+        process.env.BUCKET_NAME,
+        key
+      );
 
     res.json(dados);
 
@@ -38,6 +56,5 @@ async function listarProcessos(req, res) {
 
 
 module.exports = {
-    buscar,
     listarProcessos
 }
