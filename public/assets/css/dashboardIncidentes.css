@@ -783,19 +783,19 @@ body {
   }
 
 
-  .critico {
+  .nivel-1 {
     background: #ffd7d7;
     border: 1px solid #ff8b8b;
   }
 
-  .aberto {
-    background: #fff5bf;
-    border: 1px solid #e5d97d;
+  .nivel-2 {
+    background: #ffb3b3;
+    border: 1px solid #ff7a7a;
   }
 
-  .resolvido {
-    background: #cdf5d8;
-    border: 1px solid #8de0a8;
+  .nivel-3 {
+    background: #8b0000;
+    border: 1px solid #6a0000;
   }
 
   .vazio {
@@ -824,16 +824,16 @@ body {
     border-radius: 4px;
   }
 
-  .box-critico {
-    background: #ffd7d7;
+  .box-umIncidente {
+    background: #ffb3b3;
   }
 
-  .box-aberto {
-    background: #fff5bf;
+  .box-doisIncidentes {
+    background: #e05252;
   }
 
-  .box-resolvido {
-    background: #cdf5d8;
+  .box-quatroMaisIncidentes {
+    background: #8b0000;
   }
 
   .box-vazio {

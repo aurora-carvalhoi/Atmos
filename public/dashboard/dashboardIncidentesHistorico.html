@@ -251,9 +251,9 @@
             <thead>
               <tr>
                 <th>Servidor</th>
-                <th>Incidentes</th>
-                <th title="Tempo médio de resolução">
-                  TMR
+                <th>Incidente</th>
+                <th title="Responsável">
+                  Aberto
                 </th>
                 <th>Status</th>
               </tr>
@@ -262,42 +262,42 @@
               <tr>
                 <td>Server-CL-01</td>
                 <td>
-                  <span class="etiqueta etiqueta-critico">
-                    3
+                  <span>
+                    ATMOS-42
                   </span>
                 </td>
-                <td>6.1h</td>
+                <td>10min</td>
                 <td>
-                  <span class="status status-risco">
-                    SLA em risco
+                  <span class="status status-analise">
+                    Em Andamento
                   </span>
                 </td>
               </tr>
               <tr>
                 <td>Server-MB-01</td>
                 <td>
-                  <span class="etiqueta etiqueta-alerta">
-                    2
+                  <span>
+                    ATMOS-43
                   </span>
                 </td>
-                <td>3.8h</td>
+                <td>1h</td>
                 <td>
                   <span class="status status-analise">
-                    Em análise
+                    Em Andamento
                   </span>
                 </td>
               </tr>
               <tr>
                 <td>Server-AD-01</td>
                 <td>
-                  <span class="etiqueta etiqueta-ok">
-                    1
+                  <span>
+                    ATMOS-44
                   </span>
                 </td>
                 <td>1.2h</td>
                 <td>
-                  <span class="status status-ok">
-                    OK
+                  <span class="status status-naoAtribuido">
+                    Não atribuído
                   </span>
                 </td>
               </tr>
@@ -306,8 +306,8 @@
                   Server-SM-01
                 </td>
                 <td>
-                  <span class="etiqueta etiqueta-critico">
-                    2
+                  <span></span>
+                    ATMOS-45
                   </span>
                 </td>
                 <td>—</td>
@@ -422,23 +422,23 @@
 
           <div class="legenda">
             <div class="item">
-              <span class="box box-critico"></span>
-              Incidente crítico
+              <span class="box box-umIncidente"></span>
+              1 incidente
             </div>
 
             <div class="item">
-              <span class="box box-aberto"></span>
-              Em aberto
+              <span class="box box-doisIncidentes"></span>
+              2-3 Incidentes
             </div>
 
             <div class="item">
-              <span class="box box-resolvido"></span>
-              Resolvido
+              <span class="box box-quatroMaisIncidentes"></span>
+              4+ Incidentes
             </div>
 
             <div class="item">
               <span class="box box-vazio"></span>
-              Sem ocorrência
+              Sem Incidentes
             </div>
           </div>
 
@@ -518,7 +518,7 @@ const incidentes = [
     dia: 8,
     mes: 5,
     ano: 2026,
-    status: "critico"
+    componente: "RAM"
   },
 
   {
@@ -526,7 +526,7 @@ const incidentes = [
     dia: 9,
     mes: 5,
     ano: 2026,
-    status: "resolvido"
+    componente: "CPU"
   },
 
   {
@@ -534,7 +534,7 @@ const incidentes = [
     dia: 4,
     mes: 5,
     ano: 2026,
-    status: "critico"
+    componente: "RAM"
   },
 
   {
@@ -542,7 +542,7 @@ const incidentes = [
     dia: 14,
     mes: 5,
     ano: 2026,
-    status: "aberto"
+    componente: "Disco"
   },
 
   {
@@ -550,7 +550,7 @@ const incidentes = [
     dia: 27,
     mes: 5,
     ano: 2026,
-    status: "resolvido"
+    componente: "Disco"
   },
 
   /* Abril */
@@ -560,7 +560,7 @@ const incidentes = [
     dia: 12,
     mes: 4,
     ano: 2026,
-    status: "critico"
+    componente: "CPU"
   }
 
 ];
@@ -680,8 +680,8 @@ function renderizarHeatmap() {
 
       celula.classList.add("bloco-incidente");
 
-      const incidente =
-        incidentes.find(item =>
+      const incidentesDoDia =
+        incidentes.filter(item =>
 
           item.servidor === servidores[i] &&
           item.dia === dia &&
@@ -690,24 +690,22 @@ function renderizarHeatmap() {
 
         );
 
-      if(incidente) {
+  const qtd = incidentesDoDia.length;
 
-        celula.classList.add(
-          incidente.status
-        );
+  if (qtd === 0)       celula.classList.add("vazio"); // vazio
+  else if (qtd === 1)  celula.classList.add("nivel-1");
+  else if (qtd <= 3)   celula.classList.add("nivel-2");
+  else                 celula.classList.add("nivel-3");
 
-        celula.title = `
-Servidor: ${incidente.servidor}
-Dia: ${incidente.dia}
-Status: ${incidente.status}
-        `;
-
-      }
-      else {
-
-        celula.classList.add("vazio");
-
-      }
+  if (qtd > 0) {
+    if (qtd === 1){
+      const lista = incidentesDoDia.map(i => i.componente);
+      celula.title = `${qtd} incidente: ${lista}`;
+    } else{
+      const lista = incidentesDoDia.map(i => i.componente).join(", ");
+    celula.title = `${qtd} incidentes: ${lista}`;
+    }
+  }
 
       linhaServidor.appendChild(celula);
 
