@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Servidor</title>
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardAlertas.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardAtmosGerente.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardAnalisePreditiva.css">
+
+
+  <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+
+  <!-- ChartJS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+
+</head>
+
+<body>
+  <nav class="sidebar" id="siderbar">
+    <div class="logo-container">
+      <a href="./dashboardAtmos.html" class="logo">
+        <div class="cicle"></div>
+        <span>ATMOS</span>
+      </a>
+    </div>
+
+    <ul class="nav-links">
+      <ul>
+        <li class="nav-category">
+          <span>PRINCIPAL</span>
+        </li>
+        <li class="nav-item area-contribuidor">
+          <a href="./dashboardAtmos.html">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardAtmosGerente.html">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item nav-item-active">
+          <a href="./dashboardAlertas.html">
+            <img src="../assets/images/alert.svg" class="icon" alt="">
+            <span>Alertas</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardRelatorios.html">
+            <img src="../assets/images/documentos.svg" class="icon" alt="">
+            <span>Relatorios</span>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li class="nav-category">
+          <span>INFRAESTRUTURA</span>
+        </li>
+        <li class="nav-item">
+          <a href="./dashboardServidor.html">
+            <img src="../assets/images/server.svg" class="icon" alt="">
+            <span>Servidores</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardEquipe.html">
+            <img src="../assets/images/user.svg" class="icon" alt="">
+            <span>Equipe</span>
+          </a>
+        </li>
+      </ul>
+    </ul>
+
+    <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
+      <div class="img-user" id="usarioimagem">
+        <img alt="A">
+      </div>
+      <div>
+        <h3><span id="usuarionome">usuário</span></h3>
+        <h5><span id="usuarioemail">email</span></h3>
+      </div>
+    </div>
+
+    <!--Menu mobile-->
+    <div class="menu" style="display: none" id="menu">
+      <div class="menu-container" id="menu-mobile">
+        <ul>
+          <ul>
+            <li class="nav-category">
+              <span>PRINCIPAL</span>
+            </li>
+            <li class="nav-item area-contribuidor">
+              <a href="./dashboardAtmos.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardAtmosGerente.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item nav-item-active">
+              <a href="./dashboardAlertas.html">
+                <img src="../assets/images/alert.svg" class="icon" alt="">
+                <span>Alertas</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardRelatorios.html">
+                <img src="../assets/images/documentos.svg" class="icon" alt="">
+                <span>Relatorios</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>INFRAESTRUTURA</span>
+            </li>
+            <li class="nav-item">
+              <a href="./dashboardServidor.html">
+                <img src="../assets/images/server.svg" class="icon" alt="">
+                <span>Servidores</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardEquipe.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Equipe</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>Usuário</span>
+            </li>
+            <li class="nav-item ">
+              <a href="./dashboardPerfil.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Perfil</span>
+              </a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+    <!-- Menu Icon -->
+    <div class="container-menu">
+      <div class="menu-icon" id="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+  </nav>
+  <div class="principal">
+
+    <div class="topo">
+      <div class="caminho">
+        <span>Infraestrutura</span>
+        <span>›</span>
+        <span class="ativo">Análise Preditiva</span>
+      </div>
+      <div class="topo-direita">
+        <div class="emblema-sistema"><span></span> Sistema Operacional</div>
+        <div class="topo-hora" id="relogio">—</div>
+      </div>
+    </div>
+
+    <div class="conteudo">
+
+      <div class="cabecalho-pagina">
+        <h1>Análise Preditiva de Temperatura</h1>
+        <p>Acompanhe como o uso da CPU influencia a temperatura do servidor e identifique riscos antes que
+          afetem o desempenho.</p>
+      </div>
+
+      <div class="grade-kpis-servidor">
+        <div class="grade-servidor">
+
+          <div class="campo-servidor">
+            <h1 class="campo-rotulo">Servidor:</h1>
+            <div class="campo-valor" id="nome-servidor">SRV-METEOROLOGIA-01</div>
+          </div>
+
+          <div class="campo-servidor">
+            <h1 class="campo-rotulo">Status:</h1>
+            <div class="campo-status" id="emblema-status">—</div>
+          </div>
+
+        </div>
+
+        <div class="grade-kpi">
+
+          <div class="cartao-kpi" id="cartao-temp-atual">
+            <h3>Temperatura Atual</h3>
+            <div class="kpi-valor" id="valor-temp-atual">—</div>
+            <div class="kpi-descricao">Temperatura medida no momento</div>
+          </div>
+
+          <div class="cartao-kpi" id="cartao-temp-prev">
+            <h3>Temperatura Prevista + 1 hora</h3>
+            <div class="kpi-valor" id="valor-temp-prev">—</div>
+            <div class="kpi-faixa">
+              <span class="normal">Faixa Normal: 45°C</span>
+              <span class="critico">Limite Crítico: 85°C</span>
+            </div>
+          </div>
+
+          <div class="cartao-kpi" id="cartao-cpu">
+            <h3>Uso de CPU (p90)</h3>
+            <div class="kpi-valor" id="valor-cpu">—</div>
+            <div class="kpi-descricao">90% das leituras ficam abaixo deste valor</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="grade-graficos">
+
+
+        <div class="cartao-secao">
+
+          <div class="secao-titulo">
+            Relação Temperatura × CPU
+          </div>
+
+          <div class="secao-subtitulo">
+            Regressão linear baseada nas leituras
+            coletadas do servidor.
+          </div>
+
+          <div class="grafico-wrapper">
+            <canvas id="grafico"></canvas>
+          </div>
+
+          <div class="interpretacao">
+
+            <div class="mini-icone">
+              ℹ
+            </div>
+
+            <div>
+
+              <h4>
+                Interpretação
+              </h4>
+
+              <p id="texto-interpretacao">
+                Aguardando dados...
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="cartao-secao">
+
+          <div class="secao-titulo">
+            Temperatura Atual vs Prevista
+          </div>
+
+          <div class="secao-subtitulo">
+            Comparação entre temperatura prevista
+            e monitorada a cada 1 minuto.
+          </div>
+
+          <div class="grafico-wrapper">
+            <canvas id="graficoComparacao"></canvas>
+          </div>
+
+          <div class="mini-interpretacao" id="bloco-desvio">
+
+            <div class="mini-icone" id="icone-desvio">
+              ⚠
+            </div>
+
+            <div>
+
+              <h4>
+                Tendência
+              </h4>
+
+              <p id="texto-desvio">
+                Aguardando análise...
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="bloco-recomendacoes" class="cartao-secao" style="display:none">
+        <div class="secao-titulo">Recomendações</div>
+        <div class="secao-subtitulo">Ações sugeridas com base no status atual do servidor</div>
+        <div class="grade-recomendacoes" id="grade-rec"></div>
+      </div>
+
+      <div id="bloco-estavel" style="display:none">
+        <div class="banner-estavel">
+          <div class="banner-estavel-icone">✔</div>
+          <div>
+            <h4>Servidor estável</h4>
+            <p>Operando dentro dos parâmetros normais. Nenhuma ação necessária no momento.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>
+<!-- Scripts Funcionais -->
+<script src="../assets/javascript/datetime.js"></script>
+<script src="../assets/javascript/menu.js"></script>
+<script src="../assets/javascript/sessao.js"></script>
+
+<script>
+  usuarionome.innerHTML = sessionStorage.NOME_USUARIO
+  usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+
+  function trocarCor(select) {
+    select.classList.remove('etiqueta-vermelha', 'etiqueta-amarela', 'etiqueta-verde');
+
+    if (select.value === 'vermelho') {
+      select.classList.add('etiqueta-vermelha');
+    } else if (select.value === 'amarelo') {
+      select.classList.add('etiqueta-amarela');
+    } else if (select.value === 'verde') {
+      select.classList.add('etiqueta-verde');
+    }
+  }
+
+  window.onload = function () {
+    var selects = document.querySelectorAll('select.etiqueta');
+
+    for (var i = 0; i < selects.length; i++) {
+      trocarCor(selects[i]);
+    }
+  }
+</script>
+
+<script>
+
+  const RECOMENDACOES = {
+    ALERTA: [
+      {
+        icone: "",
+        cor: "laranja",
+        titulo: "Verifique o resfriamento",
+        desc: "Temperatura elevada. Confirme se os coolers e o fluxo de ar estão operando corretamente."
+      },
+      {
+        icone: "",
+        cor: "azul",
+        titulo: "Monitoramento contínuo",
+        desc: "Monitore os alertas e acione o time preventivamente para evitar possíveis falhas."
+      }
+    ],
+    CRITICO: [
+      {
+        icone: "🌡",
+        cor: "vermelho",
+        titulo: "Alto uso de CPU",
+        desc: "Redistribua ou encerre processos não essenciais imediatamente para reduzir a carga."
+      },
+      {
+        icone: "",
+        cor: "vermelho",
+        titulo: "Risco térmico iminente",
+        desc: "Temperatura crítica. Verifique o resfriamento e considere desligar cargas não urgentes."
+      },
+      {
+        icone: "",
+        cor: "laranja",
+        titulo: "Monitoramento de emergência",
+        desc: "Situação crítica detectada. Acompanhe os alertas e acione o time de infraestrutura com urgência."
+      }
+    ]
+  };
+
+
+  const dados = {
+    kpis: {
+      cpuP90: 26.2,
+      temperaturaAtual: 56.0,
+      temperaturaPrevista: 57.3,
+      status: "CRITICO",
+      impactoCpuPor10pct: 5.0
+    },
+    grafico: [
+      { cpu: 10, temperatura: 49.8 }, { cpu: 18, temperatura: 53.4 },
+      { cpu: 25, temperatura: 57.1 }, { cpu: 30, temperatura: 59.3 },
+      { cpu: 38, temperatura: 63.8 }, { cpu: 45, temperatura: 67.2 },
+      { cpu: 50, temperatura: 69.5 }, { cpu: 55, temperatura: 72.1 },
+      { cpu: 60, temperatura: 74.8 }, { cpu: 65, temperatura: 77.3 },
+      { cpu: 70, temperatura: 79.9 }, { cpu: 72, temperatura: 81.4 },
+      { cpu: 75, temperatura: 83.1 }, { cpu: 80, temperatura: 85.5 },
+      { cpu: 85, temperatura: 87.2 }, { cpu: 90, temperatura: 89.8 }
+    ],
+    regressao: [
+      { x: 0, y: 44.9 }, { x: 10, y: 50.0 }, { x: 20, y: 55.1 },
+      { x: 30, y: 60.2 }, { x: 40, y: 65.3 }, { x: 50, y: 70.4 },
+      { x: 60, y: 75.5 }, { x: 70, y: 80.6 }, { x: 80, y: 85.7 },
+      { x: 90, y: 90.8 }, { x: 100, y: 95.9 }
+    ]
+  };
+
+  function classeStatus(s) {
+    if (s === "CRITICO") return "status-critico";
+    if (s === "ALERTA") return "status-alerta";
+    return "status-normal";
+  }
+
+  function rotuloStatus(s) {
+    if (s === "CRITICO") return "Crítico";
+    if (s === "ALERTA") return "Alerta";
+    return "Normal";
+  }
+
+  function statusCpu(cpu) {
+    if (cpu >= 85) return "status-critico";
+    if (cpu >= 65) return "status-alerta";
+    return "status-normal";
+  }
+
+  function renderizar(dados) {
+    const k = dados.kpis;
+    const classe = classeStatus(k.status);
+    const rotulo = rotuloStatus(k.status);
+
+    /* identificação do servidor */
+    const emblemaStatus = document.getElementById("emblema-status");
+    emblemaStatus.textContent = rotulo;
+    emblemaStatus.className = "campo-status emblema-status-" + k.status.toLowerCase();
+
+    /* temperatura atual */
+    document.getElementById("cartao-temp-atual").className = "cartao-kpi " + classe;
+    document.getElementById("valor-temp-atual").textContent = k.temperaturaAtual.toFixed(1) + "°C";
+
+    /*temperatura prevista */
+    document.getElementById("cartao-temp-prev").className = "cartao-kpi " + classe;
+    document.getElementById("valor-temp-prev").textContent = k.temperaturaPrevista.toFixed(1) + "°C";
+
+    /* CPU */
+    document.getElementById("cartao-cpu").className = "cartao-kpi " + statusCpu(k.cpuP90);
+    document.getElementById("valor-cpu").textContent = k.cpuP90.toFixed(1) + "%";
+
+
+    document.getElementById("texto-interpretacao").innerHTML =
+      `A cada aumento de <strong>10% no uso da CPU</strong>, a temperatura tende a subir
+            <strong>~${k.impactoCpuPor10pct.toFixed(1)}°C</strong> neste servidor.
+            Com CPU em <strong>${k.cpuP90.toFixed(1)}%</strong>,
+            o modelo prevê <strong>${k.temperaturaPrevista.toFixed(1)}°C</strong>
+            — status <strong>${rotulo}</strong>.`;
+
+
+    const blocoRec = document.getElementById("bloco-recomendacoes");
+    const blocoEst = document.getElementById("bloco-estavel");
+    const gradeRec = document.getElementById("grade-rec");
+
+    if (k.status === "NORMAL") {
+      blocoRec.style.display = "none";
+      blocoEst.style.display = "block";
+    } else {
+      blocoEst.style.display = "none";
+      blocoRec.style.display = "block";
+
+      const listaRecs = RECOMENDACOES[k.status] || [];
+      let htmlRecs = "";
+
+      for (let i = 0; i < listaRecs.length; i++) {
+        const rec = listaRecs[i];
+        htmlRecs += `
+                    <div class="item-recomendacao">
+                        <div class="emblema-recomendacao ${rec.cor}">${rec.icone}</div>
+                        <div><h4>${rec.titulo}</h4><p>${rec.desc}</p></div>
+                    </div>
+                `;
+      }
+
+      gradeRec.innerHTML = htmlRecs;
+    }
+
+    const pontosReais = [];
+    for (let i = 0; i < dados.grafico.length; i++) {
+      pontosReais.push({
+        x: dados.grafico[i].cpu,
+        y: dados.grafico[i].temperatura
+      });
+    }
+
+    const pontosRegressao = [];
+    for (let i = 0; i < dados.regressao.length; i++) {
+      pontosRegressao.push({
+        x: dados.regressao[i].x,
+        y: dados.regressao[i].y
+      });
+    }
+
+    new Chart(document.getElementById("grafico"), {
+      type: "scatter",
+      data: {
+        datasets: [
+          {
+            label: "CPU e Temperatura",
+            data: pontosReais,
+            backgroundColor: "#1a56db",
+            pointRadius: 5,
+            pointHoverRadius: 7
+          },
+          {
+            label: "Linha de tendência",
+            data: pontosRegressao,
+            type: "line",
+            borderColor: "#ef4444",
+            borderDash: [6, 6],
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: "bottom" } },
+        scales: {
+          x: {
+            type: "linear",
+            title: { display: true, text: "Uso da CPU (%)", color: "#6b7280", font: { size: 12 } },
+            grid: { color: "rgba(0,0,0,0.05)" },
+            ticks: { color: "#6b7280", font: { size: 11 } }
+          },
+          y: {
+            title: { display: true, text: "Temperatura (°C)", color: "#6b7280", font: { size: 12 } },
+            grid: { color: "rgba(0,0,0,0.05)" },
+            ticks: { color: "#6b7280", font: { size: 11 } }
+          }
+        }
+      }
+    });
+  }
+
+  renderizar(dados);
+
+
+  const dados1 = {
+
+    historicoTemperatura: [
+
+      {
+        hora: "10:00",
+        atual: 56,
+        prevista: 54
+      },
+
+      {
+        hora: "10:05",
+        atual: 58,
+        prevista: 55
+      },
+
+      {
+        hora: "10:10",
+        atual: 60,
+        prevista: 57
+      },
+
+      {
+        hora: "10:15",
+        atual: 63,
+        prevista: 58
+      },
+
+      {
+        hora: "10:20",
+        atual: 65,
+        prevista: 59
+      },
+
+      {
+        hora: "10:25",
+        atual: 67,
+        prevista: 60
+      },
+
+       {
+        hora: "10:25",
+        atual: null,
+        prevista: 90
+      },
+
+
+    ]
+
+  };
+
+
+  const labels = [];
+
+  const temperaturasAtuais = [];
+
+  const temperaturasPrevistas = [];
+
+
+  for (let i = 0; i < dados1.historicoTemperatura.length; i++) {
+
+    labels.push(
+      dados1.historicoTemperatura[i].hora
+    );
+
+    temperaturasAtuais.push(
+      dados1.historicoTemperatura[i].atual
+    );
+
+    temperaturasPrevistas.push(
+      dados1.historicoTemperatura[i].prevista
+    );
+
+  }
+
+  new Chart(document.getElementById("graficoComparacao"), {
+
+    type: "line",
+
+    data: {
+
+      labels: labels,
+
+      datasets: [
+
+        {
+          label: "Temperatura Atual",
+
+          data: temperaturasAtuais,
+
+          borderColor: "#DC2626",
+
+          backgroundColor: "#DC2626",
+
+          tension: 0.3,
+
+          pointRadius: 4
+        },
+
+        {
+          label: "Temperatura Prevista",
+
+          data: temperaturasPrevistas,
+
+          borderColor: "#2563EB",
+
+          backgroundColor: "#2563EB",
+
+          borderDash: [6, 6],
+
+          tension: 0.3,
+
+          pointRadius: 4
+        }
+
+      ]
+
+    },
+
+    options: {
+
+      responsive: true,
+
+      maintainAspectRatio: false,
+
+      plugins: {
+
+        legend: {
+          position: "bottom"
+        }
+
+      },
+
+      scales: {
+
+        x: {
+
+          title: {
+            display: true,
+            text: "Horário"
+          },
+
+          grid: {
+            display: false
+          }
+
+        },
+
+        y: {
+
+          title: {
+            display: true,
+            text: "Temperatura (°C)"
+          },
+
+          grid: {
+            color: "rgba(0,0,0,0.05)"
+          }
+
+        }
+
+      }
+
+    }
+
+  });
+
+  const ultimaLeitura =
+    dados1.historicoTemperatura[
+    dados1.historicoTemperatura.length - 1
+    ];
+
+  const variacaoPrevista =
+    ultimaLeitura.prevista - ultimaLeitura.atual;
+
+  const textoDesvio =
+    document.getElementById("texto-desvio");
+
+  const blocoDesvio =
+    document.getElementById("bloco-desvio");
+
+  const iconeDesvio =
+    document.getElementById("icone-desvio");
+
+
+  if (variacaoPrevista >= 10) {
+
+    blocoDesvio.className =
+      "mini-interpretacao critico";
+
+    iconeDesvio.textContent = "⚠";
+
+    textoDesvio.innerHTML = `
+
+    Tendência crítica de aquecimento.
+
+    A temperatura pode subir
+    <strong>${variacaoPrevista.toFixed(1)}°C</strong>
+    na próxima hora.
+
+    Isso pode indicar sobrecarga
+    ou necessidade de verificar
+    a refrigeração do servidor.
+
+  `;
+
+  }
+
+  else if (variacaoPrevista > 0) {
+
+    blocoDesvio.className =
+      "mini-interpretacao alerta";
+
+    iconeDesvio.textContent = "⚠";
+
+    textoDesvio.innerHTML = `
+
+    Tendência de aumento térmico.
+
+    A temperatura pode subir
+    <strong>${variacaoPrevista.toFixed(1)}°C</strong>
+    na próxima hora.
+
+  `;
+
+  }
+
+  else if (variacaoPrevista < 0) {
+
+    blocoDesvio.className =
+      "mini-interpretacao normal";
+
+    iconeDesvio.textContent = "✔";
+
+    textoDesvio.innerHTML = `
+
+    Tendência de resfriamento.
+
+    A temperatura pode diminuir
+    <strong>${Math.abs(variacaoPrevista).toFixed(1)}°C</strong>
+    na próxima hora.
+
+  `;
+
+  }
+
+  else {
+
+    blocoDesvio.className =
+      "mini-interpretacao normal";
+
+    iconeDesvio.textContent = "✔";
+
+    textoDesvio.innerHTML = `
+
+    Temperatura tende a permanecer
+    estável na próxima hora.
+
+  `;
+
+  }
+</script>
