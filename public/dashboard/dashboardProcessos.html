@@ -198,20 +198,6 @@
           <div id="div_linhaSeparadora"></div>
 
           <div id="div_listaProcessos">
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
-            <div class="div_itemProcesso"></div>
           </div>
         </div>
       </section>
@@ -322,27 +308,224 @@
   <script src="../assets/javascript/menu.js"></script>
   <script src="../assets/javascript/sessao.js"></script>
 
-  <script>
-    usuarionome.innerHTML = sessionStorage.NOME_USUARIO
-    usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+ <script>
 
-    function trocarCor(select) {
-      select.classList.remove('etiqueta-vermelha', 'etiqueta-amarela', 'etiqueta-verde');
+usuarionome.innerHTML = sessionStorage.NOME_USUARIO;
+usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO;
 
-      if (select.value === 'vermelho') {
-        select.classList.add('etiqueta-vermelha');
-      } else if (select.value === 'amarelo') {
-        select.classList.add('etiqueta-amarela');
-      } else if (select.value === 'verde') {
-        select.classList.add('etiqueta-verde');
-      }
-    }
+let dados = null;
+let processoSelecionado = null;
 
-      window.onload = function() {
-    var selects = document.querySelectorAll('select.etiqueta');
+window.onload = async function () {
 
-    for (var i = 0; i < selects.length; i++) {
-      trocarCor(selects[i]);
-    }
+  await carregarDados();
+
+}
+
+async function carregarDados() {
+
+  try {
+
+    const resposta = await fetch(
+      'http://localhost:3333/processos/listar?server=laptop-NZ13&empresa=ClimaTech%20LTDA'
+    );
+
+    dados = await resposta.json();
+
+    console.log(dados);
+
+    renderizarServidor();
+    renderizarListaProcessos();
+
+  } catch (erro) {
+
+    console.error("Erro ao carregar dados:", erro);
+
   }
-  </script>
+
+}
+
+function renderizarServidor() {
+
+  document.querySelector("#div_textoServidor h2")
+    .innerHTML = dados.servidor;
+
+  document.querySelector("#div_textoServidor p")
+    .innerHTML = `| Total Processos: ${dados.total_processos}`;
+
+}
+
+function renderizarListaProcessos() {
+
+  const lista = document.getElementById("div_listaProcessos");
+
+  lista.innerHTML = "";
+
+  dados.processos.forEach((processo, index) => {
+
+    const div = document.createElement("div");
+
+    div.className = "div_itemProcesso";
+
+    div.innerHTML = `
+    
+      <div class="processo-conteudo">
+
+        <h3>${processo.nome}</h3>
+
+        <p>PID: ${processo.pid}</p>
+
+        <div class="linha-info">
+          <span>CPU: ${processo.cpu}%</span>
+          <span>RAM: ${processo.ram} MB</span>
+        </div>
+
+      </div>
+
+    `;
+
+    div.onclick = () => selecionarProcesso(processo);
+
+    lista.appendChild(div);
+
+    if(index == 0){
+
+      selecionarProcesso(processo);
+
+    }
+
+  });
+
+}
+
+function selecionarProcesso(processo) {
+
+  processoSelecionado = processo;
+
+  atualizarKPIs(processo);
+
+  atualizarGrafico(processo);
+
+}
+
+function atualizarKPIs(processo) {
+
+  const nome =
+    processo.nome ||
+    processo.name ||
+    "Processo";
+
+  const cpu =
+    processo.cpu ||
+    processo.cpu_percent ||
+    processo.cpuPercent ||
+    0;
+
+  const ram =
+    processo.ram ||
+    processo.memory ||
+    processo.memory_mb ||
+    processo.memoria ||
+    0;
+
+  const disco =
+    processo.disco ||
+    processo.disk ||
+    processo.disk_mb ||
+    0;
+
+  const subprocessos =
+    processo.subprocessos ||
+    processo.threads ||
+    processo.childs ||
+    0;
+
+  document.querySelector("#nomeProcesso")
+    .innerHTML = nome;
+
+  document.querySelector("#div_container_kpi_1 .div_conteudo_kpi")
+    .innerHTML = subprocessos;
+
+  document.querySelector("#div_container_kpi_2 .div_conteudo_kpi")
+    .innerHTML = cpu;
+
+  document.querySelector("#div_container_kpi_3 .div_conteudo_kpi")
+    .innerHTML = ram;
+
+  document.querySelector("#div_container_kpi_4 .div_conteudo_kpi")
+    .innerHTML = disco;
+
+}
+
+function atualizarGrafico(processo) {
+
+  const historico = processo.historico_cpu || [
+    processo.cpu || 0
+  ];
+
+  const largura = 600;
+  const altura = 180;
+
+  const max = 100;
+
+  const espacamento =
+    historico.length > 1
+      ? largura / (historico.length - 1)
+      : largura;
+
+  let path = "";
+
+  historico.forEach((valor, index) => {
+
+    const x = index * espacamento;
+
+    const y =
+      altura - ((valor / max) * altura);
+
+    path +=
+      `${index == 0 ? 'M' : 'L'}${x},${y} `;
+
+  });
+
+  document.querySelector(".linha_grafico")
+    .setAttribute("d", path);
+
+  document.querySelector(".area_grafico")
+    .setAttribute(
+      "d",
+      `${path} L600,180 L0,180 Z`
+    );
+
+  const grupoPontos =
+    document.querySelector(".pontos_grafico");
+
+  grupoPontos.innerHTML = "";
+
+  historico.forEach((valor, index) => {
+
+    const x = index * espacamento;
+
+    const y =
+      altura - ((valor / max) * altura);
+
+    grupoPontos.innerHTML += `
+      <circle cx="${x}" cy="${y}" r="4" />
+    `;
+
+  });
+
+}
+
+function selecionarProcesso(processo) {
+
+  console.log(processo);
+
+  processoSelecionado = processo;
+
+  atualizarKPIs(processo);
+
+  atualizarGrafico(processo);
+
+}
+
+</script>
