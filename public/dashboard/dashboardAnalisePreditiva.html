@@ -361,3 +361,486 @@
     }
   }
 </script>
+
+<script>
+
+  const RECOMENDACOES = {
+
+    ALERTA: [
+
+      {
+        icone: "",
+        cor: "laranja",
+        titulo: "Verifique o resfriamento",
+        desc: "Temperatura elevada. Confirme se os coolers e o fluxo de ar estão operando corretamente."
+      },
+
+      {
+        icone: "",
+        cor: "azul",
+        titulo: "Monitoramento contínuo",
+        desc: "Monitore os alertas e acione o time preventivamente para evitar possíveis falhas."
+      }
+
+    ],
+
+    CRITICO: [
+
+      {
+        icone: "🌡",
+        cor: "vermelho",
+        titulo: "Alto uso de CPU",
+        desc: "Redistribua ou encerre processos não essenciais imediatamente para reduzir a carga."
+      },
+
+      {
+        icone: "",
+        cor: "vermelho",
+        titulo: "Risco térmico iminente",
+        desc: "Temperatura crítica. Verifique o resfriamento e considere desligar cargas não urgentes."
+      },
+
+      {
+        icone: "",
+        cor: "laranja",
+        titulo: "Monitoramento de emergência",
+        desc: "Situação crítica detectada. Acompanhe os alertas e acione o time de infraestrutura com urgência."
+      }
+
+    ]
+  };
+
+
+  function classeStatus(s) {
+
+    if (s === "CRITICO") return "status-critico";
+
+    if (s === "ALERTA") return "status-alerta";
+
+    return "status-normal";
+  }
+
+
+  function rotuloStatus(s) {
+
+    if (s === "CRITICO") return "Crítico";
+
+    if (s === "ALERTA") return "Alerta";
+
+    return "Normal";
+  }
+
+
+  function statusCpu(cpu) {
+
+    if (cpu >= 85) return "status-critico";
+
+    if (cpu >= 65) return "status-alerta";
+
+    return "status-normal";
+  }
+
+
+  function renderizar(dados) {
+
+    const k = dados.kpis;
+
+    const classe = classeStatus(k.status);
+
+    const rotulo = rotuloStatus(k.status);
+
+
+    const emblemaStatus =
+      document.getElementById("emblema-status");
+
+    emblemaStatus.textContent = rotulo;
+
+    emblemaStatus.className =
+      "campo-status emblema-status-" +
+      k.status.toLowerCase();
+
+
+
+    document.getElementById(
+      "cartao-temp-atual"
+    ).className =
+      "cartao-kpi " + classe;
+
+    document.getElementById(
+      "valor-temp-atual"
+    ).textContent =
+      k.temperaturaAtual.toFixed(1) + "°C";
+
+
+
+    document.getElementById(
+      "cartao-temp-prev"
+    ).className =
+      "cartao-kpi " + classe;
+
+    document.getElementById(
+      "valor-temp-prev"
+    ).textContent =
+      k.temperaturaPrevista.toFixed(1) + "°C";
+
+
+
+    document.getElementById(
+      "cartao-cpu"
+    ).className =
+      "cartao-kpi " + statusCpu(k.cpuP90);
+
+    document.getElementById(
+      "valor-cpu"
+    ).textContent =
+      k.cpuP90.toFixed(1) + "%";
+
+
+
+    document.getElementById(
+      "texto-interpretacao"
+    ).innerHTML =
+
+      `A cada aumento de
+      <strong>10% no uso da CPU</strong>,
+      a temperatura tende a subir
+      <strong>~${k.impactoCpuPor10pct.toFixed(1)}°C</strong>.
+
+      O modelo prevê
+      <strong>${k.temperaturaPrevista.toFixed(1)}°C</strong>
+      — status
+      <strong>${rotulo}</strong>.`;
+
+
+
+    const blocoRec =
+      document.getElementById(
+        "bloco-recomendacoes"
+      );
+
+    const blocoEst =
+      document.getElementById(
+        "bloco-estavel"
+      );
+
+    const gradeRec =
+      document.getElementById(
+        "grade-rec"
+      );
+
+
+    if (k.status === "NORMAL") {
+
+      blocoRec.style.display = "none";
+
+      blocoEst.style.display = "block";
+
+    } else {
+
+      blocoEst.style.display = "none";
+
+      blocoRec.style.display = "block";
+
+      const listaRecs =
+        RECOMENDACOES[k.status] || [];
+
+      let htmlRecs = "";
+
+      for (let i = 0; i < listaRecs.length; i++) {
+
+        const rec = listaRecs[i];
+
+        htmlRecs += `
+
+          <div class="item-recomendacao">
+
+            <div class="emblema-recomendacao ${rec.cor}">
+              ${rec.icone}
+            </div>
+
+            <div>
+              <h4>${rec.titulo}</h4>
+              <p>${rec.desc}</p>
+            </div>
+
+          </div>
+
+        `;
+      }
+
+      gradeRec.innerHTML = htmlRecs;
+    }
+
+
+
+    const pontosReais = [];
+
+    for (let i = 0; i < dados.grafico.length; i++) {
+
+      pontosReais.push({
+
+        x: dados.grafico[i].cpu,
+
+        y: dados.grafico[i].temperatura
+      });
+    }
+
+
+    const pontosRegressao = [];
+
+    for (let i = 0; i < dados.regressao.length; i++) {
+
+      pontosRegressao.push({
+
+        x: dados.regressao[i].x,
+
+        y: dados.regressao[i].y
+      });
+    }
+
+
+    new Chart(
+      document.getElementById("grafico"),
+      {
+
+        type: "scatter",
+
+        data: {
+
+          datasets: [
+
+            {
+              label: "CPU e Temperatura",
+
+              data: pontosReais,
+
+              backgroundColor: "#1a56db",
+
+              pointRadius: 5
+            },
+
+            {
+              label: "Linha de tendência",
+
+              data: pontosRegressao,
+
+              type: "line",
+
+              borderColor: "#ef4444",
+
+              borderDash: [6, 6],
+
+              borderWidth: 2,
+
+              pointRadius: 0,
+
+              tension: 0
+            }
+
+          ]
+        },
+
+        options: {
+
+          responsive: true,
+
+          maintainAspectRatio: false
+        }
+      }
+    );
+
+
+
+
+    const labels = [];
+
+    const temperaturasAtuais = [];
+
+    const temperaturasPrevistas = [];
+
+
+    for (let i = 0; i < dados.grafico.length; i++) {
+
+      labels.push(
+        dados.grafico[i].timestamp
+      );
+
+      temperaturasAtuais.push(
+        dados.grafico[i].temperatura
+      );
+
+      temperaturasPrevistas.push(
+        dados.grafico[i].temperatura_prevista
+      );
+    }
+
+
+    new Chart(
+      document.getElementById(
+        "graficoComparacao"
+      ),
+      {
+
+        type: "line",
+
+        data: {
+
+          labels: labels,
+
+          datasets: [
+
+            {
+              label: "Temperatura Atual",
+
+              data: temperaturasAtuais,
+
+              borderColor: "#DC2626",
+
+              backgroundColor: "#DC2626",
+
+              tension: 0.3
+            },
+
+            {
+              label: "Temperatura Prevista",
+
+              data: temperaturasPrevistas,
+
+              borderColor: "#2563EB",
+
+              backgroundColor: "#2563EB",
+
+              borderDash: [6, 6],
+
+              tension: 0.3
+            }
+
+          ]
+        },
+
+        options: {
+
+          responsive: true,
+
+          maintainAspectRatio: false
+        }
+      }
+    );
+
+
+
+    const ultimaAtual =
+      temperaturasAtuais[
+      temperaturasAtuais.length - 1
+      ];
+
+    const ultimaPrevista =
+      temperaturasPrevistas[
+      temperaturasPrevistas.length - 1
+      ];
+
+
+    const variacaoPrevista =
+      ultimaPrevista - ultimaAtual;
+
+
+    const textoDesvio =
+      document.getElementById(
+        "texto-desvio"
+      );
+
+    const blocoDesvio =
+      document.getElementById(
+        "bloco-desvio"
+      );
+
+    const iconeDesvio =
+      document.getElementById(
+        "icone-desvio"
+      );
+
+
+    if (variacaoPrevista >= 10) {
+
+      blocoDesvio.className =
+        "mini-interpretacao critico";
+
+      iconeDesvio.textContent = "⚠";
+
+      textoDesvio.innerHTML = `
+
+        Tendência crítica de aquecimento.
+
+        A temperatura pode subir
+        <strong>${variacaoPrevista.toFixed(1)}°C</strong>
+        na próxima hora.
+
+      `;
+
+    }
+
+    else if (variacaoPrevista > 0) {
+
+      blocoDesvio.className =
+        "mini-interpretacao alerta";
+
+      iconeDesvio.textContent = "⚠";
+
+      textoDesvio.innerHTML = `
+
+        Tendência de aumento térmico.
+
+        A temperatura pode subir
+        <strong>${variacaoPrevista.toFixed(1)}°C</strong>
+        na próxima hora.
+
+      `;
+    }
+
+    else {
+
+      blocoDesvio.className =
+        "mini-interpretacao normal";
+
+      iconeDesvio.textContent = "✔";
+
+      textoDesvio.innerHTML = `
+
+        Temperatura estável
+        ou em resfriamento.
+
+      `;
+    }
+
+  }
+ 
+  async function carregarDados() {
+
+    try {
+
+      const resposta = await fetch(
+        "/s3/dados"
+      );
+
+      const dados = await resposta.json();
+
+      console.log(dados);
+
+      renderizar(dados);
+
+    }
+
+    catch (erro) {
+
+      console.log(
+        "Erro ao carregar dados:",
+        erro
+      );
+    }
+  }
+
+
+  carregarDados();
+  
+
+</script>
