@@ -456,3 +456,162 @@
     font-size: 13px;
     color: #16a34a;
 }
+
+
+@media (max-width: 1024px) {
+
+    .conteudo {
+        padding: 20px;
+    }
+
+    .grade-kpi {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .cartao-kpi {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .grade-graficos {
+        grid-template-columns: 1fr;
+    }
+
+    .grafico-wrapper {
+        height: 320px;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .topo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        height: auto;
+        padding: 16px;
+    }
+
+    .topo-direita {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .conteudo {
+        padding: 16px;
+        gap: 18px;
+    }
+
+    .cabecalho-pagina h1 {
+        font-size: 20px;
+    }
+
+    .cabecalho-pagina p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .grade-servidor {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .campo-valor,
+    .campo-status {
+        min-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .grade-kpi {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .cartao-kpi {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .kpi-faixa {
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+    }
+
+    .kpi-faixa .critico {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .cartao-secao {
+        padding: 18px;
+    }
+
+    .grafico-wrapper {
+        height: 280px;
+    }
+
+    .mini-interpretacao,
+    .interpretacao,
+    .banner-estavel,
+    .item-recomendacao {
+        flex-direction: column;
+    }
+
+    .mini-icone,
+    .banner-estavel-icone,
+    .emblema-recomendacao {
+        flex-shrink: 0;
+    }
+
+    .grade-recomendacoes {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .conteudo {
+        padding: 12px;
+    }
+
+    .cabecalho-pagina h1 {
+        font-size: 18px;
+    }
+
+    .kpi-valor {
+        font-size: 28px;
+    }
+
+    .campo-rotulo {
+        font-size: 14px;
+    }
+
+    .campo-valor,
+    .campo-status {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .secao-titulo {
+        font-size: 14px;
+    }
+
+    .secao-subtitulo,
+    .interpretacao p,
+    .mini-interpretacao p,
+    .item-recomendacao p {
+        font-size: 12px;
+    }
+
+    .grafico-wrapper {
+        height: 240px;
+    }
+}
