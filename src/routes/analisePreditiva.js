@@ -3,7 +3,7 @@ var router = express.Router();
 
 var analiseController = require("../controllers/analisePreditivaController");
 
-router.get("/:empresa/:server",analiseController.buscarAnalisePreditiva);
+router.get("/listar", analiseController.buscarAnalisePreditiva);
 
 module.exports = router;
 

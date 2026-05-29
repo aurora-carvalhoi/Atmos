@@ -823,13 +823,9 @@
       const servidor =
         sessionStorage.SERVIDOR;
 
-      const resposta = await fetch(
+      const resposta = await fetch(`/analisepreditiva/listar?empresa=${empresa}&server=${servidor}`);
 
-        `/analisepreditiva/${empresa}/${servidor}`
-      );
-
-      const dados =
-        await resposta.json();
+      const dados = await resposta.json();
 
       console.log(dados);
 

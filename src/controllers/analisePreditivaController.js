@@ -1,16 +1,17 @@
 const {
-    S3Client,
+  S3Client,
     GetObjectCommand
 } = require("@aws-sdk/client-s3");
 
-console.log("Bucket:",process.env.AWS_BUCKET);
+
+console.log("Bucket:", process.env.AWS_BUCKET);
+
 
 const s3 = new S3Client({
-
-    region: process.env.AWS_DEFAULT_REGION,
+    region:
+        process.env.AWS_REGION,
 
     credentials: {
-
         accessKeyId:
             process.env.AWS_ACCESS_KEY_ID,
 
@@ -24,13 +25,14 @@ const s3 = new S3Client({
 
 
 async function buscarAnalisePreditiva(req, res) {
+
     try {
 
         const empresa =
-            req.params.empresa;
+            req.query.empresa;
 
         const server =
-            req.params.server;
+            req.query.server;
 
 
         if (!empresa) {
@@ -94,6 +96,7 @@ async function buscarAnalisePreditiva(req, res) {
             "Erro ao buscar análise preditiva:",
             erro
         );
+
 
         res.status(500).json({
 
