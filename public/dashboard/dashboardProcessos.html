@@ -210,64 +210,7 @@
           </div>
 
           <div id="div_grafico">
-            <svg id="svg_grafico" viewBox="0 0 600 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
-              aria-label="Gráfico de consumo do processo">
-              <defs>
-                <linearGradient id="gradienteGrafico" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#3977f3" stop-opacity="0.18" />
-                  <stop offset="100%" stop-color="#3977f3" stop-opacity="0.01" />
-                </linearGradient>
-              </defs>
-
-              <g class="linhas_grafico">
-                <line x1="0" y1="20" x2="600" y2="20" />
-                <line x1="0" y1="56" x2="600" y2="56" />
-                <line x1="0" y1="92" x2="600" y2="92" />
-                <line x1="0" y1="128" x2="600" y2="128" />
-                <line x1="0" y1="164" x2="600" y2="164" />
-              </g>
-
-              <text x="-8" y="24" text-anchor="end" dominant-baseline="middle">
-                100
-              </text>
-              <text x="-8" y="60" text-anchor="end" dominant-baseline="middle">
-                80
-              </text>
-              <text x="-8" y="96" text-anchor="end" dominant-baseline="middle">
-                60
-              </text>
-              <text x="-8" y="132" text-anchor="end" dominant-baseline="middle">
-                40
-              </text>
-              <text x="-8" y="168" text-anchor="end" dominant-baseline="middle">
-                20
-              </text>
-
-              <path class="area_grafico"
-                d="M0,110 L40,92 L80,56 L120,74 L160,110 L200,92 L240,92 L280,56 L320,83 L360,83 L400,92 L440,92 L480,74 L520,83 L560,47 L600,38 L600,180 L0,180 Z" />
-
-              <path class="linha_grafico"
-                d="M0,110 L40,92 L80,56 L120,74 L160,110 L200,92 L240,92 L280,56 L320,83 L360,83 L400,92 L440,92 L480,74 L520,83 L560,47 L600,38" />
-
-              <g class="pontos_grafico">
-                <circle cx="0" cy="110" r="4" />
-                <circle cx="40" cy="92" r="4" />
-                <circle cx="80" cy="56" r="4" />
-                <circle cx="120" cy="74" r="4" />
-                <circle cx="160" cy="110" r="4" />
-                <circle cx="200" cy="92" r="4" />
-                <circle cx="240" cy="92" r="4" />
-                <circle cx="280" cy="56" r="4" />
-                <circle cx="320" cy="83" r="4" />
-                <circle cx="360" cy="83" r="4" />
-                <circle cx="400" cy="92" r="4" />
-                <circle cx="440" cy="92" r="4" />
-                <circle cx="480" cy="74" r="4" />
-                <circle cx="520" cy="83" r="4" />
-                <circle cx="560" cy="47" r="4" />
-                <circle cx="600" cy="38" r="4" />
-              </g>
-            </svg>
+            <canvas id="graficoProcesso" aria-label="Gráfico de consumo do processo"></canvas>
           </div>
         </div>
 
@@ -315,6 +258,7 @@ usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO;
 
 let dados = null;
 let processoSelecionado = null;
+let graficoProcesso = null;
 
 window.onload = async function () {
 
@@ -348,10 +292,10 @@ async function carregarDados() {
 function renderizarServidor() {
 
   document.querySelector("#div_textoServidor h2")
-    .innerHTML = dados.servidor;
+    .innerHTML = obterNomeServidor();
 
   document.querySelector("#div_textoServidor p")
-    .innerHTML = `| Total Processos: ${dados.total_processos}`;
+    .innerHTML = `| Total Processos: ${obterTotalProcessos()}`;
 
 }
 
@@ -361,23 +305,30 @@ function renderizarListaProcessos() {
 
   lista.innerHTML = "";
 
-  dados.processos.forEach((processo, index) => {
+  const processos = Array.isArray(dados.processos)
+    ? dados.processos
+    : [];
+
+  processos.forEach((processo, index) => {
 
     const div = document.createElement("div");
 
     div.className = "div_itemProcesso";
 
+    const cpu = obterValorMetrica(processo, "cpu");
+    const ram = obterValorMetrica(processo, "ram");
+
     div.innerHTML = `
     
       <div class="processo-conteudo">
 
-        <h3>${processo.nome}</h3>
+        <h3>${processo.nome || "Processo sem nome"}</h3>
 
-        <p>PID: ${processo.pid}</p>
+        <p>PID: ${processo.pid || "--"}</p>
 
         <div class="linha-info">
-          <span>CPU: ${processo.cpu}%</span>
-          <span>RAM: ${processo.ram} MB</span>
+          <span>CPU: ${formatarNumero(cpu)}%</span>
+          <span>RAM: ${formatarNumero(ram)} MB</span>
         </div>
 
       </div>
@@ -415,105 +366,232 @@ function atualizarKPIs(processo) {
     processo.name ||
     "Processo";
 
-  const cpu =
-    processo.cpu ||
-    processo.cpu_percent ||
-    processo.cpuPercent ||
-    0;
+  const cpu = obterValorMetrica(processo, "cpu");
 
-  const ram =
-    processo.ram ||
-    processo.memory ||
-    processo.memory_mb ||
-    processo.memoria ||
-    0;
+  const ram = obterValorMetrica(processo, "ram");
 
-  const disco =
-    processo.disco ||
-    processo.disk ||
-    processo.disk_mb ||
-    0;
+  const disco = obterValorMetrica(processo, "ioDisco");
 
-  const subprocessos =
-    processo.subprocessos ||
-    processo.threads ||
-    processo.childs ||
-    0;
+  const subprocessos = obterValorMetrica(processo, "subprocessos");
 
   document.querySelector("#nomeProcesso")
     .innerHTML = nome;
 
   document.querySelector("#div_container_kpi_1 .div_conteudo_kpi")
-    .innerHTML = subprocessos;
+    .innerHTML = formatarNumero(subprocessos);
 
   document.querySelector("#div_container_kpi_2 .div_conteudo_kpi")
-    .innerHTML = cpu;
+    .innerHTML = formatarNumero(cpu);
 
   document.querySelector("#div_container_kpi_3 .div_conteudo_kpi")
-    .innerHTML = ram;
+    .innerHTML = formatarNumero(ram);
 
   document.querySelector("#div_container_kpi_4 .div_conteudo_kpi")
-    .innerHTML = disco;
+    .innerHTML = formatarNumero(disco);
 
 }
 
 function atualizarGrafico(processo) {
 
-  const historico = processo.historico_cpu || [
-    processo.cpu || 0
+  const datasets = criarDatasetsGrafico(processo);
+  const totalPontos = obterMaiorHistorico(datasets);
+  const rotulos = Array.from(
+    { length: totalPontos },
+    (_, index) => index + 1
+  );
+
+  if (!graficoProcesso) {
+    criarGraficoProcesso(rotulos, datasets);
+    return;
+  }
+
+  graficoProcesso.data.labels = rotulos;
+  graficoProcesso.data.datasets = datasets;
+  graficoProcesso.update();
+
+}
+
+function criarGraficoProcesso(rotulos, datasets) {
+  const canvas = document.getElementById("graficoProcesso");
+
+  if (!canvas) {
+    return;
+  }
+
+  graficoProcesso = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels: rotulos,
+      datasets
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          position: "top"
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return `${context.dataset.label}: ${formatarNumero(context.parsed.y)} percentil`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            maxTicksLimit: 8
+          }
+        },
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            callback: function (valor) {
+              return valor;
+            }
+          },
+          title: {
+            display: true,
+            text: "Percentil"
+          }
+        }
+      }
+    }
+  });
+}
+
+function criarDatasetsGrafico(processo) {
+  const metricas = [
+    {
+      label: "Subprocessos",
+      nome: "subprocessos"
+    },
+    {
+      label: "CPU",
+      nome: "cpu"
+    },
+    {
+      label: "RAM",
+      nome: "ram"
+    },
+    {
+      label: "Disco",
+      nome: "ioDisco"
+    }
   ];
 
-  const largura = 600;
-  const altura = 180;
-
-  const max = 100;
-
-  const espacamento =
-    historico.length > 1
-      ? largura / (historico.length - 1)
-      : largura;
-
-  let path = "";
-
-  historico.forEach((valor, index) => {
-
-    const x = index * espacamento;
-
-    const y =
-      altura - ((valor / max) * altura);
-
-    path +=
-      `${index == 0 ? 'M' : 'L'}${x},${y} `;
-
-  });
-
-  document.querySelector(".linha_grafico")
-    .setAttribute("d", path);
-
-  document.querySelector(".area_grafico")
-    .setAttribute(
-      "d",
-      `${path} L600,180 L0,180 Z`
+  return metricas.map((metrica) => {
+    const historico = obterHistoricoMetrica(
+      processo,
+      metrica.nome
     );
 
-  const grupoPontos =
-    document.querySelector(".pontos_grafico");
-
-  grupoPontos.innerHTML = "";
-
-  historico.forEach((valor, index) => {
-
-    const x = index * espacamento;
-
-    const y =
-      altura - ((valor / max) * altura);
-
-    grupoPontos.innerHTML += `
-      <circle cx="${x}" cy="${y}" r="4" />
-    `;
-
+    return {
+      label: metrica.label,
+      data: converterHistoricoParaPercentil(historico),
+      fill: false,
+      tension: 0.1
+    };
   });
+}
 
+function obterMaiorHistorico(datasets) {
+  return datasets.reduce((maior, dataset) => {
+    return Math.max(maior, dataset.data.length);
+  }, 1);
+}
+
+function converterHistoricoParaPercentil(historico) {
+  const valores = historico
+    .map((valor) => Number(valor))
+    .filter((valor) => Number.isFinite(valor));
+
+  if (valores.length == 0) {
+    return [0];
+  }
+
+  const valoresOrdenados = [...valores].sort((a, b) => a - b);
+
+  return valores.map((valor) => {
+    const posicao = valoresOrdenados
+      .filter((item) => item <= valor)
+      .length;
+
+    return Number(((posicao / valoresOrdenados.length) * 100).toFixed(2));
+  });
+}
+
+function obterNomeServidor() {
+  if (typeof dados.servidor == "string") {
+    return dados.servidor;
+  }
+
+  return dados.servidor?.hostname ||
+    dados.hostname ||
+    "Servidor";
+}
+
+function obterTotalProcessos() {
+  return dados.total_processos ||
+    dados.servidor?.totalProcessos ||
+    dados.processos?.length ||
+    0;
+}
+
+function obterValorMetrica(processo, nomeMetrica) {
+  const metrica = processo.metricas?.[nomeMetrica];
+
+  if (metrica && metrica.valor != undefined) {
+    return metrica.valor;
+  }
+
+  const camposAlternativos = {
+    cpu: ["cpu", "cpu_percent", "cpuPercent"],
+    ram: ["ram", "memory", "memory_mb", "memoria"],
+    ioDisco: ["disco", "disk", "disk_mb"],
+    subprocessos: ["subprocessos", "threads", "childs"]
+  };
+
+  const campos = camposAlternativos[nomeMetrica] || [];
+
+  for (let i = 0; i < campos.length; i++) {
+    if (processo[campos[i]] != undefined) {
+      return processo[campos[i]];
+    }
+  }
+
+  return 0;
+}
+
+function obterHistoricoMetrica(processo, nomeMetrica) {
+  const historico = processo.metricas?.[nomeMetrica]?.historico;
+
+  if (Array.isArray(historico) && historico.length > 0) {
+    return historico;
+  }
+
+  return [
+    obterValorMetrica(processo, nomeMetrica)
+  ];
+}
+
+function formatarNumero(valor) {
+  const numero = Number(valor);
+
+  if (!Number.isFinite(numero)) {
+    return "0";
+  }
+
+  return Number.isInteger(numero)
+    ? String(numero)
+    : numero.toFixed(2);
 }
 
 function selecionarProcesso(processo) {
