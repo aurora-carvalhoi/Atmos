@@ -813,16 +813,23 @@
     }
 
   }
- 
   async function carregarDados() {
 
     try {
 
+      const empresa =
+        sessionStorage.EMPRESA_ID;
+
+      const servidor =
+        sessionStorage.SERVIDOR;
+
       const resposta = await fetch(
-        "/s3/dados"
+
+        `/analisepreditiva/${empresa}/${servidor}`
       );
 
-      const dados = await resposta.json();
+      const dados =
+        await resposta.json();
 
       console.log(dados);
 
@@ -839,8 +846,7 @@
     }
   }
 
-
   carregarDados();
-  
+
 
 </script>

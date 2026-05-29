@@ -19,12 +19,14 @@ var app = express();
 var usuarioRouter = require("./src/routes/usuarios");
 var s3Router = require("./src/routes/s3");
 var jiraRouter = require("./src/routes/jiraRouter")
+var analisePreditivaRouter = require("./src/routes/analisePreditiva");
 //var avisosRouter = require("./src/routes/avisos");
 //var medidasRouter = require("./src/routes/medidas");
 var empresasRouter = require("./src/routes/empresas");
 var funcionarioAtmosRouter = require("./src/routes/funcionarioAtmos");
 var servidoresRouter = require("./src/routes/servidores");
 var processosRouter = require("./src/routes/processos");
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -42,7 +44,7 @@ app.use("/servidores", servidoresRouter);
 app.use("/processos", processosRouter);
 app.use("/s3", s3Router);
 app.use("/jira", jiraRouter);
-
+app.use("/analisePreditiva", analisePreditivaRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
