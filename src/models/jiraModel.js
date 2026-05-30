@@ -19,7 +19,7 @@ function testeConexao() {
         method: "GET",
 
         headers: {
-            "Authorization": `Basic ${Jira.credenciais}`,
+            "Authorization": `Bas     ic ${Jira.credenciais}`,
             "Accept": "application/json"
         }
     })
@@ -28,7 +28,7 @@ function testeConexao() {
 async function chamadosSemAtribuicao() {
     var complementoUrl = "/search/jql"
     var filtro = `?jql=(assignee IS EMPTY OR assignee = "atmos") AND statusCategory != Done`
-    var campos = `&fields=summary,description,priority,status,created`
+    var campos = `&fields=summary,description,priority,status,created,labels`
     var dados = await fetch(`${Jira.jiraConfig.baseUrl}${complementoUrl}${filtro}${campos}`, {
         method: "GET",
         headers: {
@@ -52,7 +52,7 @@ async function buscarTempoResolucao() {
         }
     })
     var resposta = await dados.json();
-    console.log(resposta.issues)
+    // console.log(resposta.issues)
     return resposta
 }
 
@@ -68,8 +68,31 @@ async function distribuicaoPorContribuidor() {
         }
     })
     var resposta = await dados.json();
-    console.log(resposta.issues)
+    console.log("Esse")
+    console.log(resposta)
     return resposta
+}
+
+async function equipe() {
+    var complementoUrl = "/users/search"
+    var filtro = `?query=&maxResults=1000&query!="atmos"`
+    var campos = ``
+    var dados = await fetch(`${Jira.jiraConfig.baseUrl}${complementoUrl}${filtro}${campos}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Basic ${Jira.credenciais}`,
+            "Accept": "application/json"
+        }
+    })
+
+    var resposta = await dados.json();
+
+    var usuarios = resposta.filter(user =>
+        user.accountType === "atlassian"&&
+        !user.displayName.toLowerCase().includes("atmos")
+    )
+    
+    return usuarios
 }
 
 
@@ -78,5 +101,6 @@ module.exports = {
     testeConexao,
     chamadosSemAtribuicao,
     buscarTempoResolucao,
-    distribuicaoPorContribuidor
+    distribuicaoPorContribuidor,
+    equipe,
 };

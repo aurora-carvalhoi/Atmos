@@ -210,9 +210,9 @@
       <div class="d-kpi">
         <p class="titulo">Incidentes Sem Responsáveis</p>
         <div class="descricao t-cinza">
-          <h3 class="indicador t-vermelho">10</h3>
+          <h3 class="indicador t-vermelho" id="kpi_qtd_incidentes"></h3>
           <!-- <img src="../assets/images/time.svg" alt=""> -->
-          <p>Mais Antigo: <span class="t-vermelho">14h atrás</span></p>
+          <p id="tempo_incidente_mais_antigo"></p>
         </div>
       </div>
       <div class="linha-kpi"></div>
@@ -230,9 +230,9 @@
       <div class="d-kpi">
         <p class="titulo">Tempo médio de resolução</p>
         <div class="descricao t-cinza">
-          <h3 class="indicador t-laranja">5h</h3>
+          <h3 class="indicador" id="kpi_tempo_medio_resolucao"></h3>
           <!-- <img src="../assets/images/seta.svg" alt=""> -->
-          <p><span class="t-laranja">+1h</span> comparado ao mês passado</p>
+          <p id="kpi_tempo_medio_resolucao_ancora"></p>
         </div>
       </div>
       <div class="linha-kpi"></div>
@@ -248,7 +248,7 @@
 
     </section>
 
-    <section class="section-alerta">
+    <!-- <section class="section-alerta">
       <div class="alerta-climatico">
         <span class="alerta">⚠︎</span>
         <p>&nbsp&nbsp&nbsp
@@ -258,7 +258,7 @@
           <span class="alerta-destaque">SERV-PROD-01</span>
         </p>
       </div>
-    </section>
+    </section> -->
 
     <!-- Saúde -->
     <section class="section-saude">
@@ -267,17 +267,17 @@
           <p class="titulo-card">
             Visão de Incidentes em 90 dias
           </p>
-          <button class="btn-relatorio">
+          <!-- <button class="btn-relatorio">
             Baixar relátorio de análise
-          </button>
+          </button> -->
         </div>
         <div class="card-grafico-linha">
           <canvas id="grafico-incidente"></canvas>
         </div>
         <div class="card-infos-add">
           <div class="desc">
-            <p> <span class="t-vermelho">18</span> Incidentes registrados na semana &nbsp&nbsp|&nbsp&nbsp <span
-                class="t-vermelho">+2</span> Incidentes a cima do esperado</p>
+            <!-- <p> <span class="t-vermelho">18</span> Incidentes registrados na semana &nbsp&nbsp|&nbsp&nbsp <span -->
+            <!-- class="t-vermelho">+2</span> Incidentes a cima do esperado</p> -->
           </div>
         </div>
       </div>
@@ -285,12 +285,17 @@
       <div class="distribuicao">
         <div class="topo-card">
           <p class="titulo-card">Distribuição de Incidentes na Equipe</p>
-          <button class="btn-incidente">
+          <button class="btn-acao">
             Ação necessaria
           </button>
         </div>
-        <div class="lista-colaborador">
-          <div class="card-colaborador">
+        <div class="lista-colaborador" id="lista_distribuicao_colaborador">
+          <!-- <div class="card-colaborador">
+            <div>
+              <img class="imagem-colaborador"
+                src="https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/712020:751268ae-e43f-4c62-99c8-3a2a3e0dc21b/da98d27b-efcd-4ea8-ae49-c07d776ef71b/48"
+                alt="colaborador">
+            </div>
             <div class="infos">
               <div class="separacao">
                 <p>Matheus Gomes</p>
@@ -299,12 +304,11 @@
               <div class="separacao">
                 <div class="barra">
                   <div class="preenchimento" style="width: 85%; background-color: rgb(255, 88, 88);"></div>
-                  <div class="preenchimento preenchimento-ideial" style="width: 50;"></div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="card-colaborador">
+          </div> -->
+          <!-- <div class="card-colaborador">
             <div class="infos">
               <div class="separacao">
                 <p>Anna Costa</p>
@@ -345,23 +349,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <!-- <div class="kpis-adicionais">
-          <div class="kpi-menor">
-            <p class="titulo">Informações sobre resolução</p>
-            <p class="valor">5h e 39min</p>
-            <p class="desc">
-              Tempo estimado para a resolução completa
-            </p>
-          </div>
-          <div class="kpi-maior">
-            <p class="titulo">Informações sobre tempo de resolução</p>
-            <p class="valor t-vermelho">+2h</p>
-            <p class="desc">
-              Em comparação ao periodo de 7 dias atrás
-            </p>
           </div> -->
+        </div>
       </div>
       </div>
 
@@ -370,14 +359,6 @@
     <section class="section-dados">
       <!-- Atenção -->
       <div class="dados-atencao">
-        <!-- alerta climatico -->
-        <div class="card-alerta">
-          <p class="titulo">Alerta Climático</p>
-          <p class="texto">Probabilidade de 87% de chuva intensa nas próximas 48 horas, risco de incidentes nos
-            servidores:
-            <span class="alerta-clima-serv">SERV-PROD-01</span>
-          </p>
-        </div>
         <!-- Reincidencias de incidentes -->
         <div class="card-atencao">
           <p class="titulo-card">
@@ -388,23 +369,18 @@
           </span>
           <div class="lista">
             <div class="card-serv-recorrente">
-              <div>
-                <p class="titulo">SERV-PROD-01</p>
-                <p class="desc">RAM sobrecarregada • Último em 10/05/2026</p>
+              <div class="identificador">
+                <div class="faixa"></div>
+                <div>
+                  <p class="titulo">SERV-PROD-01</p>
+                  <p class="desc">RAM sobrecarregada • Último em 10/05/2026</p>
+                </div>
               </div>
               <div>
-                <p class="reincidencias">3x</p>
-              </div>
-            </div>
-            <div class="card-serv-recorrente">
-              <div>
-                <p class="titulo">SERV-PROD-01</p>
-                <p class="desc">RAM sobrecarregada • Último em 10/05/2026</p>
-              </div>
-              <div>
-                <p class="reincidencias">3x</p>
+                <p class="reincidencias">3x incidentes</p>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -413,36 +389,14 @@
         <div class="incidentes">
           <div class="topo-card">
             <p class="titulo-card">Incidentes sem Atribuição</p>
-            <button class="btn-incidente">
-              Ação necessaria
+            <button class="btn-acao">
+              Atribuir ao colaborador
             </button>
           </div>
-          <div class="lista-incidentes">
+          <div class="lista-incidentes" id="lista-incidentes-sem-responsavel">
             <!-- card  -->
-            <div class="card-incidente">
-              <div class="status incidente-critico"></div>
-              <div class="infos">
-                <p class="titulo">SERV-DB-01</p>
-                <span class="desc">Armazenamento em 95% - Falha ao armazenar informações</span>
-              </div>
-              <div class="tempo">
-                <p class="t-vermelho">14h atrás</p>
-                <span class="etiqueta etiqueta-vermelha">Critico</span>
-              </div>
-            </div>
-            <div class="card-incidente">
-              <div class="status incidente-medio"></div>
-              <div class="infos">
-                <p class="titulo">SERV-PROD-01</p>
-                <span class="desc">CPU 76% - Falha ou demora ao processar informações</span>
-              </div>
-              <div class="tempo">
-                <p class="t-laranja">30Min atrás</p>
-                <span class="etiqueta etiqueta-laranja">Médio</span>
-              </div>
-            </div>
           </div>
-          <div class="kpis-adicionais">
+          <!-- <div class="kpis-adicionais">
             <div class="kpi-menor">
               <p class="titulo">Incidentes na semana</p>
               <p class="valor">17</p>
@@ -456,137 +410,87 @@
               <p class="desc">
                 20% de incidentes em 90 dias
               </p>
+            </div> -->
+        </div>
+        <div class="card-desempenho">
+          <div class="topo-card">
+            <p class="titulo-card">Informações de SLA</p>
+          </div>
+          <div class="container-desempenho">
+            <div class="kpi-desempenho" onclick="sla_qtdIncidente.style.display = 'flex'">
+              <div class="titulo">
+                <p>Máximo de incidentes esperados em 30 dias
+                </p>
+                <img src="../assets/images/icones/editar-azul.svg" width="30" alt="editar">
+              </div>
+              <p class="valor">60/60</p>
+            </div>
+            <div class="kpi-desempenho" onclick="sla_tmr.style.display = 'flex' ">
+              <div class="titulo">
+                <p>Meta de tempo de resolução da SLA
+                </p>
+                <img src="../assets/images/icones/editar-azul.svg" width="25" alt="editar">
+              </div>
+              <p class="valor" id="tempo_sla">--</p>
             </div>
           </div>
 
         </div>
-        <!-- Distribuição -->
+      </div>
+
+      </div>
+      <!-- Distribuição -->
 
       </div>
     </section>
 
 
-
     <div class="erro-painel" id="dashboard_erro"></div>
   </main>
 
-  <div class="fundoModal" id="modalDetalhes">
-    <div class="modal modalDetalhes">
-      <!-- Topo do modal -->
-      <header>
-        <!-- Titulo e subtitulo -->
-        <div>
-          <h2>Detalhes do Servidor</h2>
-          <span class="subTitulo" id="modal_cabecalho_indicador">Servidor | SRV-PROD-01</span>
-        </div>
-        <!-- botão de sair -->
-        <div>
-          <button onclick="fecharModal(0)">
-            X
-          </button>
-        </div>
-      </header>
-
-      <div class="conteudo">
-
-        <!-- Parte das metricas -->
-        <div class="infos">
-          <!-- Informações do servidor -->
-          <div class="servidor">
-            <h4>Detalhes dos Recursos</h4>
-            <span>Informações gerais do servidor</span>
-            <div class="desc">
-              <div class="icon">
-                <img src="" alt="#">
-              </div>
-              <div>
-                <h2 id="modal_detalhe_nome_servidor">Nome Servidor</h2>
-                <span>Ubunto 22.04 - PI: 10.0.1.10 - ID: #001</span>
-              </div>
-              <div class="area-status">
-                <div class="status">
-                  <span>● Online</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- metricas -->
-          <div class="metricas">
-            <!-- componente/metrica - porcentagem > Barrinha -->
-            <div>
-              <div class="infos-metricas">
-                <span class="metrica">Percentil CPU</span>
-                <span class="porcentagem" id="modal_detalhe_uso_cpu">--</span>
-              </div>
-              <div class="barra">
-                <div class="preenchimento" id="modal_detalhe_preenchimento_cpu"></div>
-              </div>
-            </div>
-            <div>
-              <div class="infos-metricas">
-                <span class="metrica">Percentil RAM</span>
-                <span class="porcentagem" id="modal_detalhe_uso_ram">--</span>
-              </div>
-              <div class="barra">
-                <div class="preenchimento" id="modal_detalhe_preenchimento_ram"></div>
-              </div>
-            </div>
-            <div>
-              <div class="infos-metricas">
-                <span class="metrica">Armazenamento Disco</span>
-                <span class="porcentagem" id="modal_detalhe_uso_disco">---</span>
-              </div>
-              <div class="barra">
-                <div class="preenchimento" id="modal_detalhe_preenchimento_disco"></div>
-              </div>
-            </div>
-            <div>
-              <!-- <div class="infos-metricas">
-                <span class="metrica">--</span>
-                <span class="porcentagem">--</span>
-              </div>
-              <div class="barra">
-                <div class=""></div>
-              </div> -->
-            </div>
-
-          </div>
-          <!-- Infos adicionais -->
-          <div class="infosAdicionais">
-            <!-- Card de infos adicionais  -->
-            <div class="card">
-              <p class="legenda">Disco tota</p>
-              <p class="valor" id="modal_info_disco"> -- </p>
-            </div>
-
-            <div class="card">
-              <p class="legenda">Temperatura</p>
-              <p class="valor" style="color: #31D642" id="modal_info_temperatura">54°C</p>
-            </div>
-
-            <div class="card">
-              <p class="legenda">Processos</p>
-              <p class="valor" id="modal_info_processos">218</p>
-            </div>
-
-            <div class="card">
-              <p class="legenda">Conexão TCP</p>
-              <p class="valor" id="modal_info_conexao_tcp">1,432</p>
-            </div>
-          </div>
-        </div>
-        <div class="graficos">
-          <div>
-            <canvas id="perfomaInfra" class="graf-infraestrutura"></canvas>
-          </div>
-          <div>
-            <canvas id="perfomaInfra2" class="graf-infraestrutura"></canvas>
-          </div>
-        </div>
+  <div class="pop-up" id="sla_qtdIncidente">
+    <div class="card-sla">
+      <div class="titulo">
+        <h1>Informação de SLA - Quantidade de Incidente</h1>
+        <p>Digite a quantidade máxima de incidentes permitida em 30 dias. Esse valor será utilizado como referência para
+          monitoramento e avaliação do cumprimento do SLA.</p>
       </div>
-
+      <div>
+        <label>
+          Digite a quantidade esperada:
+          <input type="text" placeholder="Ex: 60" id="qtd_inicidente_esperada">
+        </label>
+      </div>
+      <div class="acoes">
+        <button class="cancelar"
+          onclick="qtd_inicidente_esperada.velue = ''; sla_qtdIncidente.style.display = 'none' ">Cancelar</button>
+        <button class="confirmar" onclick="alterarSlaQtdIncidente()">Confirmar</button>
+      </div>
     </div>
   </div>
+
+  <div class="pop-up" id="sla_tmr">
+    <div class="card-sla">
+      <div class="titulo">
+        <h1>Informação de SLA - Tempo Médio de Resolução (TMR)</h1>
+        <p>Informe o tempo médio esperado para a resolução dos incidentes. Esse valor será utilizado como referência
+          para monitorar o desempenho da equipe e verificar o cumprimento do SLA estabelecido.</p>
+      </div>
+      <div>
+        <label>
+          Digite o TMR esperado para resolução de incidente:
+          <input type="number" id="input_tmr_h" min="0" placeholder="Horas">
+          <input type="number" id="input_tmr_m" min="0" max="59" placeholder="Minutos">
+        </label>
+      </div>
+      <div class="acoes">
+        <button class="cancelar"
+          onclick="input_tmr_h.value = '';input_tmr_m.value = ''; sla_tmr.style.display = 'none' ">Cancelar</button>
+        <button class="confirmar" onclick="alterarTrm()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
@@ -599,13 +503,75 @@
 <script src="../assets/javascript/climaTempo.js   "></script>
 
 <script>
+  function buscarSla() {
+    fkEmpresa = sessionStorage.FKEMPRESA
+    return fetch(`/sla/buscarSlaEmpresa/${fkEmpresa}`, {
+      method: "GET",
+    })
+      .then((resposta) => resposta.json())
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
   function buscarChamadosSemResponsavel() {
     fetch("/jira/chamadosSemAtribuicao", {
       method: "GET",
     })
       .then((resposta) => resposta.json()
         .then((dados) => {
-          console.log(dados)
+          var incidentes = dados.issues
+          var maisAntigo = 0
+          var msgTempoMaisAntigo = ""
+          // console.log(incidentes)
+          var incidentesSistema = []
+          for (var i = 0; i < incidentes.length; i++) {
+            var incidente = incidentes[i].fields
+            var nomeServ = incidente.summary.split(' ')
+            var dataCriacao = new Date(incidente.created)
+            var tempoAberto = (new Date() - dataCriacao) / (1000 * 60)
+            var tempoComparacao = tempoAberto
+            var mensagemTempo = ""
+            if ((tempoAberto / 60) >= 1) {
+              var tempo = (tempoAberto - (tempoAberto % 60)) / 60
+              mensagemTempo += tempo + "h "
+              tempoAberto -= tempo * 60
+            }
+            if (tempoAberto >= 1) {
+              mensagemTempo += Math.ceil(tempoAberto) + "min"
+            }
+
+            if (maisAntigo < tempoComparacao) {
+              maisAntigo = tempoComparacao
+              msgTempoMaisAntigo = mensagemTempo
+            }
+
+            if (incidente.labels[0].toLowerCase() == "baixo") {
+              var status = 0
+              var etiqueta = `<span class="etiqueta etiqueta-amarela">Critico</span>`
+            } else if (incidente.labels[0].toLowerCase() == "alerta" || incidente.labels[0].toLowerCase() == "médio") {
+              var etiqueta = `<span class="etiqueta etiqueta-laranja">Critico</span>`
+              var status = 1
+            } else {
+              var etiqueta = `<span class="etiqueta etiqueta-vermelha">Critico</span>`
+              var status = 2
+            }
+
+            incidentesSistema[i] = {
+              "nomeServ": nomeServ[0],
+              "desc": incidente.description.content[0].content[0].text,
+              "tempoAberto": tempoComparacao,
+              "mensagemTempo": mensagemTempo,
+              "etiqueta": etiqueta,
+              "status": status,
+              "chamado": incidentes[i].key,
+            }
+          }
+          incidentesSistema.sort((a, b) => b.status - a.status)
+          kpi_qtd_incidentes.innerHTML = incidentes.length
+          tempo_incidente_mais_antigo.innerText = "Mais antigo: " + msgTempoMaisAntigo + " atrás"
+          tabelaDistribuicaoIncidentes(incidentes.length)
+          listarIncidentesSemResponsavel(incidentesSistema)
         })
       )
       .catch(function (resposta) {
@@ -613,36 +579,231 @@
       });
   }
   function buscarTempoResolucao() {
-    fetch("/jira/buscarTempoResolucao", {
+    return fetch("/jira/buscarTempoResolucao", {
       method: "GET",
     })
-      .then((resposta) => resposta.json()
-        .then((dados) => {
-          console.log(dados)
-        })
-      )
+      .then((resposta) => resposta.json())
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
   }
   function distribuicaoPorContribuidor() {
-    fetch("/jira/distribuicaoPorContribuidor", {
+    return fetch("/jira/distribuicaoPorContribuidor", {
       method: "GET",
     })
-      .then((resposta) => resposta.json()
-        .then((dados) => {
-          console.log(dados)
-        })
-      )
+      .then((resposta) => resposta.json())
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
   }
+
+  function buscarEquipe() {
+    return fetch("/jira/equipe", {
+      method: "GET",
+    })
+      .then((resposta) => resposta.json())
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  async function atribuirSla() {
+    var dados = await buscarSla();
+    console.log(dados[0])
+    var tempo_sla = ""
+    if (dados[0].tmrHoras != 0) {
+      tempo_sla += dados[0].tmrHoras + "h e "
+    }
+    tempo_sla += dados[0].tmrMinutos + "min"
+    document.getElementById("tempo_sla").innerText = tempo_sla
+  }
+
+  async function tabelaDistribuicaoIncidentes(qtdChamados) {
+    var distribuicao = await distribuicaoPorContribuidor()
+    var membros = await buscarEquipe()
+    var equipe = []
+    for (var i = 0; i < membros.length; i++) {
+      var qtdIncidentes = 0;
+      for (var j = 0; j < distribuicao.issues.length; j++) {
+        if (membros[i].displayName == distribuicao.issues[j].fields.assignee.displayName) {
+          qtdIncidentes++
+        }
+      }
+      equipe[i] = { "nome": membros[i].displayName, "imagem": membros[i].avatarUrls["48x48"], "qtdIncidentes": qtdIncidentes }
+    }
+    equipe.sort((a, b) => b.qtdIncidentes - a.qtdIncidentes)
+
+    var lista = ""
+    var listaCores = [
+      "#7299ed",
+      "#2563EB",
+      "#0a3ca7",
+      "rgb(255, 88, 88)",
+
+    ]
+    for (var i = 0; i < equipe.length; i++) {
+      var cor = ""
+      if (equipe[i].qtdIncidentes * 100 / qtdChamados <= 25) {
+        cor = listaCores[0]
+      } else if (equipe[i].qtdIncidentes * 100 / qtdChamados <= 50) {
+        cor = listaCores[1]
+      } else if (equipe[i].qtdIncidentes * 100 / qtdChamados <= 75) {
+        cor = listaCores[2]
+      } else {
+        cor = listaCores[3]
+      }
+      lista += `
+       <div class="card-colaborador">
+            <div>
+                 <img class="imagem-colaborador" src="${equipe[i].imagem}" alt="colaborador">
+            </div>
+            <div class="infos">
+              <div class="separacao">
+                <p>${equipe[i].nome}</p>
+                <p >${equipe[i].qtdIncidentes} incidentes</p>
+              </div>
+              <div class="separacao">
+                <div class="barra">
+                  <div class="preenchimento" style="width: ${equipe[i].qtdIncidentes * 100 / qtdChamados}%; background-color: ${cor};"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+      `
+    }
+
+    lista_distribuicao_colaborador.innerHTML = await lista
+
+  }
+
+  async function tempoMedio() {
+    var dados = await buscarTempoResolucao();
+    var sla = await buscarSla();
+    var incidentes = await dados.issues
+    var tempoTotal = 0
+
+    var cores = [
+      "#004AAD",
+      "#f59032",
+      "#db3232"
+    ]
+
+    for (var i = 0; i < incidentes.length; i++) {
+      var criacao = new Date(incidentes[i].fields.created)
+      var resolucao = new Date(incidentes[i].fields.resolutiondate)
+      tempoTotal += (resolucao - criacao) / (1000 * 60)
+    }
+    tempoTotal = Math.ceil(tempoTotal)
+
+    var tempoSla = parseInt((sla[0].tmrHoras)) * 60 + parseInt((sla[0].tmrMinutos))
+    console.log("Sla: " + tempoSla + "\nTMR: " + tempoTotal)
+
+    var tempoMedio = tempoTotal / incidentes.length
+    var tempoComparacao = tempoMedio
+    var ancora = ""
+    let mensagemTempo = ""
+    if (tempoMedio * 100 / tempoSla < 75) {
+      mensagemTempo = `<span style="color: ${cores[0]}">${formatarTempo(tempoMedio)}</span>`
+      ancora = `<span style="color: ${cores[0]}">-${formatarTempo((tempoSla - tempoMedio))}</span> abaixo da SLA`
+    } else if ((tempoMedio * 100 / tempoSla < 99)) {
+      mensagemTempo = `<span style="color: ${cores[1]}">${formatarTempo(tempoMedio)}</span>`
+      ancora = `<span style="color: ${cores[0]}">-${formatarTempo((tempoSla - tempoMedio))}</span> abaixo da SLA`
+    } else {
+      mensagemTempo = `<span style="color: ${cores[2]}">${formatarTempo(tempoMedio)}</span>`
+      ancora = `<span style="color: ${cores[2]}">+${formatarTempo((tempoSla - tempoMedio))}</span> a cima da SLA`
+    }
+    document.getElementById("kpi_tempo_medio_resolucao").innerHTML = mensagemTempo
+    document.getElementById("kpi_tempo_medio_resolucao_ancora").innerHTML = ancora
+  }
+
+  function listarIncidentesSemResponsavel(incidentes) {
+    console.log(incidentes[0])
+    var lista = ""
+    for (var i = 0; i < incidentes.length; i++) {
+      lista += `
+             <div class="card-incidente">
+              <div class="status"></div>
+              <div class="infos">
+                <p class="titulo">${incidentes[i].nomeServ} - Chamado: ${incidentes[i].chamado}</p>
+                <span class="desc">${incidentes[i].desc}</span>
+              </div>
+              <div class="tempo">
+                <p class="t-tempo-incidente">${incidentes[i].mensagemTempo}</p>
+                ${incidentes[i].etiqueta}
+              </div>
+            </div>
+            `
+    }
+    document.getElementById("lista-incidentes-sem-responsavel").innerHTML += lista
+  }
+
+  atribuirSla()
   buscarChamadosSemResponsavel()
-  buscarTempoResolucao()
-  distribuicaoPorContribuidor()
+  tempoMedio()
+  tabelaDistribuicaoIncidentes()
 </script>
 
+<!-- sla -->
+<script>
+  function alterarSlaQtdIncidente() {
+    var qtd = parseInt(document.getElementById("qtd_inicidente_esperada").value)
+    fetch("/sla/alterarQtdIncidente", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fkEmpresa: sessionStorage.FKEMPRESA,
+        qtdIncidentes: qtd
+      })
+    })
+      .then(resposta => resposta.json())
+      .then(dados => {
+        console.log(dados);
+        window.location.reload();
+      })
+      .catch(erro => {
+        console.error(erro);
+      });
+  }
+  function alterarTrm() {
+    var tmr_h = parseInt(document.getElementById("input_tmr_h").value)
+    var tmr_m = parseInt(document.getElementById("input_tmr_m").value)
+    fetch("/sla/alterarTrm", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fkEmpresa: sessionStorage.FKEMPRESA,
+        tmrHoras: tmr_h,
+        tmrMinutos: tmr_m,
+      })
+    })
+      .then(resposta => resposta.json())
+      .then(dados => {
+        console.log(dados);
+        window.location.reload();
+      })
+      .catch(erro => {
+        console.error(erro);
+      });
+  }
+  function formatarTempo(tempoBase) {
+    tempoBase = Math.abs(tempoBase)
+    console.log("Tempo base:" + tempoBase)
+    var mensagemTempo = "";
+    if ((tempoBase / 60) >= 1) {
+      var tempo = (tempoBase - (tempoBase % 60)) / 60
+      mensagemTempo += tempo + "H "
+      tempoBase -= tempo * 60
+    }
+    if (tempoBase >= 0) {
+      mensagemTempo += Math.ceil(tempoBase) + "Min"
+    }
+    return mensagemTempo
+  }
+</script>
 
 <!-- grafico -->
 <script>

@@ -19,5 +19,11 @@ router.get("/distribuicaoPorContribuidor", function(req, res){
     jiraController.distribuicaoPorContribuidor(req, res)
 })
 
+router.get("/equipe", function(req, res){
+    jiraController.equipe(req, res)
+})
+
+
+
 module.exports = router;
 
