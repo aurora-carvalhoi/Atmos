@@ -24,10 +24,16 @@ async function distribuicaoPorContribuidor(req, res) {
     res.status(200).json(resposta)   
 }
 
+async function equipe(req, res) {
+    var resposta = await jiraModel.equipe()
+    res.status(200).json(resposta)
+}
 
 module.exports = {
     testeConexao,
     chamadosSemAtribuicao,
     buscarTempoResolucao,
-    distribuicaoPorContribuidor
+    distribuicaoPorContribuidor,
+    equipe,
+
 }

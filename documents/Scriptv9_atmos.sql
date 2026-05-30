@@ -22,6 +22,15 @@ CREATE TABLE empresa (
     statusEmpresa VARCHAR(20)
 );
 
+CREATE TABLE slaEmpresa(
+	idSla INT PRIMARY KEY AUTO_INCREMENT,
+    tmrHoras INT,
+	tmrMinutos INT,
+    qtdIncidentes INT,
+	fkEmpresa INT NOT NULL,
+	CONSTRAINT fkEmpresaSla FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+);
+
 CREATE TABLE usuario (
     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     codigoAcesso VARCHAR(45),
@@ -128,9 +137,15 @@ INSERT INTO empresa (nomeResponsavel, razaoSocial, cnpj, senha, statusEmpresa) V
 ('João Pereira', 'AtmosData LTDA', '33333333000103', '123456', 'Ativo'),
 ('Fernanda Lima', 'SkyMonitor SA', '44444444000104', '123456', 'Ativo');
 
+INSERT INTO slaEmpresa (tmrHoras, tmrMinutos, qtdIncidentes, fkEmpresa) VALUES
+(12, 0, 600, 1),
+(8, 0, 120, 2),
+(4, 30, 80, 3),
+(2, 0, 50, 4);
+
 INSERT INTO usuario (codigoAcesso, nome, email, dataNascimento, cpf, senha, statusUsuario, tipoUsuario, setor, documentoIdentificacao, fkEmpresa, fkSuperior) VALUES
-('A1', 'Carlos Silva', 'carlos@climatech.com', '1980-05-10', '11111111111', '123', 'Ativo', 'Gestor', 'Infraestrutura', 'RG', 1, NULL),
-('A2', 'Lucas Mendes', 'lucas@climatech.com', '1995-03-15', '11111111112', '123', 'Ativo', 'Funcionario', 'Infraestrutura', 'RG', 1, 1),
+('A1', 'Carlos Silva', 'carlos@climatech.com', '1980-05-10', '11111111111', '12345678', 'Ativo', 'Gestor', 'Infraestrutura', 'RG', 1, NULL),
+('A2', 'Lucas Mendes', 'lucas@climatech.com', '1995-03-15', '11111111112', '12345678', 'Ativo', 'Funcionario', 'Infraestrutura', 'RG', 1, 1),
 ('A3', 'Roberto Dias', 'roberto@climatech.com', '1983-02-12', '11111111113', '123', 'Ativo', 'Gestor', 'Dados', 'RG9', 1, NULL),
 ('A4', 'Juliana Freitas', 'juliana@climatech.com', '1997-06-22', '11111111114', '123', 'Ativo', 'Funcionario', 'Dados', 'RG10', 1, 1),
 
@@ -225,7 +240,66 @@ SELECT idServidor, nomeIdentificacao, enderecoIPV4, enderecoIPV6, sistemaOperaci
 
 
 */
-use atmos;
-update usuario set senha = "12345678" where idUsuario = 2;
- SELECT * FROM usuario;
+
+-- AS COISAS QUE EU FIZ DAQUI PRA BAIXO - ANDERSON
  
+-- Tabela da dashboard individual: Analise de Carga sob Eventos Climaticos.
+
+CREATE TABLE IF NOT EXISTS analise_carga_climatica (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data_hora DATETIME NOT NULL,
+    servidor_id INT NOT NULL,
+    requisicoes_minuto INT NOT NULL,
+    cpu_percentual DECIMAL(5,2) NOT NULL,
+    evento_climatico VARCHAR(80) NOT NULL,
+    tipo_evento VARCHAR(40) NOT NULL,
+    temperatura_externa DECIMAL(5,2) NOT NULL,
+    precipitacao DECIMAL(7,2) NOT NULL,
+    faixa_esperada INT NOT NULL DEFAULT 8000,
+    pressao_operacional VARCHAR(20) NOT NULL DEFAULT 'baixa',
+    nivel_risco VARCHAR(20) NOT NULL DEFAULT 'baixo',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_analise_data_hora (data_hora),
+    INDEX idx_analise_servidor (servidor_id),
+    INDEX idx_analise_tipo_evento (tipo_evento)
+);
+
+-- Massa inicial para demonstracao da dashboard sem depender da captura continua.
+
+INSERT INTO analise_carga_climatica (
+    data_hora,
+    servidor_id,
+    requisicoes_minuto,
+    cpu_percentual,
+    evento_climatico,
+    tipo_evento,
+    temperatura_externa,
+    precipitacao,
+    faixa_esperada,
+    pressao_operacional,
+    nivel_risco
+)
+VALUES
+('2026-05-01 08:00:00',1,5200,31.4,'Sem evento relevante','sem evento relevante',22.1,0.0,8000,'baixa','baixo'),
+('2026-05-02 10:00:00',1,8700,44.2,'Chuva intensa','chuva intensa',20.3,8.4,8000,'moderada','medio'),
+('2026-05-03 14:00:00',1,9100,48.5,'Chuva intensa','chuva intensa',19.8,10.2,8000,'moderada','medio'),
+('2026-05-04 16:00:00',1,13800,67.1,'Frente fria','frente fria',13.4,2.1,8000,'critica','critico'),
+('2026-05-05 18:00:00',1,7600,39.0,'Sem evento relevante','sem evento relevante',21.7,0.0,8000,'baixa','baixo'),
+('2026-05-06 12:00:00',1,5100,30.2,'Sem evento relevante','sem evento relevante',23.0,0.0,8000,'baixa','baixo'),
+('2026-05-07 14:00:00',1,6800,35.7,'Chuva moderada','chuva intensa',20.8,6.5,8000,'baixa','baixo'),
+('2026-05-08 10:00:00',1,14200,71.8,'Tempestade','tempestade',18.2,18.0,8000,'critica','critico'),
+('2026-05-09 16:00:00',1,6500,36.8,'Sem evento relevante','sem evento relevante',22.5,0.0,8000,'baixa','baixo'),
+('2026-05-10 18:00:00',1,4100,25.3,'Sem evento relevante','sem evento relevante',24.0,0.0,8000,'baixa','baixo'),
+('2026-05-11 14:00:00',1,13900,69.4,'Chuva intensa','chuva intensa',19.6,13.7,8000,'critica','critico'),
+('2026-05-12 16:00:00',1,12100,61.5,'Chuva intensa','chuva intensa',20.1,11.8,8000,'alta','alto'),
+('2026-05-13 12:00:00',1,9300,50.1,'Onda de calor','onda de calor',34.8,0.0,8000,'moderada','medio'),
+('2026-05-14 18:00:00',1,5600,33.0,'Sem evento relevante','sem evento relevante',25.4,0.0,8000,'baixa','baixo'),
+('2026-05-15 12:00:00',1,9400,49.5,'Onda de calor','onda de calor',35.2,0.0,8000,'moderada','medio'),
+('2026-05-16 14:00:00',1,12800,64.4,'Tempestade','tempestade',18.9,21.0,8000,'critica','critico'),
+('2026-05-17 16:00:00',1,16467,82.7,'Tempestade','tempestade',18.4,24.8,8000,'critica','critico');
+
+SELECT *
+FROM analise_carga_climatica
+ORDER BY id DESC;
+
+select * from slaEmpresa;
