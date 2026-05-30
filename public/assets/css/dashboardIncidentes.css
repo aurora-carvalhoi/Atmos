@@ -347,35 +347,6 @@ body {
     color: var(--color-opaque);
   }
 
-  header .tela {
-    margin-top: 2vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  header h1 {
-    font-family: var(--font-default);
-    color: #004aad;
-    font-size: 22px;
-  }
-
-  header button {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 125px;
-    height: 30px;
-    padding: 5px 10px;
-    font-size: 14px;
-    font-family: var(--font-default);
-    border-radius: 3px;
-    border: none;
-    margin-left: 1vw;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.3s ease-in;
-  }
 
   .linha-kpis {
     display: flex;
@@ -546,24 +517,6 @@ body {
     font-weight: 700;
   }
 
-  .etiqueta-critico {
-    background: #ffe2e2;
-    border: 1px solid #ff9a9a;
-    color: #ff3d3d;
-  }
-
-  .etiqueta-alerta {
-    background: #fff1d9;
-    border: 1px solid #ffd17d;
-    color: #d98a00;
-  }
-
-  .etiqueta-ok {
-    background: #ddf7e7;
-    border: 1px solid #8de0a8;
-    color: #2ea866;
-  }
-
   .status {
     padding: 5px 9px;
     border-radius: 999px;
@@ -667,6 +620,11 @@ body {
     cursor: pointer;
   }
 
+
+.coluna-direita{
+  flex: 1;
+  min-width: 0;
+}
   
 
   .insights {
@@ -675,7 +633,6 @@ body {
     padding: 24px;
     margin-top: 24px;
     border: 1px solid #e8e8e8;
-    flex: 2;
     min-width: 0;
   }
 
@@ -784,13 +741,13 @@ body {
 
 
   .nivel-1 {
-    background: #ffd7d7;
-    border: 1px solid #ff8b8b;
+    background: #ffb3b3;
+    border: 1px solid #fe8585;
   }
 
   .nivel-2 {
-    background: #ffb3b3;
-    border: 1px solid #ff7a7a;
+    background: #e05252;
+    border: 1px solid #e45050;
   }
 
   .nivel-3 {
@@ -884,13 +841,18 @@ body {
 
   /* heatmap fim */
 
-  /* charts */
-  .graficos-uso {
+    .area-graficos {
     background: white;
     border-radius: 14px;
     padding: 24px;
-    border: 1px solid #e8e8e8;
     margin-top: 24px;
+    border: 1px solid #e8e8e8;
+  }
+
+  /* charts */
+  .graficos-uso {
+    margin-top: 24px;
+    margin-bottom: 24px;
   }
 
   .grafico-uso {
