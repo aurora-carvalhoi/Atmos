@@ -9,9 +9,7 @@
   <title>Dashboard - Atmos</title>
 
   <!-- Styles -->
-  <!-- <link rel="stylesheet" href="../assets/css/dashboard/dashboardAtmosGerente.css"> -->
   <link rel="stylesheet" href="../assets/css/dashboardIncidentes.css">
-  <script src="dist/heat.min.js"></script>
 
 
   <!-- Favicon -->
@@ -90,7 +88,7 @@
       </div>
       <div>
         <h3><span id="usuarionome">usuário</span></h3>
-        <h5><span id="usuarioemail">email</span></h3>
+        <h3><span id="usuarioemail">email</span></h3>
       </div>
     </div>
 
@@ -233,7 +231,7 @@
 
             <select class="filtro-incidentes">
               <option selected>
-                Mais críticos
+                Em Andamento
               </option>
               <option>
                 Mais recentes
@@ -306,8 +304,8 @@
                   Server-SM-01
                 </td>
                 <td>
-                  <span></span>
-                    ATMOS-45
+                  <span>
+                  ATMOS-45
                   </span>
                 </td>
                 <td>—</td>
@@ -359,31 +357,32 @@
         </div>
       </div>
 
-      <div class="insights">
+      <div class="coluna-direita">
+        <div class="insights">
 
-        <div class="barra-filtro">
-          <div>
-            <label for="filtroPeriodo">Período</label>
-            <select name="" id="filtroMes">
-              <option value="1">Janeiro</option>
-              <option value="2">Fevereiro</option>
-              <option value="3">Março</option>
-              <option value="4">Abril</option>
-              <option value="5" selected>Maio</option>
-              <option value="6">Junho</option>
-              <option value="7">Julho</option>
-              <option value="8">Agosto</option>
-              <option value="9">Setembro</option>
-              <option value="10">Outubro</option>
-              <option value="11">Novembro</option>
-              <option value="12">Dezembro</option>
-            </select>
-            <select name="" id="filtroAno">
-              <option value="2026" selected>2026</option>
-              <option value="2025">2025</option>
-            </select>
-          </div>
-          <div>
+          <div class="barra-filtro">
+            <div>
+              <label for="filtroPeriodo">Período</label>
+              <select name="" id="filtroMes">
+                <option value="1">Janeiro</option>
+                <option value="2">Fevereiro</option>
+                <option value="3">Março</option>
+                <option value="4">Abril</option>
+                <option value="5">Maio</option>
+                <option value="6">Junho</option>
+                <option value="7">Julho</option>
+                <option value="8">Agosto</option>
+                <option value="9">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+              </select>
+              <select name="" id="filtroAno">
+                <option value="2026" selected>2026</option>
+                <option value="2025">2025</option>
+              </select>
+            </div>
+            <div>
               <label for="filtroOrdenacao">Ordenar por:</label>
               <select name="" id="filtroOrdenacao">
                 <option value="" selected>Mais recentes</option>
@@ -395,82 +394,121 @@
               </select>
             </div>
             <button onclick="">Aplicar Filtro</button>
-        </div>
-
-
-
-        <div class="heatmap">
-
-          <h3>Heatmap de Incidentes por Servidor</h3>
-
-          <!-- Cabeçalho dos dias -->
-          <div class="cabecalho-dias" id="cabecalhoDias"></div>
-
-          <!-- Grid -->
-          <div class="grid-incidentes" id="gridIncidentes"></div>
-
-          <!-- Eventos climáticos -->
-          <div class="eventos-climaticos">
-
-            <div class="titulo-eventos">
-              Eventos
-            </div>
-
-            <div class="eventos-grid" id="eventosGrid"></div>
-
           </div>
 
-          <div class="legenda">
-            <div class="item">
-              <span class="box box-umIncidente"></span>
-              1 incidente
+          <div class="heatmap">
+
+            <h3>Heatmap de Incidentes por Servidor</h3>
+
+            <!-- Cabeçalho dos dias -->
+            <div class="cabecalho-dias" id="cabecalhoDias"></div>
+
+            <!-- Grid -->
+            <div class="grid-incidentes" id="gridIncidentes"></div>
+
+            <!-- Eventos climáticos -->
+            <div class="eventos-climaticos">
+
+              <div class="titulo-eventos">
+                Eventos
+              </div>
+
+              <div class="eventos-grid" id="eventosGrid"></div>
+
             </div>
 
-            <div class="item">
-              <span class="box box-doisIncidentes"></span>
-              2-3 Incidentes
+            <div class="legenda">
+              <div class="item">
+                <span class="box box-umIncidente"></span>
+                1 incidente
+              </div>
+
+              <div class="item">
+                <span class="box box-doisIncidentes"></span>
+                2-3 Incidentes
+              </div>
+
+              <div class="item">
+                <span class="box box-quatroMaisIncidentes"></span>
+                4+ Incidentes
+              </div>
+
+              <div class="item">
+                <span class="box box-vazio"></span>
+                Sem Incidentes
+              </div>
             </div>
 
-            <div class="item">
-              <span class="box box-quatroMaisIncidentes"></span>
-              4+ Incidentes
-            </div>
-
-            <div class="item">
-              <span class="box box-vazio"></span>
-              Sem Incidentes
-            </div>
-          </div>
-
-        </div>
-
-        <div class="graficos-uso">
-
-          <div class="grafico-uso">
-            <div class="titulo-grafico">
-              <h4>CPU (%)</h4>
-              <span>Estável →</span>
-            </div>
-            <canvas id="graficoCpu"></canvas>
-          </div>
-
-          <div class="grafico-uso">
-            <div class="titulo-grafico">
-              <h4>RAM (%)</h4>
-              <span class="alerta">+8% ao mês ↑</span>
-            </div>
-            <canvas id="graficoRam"></canvas>
-          </div>
-
-          <div class="grafico-uso">
-            <div class="titulo-grafico">
-              <h4>Disco (%)</h4>
-              <span class="alerta">+4% ao mês ↑</span>
-            </div>
-            <canvas id="graficoDisco"></canvas>
           </div>
 
         </div>
+
+        <div class="area-graficos">
+          <div class="barra-filtro">
+            <div>
+              <label for="filtroPeriodo">Período</label>
+              <select name="" id="filtroMesGraficos">
+                <option value="1">Janeiro</option>
+                <option value="2">Fevereiro</option>
+                <option value="3">Março</option>
+                <option value="4">Abril</option>
+                <option value="5">Maio</option>
+                <option value="6">Junho</option>
+                <option value="7">Julho</option>
+                <option value="8">Agosto</option>
+                <option value="9">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+              </select>
+              <select name="" id="filtroAnoGraficos">
+                <option value="2026" selected>2026</option>
+                <option value="2025">2025</option>
+              </select>
+              <label>Servidor</label>
+              <select id="filtroServidor">
+                <option value="todos">Todos os servidores</option>
+                <option value="Server-CL-01">Server-CL-01</option>
+                <option value="Server-MB-01">Server-MB-01</option>
+                <option value="Server-AD-01">Server-AD-01</option>
+                <option value="Server-SM-01">Server-SM-01</option>
+              </select>
+
+            </div>
+            <button onclick="">Aplicar Filtro</button>
+          </div>
+
+          <div class="graficos-uso">
+
+            <div class="grafico-uso">
+              <div class="titulo-grafico">
+                <h4>CPU (%)</h4>
+                <span>Estável →</span>
+              </div>
+              <canvas id="graficoCpu"></canvas>
+            </div>
+
+            <div class="grafico-uso">
+              <div class="titulo-grafico">
+                <h4>RAM (%)</h4>
+                <span class="alerta">+8% ao mês ↑</span>
+              </div>
+              <canvas id="graficoRam"></canvas>
+            </div>
+
+            <div class="grafico-uso">
+              <div class="titulo-grafico">
+                <h4>Disco (%)</h4>
+                <span class="alerta">+4% ao mês ↑</span>
+              </div>
+              <canvas id="graficoDisco"></canvas>
+            </div>
+
+          </div>
+
+        </div>
+
+
 
       </div>
 
@@ -486,259 +524,256 @@
 <!-- <script src="../assets/javascript/sessao.js"></script> -->
 
 <!-- clima tempo -->
-<script src="../assets/javascript/climaTempo.js   "></script>
-
-<!-- heat.js -->
-<script src="https://cdn.jsdelivr.net/npm/heat.js"></script>
+<script src="../assets/javascript/climaTempo.js"></script>
 
 <script>
 
-// filtros
-const filtroMes = document.getElementById("filtroMes");
-const filtroAno = document.getElementById("filtroAno");
+  // filtros
+  const filtroMes = document.getElementById("filtroMes");
+  const filtroAno = document.getElementById("filtroAno");
 
 
-const headerDias = document.getElementById("cabecalhoDias");
-const gridIncidentes = document.getElementById("gridIncidentes");
-const gridEventos = document.getElementById("eventosGrid");
+  const headerDias = document.getElementById("cabecalhoDias");
+  const gridIncidentes = document.getElementById("gridIncidentes");
+  const gridEventos = document.getElementById("eventosGrid");
 
-//incidentes mockados
+  //incidentes mockados
 
-const servidores = [
-  "Server-CL-01",
-  "Server-MB-01",
-  "Server-AD-01",
-  "Server-SM-01"
-];
+  const servidores = [
+    "Server-CL-01",
+    "Server-MB-01",
+    "Server-AD-01",
+    "Server-SM-01"
+  ];
 
-const incidentes = [
+  const incidentes = [
 
-  {
-    servidor: "Server-CL-01",
-    dia: 8,
-    mes: 5,
-    ano: 2026,
-    componente: "RAM"
-  },
+    {
+      servidor: "Server-CL-01",
+      dia: 8,
+      mes: 5,
+      ano: 2026,
+      componente: "RAM"
+    },
 
-  {
-    servidor: "Server-CL-01",
-    dia: 9,
-    mes: 5,
-    ano: 2026,
-    componente: "CPU"
-  },
+    {
+      servidor: "Server-CL-01",
+      dia: 9,
+      mes: 5,
+      ano: 2026,
+      componente: "CPU"
+    },
 
-  {
-    servidor: "Server-MB-01",
-    dia: 4,
-    mes: 5,
-    ano: 2026,
-    componente: "RAM"
-  },
+    {
+      servidor: "Server-MB-01",
+      dia: 4,
+      mes: 5,
+      ano: 2026,
+      componente: "RAM"
+    },
 
-  {
-    servidor: "Server-MB-01",
-    dia: 14,
-    mes: 5,
-    ano: 2026,
-    componente: "Disco"
-  },
+    {
+      servidor: "Server-MB-01",
+      dia: 14,
+      mes: 5,
+      ano: 2026,
+      componente: "Disco"
+    },
 
-  {
-    servidor: "Server-AD-01",
-    dia: 27,
-    mes: 5,
-    ano: 2026,
-    componente: "Disco"
-  },
+    {
+      servidor: "Server-AD-01",
+      dia: 27,
+      mes: 5,
+      ano: 2026,
+      componente: "Disco"
+    },
 
-  /* Abril */
+    /* Abril */
 
-  {
-    servidor: "Server-SM-01",
-    dia: 12,
-    mes: 4,
-    ano: 2026,
-    componente: "CPU"
-  }
+    {
+      servidor: "Server-SM-01",
+      dia: 12,
+      mes: 4,
+      ano: 2026,
+      componente: "CPU"
+    }
 
-];
+  ];
 
-const eventosClimaticos = [
+  const eventosClimaticos = [
 
-  {
-    dia: 14,
-    mes: 5,
-    ano: 2026,
-    nome: "Tempestade"
-  },
+    {
+      dia: 14,
+      mes: 5,
+      ano: 2026,
+      nome: "Tempestade"
+    },
 
-  {
-    dia: 22,
-    mes: 5,
-    ano: 2026,
-    nome: "Onda de calor"
-  },
+    {
+      dia: 22,
+      mes: 5,
+      ano: 2026,
+      nome: "Onda de calor"
+    },
 
-  {
-    dia: 12,
-    mes: 4,
-    ano: 2026,
-    nome: "Granizo"
-  }
+    {
+      dia: 12,
+      mes: 4,
+      ano: 2026,
+      nome: "Granizo"
+    }
 
-];
+  ];
 
-//obter qtd de dias do mes
+  //obter qtd de dias do mes
 
-function obterDiasDoMes(mes, ano) {
+  function obterDiasDoMes(mes, ano) {
 
-  return new Date(ano, mes, 0).getDate();
-
-}
-
-//limpar o heatmap toda vez que mudar o filtro pra nao ficar acumulando
-
-function limparHeatmap() {
-
-  headerDias.innerHTML = "";
-  gridIncidentes.innerHTML = "";
-  gridEventos.innerHTML = "";
-
-}
-
-//renderizar o heatmap
-
-function renderizarHeatmap() {
-
-  limparHeatmap();
-
-  const mesSelecionado = Number(filtroMes.value);
-  const anoSelecionado = Number(filtroAno.value);
-
-  const totalDias =
-    obterDiasDoMes(mesSelecionado, anoSelecionado);
-
-//grid dinamico de acordo com total de dias do mes/ano
-
-  const templateColunas =
-    `120px repeat(${totalDias}, 24px)`;
-
-  headerDias.style.gridTemplateColumns =
-    templateColunas;
-
-//cabeçalho
-
-  const espacoVazio =
-    document.createElement("div");
-
-  espacoVazio.classList.add("header-vazio");
-
-  headerDias.appendChild(espacoVazio);
-
-  for(let dia = 1; dia <= totalDias; dia++) {
-
-    const diaHeader =
-      document.createElement("div");
-
-    diaHeader.classList.add("dia-header");
-
-    diaHeader.innerText = dia;
-
-    headerDias.appendChild(diaHeader);
+    return new Date(ano, mes, 0).getDate();
 
   }
 
-//linha dos servidores
+  //limpar o heatmap toda vez que mudar o filtro pra nao ficar acumulando
 
-  for(let i = 0; i < servidores.length; i++) {
+  function limparHeatmap() {
 
-    const linhaServidor =
-      document.createElement("div");
+    headerDias.innerHTML = "";
+    gridIncidentes.innerHTML = "";
+    gridEventos.innerHTML = "";
 
-    linhaServidor.classList.add("linha-servidor");
+  }
 
-    linhaServidor.style.gridTemplateColumns =
+  //renderizar o heatmap
+
+  function renderizarHeatmap() {
+
+    limparHeatmap();
+
+    const mesSelecionado = Number(filtroMes.value);
+    const anoSelecionado = Number(filtroAno.value);
+
+    const totalDias =
+      obterDiasDoMes(mesSelecionado, anoSelecionado);
+
+    //grid dinamico de acordo com total de dias do mes/ano
+
+    const templateColunas =
+      `120px repeat(${totalDias}, 24px)`;
+
+    headerDias.style.gridTemplateColumns =
       templateColunas;
 
-    const nomeServidor =
+    //cabeçalho
+
+    const espacoVazio =
       document.createElement("div");
 
-    nomeServidor.classList.add("nome-servidor");
+    espacoVazio.classList.add("header-vazio");
 
-    nomeServidor.innerText = servidores[i];
+    headerDias.appendChild(espacoVazio);
 
-    linhaServidor.appendChild(nomeServidor);
+    for (let dia = 1; dia <= totalDias; dia++) {
 
-    //quadradinhos do heatmap
-
-    for(let dia = 1; dia <= totalDias; dia++) {
-
-      const celula =
+      const diaHeader =
         document.createElement("div");
 
-      celula.classList.add("bloco-incidente");
+      diaHeader.classList.add("dia-header");
 
-      const incidentesDoDia =
-        incidentes.filter(item =>
+      diaHeader.innerText = dia;
 
-          item.servidor === servidores[i] &&
+      headerDias.appendChild(diaHeader);
+
+    }
+
+    //linha dos servidores
+
+    for (let i = 0; i < servidores.length; i++) {
+
+      const linhaServidor =
+        document.createElement("div");
+
+      linhaServidor.classList.add("linha-servidor");
+
+      linhaServidor.style.gridTemplateColumns =
+        templateColunas;
+
+      const nomeServidor =
+        document.createElement("div");
+
+      nomeServidor.classList.add("nome-servidor");
+
+      nomeServidor.innerText = servidores[i];
+
+      linhaServidor.appendChild(nomeServidor);
+
+      //quadradinhos do heatmap
+
+      for (let dia = 1; dia <= totalDias; dia++) {
+
+        const celula =
+          document.createElement("div");
+
+        celula.classList.add("bloco-incidente");
+
+        const incidentesDoDia =
+          incidentes.filter(item =>
+
+            item.servidor === servidores[i] &&
+            item.dia === dia &&
+            item.mes === mesSelecionado &&
+            item.ano === anoSelecionado
+
+          );
+
+        const qtd = incidentesDoDia.length;
+
+        if (qtd === 0) celula.classList.add("vazio"); // vazio
+        else if (qtd === 1) celula.classList.add("nivel-1");
+        else if (qtd <= 3) celula.classList.add("nivel-2");
+        else celula.classList.add("nivel-3");
+
+        if (qtd > 0) {
+          if (qtd === 1) {
+            const lista = incidentesDoDia.map(i => i.componente);
+            celula.title = `${qtd} incidente: ${lista}`;
+          } else {
+            const lista = incidentesDoDia.map(i => i.componente).join(", ");
+            celula.title = `${qtd} incidentes: ${lista}`;
+          }
+        }
+
+        linhaServidor.appendChild(celula);
+
+      }
+
+      gridIncidentes.appendChild(linhaServidor);
+
+    }
+
+    //eventos climaticos
+
+    gridEventos.style.gridTemplateColumns =
+      `repeat(${totalDias}, 24px)`;
+
+    for (let dia = 1; dia <= totalDias; dia++) {
+
+      const eventoDia =
+        document.createElement("div");
+
+      eventoDia.classList.add("evento-item");
+
+      const evento =
+        eventosClimaticos.find(item =>
+
           item.dia === dia &&
           item.mes === mesSelecionado &&
           item.ano === anoSelecionado
 
         );
 
-  const qtd = incidentesDoDia.length;
+      if (evento) {
 
-  if (qtd === 0)       celula.classList.add("vazio"); // vazio
-  else if (qtd === 1)  celula.classList.add("nivel-1");
-  else if (qtd <= 3)   celula.classList.add("nivel-2");
-  else                 celula.classList.add("nivel-3");
-
-  if (qtd > 0) {
-    if (qtd === 1){
-      const lista = incidentesDoDia.map(i => i.componente);
-      celula.title = `${qtd} incidente: ${lista}`;
-    } else{
-      const lista = incidentesDoDia.map(i => i.componente).join(", ");
-    celula.title = `${qtd} incidentes: ${lista}`;
-    }
-  }
-
-      linhaServidor.appendChild(celula);
-
-    }
-
-    gridIncidentes.appendChild(linhaServidor);
-
-  }
-
-//eventos climaticos
-
-  gridEventos.style.gridTemplateColumns =
-    `repeat(${totalDias}, 24px)`;
-
-  for(let dia = 1; dia <= totalDias; dia++) {
-
-    const eventoDia =
-      document.createElement("div");
-
-    eventoDia.classList.add("evento-item");
-
-    const evento =
-      eventosClimaticos.find(item =>
-
-        item.dia === dia &&
-        item.mes === mesSelecionado &&
-        item.ano === anoSelecionado
-
-      );
-
-    if(evento) {
-
-      eventoDia.innerHTML = `
+        eventoDia.innerHTML = `
         <div class="evento-linha"></div>
 
         <div class="evento-texto">
@@ -746,294 +781,232 @@ function renderizarHeatmap() {
         </div>
       `;
 
+      }
+
+      gridEventos.appendChild(eventoDia);
+
     }
 
-    gridEventos.appendChild(eventoDia);
+  }
+
+  //mudança dos filtros
+
+  filtroMes.addEventListener(
+    "change",
+    renderizarHeatmap
+  );
+
+  filtroAno.addEventListener(
+    "change",
+    renderizarHeatmap
+  );
+
+  //renderizar o heatmap
+
+  renderizarHeatmap();
+
+
+  const diasMes = [];
+
+  for (let dia = 1; dia <= 31; dia++) {
+    diasMes.push(dia);
+  }
+
+  const dadosUsoServidores = [];
+
+  const servidoresGraficos = [
+    "Server-CL-01",
+    "Server-MB-01",
+    "Server-AD-01",
+    "Server-SM-01"
+  ];
+
+  const coresServidores = {
+    "Server-CL-01": { linha: "#3879FC", fundo: "rgba(56,121,252,0.1)" },
+    "Server-MB-01": { linha: "#44A774", fundo: "rgba(68,167,116,0.1)" },
+    "Server-AD-01": { linha: "#D77706", fundo: "rgba(215,119,6,0.1)" },
+    "Server-SM-01": { linha: "#D92629", fundo: "rgba(217,38,41,0.1)" }
+  };
+
+  const limites = { cpu: 90, ram: 80, disco: 85 };
+
+
+  for (let i = 0; i < servidoresGraficos.length; i++) {
+
+    for (let dia = 1; dia <= 31; dia++) {
+
+      dadosUsoServidores.push({
+
+        servidor: servidoresGraficos[i],
+
+        dia: dia,
+
+        cpu: Math.floor(45 + Math.random() * 30),
+
+        ram: Math.floor(40 + Math.random() * 35),
+
+        disco: Math.floor(45 + Math.random() * 25)
+
+      });
+
+    }
 
   }
 
-}
+  function obterPicosPorDia(metrica, servidorSelecionado) {
 
-//mudança dos filtros
+    const resultado = [];
 
-filtroMes.addEventListener(
-  "change",
-  renderizarHeatmap
-);
+    for (let dia = 1; dia <= 31; dia++) {
 
-filtroAno.addEventListener(
-  "change",
-  renderizarHeatmap
-);
-
-//renderizar o heatmap
-
-renderizarHeatmap();
-
-
-const diasMes = [];
-
-for (let dia = 1; dia <= 31; dia++) {
-  diasMes.push(dia);
-}
-
-const dadosUsoServidores = [];
-
-const servidoresGraficos = [
-  "Server-CL-01",
-  "Server-MB-01",
-  "Server-AD-01",
-  "Server-SM-01"
-];
-
-for (let i = 0; i < servidoresGraficos.length; i++) {
-
-  for (let dia = 1; dia <= 31; dia++) {
-
-    dadosUsoServidores.push({
-
-      servidor: servidoresGraficos[i],
-
-      dia: dia,
-
-      cpu: Math.floor(45 + Math.random() * 30),
-
-      ram: Math.floor(40 + Math.random() * 35),
-
-      disco: Math.floor(45 + Math.random() * 25)
-
-    });
-
-  }
-
-}
-
-function obterPicosPorDia(metrica, servidorSelecionado) {
-
-  const resultado = [];
-
-  for (let dia = 1; dia <= 31; dia++) {
-
-    let registrosDoDia =
-      dadosUsoServidores.filter(item =>
-        item.dia === dia
-      );
-
-    if (servidorSelecionado !== "todos") {
-
-      registrosDoDia =
-        registrosDoDia.filter(item =>
-          item.servidor === servidorSelecionado
+      let registrosDoDia =
+        dadosUsoServidores.filter(item =>
+          item.dia === dia
         );
 
-    }
+      if (servidorSelecionado !== "todos") {
 
-    let maiorPico = 0;
-
-    for (let i = 0; i < registrosDoDia.length; i++) {
-
-      if (
-        registrosDoDia[i][metrica] > maiorPico
-      ) {
-
-        maiorPico =
-          registrosDoDia[i][metrica];
+        registrosDoDia =
+          registrosDoDia.filter(item =>
+            item.servidor === servidorSelecionado
+          );
 
       }
 
+      let maiorPico = 0;
+
+      for (let i = 0; i < registrosDoDia.length; i++) {
+
+        if (
+          registrosDoDia[i][metrica] > maiorPico
+        ) {
+
+          maiorPico =
+            registrosDoDia[i][metrica];
+
+        }
+
+      }
+
+      resultado.push(maiorPico);
+
     }
 
-    resultado.push(maiorPico);
+    return resultado;
 
   }
 
-  return resultado;
 
-}
+  function montarDatasets(metrica, servidorSelecionado) {
 
-function criarGrafico(
-  idCanvas,
-  label,
-  dados,
-  corLinha,
-  corFundo
-) {
+    if (servidorSelecionado === "todos") {
+      return [{
+        label: metrica.toUpperCase(),
+        data: servidoresGraficos.map(function (servidor) {
+          const dados = obterPicosPorDia(metrica, servidor);
+          return Math.max(...dados);
+        }),
+        backgroundColor: servidoresGraficos.map(function (servidor) {
+          return coresServidores[servidor].fundo;
+        }),
+        borderColor: servidoresGraficos.map(function (servidor) {
+          return coresServidores[servidor].linha;
+        }),
+        borderWidth: 2
+      }];
+    }
 
-  const canvas =
-    document.getElementById(idCanvas);
-
-  return new Chart(canvas, {
-
-    type: "line",
-
-    data: {
-
-      labels: diasMes,
-
-      datasets: [{
-
-        label: label,
-        data: dados,
-        borderColor: corLinha,
-        backgroundColor: corFundo,
+    return [
+      {
+        label: metrica.toUpperCase(),
+        data: obterPicosPorDia(metrica, servidorSelecionado),
+        borderColor: "#3f7cff",
+        backgroundColor: "rgba(63,124,255,0.12)",
         fill: true,
         tension: 0.35,
         pointRadius: 3,
         pointHoverRadius: 6,
-        pointBorderWidth: 2,
         borderWidth: 2
-
-      }]
-
-    },
-
-    options: {
-
-      responsive: true,
-
-      maintainAspectRatio: false,
-
-      scales: {
-
-        y: {
-
-          min: 0,
-
-          max: 100,
-
-          ticks: {
-
-            callback: function(valor) {
-
-              return valor + "%";
-
-            }
-
-          }
-
-        },
-
-        x: {
-
-          grid: {
-
-            display: false
-
-          }
-
-        }
-
       },
-
-      plugins: {
-
-        legend: {
-
-          display: false
-
-        }
-
+      {
+        label: "Limite",
+        data: Array(31).fill(limites[metrica]),
+        borderColor: "#D92629",
+        borderDash: [6, 3],
+        borderWidth: 1.5,
+        pointRadius: 0,
+        fill: false
       }
+    ];
 
-    }
+  }
 
-  });
 
-}
+  function criarGrafico(idCanvas, datasets, mostrarLegenda, tipo) {
 
-const servidorSelecionado = "todos";
+    const canvas = document.getElementById(idCanvas);
 
-const graficoCpu = criarGrafico(
+    const eixoX = tipo === "bar"
+      ? { data: servidoresGraficos }
+      : { labels: diasMes };
 
-  "graficoCpu",
+    return new Chart(canvas, {
+      type: tipo || "line",
+      data: {
+        labels: tipo === "bar" ? servidoresGraficos : diasMes,
+        datasets: datasets
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: tipo === "bar" ? "y" : "x",
+        scales: {
+          x: {
+            min: 0, max: 100, ticks: {
+              callback: function (v) {
+                return v +
+                  "%";
+              }
+            }
+          },
+          y: { grid: { display: false } }
+        },
+        plugins: {
+          legend: { display: mostrarLegenda }
+        }
+      }
+    });
 
-  "CPU",
+  }
 
-  obterPicosPorDia(
-    "cpu",
-    servidorSelecionado
-  ),
 
-  "#3f7cff",
+  let graficoCpu = criarGrafico("graficoCpu", montarDatasets("cpu",
+    "todos"), false, "bar");
+  let graficoRam = criarGrafico("graficoRam", montarDatasets("ram",
+    "todos"), false, "bar");
+  let graficoDisco = criarGrafico("graficoDisco", montarDatasets("disco",
+    "todos"), false, "bar");
 
-  "rgba(63, 124, 255, 0.12)"
+  function atualizarGraficos() {
 
-);
+    const servidorSelecionado = document.getElementById("filtroServidor").value;
+    const tipo = servidorSelecionado === "todos" ? "bar" : "line";
+    const mostrarLegenda = false;
 
-const graficoRam = criarGrafico(
+    graficoCpu.destroy();
+    graficoRam.destroy();
+    graficoDisco.destroy();
 
-  "graficoRam",
+    graficoCpu = criarGrafico("graficoCpu", montarDatasets("cpu",
+      servidorSelecionado), mostrarLegenda, tipo);
+    graficoRam = criarGrafico("graficoRam", montarDatasets("ram",
+      servidorSelecionado), mostrarLegenda, tipo);
+    graficoDisco = criarGrafico("graficoDisco", montarDatasets("disco",
+      servidorSelecionado), mostrarLegenda, tipo);
 
-  "RAM",
+  }
 
-  obterPicosPorDia(
-    "ram",
-    servidorSelecionado
-  ),
-
-  "#f28c28",
-
-  "rgba(242, 140, 40, 0.12)"
-
-);
-
-const graficoDisco = criarGrafico(
-
-  "graficoDisco",
-
-  "Disco",
-
-  obterPicosPorDia(
-    "disco",
-    servidorSelecionado
-  ),
-
-  "#ff4b4b",
-
-  "rgba(255, 75, 75, 0.12)"
-
-);
-
-function atualizarGraficos() {
-
-  const servidorSelecionado =
-    document.getElementById(
-      "filtroServidor"
-    ).value;
-
-  graficoCpu.data.datasets[0].data =
-    obterPicosPorDia(
-      "cpu",
-      servidorSelecionado
-    );
-
-  graficoRam.data.datasets[0].data =
-    obterPicosPorDia(
-      "ram",
-      servidorSelecionado
-    );
-
-  graficoDisco.data.datasets[0].data =
-    obterPicosPorDia(
-      "disco",
-      servidorSelecionado
-    );
-
-  graficoCpu.update();
-
-  graficoRam.update();
-
-  graficoDisco.update();
-
-}
-
-document
-  .getElementById("filtroServidor")
-  .addEventListener(
-    "change",
-    atualizarGraficos
-  );
+  document.getElementById("filtroServidor").addEventListener("change",
+    atualizarGraficos);
 
 </script>
-
-
