@@ -1,22 +1,19 @@
-const procesosModel = require("../models/processoModel");
 const s3Service = require("../services/s3Services");
 
-async function listarProcessos(req, res) {
+async function incidentesHistoricos(req, res) {
 
   try {
 
-    const server =
-      req.query.server;
+    const arquivo =
+      req.query.arquivo;
 
     const empresa =
       req.query.empresa;
 
-    if (!server) {
-
+    if (!arquivo) {
       return res.status(400).json({
-        erro: "Servidor não informado"
+        erro: "Arquivo não informado"
       });
-
     }
 
     if (!empresa) {
@@ -29,7 +26,7 @@ async function listarProcessos(req, res) {
 
     const key =
 
-      `client/${empresa}/processos/servidor/${server}/snapshot_${server}.json`;
+      `client/${empresa}/historico/${arquivo}`;
 
     const dados =
       await s3Service.buscarJson(
@@ -44,7 +41,7 @@ async function listarProcessos(req, res) {
     console.error(erro);
 
     res.status(500).json({
-      erro: "Erro ao buscar processos"
+      erro: "Erro ao buscar incidentes"
     });
 
   }
@@ -52,5 +49,5 @@ async function listarProcessos(req, res) {
 
 
 module.exports = {
-    listarProcessos
+    incidentesHistoricos
 }
