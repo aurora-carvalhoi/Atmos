@@ -111,6 +111,21 @@ async function todosIncidentesAbertos(){
     return resposta
 }
 
+async function atribuirResponsavel(issueKey, accountId) {
+      var dados = await
+  fetch(`${Jira.jiraConfig.baseUrl}/issue/${issueKey}/assignee`, {
+          method: "PUT",
+          headers: {
+              "Authorization": `Basic ${Jira.credenciais}`,
+              "Accept": "application/json",
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ accountId: accountId })
+      })
+      return dados.status
+  }
+
+
 
 
 module.exports = {
@@ -119,5 +134,6 @@ module.exports = {
     buscarTempoResolucao,
     distribuicaoPorContribuidor,
     equipe,
-    todosIncidentesAbertos
+    todosIncidentesAbertos,
+    atribuirResponsavel
 };

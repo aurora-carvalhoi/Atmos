@@ -34,12 +34,21 @@ async function todosIncidentesAbertos(req, res) {
     res.status(200).json(resposta)
 }
 
+  async function atribuirResponsavel(req, res) {
+      const { issueKey } = req.params
+      const { accountId } = req.body
+      var status = await jiraModel.atribuirResponsavel(issueKey, accountId)
+      res.status(status).end()
+  }
+
+
 module.exports = {
     testeConexao,
     chamadosSemAtribuicao,
     buscarTempoResolucao,
     distribuicaoPorContribuidor,
     equipe,
-    todosIncidentesAbertos
+    todosIncidentesAbertos,
+    atribuirResponsavel
 
 }

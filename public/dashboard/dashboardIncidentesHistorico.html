@@ -264,38 +264,8 @@
 
         <div class="atribuicao-funcionario">
           <h4>Incidentes Recentes Sem Responsável</h4>
-          <div class="card-atribuicao">
-            <h4>Server-SM-01</h4>
-            <div class="descricao-incidente">
-              <p>CPU > 90%</p>
-              <p>|</p>
-              <p>Aberto há 20 minutos</p>
+          <div id="cardsAtribuicao">
             </div>
-            <div class="seletor-atribuicao">
-              <select class="select-atribuicao" name="" id="">
-                <option value="" selected disabled>Atribuir Funcionário</option>
-                <option value="">Lucas Mendes</option>
-                <option value="">Júlia Araripe</option>
-              </select>
-              <button onclick="">Atribuir</button>
-            </div>
-          </div>
-          <div class="card-atribuicao">
-            <h4>Server-SM-01</h4>
-            <div class="descricao-incidente">
-              <p>RAM > 90%</p>
-              <p>|</p>
-              <p>Aberto há 15 minutos</p>
-            </div>
-            <div class="seletor-atribuicao">
-              <select class="select-atribuicao" name="" id="">
-                <option value="" selected disabled>Atribuir Funcionário</option>
-                <option value="">Lucas Mendes</option>
-                <option value="">Júlia Araripe</option>
-              </select>
-              <button onclick="">Atribuir</button>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -553,7 +523,8 @@ function calcularTempoAberto(tempoAbertura) {
   fetch("/jira/todosIncidentesAbertos").then(r => r.json());
       const tbody = document.getElementById("tabelaIncidentes");
 
-      tbody.innerHTML = issues.map(({ key, fields }) => {
+      tbody.innerHTML = issues.map(({ key, fields, self }) => {
+            const linkChamado = new URL(self).origin + '/browse/' + key;
             const chaveStatus = fields.status.statusCategory.key;
   const status = chaveStatus === "done" ? "Resolvido"
                : chaveStatus === "indeterminate" ? "Em Andamento"
@@ -564,12 +535,66 @@ function calcularTempoAberto(tempoAbertura) {
 
           return `<tr>
               <td>${fields.summary.split(' - ')[0]}</td>
-              <td><span>${key}</span></td>
+              <td><a href="${linkChamado}" target="_blank">${key}</a></td>
               <td>${calcularTempoAberto(fields.created)}</td>
               <td><span class="status ${classe}">${status}</span></td>
           </tr>`;
       }).join("") || '<tr><td colspan="4">Nenhum incidente aberto</td></tr>';
   }
+
+   async function carregarIncidentesSemResponsavel(equipe) {
+      const { issues = [] } = await
+  fetch("/jira/chamadosSemAtribuicao").then(r => r.json());
+      const container = document.getElementById("cardsAtribuicao");
+
+      container.innerHTML = issues.map(({ key, fields }) => {
+          const servidor = fields.summary.split(' - ')[0];
+          const componente = fields.labels.find(l => l.includes(':')) ??
+  "—";
+          const aberto = calcularTempoAberto(fields.created);
+          const opcoes = equipe.map(u =>
+              `<option value="${u.accountId}">${u.displayName}</option>`
+          ).join("");
+
+          return `<div class="card-atribuicao" id="card-${key}">
+              <h4>${servidor}</h4>
+              <div class="descricao-incidente">
+                  <p>${componente}</p>
+                  <p>|</p>
+                  <p>Aberto há ${aberto}</p>
+              </div>
+              <div class="seletor-atribuicao">
+                  <select class="select-atribuicao" id="select-${key}">
+                      <option value="" selected disabled>Atribuir Funcionário</option>
+                      ${opcoes}
+                  </select>
+                  <button onclick="atribuirFuncionario('${key}')">Atribuir</button>
+              </div>
+          </div>`;
+      }).join("") || `<div class="card-atribuicao card-atribuicao-verde">
+          <h4>Nenhum incidente sem responsável</h4>
+      </div>`;
+  }
+
+  async function atribuirFuncionario(issueKey) {
+      const accountId =
+  document.getElementById(`select-${issueKey}`).value;
+      if (!accountId) return alert("Selecione um funcionário.");
+
+      const res = await fetch(`/jira/atribuirResponsavel/${issueKey}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ accountId })
+      });
+
+      if (res.ok) {
+          document.getElementById(`card-${issueKey}`).remove();
+          carregarTabelaIncidentes();
+      } else {
+          alert("Erro ao atribuir. Tente novamente.");
+      }
+  }
+
 
 
   let servidores = [];
@@ -787,6 +812,11 @@ function calcularTempoAberto(tempoAbertura) {
   });
   
   carregarTabelaIncidentes();
+
+   fetch("/jira/equipe").then(r => r.json()).then(function(equipe) {
+      carregarIncidentesSemResponsavel(equipe);
+  });
+
 
   const diasMes = [];
 
