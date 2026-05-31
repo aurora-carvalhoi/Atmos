@@ -26,7 +26,9 @@ var empresasRouter = require("./src/routes/empresas");
 var funcionarioAtmosRouter = require("./src/routes/funcionarioAtmos");
 var servidoresRouter = require("./src/routes/servidores");
 var processosRouter = require("./src/routes/processos");
+var incidentesHistoricosRouter = require("./src/routes/incidentesHistoricos")
 var slaEmpresaRouter = require("./src/routes/slaEmpresasRouter")
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -42,6 +44,7 @@ app.use("/empresas", empresasRouter);
 app.use("/funcionarioAtmos", funcionarioAtmosRouter);
 app.use("/servidores", servidoresRouter);
 app.use("/processos", processosRouter);
+app.use("/incidentesHistoricos", incidentesHistoricosRouter);
 app.use("/s3", s3Router);
 app.use("/sla", slaEmpresaRouter);
 app.use("/jira", jiraRouter);
