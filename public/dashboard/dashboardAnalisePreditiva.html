@@ -279,8 +279,8 @@
           </div>
 
           <div class="secao-subtitulo">
-            Comparação entre temperatura prevista
-            e monitorada a cada 1 minuto.
+          Comparação entre a temperatura monitorada a cada 10 minutos
+           e a temperatura prevista para 1 hora à frente.
           </div>
 
           <div class="grafico-wrapper">
@@ -433,9 +433,9 @@
 
   function statusCpu(cpu) {
 
-    if (cpu >= 85) return "status-critico";
+    if (cpu >= 90) return "status-critico";
 
-    if (cpu >= 65) return "status-alerta";
+    if (cpu >= 80) return "status-alerta";
 
     return "status-normal";
   }
@@ -775,58 +775,70 @@ new Chart(
         "icone-desvio"
       );
 
+  if (variacaoPrevista >= 10) {
 
-    if (variacaoPrevista >= 10) {
+  blocoDesvio.className =
+    "mini-interpretacao critico";
 
-      blocoDesvio.className =
-        "mini-interpretacao critico";
+  iconeDesvio.textContent = "⚠";
 
-      iconeDesvio.textContent = "⚠";
+  textoDesvio.innerHTML = `
+    Forte tendência de aquecimento.
 
-      textoDesvio.innerHTML = `
+    A temperatura pode subir
+    <strong>${variacaoPrevista.toFixed(1)}°C</strong>
+    na próxima hora.
+  `;
 
-        Tendência crítica de aquecimento.
+}
 
-        A temperatura pode subir
-        <strong>${variacaoPrevista.toFixed(1)}°C</strong>
-        na próxima hora.
+else if (variacaoPrevista >= 5) {
 
-      `;
+  blocoDesvio.className =
+    "mini-interpretacao alerta";
 
-    }
+  iconeDesvio.textContent = "⚠";
 
-    else if (variacaoPrevista > 0) {
+  textoDesvio.innerHTML = `
+    Tendência de aquecimento.
 
-      blocoDesvio.className =
-        "mini-interpretacao alerta";
+    A temperatura pode subir
+    <strong>${variacaoPrevista.toFixed(1)}°C</strong>
+    na próxima hora.
+  `;
 
-      iconeDesvio.textContent = "⚠";
+}
 
-      textoDesvio.innerHTML = `
+else if (variacaoPrevista > 0) {
 
-        Tendência de aumento térmico.
+  blocoDesvio.className =
+    "mini-interpretacao atencao";
 
-        A temperatura pode subir
-        <strong>${variacaoPrevista.toFixed(1)}°C</strong>
-        na próxima hora.
+  iconeDesvio.textContent = "ℹ";
 
-      `;
-    }
+  textoDesvio.innerHTML = `
+    Pequeno aumento previsto.
 
-    else {
+    A temperatura pode subir
+    <strong>${variacaoPrevista.toFixed(1)}°C</strong>
+    na próxima hora.
+  `;
 
-      blocoDesvio.className =
-        "mini-interpretacao normal";
+}
 
-      iconeDesvio.textContent = "✔";
+else {
 
-      textoDesvio.innerHTML = `
+  blocoDesvio.className =
+    "mini-interpretacao normal";
 
-        Temperatura estável
-        ou em resfriamento.
+  iconeDesvio.textContent = "✔";
 
-      `;
-    }
+  textoDesvio.innerHTML = `
+    Temperatura estável
+    ou em resfriamento.
+  `;
+
+}
 
   }
   async function carregarDados() {
