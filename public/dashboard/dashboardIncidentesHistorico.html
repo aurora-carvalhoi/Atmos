@@ -366,7 +366,7 @@
               <select name="" id="filtroMes">
                 <option value="1">Janeiro</option>
                 <option value="2">Fevereiro</option>
-                <option value="3">Março</option>
+                <option value="3" selected>Março</option>
                 <option value="4">Abril</option>
                 <option value="5">Maio</option>
                 <option value="6">Junho</option>
@@ -450,7 +450,7 @@
               <select name="" id="filtroMesGraficos">
                 <option value="1">Janeiro</option>
                 <option value="2">Fevereiro</option>
-                <option value="3">Março</option>
+                <option selected value="3">Março</option>
                 <option value="4">Abril</option>
                 <option value="5">Maio</option>
                 <option value="6">Junho</option>
@@ -521,7 +521,7 @@
 <!-- Scripts Funcionais -->
 <script src="../assets/javascript/datetime.js"></script>
 <script src="../assets/javascript/menu.js"></script>
-<!-- <script src="../assets/javascript/sessao.js"></script> -->
+<script src="../assets/javascript/sessao.js"></script>
 
 <!-- clima tempo -->
 <script src="../assets/javascript/climaTempo.js"></script>
@@ -532,73 +532,29 @@
   const filtroMes = document.getElementById("filtroMes");
   const filtroAno = document.getElementById("filtroAno");
 
-
   const headerDias = document.getElementById("cabecalhoDias");
   const gridIncidentes = document.getElementById("gridIncidentes");
   const gridEventos = document.getElementById("eventosGrid");
 
+  //buscar dados no backend
+   let dadosApi = null;
+
+   async function carregarDados() {
+    const empresa = "empresaX";
+    const mes = filtroMes.value;
+    const ano = filtroAno.value;
+    const mesFormatado = String(mes).padStart(2, '0');
+    const arquivo      = `client_${mesFormatado}_${ano}.json`;
+
+    const resposta = await 
+    fetch(`/incidentesHistoricos/listar?empresa=${empresa}&arquivo=${arquivo}`);
+
+    dadosApi = await resposta.json()
+   }
+
   //incidentes mockados
 
-  const servidores = [
-    "Server-CL-01",
-    "Server-MB-01",
-    "Server-AD-01",
-    "Server-SM-01"
-  ];
-
-  const incidentes = [
-
-    {
-      servidor: "Server-CL-01",
-      dia: 8,
-      mes: 5,
-      ano: 2026,
-      componente: "RAM"
-    },
-
-    {
-      servidor: "Server-CL-01",
-      dia: 9,
-      mes: 5,
-      ano: 2026,
-      componente: "CPU"
-    },
-
-    {
-      servidor: "Server-MB-01",
-      dia: 4,
-      mes: 5,
-      ano: 2026,
-      componente: "RAM"
-    },
-
-    {
-      servidor: "Server-MB-01",
-      dia: 14,
-      mes: 5,
-      ano: 2026,
-      componente: "Disco"
-    },
-
-    {
-      servidor: "Server-AD-01",
-      dia: 27,
-      mes: 5,
-      ano: 2026,
-      componente: "Disco"
-    },
-
-    /* Abril */
-
-    {
-      servidor: "Server-SM-01",
-      dia: 12,
-      mes: 4,
-      ano: 2026,
-      componente: "CPU"
-    }
-
-  ];
+  let servidores = [];
 
   const eventosClimaticos = [
 
@@ -715,32 +671,21 @@
 
         celula.classList.add("bloco-incidente");
 
-        const incidentesDoDia =
-          incidentes.filter(item =>
+        const dataFormatada = `${anoSelecionado}-${String(mesSelecionado).padStart(2,'0')}-${String(dia).padStart(2,'0')}`
+        const servidorAtual = dadosApi.incidentes[servidores[i]];
+        const qtdIncidentes = servidorAtual ? (servidorAtual.TotalIncidentes.por_dia[dataFormatada] || 0) : 0;
 
-            item.servidor === servidores[i] &&
-            item.dia === dia &&
-            item.mes === mesSelecionado &&
-            item.ano === anoSelecionado
-
-          );
-
-        const qtd = incidentesDoDia.length;
-
-        if (qtd === 0) celula.classList.add("vazio"); // vazio
-        else if (qtd === 1) celula.classList.add("nivel-1");
-        else if (qtd <= 3) celula.classList.add("nivel-2");
+        if (qtdIncidentes === 0) celula.classList.add("vazio"); // vazio
+        else if (qtdIncidentes === 1) celula.classList.add("nivel-1");
+        else if (qtdIncidentes <= 3) celula.classList.add("nivel-2");
         else celula.classList.add("nivel-3");
 
-        if (qtd > 0) {
-          if (qtd === 1) {
-            const lista = incidentesDoDia.map(i => i.componente);
-            celula.title = `${qtd} incidente: ${lista}`;
-          } else {
-            const lista = incidentesDoDia.map(i => i.componente).join(", ");
-            celula.title = `${qtd} incidentes: ${lista}`;
+        if (qtdIncidentes > 0) {
+          const componentes = Object.keys(servidorAtual.Componentes)
+          .filter(c => servidorAtual.Componentes[c].includes(dataFormatada)).join(", ");
+          celula.title = `${qtdIncidentes} incidente(s): ${componentes}`;
           }
-        }
+
 
         linhaServidor.appendChild(celula);
 
@@ -801,9 +746,25 @@
     renderizarHeatmap
   );
 
-  //renderizar o heatmap
+  //renderizar heatmap e graficos
 
-  renderizarHeatmap();
+  let graficoCpu, graficoRam, graficoDisco;
+
+   carregarDados().then(function() {
+    
+    servidores = Object.keys(dadosApi.incidentes);
+    servidoresGraficos = Object.keys(dadosApi.metricas);
+
+    servidoresGraficos.forEach(function(servidor, i){
+      coresServidores[servidor] = paleta[i % paleta.length];
+    });
+
+    renderizarHeatmap();
+
+    graficoCpu = criarGrafico("graficoCpu", montarDatasets("cpu", "todos"), false, "bar");
+    graficoRam = criarGrafico("graficoRam", montarDatasets("ram", "todos"), false, "bar");
+    graficoDisco = criarGrafico("graficoDisco", montarDatasets("disco", "todos"), false, "bar");
+  });
 
 
   const diasMes = [];
@@ -812,87 +773,46 @@
     diasMes.push(dia);
   }
 
-  const dadosUsoServidores = [];
-
-  const servidoresGraficos = [
-    "Server-CL-01",
-    "Server-MB-01",
-    "Server-AD-01",
-    "Server-SM-01"
+  const paleta = [
+    { linha: "#3879FC", fundo: "rgba(56,121,252,0.1)" },
+    { linha: "#44A774", fundo: "rgba(68,167,116,0.1)" },
+    { linha: "#D77706", fundo: "rgba(215,119,6,0.1)" },
+    { linha: "#D92629", fundo: "rgba(217,38,41,0.1)" },
+    { linha: "#9B59B6", fundo: "rgba(155,89,182,0.1)" },
+    { linha: "#E67E22", fundo: "rgba(230,126,34,0.1)" }
   ];
+  
+  let servidoresGraficos = dadosApi ? Object.keys(dadosApi.metricas) : [];
 
-  const coresServidores = {
-    "Server-CL-01": { linha: "#3879FC", fundo: "rgba(56,121,252,0.1)" },
-    "Server-MB-01": { linha: "#44A774", fundo: "rgba(68,167,116,0.1)" },
-    "Server-AD-01": { linha: "#D77706", fundo: "rgba(215,119,6,0.1)" },
-    "Server-SM-01": { linha: "#D92629", fundo: "rgba(217,38,41,0.1)" }
-  };
+  let coresServidores = {};
+
+  servidoresGraficos.forEach(function(servidor, i) {
+  coresServidores[servidor] = paleta[i % paleta.length];
+  });
+
 
   const limites = { cpu: 90, ram: 80, disco: 85 };
 
 
-  for (let i = 0; i < servidoresGraficos.length; i++) {
-
-    for (let dia = 1; dia <= 31; dia++) {
-
-      dadosUsoServidores.push({
-
-        servidor: servidoresGraficos[i],
-
-        dia: dia,
-
-        cpu: Math.floor(45 + Math.random() * 30),
-
-        ram: Math.floor(40 + Math.random() * 35),
-
-        disco: Math.floor(45 + Math.random() * 25)
-
-      });
-
-    }
-
-  }
-
   function obterPicosPorDia(metrica, servidorSelecionado) {
-
     const resultado = [];
+    const dadosServidor = dadosApi.metricas[servidorSelecionado];
+    const mes = Number(filtroMes.value);
+    const ano = Number(filtroAno.value);
+    const totalDias = new Date(ano, mes, 0).getDate();
 
-    for (let dia = 1; dia <= 31; dia++) {
-
-      let registrosDoDia =
-        dadosUsoServidores.filter(item =>
-          item.dia === dia
-        );
-
-      if (servidorSelecionado !== "todos") {
-
-        registrosDoDia =
-          registrosDoDia.filter(item =>
-            item.servidor === servidorSelecionado
-          );
-
-      }
-
-      let maiorPico = 0;
-
-      for (let i = 0; i < registrosDoDia.length; i++) {
-
-        if (
-          registrosDoDia[i][metrica] > maiorPico
-        ) {
-
-          maiorPico =
-            registrosDoDia[i][metrica];
-
-        }
-
-      }
-
-      resultado.push(maiorPico);
-
+      for (let dia = 1; dia <= totalDias; dia++) {
+      const data_str =
+      `${ano}-${String(mes).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+      
+      const pico = dadosServidor && dadosServidor.dias[data_str]
+        ? dadosServidor.dias[data_str][metrica + "_pico"]
+        : 0;
+      resultado.push(pico || 0);
     }
 
     return resultado;
+
 
   }
 
@@ -900,16 +820,27 @@
   function montarDatasets(metrica, servidorSelecionado) {
 
     if (servidorSelecionado === "todos") {
+
+      const picos = [];
+
+      for (let i = 0; i < servidoresGraficos.length; i++) {
+        const servidor = servidoresGraficos[i];
+        const dadosServidor = dadosApi.metricas[servidor];
+
+        if (dadosServidor) {
+          picos.push(dadosServidor.pico_mes[metrica] || 0);
+        } else {
+          picos.push(0);
+        }
+      }
+
       return [{
         label: metrica.toUpperCase(),
-        data: servidoresGraficos.map(function (servidor) {
-          const dados = obterPicosPorDia(metrica, servidor);
-          return Math.max(...dados);
-        }),
-        backgroundColor: servidoresGraficos.map(function (servidor) {
+        data: picos,
+        backgroundColor: servidoresGraficos.map(function(servidor) {
           return coresServidores[servidor].fundo;
         }),
-        borderColor: servidoresGraficos.map(function (servidor) {
+        borderColor: servidoresGraficos.map(function(servidor) {
           return coresServidores[servidor].linha;
         }),
         borderWidth: 2
@@ -978,14 +909,6 @@
     });
 
   }
-
-
-  let graficoCpu = criarGrafico("graficoCpu", montarDatasets("cpu",
-    "todos"), false, "bar");
-  let graficoRam = criarGrafico("graficoRam", montarDatasets("ram",
-    "todos"), false, "bar");
-  let graficoDisco = criarGrafico("graficoDisco", montarDatasets("disco",
-    "todos"), false, "bar");
 
   function atualizarGraficos() {
 

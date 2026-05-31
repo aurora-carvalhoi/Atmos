@@ -26,7 +26,7 @@ async function incidentesHistoricos(req, res) {
 
     const key =
 
-      `client/${empresa}/historico/${arquivo}`;
+      `client/${empresa}/dashboard/${arquivo}`;
 
     const dados =
       await s3Service.buscarJson(
