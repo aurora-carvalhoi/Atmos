@@ -607,4 +607,17 @@ btnVerMais.addEventListener('click', () => {
   tabela.classList.toggle('ocultar-extra');
   btnVerMais.textContent = mostrandoMais ? 'Ver menos' : 'Ver mais';
 });
+
+function selecionarServidor(elementoLinha, idServidor) {
+  const todasLinhas = document.querySelectorAll('#tabela_lista_servidor tr')
+  todasLinhas.forEach(function (linha) {
+    linha.classList.remove('tr-selecionada')
+  })
+  elementoLinha.classList.add('tr-selecionada')
+  sessionStorage.setItem(
+    "servidorSelecionado",
+    idServidor
+  )
+  detalhesServidor(idServidor)
+}
 </script>

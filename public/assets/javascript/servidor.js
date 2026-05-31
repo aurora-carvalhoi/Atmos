@@ -3,8 +3,10 @@ async function buscarClient() {
   const data = await res.json()
   return data
 }
-
 const dataClient = await buscarClient()
+console.log(dataClient)
+console.log(dataClient.empresas)
+
 const totalRegistros = dataClient.resumo.total_registros
 const hostsAtivos = dataClient.resumo.hosts_ativos
 const indiceUltimaLeitura = (totalRegistros / hostsAtivos) - 1
