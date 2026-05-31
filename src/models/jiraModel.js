@@ -95,6 +95,22 @@ async function equipe() {
     return usuarios
 }
 
+async function todosIncidentesAbertos(){
+    var complementoUrl = "/search/jql";
+    var filtro = `?jql=created >= -30d ORDER BY created DESC&maxResults=10`;
+    var campos = `&fields=summary,priority,status,created,labels,assignee`;
+    var dados = await
+    fetch(`${Jira.jiraConfig.baseUrl}${complementoUrl}${filtro}${campos}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Basic ${Jira.credenciais}`,
+            "Accept": "application/json"
+        }
+    })
+    var resposta = await dados.json();
+    return resposta
+}
+
 
 
 module.exports = {
@@ -103,4 +119,5 @@ module.exports = {
     buscarTempoResolucao,
     distribuicaoPorContribuidor,
     equipe,
+    todosIncidentesAbertos
 };

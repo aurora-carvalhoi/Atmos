@@ -23,6 +23,10 @@ router.get("/equipe", function(req, res){
     jiraController.equipe(req, res)
 })
 
+router.get("/todosIncidentesAbertos", function(req, res){
+    jiraController.todosIncidentesAbertos(req, res)
+})
+
 
 
 module.exports = router;

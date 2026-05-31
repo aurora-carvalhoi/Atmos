@@ -89,7 +89,6 @@
       <div>
         <h3><span id="usuarionome">usuário</span></h3>
         <h3><span id="usuarioemail">email</span></h3>
-        <h3><span id="usuarioemail">email</span></h3>
       </div>
     </div>
 
@@ -183,7 +182,7 @@
     <div class="linha-kpis">
       <div class="kpi">
         <p>Total de Incidentes</p>
-        <H1>12</H1>
+        <H1 id="kpiTotal"></H1>
         <div class="informativo-kpi">
           <p>Maio</p>
           <p>2026</p>
@@ -193,23 +192,23 @@
       </div>
       <div class="kpi">
         <p>Resolvidos</p>
-        <H1>10</H1>
+        <H1 id="kpiResolvidos"></H1>
         <div class="informativo-kpi">
-          <p>80% resolvidos</p>
+          <p id="porcentagemResolvidos">--% resolvidos</p>
           <p>|</p>
-          <P>TMR: 2h15min</P>
+          <P id="kpiTMR">TMR: --</P>
         </div>
       </div>
       <div class="kpi">
         <p>Em andamento</p>
-        <H1>0</H1>
+        <H1 id="kpiAndamento"></H1>
         <div class="informativo-kpi">
           <p>0% do total</p>
         </div>
       </div>
       <div class="kpi">
         <p>Incidentes sem Responsável</p>
-        <H1>2</H1>
+        <H1 id="kpiSemResponsavel"></H1>
         <div class="informativo-kpi">
           <p>Último incidente há: 10 minutos</p>
         </div>
@@ -233,7 +232,6 @@
             <select class="filtro-incidentes">
               <option selected>
                 Em Andamento
-                Em Andamento
               </option>
               <option>
                 Mais recentes
@@ -254,87 +252,11 @@
                 <th>Incidente</th>
                 <th title="Responsável">
                   Aberto
-                <th>Incidente</th>
-                <th title="Responsável">
-                  Aberto
                 </th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody id="tabelaIncidentes">
-              <tr>
-                <td>Server-CL-01</td>
-                <td>
-                  <span>
-                    ATMOS-42
-                  <span>
-                    ATMOS-42
-                  </span>
-                </td>
-                <td>10min</td>
-                <td>10min</td>
-                <td>
-                  <span class="status status-analise">
-                    Em Andamento
-                  <span class="status status-analise">
-                    Em Andamento
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Server-MB-01</td>
-                <td>
-                  <span>
-                    ATMOS-43
-                  <span>
-                    ATMOS-43
-                  </span>
-                </td>
-                <td>1h</td>
-                <td>1h</td>
-                <td>
-                  <span class="status status-analise">
-                    Em Andamento
-                    Em Andamento
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Server-AD-01</td>
-                <td>
-                  <span>
-                    ATMOS-44
-                  <span>
-                    ATMOS-44
-                  </span>
-                </td>
-                <td>1.2h</td>
-                <td>
-                  <span class="status status-naoAtribuido">
-                    Não atribuído
-                  <span class="status status-naoAtribuido">
-                    Não atribuído
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="texto-alerta">
-                  Server-SM-01
-                </td>
-                <td>
-                  <span>
-                  ATMOS-45
-                  <span>
-                  ATMOS-45
-                  </span>
-                </td>
-                <td>—</td>
-                <td>
-                  <span class="status status-naoAtribuido">
-                    Não atribuído
-                  </span>
-                </td>
-              </tr>
             </tbody>
           </table>
 
@@ -379,8 +301,6 @@
 
       <div class="coluna-direita">
         <div class="insights">
-      <div class="coluna-direita">
-        <div class="insights">
 
           <div class="barra-filtro">
             <div>
@@ -417,40 +337,17 @@
             </div>
             <button onclick="">Aplicar Filtro</button>
           </div>
-          </div>
 
-          <div class="heatmap">
           <div class="heatmap">
 
             <h3>Heatmap de Incidentes por Servidor</h3>
-            <h3>Heatmap de Incidentes por Servidor</h3>
 
-            <!-- Cabeçalho dos dias -->
             <div class="cabecalho-dias" id="cabecalhoDias"></div>
-            <!-- Cabeçalho dos dias -->
-            <div class="cabecalho-dias" id="cabecalhoDias"></div>
-
-            <!-- Grid -->
-            <div class="grid-incidentes" id="gridIncidentes"></div>
-            <!-- Grid -->
             <div class="grid-incidentes" id="gridIncidentes"></div>
 
-            <!-- Eventos climáticos -->
             <div class="eventos-climaticos">
-            <!-- Eventos climáticos -->
-            <div class="eventos-climaticos">
-
-              <div class="titulo-eventos">
-                Eventos
-              </div>
-              <div class="titulo-eventos">
-                Eventos
-              </div>
-
+              <div class="titulo-eventos">Eventos</div>
               <div class="eventos-grid" id="eventosGrid"></div>
-              <div class="eventos-grid" id="eventosGrid"></div>
-
-            </div>
             </div>
 
             <div class="legenda">
@@ -458,35 +355,14 @@
                 <span class="box box-umIncidente"></span>
                 1 incidente
               </div>
-            <div class="legenda">
-              <div class="item">
-                <span class="box box-umIncidente"></span>
-                1 incidente
-              </div>
-
               <div class="item">
                 <span class="box box-doisIncidentes"></span>
                 2-3 Incidentes
               </div>
               <div class="item">
-                <span class="box box-doisIncidentes"></span>
-                2-3 Incidentes
-              </div>
-
-              <div class="item">
                 <span class="box box-quatroMaisIncidentes"></span>
                 4+ Incidentes
               </div>
-              <div class="item">
-                <span class="box box-quatroMaisIncidentes"></span>
-                4+ Incidentes
-              </div>
-
-              <div class="item">
-                <span class="box box-vazio"></span>
-                Sem Incidentes
-              </div>
-            </div>
               <div class="item">
                 <span class="box box-vazio"></span>
                 Sem Incidentes
@@ -562,8 +438,6 @@
 
         </div>
 
-
-
       </div>
 
     </div>
@@ -578,7 +452,6 @@
 <script src="../assets/javascript/sessao.js"></script>
 
 <!-- clima tempo -->
-<script src="../assets/javascript/climaTempo.js"></script>
 <script src="../assets/javascript/climaTempo.js"></script>
 
 <script>
@@ -607,7 +480,97 @@
     dadosApi = await resposta.json()
    }
 
-  //incidentes mockados
+   async function carregarKpis(){
+    const [resResolvidos, resAndamento, resSemResp] = await Promise.all([
+      fetch("/jira/buscarTempoResolucao"),
+      fetch("/jira/distribuicaoPorContribuidor"),
+      fetch("/jira/chamadosSemAtribuicao")
+    ]);
+
+    const resolvidos = await resResolvidos.json();
+    const andamento = await resAndamento.json();
+    const semResp = await resSemResp.json();
+
+    const qtdResolvidos = resolvidos.issues.length;
+    const qtdAndamento = andamento.issues.length;
+    const qtdSemResp = semResp.issues.length;
+    const qtdTotal = qtdResolvidos + qtdAndamento + qtdSemResp;
+
+    document.getElementById("kpiTotal").innerText = qtdTotal;
+    document.getElementById("kpiResolvidos").innerText = qtdResolvidos;
+    document.getElementById("kpiAndamento").innerText = qtdAndamento;
+    document.getElementById("kpiSemResponsavel").innerText = qtdSemResp;
+
+    if(qtdResolvidos > 0){
+      let totalMinutos = 0;
+
+      resolvidos.issues.forEach(function(issue){
+        const criado = new Date(issue.fields.created);
+        const resolvido = new Date(issue.fields.resolutiondate);
+        const qtdMinutos = (resolvido - criado) / 1000 / 60;
+        totalMinutos += qtdMinutos;
+      });
+
+      const mediaMinutos = Math.round(totalMinutos / qtdResolvidos);
+      const horas = Math.floor(mediaMinutos / 60);
+      const minutos = mediaMinutos % 60;
+
+      document.getElementById("kpiTMR").innerText = 
+      `TMR: ${horas}h${String(minutos).padStart(2,'0')}min`
+    }}
+
+
+function calcularTempoAberto(tempoAbertura) {
+      const difTempo = Math.floor((new Date() - new Date(tempoAbertura)) /
+  60000);
+      if (difTempo < 60) return `${difTempo}min`;
+      if (difTempo < 1440) return `${Math.floor(difTempo / 60)}h`;
+      return `${Math.floor(difTempo / 1440)}d`;
+  }
+
+
+// async function carregarTabelaIncidentes(){
+//   const {issues = []} = await
+//   fetch("/jira/todosIncidentesAbertos").then(r => r.json);
+//       console.log("issues:", issues);
+//       console.log("tbody:", document.getElementById("tabelaIncidentes"));
+//   const tbody = document.getElementById("tabelaIncidentes");
+//   tbody.innerHTML = issues.map(({key, fields}) => {
+//     const atribuido = !!fields.assignee && fields.assignee.displayName.toLowerCase() !== "atmos";
+//     const status = atribuido ? "Em Andamento" : "Não Atribuído";
+//     const classe = atribuido ? "status-analise" : "status-naoAtribuido";
+//     return `<tr>
+//       <td>${fields.labels?.[0] ?? "—"}</td>
+//               <td><span>${key}</span></td>
+//               <td>${calcularTempoAberto(fields.created)}</td>
+//               <td><span class="status ${classe}">${status}</span></td>
+//           </tr>`;
+//   }).join("") || '<tr><td colspan="4">Nenhum incidente aberto</td></tr>';
+// }
+
+  async function carregarTabelaIncidentes() {
+      const { issues = [] } = await
+  fetch("/jira/todosIncidentesAbertos").then(r => r.json());
+      const tbody = document.getElementById("tabelaIncidentes");
+
+      tbody.innerHTML = issues.map(({ key, fields }) => {
+            const chaveStatus = fields.status.statusCategory.key;
+  const status = chaveStatus === "done" ? "Resolvido"
+               : chaveStatus === "indeterminate" ? "Em Andamento"
+               : "Não atribuído";
+   const classe = chaveStatus === "done" ? "status-ok"
+               : chaveStatus === "indeterminate" ? "status-analise"
+               : "status-naoAtribuido";
+
+          return `<tr>
+              <td>${fields.summary.split(' - ')[0]}</td>
+              <td><span>${key}</span></td>
+              <td>${calcularTempoAberto(fields.created)}</td>
+              <td><span class="status ${classe}">${status}</span></td>
+          </tr>`;
+      }).join("") || '<tr><td colspan="4">Nenhum incidente aberto</td></tr>';
+  }
+
 
   let servidores = [];
 
@@ -801,7 +764,7 @@
     renderizarHeatmap
   );
 
-  //renderizar heatmap e graficos
+  //renderizar tela
 
   let graficoCpu, graficoRam, graficoDisco;
 
@@ -819,8 +782,11 @@
     graficoCpu = criarGrafico("graficoCpu", montarDatasets("cpu", "todos"), false, "bar");
     graficoRam = criarGrafico("graficoRam", montarDatasets("ram", "todos"), false, "bar");
     graficoDisco = criarGrafico("graficoDisco", montarDatasets("disco", "todos"), false, "bar");
-  });
 
+    carregarKpis();
+  });
+  
+  carregarTabelaIncidentes();
 
   const diasMes = [];
 

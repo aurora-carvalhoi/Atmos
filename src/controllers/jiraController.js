@@ -29,11 +29,17 @@ async function equipe(req, res) {
     res.status(200).json(resposta)
 }
 
+async function todosIncidentesAbertos(req, res) {
+    var resposta = await jiraModel.todosIncidentesAbertos()
+    res.status(200).json(resposta)
+}
+
 module.exports = {
     testeConexao,
     chamadosSemAtribuicao,
     buscarTempoResolucao,
     distribuicaoPorContribuidor,
     equipe,
+    todosIncidentesAbertos
 
 }
