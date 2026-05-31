@@ -31,8 +31,8 @@ async function buscarAnalisePreditiva(req, res) {
         const empresa =
             req.query.empresa;
 
-        const server =
-            req.query.server;
+        // const server =
+        //     req.query.server;
 
 
         if (!empresa) {
@@ -45,18 +45,18 @@ async function buscarAnalisePreditiva(req, res) {
         }
 
 
-        if (!server) {
+        // if (!server) {
 
-            return res.status(400).json({
+        //     return res.status(400).json({
 
-                erro:
-                    "Servidor não informado"
-            });
-        }
+        //         erro:
+        //             "Servidor não informado"
+        //     });
+        // }
 
 
         const key =
-            `client/${empresa}/${server}.json`;
+            `client/${empresa}.json`;
 
 
         console.log(

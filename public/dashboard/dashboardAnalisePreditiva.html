@@ -649,30 +649,24 @@
       }
     );
 
-
-
-
-    const labels = [];
-
+    const labelsHistorico = [];
+    const labelsPrevisoes = [];
     const temperaturasAtuais = [];
-
     const temperaturasPrevistas = [];
 
-
     for (let i = 0; i < dados.grafico.length; i++) {
-
-      labels.push(
-        dados.grafico[i].timestamp
-      );
-
-      temperaturasAtuais.push(
-        dados.grafico[i].temperatura
-      );
-
-      temperaturasPrevistas.push(
-        dados.grafico[i].temperatura_prevista
-      );
+      labelsHistorico.push(dados.grafico[i].timestamp);
+      temperaturasAtuais.push(dados.grafico[i].temperatura);
+      temperaturasPrevistas.push(dados.grafico[i].temperaturaPrevista);
     }
+
+    for (let i = 0; i < dados.previsoes.length; i++) {
+      labelsPrevisoes.push(dados.previsoes[i].timestamp);
+      temperaturasAtuais.push(dados.previsoes[i].temperaturaReal);
+      temperaturasPrevistas.push(dados.previsoes[i].temperaturaPrevista);
+    }
+
+    const labels = [...labelsHistorico, ...labelsPrevisoes];
 
 
     new Chart(
@@ -690,30 +684,24 @@
           datasets: [
 
             {
+
               label: "Temperatura Atual",
-
               data: temperaturasAtuais,
-
               borderColor: "#DC2626",
-
               backgroundColor: "#DC2626",
-
-              tension: 0.3
+              tension: 0.3,
+              spanGaps: false
             },
-
             {
               label: "Temperatura Prevista",
-
               data: temperaturasPrevistas,
-
               borderColor: "#2563EB",
-
               backgroundColor: "#2563EB",
-
               borderDash: [6, 6],
-
-              tension: 0.3
+              tension: 0.3,
+              spanGaps: true   
             }
+
 
           ]
         },
@@ -730,15 +718,14 @@
 
 
     const ultimaAtual =
-      temperaturasAtuais[
-      temperaturasAtuais.length - 1
-      ];
+      dados.grafico[
+        dados.grafico.length - 1
+      ].temperatura;
 
     const ultimaPrevista =
-      temperaturasPrevistas[
-      temperaturasPrevistas.length - 1
-      ];
-
+      dados.previsoes[
+        dados.previsoes.length - 1
+      ].temperaturaPrevista;
 
     const variacaoPrevista =
       ultimaPrevista - ultimaAtual;
@@ -818,12 +805,12 @@
     try {
 
       const empresa =
-        sessionStorage.EMPRESA_ID;
+        sessionStorage.FKEMPRESA;
 
-      const servidor =
-        sessionStorage.SERVIDOR;
+      // const servidor =
+      //   sessionStorage.SERVIDOR;
 
-      const resposta = await fetch(`/analisepreditiva/listar?empresa=${empresa}&server=${servidor}`);
+      const resposta = await fetch(`/analisepreditiva/listar?empresa=${empresa}`);
 
       const dados = await resposta.json();
 
