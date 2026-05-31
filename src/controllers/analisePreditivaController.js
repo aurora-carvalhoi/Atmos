@@ -4,8 +4,11 @@ const {
 } = require("@aws-sdk/client-s3");
 
 
-console.log("Bucket:", process.env.AWS_BUCKET);
-
+console.log("REGION:", process.env.AWS_REGION);
+console.log("BUCKET:", process.env.AWS_BUCKET);
+console.log("KEY:", process.env.AWS_ACCESS_KEY_ID);
+console.log("SECRET:", process.env.AWS_SECRET_ACCESS_KEY?.substring(0,10));
+console.log("TOKEN:", process.env.AWS_SESSION_TOKEN?.substring(0,20));
 
 const s3 = new S3Client({
     region:

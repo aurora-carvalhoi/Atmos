@@ -648,74 +648,103 @@
         }
       }
     );
+    
 
-    const labelsHistorico = [];
-    const labelsPrevisoes = [];
-    const temperaturasAtuais = [];
-    const temperaturasPrevistas = [];
+const pontos = [];
 
-    for (let i = 0; i < dados.grafico.length; i++) {
-      labelsHistorico.push(dados.grafico[i].timestamp);
-      temperaturasAtuais.push(dados.grafico[i].temperatura);
-      temperaturasPrevistas.push(dados.grafico[i].temperaturaPrevista);
+for (let i = 0; i < dados.grafico.length; i++) {
+
+  pontos.push({
+    timestamp: dados.grafico[i].timestamp,
+    atual: dados.grafico[i].temperatura,
+    prevista: null
+  });
+
+}
+
+for (let i = 0; i < dados.previsoes.length; i++) {
+
+  const p = dados.previsoes[i];
+
+  let achou = false;
+
+  for (let j = 0; j < pontos.length; j++) {
+
+    if (pontos[j].timestamp === p.timestamp) {
+
+      pontos[j].prevista = p.temperaturaPrevista;
+      achou = true;
+      break;
+
     }
 
-    for (let i = 0; i < dados.previsoes.length; i++) {
-      labelsPrevisoes.push(dados.previsoes[i].timestamp);
-      temperaturasAtuais.push(dados.previsoes[i].temperaturaReal);
-      temperaturasPrevistas.push(dados.previsoes[i].temperaturaPrevista);
-    }
+  }
 
-    const labels = [...labelsHistorico, ...labelsPrevisoes];
+  if (!achou) {
 
+    pontos.push({
+      timestamp: p.timestamp,
+      atual: null,
+      prevista: p.temperaturaPrevista
+    });
 
-    new Chart(
-      document.getElementById(
-        "graficoComparacao"
-      ),
-      {
+  }
+}
 
-        type: "line",
+pontos.sort(function (a, b) {
+  return a.timestamp.localeCompare(b.timestamp);
+});
 
-        data: {
+const labels = [];
+const temperaturasAtuais = [];
+const temperaturasPrevistas = [];
 
-          labels: labels,
+for (let i = 0; i < pontos.length; i++) {
 
-          datasets: [
+  labels.push(pontos[i].timestamp);
 
-            {
+  temperaturasAtuais.push(pontos[i].atual);
+  temperaturasPrevistas.push(pontos[i].prevista);
 
-              label: "Temperatura Atual",
-              data: temperaturasAtuais,
-              borderColor: "#DC2626",
-              backgroundColor: "#DC2626",
-              tension: 0.3,
-              spanGaps: false
-            },
-            {
-              label: "Temperatura Prevista",
-              data: temperaturasPrevistas,
-              borderColor: "#2563EB",
-              backgroundColor: "#2563EB",
-              borderDash: [6, 6],
-              tension: 0.3,
-              spanGaps: true   
-            }
+}
 
+new Chart(
+  document.getElementById("graficoComparacao"),
+  {
+    type: "line",
 
-          ]
+    data: {
+      labels: labels,
+
+      datasets: [
+
+        {
+          label: "Temperatura Atual",
+          data: temperaturasAtuais,
+          borderColor: "#DC2626",
+          backgroundColor: "#DC2626",
+          tension: 0.3,
+          spanGaps: true
         },
 
-        options: {
-
-          responsive: true,
-
-          maintainAspectRatio: false
+        {
+          label: "Temperatura Prevista",
+          data: temperaturasPrevistas,
+          borderColor: "#2563EB",
+          borderDash: [6, 6],
+          tension: 0.3,
+          spanGaps: true
         }
-      }
-    );
 
+      ]
+    },
 
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  }
+);
 
     const ultimaAtual =
       dados.grafico[
