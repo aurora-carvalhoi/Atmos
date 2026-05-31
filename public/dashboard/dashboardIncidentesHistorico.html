@@ -89,6 +89,7 @@
       <div>
         <h3><span id="usuarionome">usuário</span></h3>
         <h3><span id="usuarioemail">email</span></h3>
+        <h3><span id="usuarioemail">email</span></h3>
       </div>
     </div>
 
@@ -232,6 +233,7 @@
             <select class="filtro-incidentes">
               <option selected>
                 Em Andamento
+                Em Andamento
               </option>
               <option>
                 Mais recentes
@@ -252,6 +254,9 @@
                 <th>Incidente</th>
                 <th title="Responsável">
                   Aberto
+                <th>Incidente</th>
+                <th title="Responsável">
+                  Aberto
                 </th>
                 <th>Status</th>
               </tr>
@@ -262,10 +267,15 @@
                 <td>
                   <span>
                     ATMOS-42
+                  <span>
+                    ATMOS-42
                   </span>
                 </td>
                 <td>10min</td>
+                <td>10min</td>
                 <td>
+                  <span class="status status-analise">
+                    Em Andamento
                   <span class="status status-analise">
                     Em Andamento
                   </span>
@@ -276,11 +286,15 @@
                 <td>
                   <span>
                     ATMOS-43
+                  <span>
+                    ATMOS-43
                   </span>
                 </td>
                 <td>1h</td>
+                <td>1h</td>
                 <td>
                   <span class="status status-analise">
+                    Em Andamento
                     Em Andamento
                   </span>
                 </td>
@@ -290,10 +304,14 @@
                 <td>
                   <span>
                     ATMOS-44
+                  <span>
+                    ATMOS-44
                   </span>
                 </td>
                 <td>1.2h</td>
                 <td>
+                  <span class="status status-naoAtribuido">
+                    Não atribuído
                   <span class="status status-naoAtribuido">
                     Não atribuído
                   </span>
@@ -304,6 +322,8 @@
                   Server-SM-01
                 </td>
                 <td>
+                  <span>
+                  ATMOS-45
                   <span>
                   ATMOS-45
                   </span>
@@ -359,6 +379,8 @@
 
       <div class="coluna-direita">
         <div class="insights">
+      <div class="coluna-direita">
+        <div class="insights">
 
           <div class="barra-filtro">
             <div>
@@ -395,28 +417,47 @@
             </div>
             <button onclick="">Aplicar Filtro</button>
           </div>
+          </div>
 
+          <div class="heatmap">
           <div class="heatmap">
 
             <h3>Heatmap de Incidentes por Servidor</h3>
+            <h3>Heatmap de Incidentes por Servidor</h3>
 
+            <!-- Cabeçalho dos dias -->
+            <div class="cabecalho-dias" id="cabecalhoDias"></div>
             <!-- Cabeçalho dos dias -->
             <div class="cabecalho-dias" id="cabecalhoDias"></div>
 
             <!-- Grid -->
             <div class="grid-incidentes" id="gridIncidentes"></div>
+            <!-- Grid -->
+            <div class="grid-incidentes" id="gridIncidentes"></div>
 
+            <!-- Eventos climáticos -->
+            <div class="eventos-climaticos">
             <!-- Eventos climáticos -->
             <div class="eventos-climaticos">
 
               <div class="titulo-eventos">
                 Eventos
               </div>
+              <div class="titulo-eventos">
+                Eventos
+              </div>
 
+              <div class="eventos-grid" id="eventosGrid"></div>
               <div class="eventos-grid" id="eventosGrid"></div>
 
             </div>
+            </div>
 
+            <div class="legenda">
+              <div class="item">
+                <span class="box box-umIncidente"></span>
+                1 incidente
+              </div>
             <div class="legenda">
               <div class="item">
                 <span class="box box-umIncidente"></span>
@@ -427,12 +468,25 @@
                 <span class="box box-doisIncidentes"></span>
                 2-3 Incidentes
               </div>
+              <div class="item">
+                <span class="box box-doisIncidentes"></span>
+                2-3 Incidentes
+              </div>
 
               <div class="item">
                 <span class="box box-quatroMaisIncidentes"></span>
                 4+ Incidentes
               </div>
+              <div class="item">
+                <span class="box box-quatroMaisIncidentes"></span>
+                4+ Incidentes
+              </div>
 
+              <div class="item">
+                <span class="box box-vazio"></span>
+                Sem Incidentes
+              </div>
+            </div>
               <div class="item">
                 <span class="box box-vazio"></span>
                 Sem Incidentes
@@ -524,6 +578,7 @@
 <script src="../assets/javascript/sessao.js"></script>
 
 <!-- clima tempo -->
+<script src="../assets/javascript/climaTempo.js"></script>
 <script src="../assets/javascript/climaTempo.js"></script>
 
 <script>
