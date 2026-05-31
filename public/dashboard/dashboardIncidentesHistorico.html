@@ -229,17 +229,17 @@
               </p>
             </div>
 
-            <select class="filtro-incidentes">
-              <option selected>
+            <select id="filtroTabela" class="filtro-incidentes">
+              <option value="andamento" >
                 Em Andamento
               </option>
-              <option>
+              <option value="recentes" selected>
                 Mais recentes
               </option>
-              <option>
+              <option value="sla">
                 SLA em risco
               </option>
-              <option>
+              <option value="semResponsavel">
                 Sem responsável
               </option>
             </select>
@@ -305,7 +305,7 @@
                 <option value="">Disco</option>
               </select>
             </div>
-            <button onclick="">Aplicar Filtro</button>
+            <button onclick="aplicarFiltroHeatmap()">Aplicar Filtro</button>
           </div>
 
           <div class="heatmap">
@@ -518,29 +518,78 @@ function calcularTempoAberto(tempoAbertura) {
 //   }).join("") || '<tr><td colspan="4">Nenhum incidente aberto</td></tr>';
 // }
 
-  async function carregarTabelaIncidentes() {
-      const { issues = [] } = await
-  fetch("/jira/todosIncidentesAbertos").then(r => r.json());
+let todosChamados = [];
+
+function renderizarTabelaIncidentes(issues) {
       const tbody = document.getElementById("tabelaIncidentes");
 
       tbody.innerHTML = issues.map(({ key, fields, self }) => {
-            const linkChamado = new URL(self).origin + '/browse/' + key;
-            const chaveStatus = fields.status.statusCategory.key;
-  const status = chaveStatus === "done" ? "Resolvido"
-               : chaveStatus === "indeterminate" ? "Em Andamento"
-               : "Não atribuído";
-   const classe = chaveStatus === "done" ? "status-ok"
-               : chaveStatus === "indeterminate" ? "status-analise"
-               : "status-naoAtribuido";
-
+          const chaveStatus = fields.status.statusCategory.key;
+          const status = chaveStatus === "done" ? "Resolvido"
+                       : chaveStatus === "indeterminate" ? "Em Andamento"
+                       : "Não atribuído";
+          const classe = chaveStatus === "done" ? "status-ok"
+                       : chaveStatus === "indeterminate" ? "status-analise"
+                       : "status-naoAtribuido";
+          const browseUrl = new URL(self).origin + '/browse/' + key;
           return `<tr>
               <td>${fields.summary.split(' - ')[0]}</td>
-              <td><a href="${linkChamado}" target="_blank">${key}</a></td>
+              <td><a href="${browseUrl}" target="_blank">${key}</a></td>
               <td>${calcularTempoAberto(fields.created)}</td>
               <td><span class="status ${classe}">${status}</span></td>
           </tr>`;
-      }).join("") || '<tr><td colspan="4">Nenhum incidente aberto</td></tr>';
+      }).join("") || '<tr><td colspan="4">Nenhum incidente encontrado</td></tr>';
   }
+
+    async function carregarTabelaIncidentes() {
+      const { issues = [] } = await
+  fetch("/jira/todosIncidentesAbertos").then(r => r.json());
+      todosChamados = issues;
+      filtrarTabelaIncidentesRecentes();
+  }
+
+  function filtrarTabelaIncidentesRecentes() {
+      const filtro = document.getElementById("filtroTabela").value;
+
+      const filtrados = todosChamados.filter(({ fields }) => {
+          const chave = fields.status.statusCategory.key;
+          const semResponsavel = !fields.assignee ||
+  fields.assignee.displayName.toLowerCase() === "atmos";
+          const slaRisco = (new Date() - new Date(fields.created)) / 3600000 > 12;
+          if (filtro === "andamento") return chave === "indeterminate";
+          if (filtro === "sla") return slaRisco;
+          if (filtro === "semResponsavel") return semResponsavel;
+          return true; 
+      });
+
+      renderizarTabelaIncidentes(filtrados);
+  }
+
+
+
+  // async function carregarTabelaIncidentes() {
+  //     const { issues = [] } = await
+  // fetch("/jira/todosIncidentesAbertos").then(r => r.json());
+  //     const tbody = document.getElementById("tabelaIncidentes");
+
+  //     tbody.innerHTML = issues.map(({ key, fields, self }) => {
+  //           const linkChamado = new URL(self).origin + '/browse/' + key;
+  //           const chaveStatus = fields.status.statusCategory.key;
+  // const status = chaveStatus === "done" ? "Resolvido"
+  //              : chaveStatus === "indeterminate" ? "Em Andamento"
+  //              : "Não atribuído";
+  //  const classe = chaveStatus === "done" ? "status-ok"
+  //              : chaveStatus === "indeterminate" ? "status-analise"
+  //              : "status-naoAtribuido";
+
+  //         return `<tr>
+  //             <td>${fields.summary.split(' - ')[0]}</td>
+  //             <td><a href="${linkChamado}" target="_blank">${key}</a></td>
+  //             <td>${calcularTempoAberto(fields.created)}</td>
+  //             <td><span class="status ${classe}">${status}</span></td>
+  //         </tr>`;
+  //     }).join("") || '<tr><td colspan="4">Nenhum incidente aberto</td></tr>';
+  // }
 
    async function carregarIncidentesSemResponsavel(equipe) {
       const { issues = [] } = await
@@ -777,17 +826,17 @@ function calcularTempoAberto(tempoAbertura) {
 
   }
 
+  
+
   //mudança dos filtros
+      async function aplicarFiltroHeatmap() {
+      await carregarDados();
+      servidores = Object.keys(dadosApi.incidentes);
+      renderizarHeatmap();
+  }
 
-  filtroMes.addEventListener(
-    "change",
-    renderizarHeatmap
-  );
-
-  filtroAno.addEventListener(
-    "change",
-    renderizarHeatmap
-  );
+  document.getElementById("filtroTabela").addEventListener("change",
+  filtrarTabelaIncidentesRecentes);
 
   //renderizar tela
 
