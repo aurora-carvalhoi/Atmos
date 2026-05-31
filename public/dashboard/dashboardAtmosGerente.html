@@ -210,7 +210,7 @@
       <div class="d-kpi">
         <p class="titulo">Incidentes Sem Responsáveis</p>
         <div class="descricao t-cinza">
-          <h3 class="indicador t-vermelho" id="kpi_qtd_incidentes"></h3>
+          <h3 class="indicador t-vermelho" id="kpi_qtd_incidentes">--</h3>
           <!-- <img src="../assets/images/time.svg" alt=""> -->
           <p id="tempo_incidente_mais_antigo"></p>
         </div>
@@ -218,10 +218,16 @@
       <div class="linha-kpi"></div>
       <!-- Reincidencia -->
       <div class="d-kpi">
-        <p class="titulo">Reincidentes nos últimos 3 meses</p>
+        <p class="titulo">Reincidentes nos últimos mês
+          <span class="tooltip">
+            <img src="../assets/images/info.svg" width="15" alt="i">
+            <span class="tooltip-text">
+              Servidores com mais de 5 incidentes registrados no mesmo componente nos últimos mês.</span>
+        </p>
+        </p>
         <div class="descricao t-cinza">
-          <h3 class="indicador t-vermelho">9</h3>
-          <p><span class="t-vermelho">3 servidores</span> em atenção de reincidencia</p>
+          <h3 class="indicador t-vermelho" id="kpi_qtd_reincidente">--</h3>
+          <p id="kpi_qtd_reincidente_desc"></p>
         </div>
       </div>
       <div class="linha-kpi"></div>
@@ -230,7 +236,7 @@
       <div class="d-kpi">
         <p class="titulo">Tempo médio de resolução</p>
         <div class="descricao t-cinza">
-          <h3 class="indicador" id="kpi_tempo_medio_resolucao"></h3>
+          <h3 class="indicador" id="kpi_tempo_medio_resolucao">--</h3>
           <!-- <img src="../assets/images/seta.svg" alt=""> -->
           <p id="kpi_tempo_medio_resolucao_ancora"></p>
         </div>
@@ -244,11 +250,12 @@
           <span class="tooltip">
             <img src="../assets/images/info.svg" width="15" alt="i">
             <span class="tooltip-text">
-              Servidores que não apresentaram componentes críticos na coleta mais recente </span>
+              Servidores sem componentes críticos considerando o percentil da última coleta
+            </span>
         </p>
         <div class="descricao t-cinza">
-          <h3 class="indicador t-verde">5/6</h3>
-          <p><span class="t-verde">80%</span> da infraestrutura funcionando</p>
+          <h3 class="indicador" id="kpi_saude_infra">--</h3>
+          <p><span id="kpi_saude_infra_desc">
         </div>
       </div>
       <!-- <div class="d-kpi">
@@ -285,7 +292,7 @@
       <div class="distribuicao">
         <div class="topo-card">
           <p class="titulo-card">Distribuição de Incidentes na Equipe</p>
-          <button class="btn-acao">
+          <button onclick="window.location.href= './dashboardIncidentesHistorico.html'" class="btn-acao">
             Ação necessaria
           </button>
         </div>
@@ -306,21 +313,10 @@
             Servidores em Atenção
           </p>
           <span class="subtitulo-card">
-            Múltiplos incidentes recorrentes nos últimos 3 meses
+            Múltiplos incidentes recorrentes nos últimos mês
           </span>
-          <div class="lista">
-            <div class="card-serv-recorrente">
-              <div class="identificador">
-                <div class="faixa"></div>
-                <div>
-                  <p class="titulo">SERV-PROD-01</p>
-                  <p class="desc">RAM sobrecarregada • Último em 10/05/2026</p>
-                </div>
-              </div>
-              <div>
-                <p class="reincidencias">3x incidentes</p>
-              </div>
-            </div>
+          <div class="lista" id="lista_servidores_atencao">
+
 
           </div>
         </div>
@@ -330,7 +326,7 @@
         <div class="incidentes">
           <div class="topo-card">
             <p class="titulo-card">Incidentes sem Atribuição</p>
-            <button class="btn-acao">
+            <button onclick="window.location.href= './dashboardIncidentesHistorico.html'" class="btn-acao">
               Atribuir ao colaborador
             </button>
           </div>
@@ -350,7 +346,7 @@
                 </p>
                 <img src="../assets/images/icones/editar-azul.svg" width="30" alt="editar">
               </div>
-              <p class="valor">60/60</p>
+              <p class="valor" id="valor_sla_incidente"></p>
             </div>
             <div class="kpi-desempenho" onclick="sla_tmr.style.display = 'flex' ">
               <div class="titulo">
@@ -553,10 +549,14 @@
         `client_${String(menos2.getMonth() + 1).padStart(2, '0')}_${menos2.getFullYear()}.json`;
 
       const nomeArquivo2 =
-        `client_${String(menos1.getMonth() + 1).padStart(2, '0')}_${menos1.getFullYear()}.json`;
+        `client_${String(menos1.getMonth()).padStart(2, '0')}_${menos1.getFullYear()}.json`;
 
       const nomeArquivo3 =
         `client_${String(atual.getMonth() + 1).padStart(2, '0')}_${atual.getFullYear()}.json`;
+
+      // console.log("a:", nomeArquivo1)
+      // console.log("b:", nomeArquivo2)
+      // console.log("c:", nomeArquivo3)
 
       const respostas = await Promise.all([
         fetch(`http://localhost:3333/incidentesHistoricos/listar?arquivo=${nomeArquivo1}&empresa=${empresa}`),
@@ -609,10 +609,6 @@
       }
 
       criarGrafico(dadosCriarGrafico)
-
-      console.log("Labels:", labels);
-      console.log("Valores:", serieTotal);
-
       listarReincidentes(dados)
     } catch (erro) {
 
@@ -620,45 +616,185 @@
 
     }
   }
+  async function buscarClientS3() {
+    const res = await fetch('/s3/dados')
+    const dataClient = await res.json()
+    const totalRegistros = dataClient.resumo.total_registros
+    const hostsAtivos = dataClient.resumo.hosts_ativos
+    const indiceUltimaLeitura = (totalRegistros / hostsAtivos) - 1
 
-  function listarReincidentes(dados) {
+    const LIMITES_ALERTA = {
+      cpu: { atencao: 80, critico: 90 },
+      ram: { atencao: 75, critico: 90 },
+      disco: { atencao: 85, critico: 95 },
+      temp: { atencao: 85, critico: 95 }
+    }
+
+    var servidoresSaudaveis = 0
+    for (var i = 0; i < hostsAtivos; i++) {
+      var servidor = dataClient.hosts[i]
+      var metricas = servidor.metricas
+
+      var cpuPico = Math.max(...metricas.cpu_percent);
+      var ramPico = Math.max(...metricas.ram_perc);
+      var discoPico = Math.max(...metricas.disco_porcentagem);
+
+      if (
+        metricas.cpu_percentil_maquina < LIMITES_ALERTA.cpu.critico &&
+        metricas.ram_percentil_maquina < LIMITES_ALERTA.ram.critico &&
+        metricas.disco_porcentagem[indiceUltimaLeitura] < LIMITES_ALERTA.disco.critico
+      ) {
+        servidoresSaudaveis++;
+      }
+
+      var cores = [
+        "#004AAD",
+        "#f59032",
+        "#db3232"
+      ];
+
+
+      const percentual = (servidoresSaudaveis / hostsAtivos) * 100;
+      let cor = "";
+      if (percentual >= 80) {
+        cor = cores[0];
+      } else if (percentual >= 50) {
+        cor = cores[1];
+      } else {
+        cor = cores[2];
+      }
+
+      const kpiSaude = `<span style="color:${cor}">${servidoresSaudaveis}/${hostsAtivos}</span>`;
+      const kpiDesc = `<span style="color:${cor}">${Math.floor(percentual)}%</span> da infraestrutura funcionando`;
+
+      document.getElementById("kpi_saude_infra").innerHTML = kpiSaude;
+      document.getElementById("kpi_saude_infra_desc").innerHTML = kpiDesc;
+    }
+
+    // return data
+  }
+
+
+  async function listarReincidentes(dados) {
+
     var reincidencias = {};
-    for (var i = 0; i < dados.length; i++) {
-
+    var totalIncidentes = 0;
+    for (var i = dados.length - 1; i < dados.length; i++) {
       var mes = dados[i];
-
       var servidores = Object.keys(mes.incidentes);
-
       for (var j = 0; j < servidores.length; j++) {
-
         var nomeServidor = servidores[j];
-
-        var detalhes =
-          mes.incidentes[nomeServidor].detalhes;
-
+        var detalhes = mes.incidentes[nomeServidor].detalhes;
+        totalIncidentes += detalhes.length;
         for (var k = 0; k < detalhes.length; k++) {
-
           var incidente = detalhes[k];
-
           var chave =
             incidente.servidor +
             "_" +
             incidente.componente;
-
           if (reincidencias[chave] == undefined) {
-            reincidencias[chave] = 0;
+            reincidencias[chave] = {
+              servidor: incidente.servidor,
+              componente: incidente.componente,
+              quantidade: 0,
+              ultimaData: incidente.data
+            };
           }
-
-          reincidencias[chave]++;
+          reincidencias[chave].quantidade++;
+          if (new Date(incidente.data) > new Date(reincidencias[chave].ultimaData)) {
+            reincidencias[chave].ultimaData = incidente.data;
+          }
         }
       }
     }
-    console.log("AA")
-    console.log(reincidencias)
+
+    var qtdReincidentes = 0;
+    var servidoresAcompanhamento = {};
+    var listaReincidentes = [];
+    var chaves = Object.keys(reincidencias);
+    for (var i = 0; i < chaves.length; i++) {
+      var reincidente =
+        reincidencias[chaves[i]];
+      if (reincidente.quantidade >= 5) {
+        qtdReincidentes += reincidente.quantidade;
+        servidoresAcompanhamento[
+          reincidente.servidor
+        ] = true;
+        listaReincidentes.push(reincidente);
+      }
+    }
+
+    listaReincidentes.sort(function (a, b) {
+      return b.quantidade - a.quantidade;
+    });
+
+    var qtdServidoresAcompanhamento =
+      Object.keys(servidoresAcompanhamento).length;
+
+    var htmlReincidentes = "";
+    for (var i = 0; i < listaReincidentes.length; i++) {
+
+      var reincidente =
+        listaReincidentes[i];
+      htmlReincidentes += `
+          <div class="card-serv-recorrente">
+            <div class="identificador">
+              <div class="faixa"></div>
+              <div>
+                <p class="titulo">${reincidente.servidor}</p>
+                <p class="desc">Componente: ${reincidente.componente} • Último em ${reincidente.ultimaData}</p>
+              </div>
+            </div>
+            <div>
+              <p class="reincidencias">${reincidente.quantidade}x incidentes</p>
+            </div>
+          </div>
+    `;
+
+    }
+
+
+    var sla = await buscarSla();
+
+    var cores = [
+      "#004AAD",
+      "#f59032",
+      "#db3232"
+    ];
+
+    var slaIncidente = "";
+
+    if (totalIncidentes < sla[0].qtdIncidentes * 0.5) {
+
+      slaIncidente =
+        `<span style="color:${cores[0]}">${totalIncidentes}/${sla[0].qtdIncidentes}</span>`;
+
+    } else if (totalIncidentes < sla[0].qtdIncidentes * 0.90) {
+      slaIncidente = `<span style="color:${cores[1]}">${totalIncidentes}/${sla[0].qtdIncidentes}</span>`;
+    } else {
+      slaIncidente = `<span style="color:${cores[2]}">${totalIncidentes}/${sla[0].qtdIncidentes}</span>`;
+    }
+
+    var kpi_desc = "";
+    var kpi_reincidente = "";
+    if (qtdServidoresAcompanhamento <= Object.keys(servidoresAcompanhamento).length * .5) {
+      kpi_desc = `<span style="color:${cores[1]}">${qtdServidoresAcompanhamento} servidores</span> em atenção de reincidência`;
+    } else {
+      kpi_desc = `<span style="color:${cores[2]}">${qtdServidoresAcompanhamento} servidores</span> em atenção de reincidência`;
+    }
+
+    if (qtdReincidentes <= 1) {
+      kpi_reincidente = `<span style="color:${cores[0]}">${qtdReincidentes}</span>`;
+    } else {
+      kpi_reincidente = `<span style="color:${cores[2]}">${qtdReincidentes}</span>`;
+    }
+
+    document.getElementById("valor_sla_incidente").innerHTML = slaIncidente;
+    document.getElementById("kpi_qtd_reincidente").innerHTML = kpi_reincidente;
+    document.getElementById("kpi_qtd_reincidente_desc").innerHTML = kpi_desc;
+    document.getElementById("lista_servidores_atencao").innerHTML = htmlReincidentes;
+
   }
-
-
-  // funçoes
 
   async function atribuirSla() {
     var dados = await buscarSla();
@@ -795,6 +931,7 @@
   tempoMedio()
   tabelaDistribuicaoIncidentes()
   buscarIncidentes()
+  buscarClientS3()
 </script>
 
 <!-- sla -->
