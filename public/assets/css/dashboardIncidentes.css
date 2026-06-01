@@ -556,6 +556,16 @@ body {
     font-weight: 700;
   }
 
+  .tabela-incidentes a {
+      color: var(--color-blue1);
+      text-decoration: none;
+  }
+
+  .tabela-incidentes a:hover {
+      text-decoration: underline;
+  }
+
+
   /* fim tabela */
 
   .atribuicao-funcionario {
@@ -582,6 +592,16 @@ body {
     color: red;
     font-size: 13px;
   }
+
+    .card-atribuicao-verde {
+      background-color: rgb(247, 254, 249);
+      border: 3px solid rgb(190, 230, 200);
+  }
+
+  .card-atribuicao-verde h4 {
+      color: #44A774;
+  }
+
 
   .descricao-incidente {
     display: flex;

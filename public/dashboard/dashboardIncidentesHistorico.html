@@ -89,7 +89,6 @@
       <div>
         <h3><span id="usuarionome">usuário</span></h3>
         <h3><span id="usuarioemail">email</span></h3>
-        <h3><span id="usuarioemail">email</span></h3>
       </div>
     </div>
 
@@ -183,7 +182,7 @@
     <div class="linha-kpis">
       <div class="kpi">
         <p>Total de Incidentes</p>
-        <H1>12</H1>
+        <H1 id="kpiTotal"></H1>
         <div class="informativo-kpi">
           <p>Maio</p>
           <p>2026</p>
@@ -193,23 +192,23 @@
       </div>
       <div class="kpi">
         <p>Resolvidos</p>
-        <H1>10</H1>
+        <H1 id="kpiResolvidos"></H1>
         <div class="informativo-kpi">
-          <p>80% resolvidos</p>
+          <p id="porcentagemResolvidos">--% resolvidos</p>
           <p>|</p>
-          <P>TMR: 2h15min</P>
+          <P id="kpiTMR">TMR: --</P>
         </div>
       </div>
       <div class="kpi">
         <p>Em andamento</p>
-        <H1>0</H1>
+        <H1 id="kpiAndamento"></H1>
         <div class="informativo-kpi">
           <p>0% do total</p>
         </div>
       </div>
       <div class="kpi">
         <p>Incidentes sem Responsável</p>
-        <H1>2</H1>
+        <H1 id="kpiSemResponsavel"></H1>
         <div class="informativo-kpi">
           <p>Último incidente há: 10 minutos</p>
         </div>
@@ -230,18 +229,17 @@
               </p>
             </div>
 
-            <select class="filtro-incidentes">
-              <option selected>
-                Em Andamento
+            <select id="filtroTabela" class="filtro-incidentes">
+              <option value="andamento" >
                 Em Andamento
               </option>
-              <option>
+              <option value="recentes" selected>
                 Mais recentes
               </option>
-              <option>
+              <option value="sla">
                 SLA em risco
               </option>
-              <option>
+              <option value="semResponsavel">
                 Sem responsável
               </option>
             </select>
@@ -254,87 +252,11 @@
                 <th>Incidente</th>
                 <th title="Responsável">
                   Aberto
-                <th>Incidente</th>
-                <th title="Responsável">
-                  Aberto
                 </th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody id="tabelaIncidentes">
-              <tr>
-                <td>Server-CL-01</td>
-                <td>
-                  <span>
-                    ATMOS-42
-                  <span>
-                    ATMOS-42
-                  </span>
-                </td>
-                <td>10min</td>
-                <td>10min</td>
-                <td>
-                  <span class="status status-analise">
-                    Em Andamento
-                  <span class="status status-analise">
-                    Em Andamento
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Server-MB-01</td>
-                <td>
-                  <span>
-                    ATMOS-43
-                  <span>
-                    ATMOS-43
-                  </span>
-                </td>
-                <td>1h</td>
-                <td>1h</td>
-                <td>
-                  <span class="status status-analise">
-                    Em Andamento
-                    Em Andamento
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Server-AD-01</td>
-                <td>
-                  <span>
-                    ATMOS-44
-                  <span>
-                    ATMOS-44
-                  </span>
-                </td>
-                <td>1.2h</td>
-                <td>
-                  <span class="status status-naoAtribuido">
-                    Não atribuído
-                  <span class="status status-naoAtribuido">
-                    Não atribuído
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="texto-alerta">
-                  Server-SM-01
-                </td>
-                <td>
-                  <span>
-                  ATMOS-45
-                  <span>
-                  ATMOS-45
-                  </span>
-                </td>
-                <td>—</td>
-                <td>
-                  <span class="status status-naoAtribuido">
-                    Não atribuído
-                  </span>
-                </td>
-              </tr>
             </tbody>
           </table>
 
@@ -342,43 +264,11 @@
 
         <div class="atribuicao-funcionario">
           <h4>Incidentes Recentes Sem Responsável</h4>
-          <div class="card-atribuicao">
-            <h4>Server-SM-01</h4>
-            <div class="descricao-incidente">
-              <p>CPU > 90%</p>
-              <p>|</p>
-              <p>Aberto há 20 minutos</p>
+          <div id="cardsAtribuicao">
             </div>
-            <div class="seletor-atribuicao">
-              <select class="select-atribuicao" name="" id="">
-                <option value="" selected disabled>Atribuir Funcionário</option>
-                <option value="">Lucas Mendes</option>
-                <option value="">Júlia Araripe</option>
-              </select>
-              <button onclick="">Atribuir</button>
-            </div>
-          </div>
-          <div class="card-atribuicao">
-            <h4>Server-SM-01</h4>
-            <div class="descricao-incidente">
-              <p>RAM > 90%</p>
-              <p>|</p>
-              <p>Aberto há 15 minutos</p>
-            </div>
-            <div class="seletor-atribuicao">
-              <select class="select-atribuicao" name="" id="">
-                <option value="" selected disabled>Atribuir Funcionário</option>
-                <option value="">Lucas Mendes</option>
-                <option value="">Júlia Araripe</option>
-              </select>
-              <button onclick="">Atribuir</button>
-            </div>
-          </div>
         </div>
       </div>
 
-      <div class="coluna-direita">
-        <div class="insights">
       <div class="coluna-direita">
         <div class="insights">
 
@@ -407,50 +297,26 @@
             <div>
               <label for="filtroOrdenacao">Ordenar por:</label>
               <select name="" id="filtroOrdenacao">
-                <option value="" selected>Mais recentes</option>
-                <option value="">Maior quantidade</option>
-                <option value="">Menor quantidade</option>
-                <option value="">RAM</option>
-                <option value="">CPU</option>
-                <option value="">Disco</option>
+                <option value="maiorQtd" selected>Maior Quantidade de Incidentes</option>
+                <option value="menorQtd">Menor Quantidade de Incidentes</option>
+                <option value="ram">Mais Incidentes de RAM</option>
+                <option value="cpu">Mais Incidentes de CPU</option>
+                <option value="disco">Mais Incidentes de Disco</option>
               </select>
             </div>
-            <button onclick="">Aplicar Filtro</button>
-          </div>
+            <button onclick="aplicarFiltroHeatmap()">Aplicar Filtro</button>
           </div>
 
           <div class="heatmap">
-          <div class="heatmap">
 
             <h3>Heatmap de Incidentes por Servidor</h3>
-            <h3>Heatmap de Incidentes por Servidor</h3>
 
-            <!-- Cabeçalho dos dias -->
             <div class="cabecalho-dias" id="cabecalhoDias"></div>
-            <!-- Cabeçalho dos dias -->
-            <div class="cabecalho-dias" id="cabecalhoDias"></div>
-
-            <!-- Grid -->
-            <div class="grid-incidentes" id="gridIncidentes"></div>
-            <!-- Grid -->
             <div class="grid-incidentes" id="gridIncidentes"></div>
 
-            <!-- Eventos climáticos -->
             <div class="eventos-climaticos">
-            <!-- Eventos climáticos -->
-            <div class="eventos-climaticos">
-
-              <div class="titulo-eventos">
-                Eventos
-              </div>
-              <div class="titulo-eventos">
-                Eventos
-              </div>
-
+              <div class="titulo-eventos">Eventos</div>
               <div class="eventos-grid" id="eventosGrid"></div>
-              <div class="eventos-grid" id="eventosGrid"></div>
-
-            </div>
             </div>
 
             <div class="legenda">
@@ -458,35 +324,14 @@
                 <span class="box box-umIncidente"></span>
                 1 incidente
               </div>
-            <div class="legenda">
-              <div class="item">
-                <span class="box box-umIncidente"></span>
-                1 incidente
-              </div>
-
               <div class="item">
                 <span class="box box-doisIncidentes"></span>
                 2-3 Incidentes
               </div>
               <div class="item">
-                <span class="box box-doisIncidentes"></span>
-                2-3 Incidentes
-              </div>
-
-              <div class="item">
                 <span class="box box-quatroMaisIncidentes"></span>
                 4+ Incidentes
               </div>
-              <div class="item">
-                <span class="box box-quatroMaisIncidentes"></span>
-                4+ Incidentes
-              </div>
-
-              <div class="item">
-                <span class="box box-vazio"></span>
-                Sem Incidentes
-              </div>
-            </div>
               <div class="item">
                 <span class="box box-vazio"></span>
                 Sem Incidentes
@@ -521,15 +366,10 @@
               </select>
               <label>Servidor</label>
               <select id="filtroServidor">
-                <option value="todos">Todos os servidores</option>
-                <option value="Server-CL-01">Server-CL-01</option>
-                <option value="Server-MB-01">Server-MB-01</option>
-                <option value="Server-AD-01">Server-AD-01</option>
-                <option value="Server-SM-01">Server-SM-01</option>
               </select>
 
             </div>
-            <button onclick="">Aplicar Filtro</button>
+            <button onclick="aplicarFiltroGraficos()">Aplicar Filtro</button>
           </div>
 
           <div class="graficos-uso">
@@ -562,8 +402,6 @@
 
         </div>
 
-
-
       </div>
 
     </div>
@@ -579,13 +417,15 @@
 
 <!-- clima tempo -->
 <script src="../assets/javascript/climaTempo.js"></script>
-<script src="../assets/javascript/climaTempo.js"></script>
 
 <script>
 
   // filtros
   const filtroMes = document.getElementById("filtroMes");
   const filtroAno = document.getElementById("filtroAno");
+  const filtroMesGraficos = document.getElementById("filtroMesGraficos");
+  const filtroAnoGraficos = document.getElementById("filtroAnoGraficos");
+
 
   const headerDias = document.getElementById("cabecalhoDias");
   const gridIncidentes = document.getElementById("gridIncidentes");
@@ -593,6 +433,7 @@
 
   //buscar dados no backend
    let dadosApi = null;
+   let dadosApiGraficos = null;
 
    async function carregarDados() {
     const empresa = "empresaX";
@@ -607,34 +448,170 @@
     dadosApi = await resposta.json()
    }
 
-  //incidentes mockados
+   async function carregarKpis(){
+    const [resResolvidos, resAndamento, resSemResp] = await Promise.all([
+      fetch("/jira/buscarTempoResolucao"),
+      fetch("/jira/distribuicaoPorContribuidor"),
+      fetch("/jira/chamadosSemAtribuicao")
+    ]);
+
+    const resolvidos = await resResolvidos.json();
+    const andamento = await resAndamento.json();
+    const semResp = await resSemResp.json();
+
+    const qtdResolvidos = resolvidos.issues.length;
+    const qtdAndamento = andamento.issues.length;
+    const qtdSemResp = semResp.issues.length;
+    const qtdTotal = qtdResolvidos + qtdAndamento + qtdSemResp;
+
+    document.getElementById("kpiTotal").innerText = qtdTotal;
+    document.getElementById("kpiResolvidos").innerText = qtdResolvidos;
+    document.getElementById("kpiAndamento").innerText = qtdAndamento;
+    document.getElementById("kpiSemResponsavel").innerText = qtdSemResp;
+
+    if(qtdResolvidos > 0){
+      let totalMinutos = 0;
+
+      resolvidos.issues.forEach(function(issue){
+        const criado = new Date(issue.fields.created);
+        const resolvido = new Date(issue.fields.resolutiondate);
+        const qtdMinutos = (resolvido - criado) / 1000 / 60;
+        totalMinutos += qtdMinutos;
+      });
+
+      const mediaMinutos = Math.round(totalMinutos / qtdResolvidos);
+      const horas = Math.floor(mediaMinutos / 60);
+      const minutos = mediaMinutos % 60;
+
+      document.getElementById("kpiTMR").innerText = 
+      `TMR: ${horas}h${String(minutos).padStart(2,'0')}min`
+    }}
+
+
+function calcularTempoAberto(tempoAbertura) {
+      const difTempo = Math.floor((new Date() - new Date(tempoAbertura)) /
+  60000);
+      if (difTempo < 60) return `${difTempo}min`;
+      if (difTempo < 1440) return `${Math.floor(difTempo / 60)}h`;
+      return `${Math.floor(difTempo / 1440)}d`;
+  }
+
+
+    async function carregarDadosGraficos() {
+      const empresa = "empresaX";
+      const mes = document.getElementById("filtroMesGraficos").value;
+      const ano = document.getElementById("filtroAnoGraficos").value;
+      const mesFormatado = String(mes).padStart(2, '0');
+      const arquivo = `client_${mesFormatado}_${ano}.json`;
+      const resposta = await fetch(`/incidentesHistoricos/listar?empresa=${
+  empresa}&arquivo=${arquivo}`);
+      dadosApiGraficos = await resposta.json();
+  }
+
+let todosChamados = [];
+
+function renderizarTabelaIncidentes(issues) {
+      const tbody = document.getElementById("tabelaIncidentes");
+
+      tbody.innerHTML = issues.map(({ key, fields, self }) => {
+          const chaveStatus = fields.status.statusCategory.key;
+          const status = chaveStatus === "done" ? "Resolvido"
+                       : chaveStatus === "indeterminate" ? "Em Andamento"
+                       : "Não atribuído";
+          const classe = chaveStatus === "done" ? "status-ok"
+                       : chaveStatus === "indeterminate" ? "status-analise"
+                       : "status-naoAtribuido";
+          const browseUrl = new URL(self).origin + '/browse/' + key;
+          return `<tr>
+              <td>${fields.summary.split(' - ')[0]}</td>
+              <td><a href="${browseUrl}" target="_blank">${key}</a></td>
+              <td>${calcularTempoAberto(fields.created)}</td>
+              <td><span class="status ${classe}">${status}</span></td>
+          </tr>`;
+      }).join("") || '<tr><td colspan="4">Nenhum incidente encontrado</td></tr>';
+  }
+
+    async function carregarTabelaIncidentes() {
+      const { issues = [] } = await
+  fetch("/jira/todosIncidentesAbertos").then(r => r.json());
+      todosChamados = issues;
+      filtrarTabelaIncidentesRecentes();
+  }
+
+  function filtrarTabelaIncidentesRecentes() {
+      const filtro = document.getElementById("filtroTabela").value;
+
+      const filtrados = todosChamados.filter(({ fields }) => {
+          const chave = fields.status.statusCategory.key;
+          const semResponsavel = !fields.assignee ||
+  fields.assignee.displayName.toLowerCase() === "atmos";
+          const slaRisco = (new Date() - new Date(fields.created)) / 3600000 > 12;
+          if (filtro === "andamento") return chave === "indeterminate";
+          if (filtro === "sla") return slaRisco;
+          if (filtro === "semResponsavel") return semResponsavel;
+          return true; 
+      });
+
+      renderizarTabelaIncidentes(filtrados);
+  }
+
+   async function carregarIncidentesSemResponsavel(equipe) {
+      const { issues = [] } = await
+  fetch("/jira/chamadosSemAtribuicao").then(r => r.json());
+      const container = document.getElementById("cardsAtribuicao");
+
+      container.innerHTML = issues.map(({ key, fields }) => {
+          const servidor = fields.summary.split(' - ')[0];
+          const componente = fields.labels.find(l => l.includes(':')) ??
+  "—";
+          const aberto = calcularTempoAberto(fields.created);
+          const opcoes = equipe.map(u =>
+              `<option value="${u.accountId}">${u.displayName}</option>`
+          ).join("");
+
+          return `<div class="card-atribuicao" id="card-${key}">
+              <h4>${servidor}</h4>
+              <div class="descricao-incidente">
+                  <p>${componente}</p>
+                  <p>|</p>
+                  <p>Aberto há ${aberto}</p>
+              </div>
+              <div class="seletor-atribuicao">
+                  <select class="select-atribuicao" id="select-${key}">
+                      <option value="" selected disabled>Atribuir Funcionário</option>
+                      ${opcoes}
+                  </select>
+                  <button onclick="atribuirFuncionario('${key}')">Atribuir</button>
+              </div>
+          </div>`;
+      }).join("") || `<div class="card-atribuicao card-atribuicao-verde">
+          <h4>Nenhum incidente sem responsável</h4>
+      </div>`;
+  }
+
+  async function atribuirFuncionario(issueKey) {
+      const accountId =
+  document.getElementById(`select-${issueKey}`).value;
+      if (!accountId) return alert("Selecione um funcionário.");
+
+      const res = await fetch(`/jira/atribuirResponsavel/${issueKey}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ accountId })
+      });
+
+      if (res.ok) {
+          document.getElementById(`card-${issueKey}`).remove();
+          carregarTabelaIncidentes();
+      } else {
+          alert("Erro ao atribuir. Tente novamente.");
+      }
+  }
 
   let servidores = [];
-
-  const eventosClimaticos = [
-
-    {
-      dia: 14,
-      mes: 5,
-      ano: 2026,
-      nome: "Tempestade"
-    },
-
-    {
-      dia: 22,
-      mes: 5,
-      ano: 2026,
-      nome: "Onda de calor"
-    },
-
-    {
-      dia: 12,
-      mes: 4,
-      ano: 2026,
-      nome: "Granizo"
-    }
-
-  ];
+ 
+  //eventos climáticos
+  let eventosClimaticos = [];
 
   //obter qtd de dias do mes
 
@@ -659,6 +636,21 @@
   function renderizarHeatmap() {
 
     limparHeatmap();
+
+    const ordenacao = document.getElementById("filtroOrdenacao").value;
+
+servidores.sort(function(a, b) {
+      const incA = dadosApi.incidentes[a];
+      const incB = dadosApi.incidentes[b];
+      if (!incA || !incB) return 0;
+      if (ordenacao === "maiorQtd") return incB.TotalIncidentes.total_mes - incA.TotalIncidentes.total_mes;
+      if (ordenacao === "menorQtd") return incA.TotalIncidentes.total_mes - incB.TotalIncidentes.total_mes;
+      if (ordenacao === "ram") return incB.Componentes.ram.length - incA.Componentes.ram.length;
+      if (ordenacao === "cpu") return incB.Componentes.cpu.length - incA.Componentes.cpu.length;
+      if (ordenacao === "disco") return incB.Componentes.disco.length - incA.Componentes.disco.length;
+      return 0;
+  });
+
 
     const mesSelecionado = Number(filtroMes.value);
     const anoSelecionado = Number(filtroAno.value);
@@ -750,6 +742,12 @@
 
     }
 
+      // if (servidores.length === 0) {
+      // const msg = document.createElement("div");                                                   
+      // msg.style.cssText = "padding: 20px; color: #888; grid-column: 1 / -1;";
+      // msg.innerText = "Nenhum dado disponível para este período.";
+      // gridIncidentes.appendChild(msg);}
+
     //eventos climaticos
 
     gridEventos.style.gridTemplateColumns =
@@ -789,19 +787,89 @@
 
   }
 
+  async function carregarEventosClimaticos(mes, ano) {
+      const mesFormatado = String(mes).padStart(2, '0');
+      const totalDias = new Date(ano, mes, 0).getDate();
+      const dataInicio = `${ano}-${mesFormatado}-01`;
+      const dataFim = `${ano}-${mesFormatado}-${String(totalDias).padStart(2, '0')}`;
+
+      const url = `https://archive-api.open-meteo.com/v1/archive?latitude=-23.55&longitude=-46.63&start_date=${dataInicio}&end_date=${dataFim}&daily=weather_code,temperature_2m_max&timezone=America/Sao_Paulo`;
+
+      try {
+          const dados = await fetch(url).then(r => r.json());
+          eventosClimaticos = [];
+
+          dados.daily.time.forEach(function(data, i) {
+              const codigo = dados.daily.weather_code[i];
+              const tempMax = dados.daily.temperature_2m_max[i];
+              const [anoStr, mesStr, diaStr] = data.split('-');
+
+               let nome = null;
+               if (codigo >= 95)      nome = 'Tempestade';
+                else if (codigo >= 80) nome = 'Chuva Forte';
+                else if (codigo >= 61) nome = 'Chuva';
+                else if (codigo >= 51) nome = 'Garoa';
+                else if (tempMax >= 32) nome = 'Calor Intenso';
+
+              if (nome) eventosClimaticos.push({
+                  dia: Number(diaStr),
+                  mes: Number(mesStr),
+                  ano: Number(anoStr),
+                  nome
+              });
+          });
+      } catch (e) {
+          eventosClimaticos = [];
+      }
+  }
+
   //mudança dos filtros
+async function aplicarFiltroHeatmap() {
+      try {
+          await carregarDados();
+          if (dadosApi.incidentes) {
+              servidores = Object.keys(dadosApi.incidentes);
+          } else {
+              dadosApi.incidentes = {};
+          }
+      } catch (e) {
+          dadosApi = { incidentes: {}, metricas: {} };
+      }
 
-  filtroMes.addEventListener(
-    "change",
-    renderizarHeatmap
-  );
+      await carregarEventosClimaticos(Number(filtroMes.value), Number(filtroAno.value));
+      renderizarHeatmap();
+    }
 
-  filtroAno.addEventListener(
-    "change",
-    renderizarHeatmap
-  );
+  document.getElementById("filtroTabela").addEventListener("change",
+  filtrarTabelaIncidentesRecentes);
 
-  //renderizar heatmap e graficos
+    async function aplicarFiltroGraficos() {
+      const servidorAtual =
+  document.getElementById("filtroServidor").value;
+
+      await carregarDadosGraficos();
+      servidoresGraficos =
+  Object.keys(dadosApiGraficos.metricas);
+
+      servidoresGraficos.forEach(function(servidor, i) {
+          coresServidores[servidor] = paleta[i % paleta.length];
+      });
+
+      const selectServidor =
+  document.getElementById("filtroServidor");
+      selectServidor.innerHTML = '<option value="todos">Todos os servidores</option>' +
+          servidoresGraficos.map(s => `<option 
+  value="${s}">${s}</option>`).join("");
+
+      if (servidoresGraficos.includes(servidorAtual)) {
+          selectServidor.value = servidorAtual;
+      }
+
+      atualizarGraficos();
+  }
+
+
+  //renderizar tela
 
   let graficoCpu, graficoRam, graficoDisco;
 
@@ -809,16 +877,30 @@
     
     servidores = Object.keys(dadosApi.incidentes);
     servidoresGraficos = Object.keys(dadosApi.metricas);
+    dadosApiGraficos = dadosApi;
+
+    document.getElementById("filtroServidor").innerHTML =
+      '<option value="todos">Todos os servidores</option>' +
+      servidoresGraficos.map(s => `<option value="${s}">${s}</option>`).join("");
 
     servidoresGraficos.forEach(function(servidor, i){
       coresServidores[servidor] = paleta[i % paleta.length];
     });
 
-    renderizarHeatmap();
+     carregarEventosClimaticos(Number(filtroMes.value), Number(filtroAno.value)).then(function() {
+      renderizarHeatmap(); });
 
     graficoCpu = criarGrafico("graficoCpu", montarDatasets("cpu", "todos"), false, "bar");
     graficoRam = criarGrafico("graficoRam", montarDatasets("ram", "todos"), false, "bar");
     graficoDisco = criarGrafico("graficoDisco", montarDatasets("disco", "todos"), false, "bar");
+
+    carregarKpis();
+  });
+  
+  carregarTabelaIncidentes();
+
+   fetch("/jira/equipe").then(r => r.json()).then(function(equipe) {
+      carregarIncidentesSemResponsavel(equipe);
   });
 
 
@@ -851,9 +933,9 @@
 
   function obterPicosPorDia(metrica, servidorSelecionado) {
     const resultado = [];
-    const dadosServidor = dadosApi.metricas[servidorSelecionado];
-    const mes = Number(filtroMes.value);
-    const ano = Number(filtroAno.value);
+    const dadosServidor = dadosApiGraficos.metricas[servidorSelecionado];
+    const mes = Number(filtroMesGraficos.value);
+    const ano = Number(filtroAnoGraficos.value);
     const totalDias = new Date(ano, mes, 0).getDate();
 
       for (let dia = 1; dia <= totalDias; dia++) {
@@ -880,7 +962,7 @@
 
       for (let i = 0; i < servidoresGraficos.length; i++) {
         const servidor = servidoresGraficos[i];
-        const dadosServidor = dadosApi.metricas[servidor];
+        const dadosServidor = dadosApiGraficos.metricas[servidor];
 
         if (dadosServidor) {
           picos.push(dadosServidor.pico_mes[metrica] || 0);
@@ -946,17 +1028,12 @@
         responsive: true,
         maintainAspectRatio: false,
         indexAxis: tipo === "bar" ? "y" : "x",
-        scales: {
-          x: {
-            min: 0, max: 100, ticks: {
-              callback: function (v) {
-                return v +
-                  "%";
-              }
-            }
-          },
-          y: { grid: { display: false } }
-        },
+       scales: tipo === "bar" ? {
+          x: { min: 0, max: 100, ticks: { callback: v => v + "%" } },
+          y: { grid: { display: false } }} : {
+          x: { grid: { display: false } },
+          y: { min: 0, max: 100, ticks: { callback: v => v + "%" } }
+      },
         plugins: {
           legend: { display: mostrarLegenda }
         }
@@ -968,6 +1045,10 @@
   function atualizarGraficos() {
 
     const servidorSelecionado = document.getElementById("filtroServidor").value;
+          console.log("servidor:", servidorSelecionado);
+      console.log("datasets cpu:", montarDatasets("cpu",
+  servidorSelecionado));
+
     const tipo = servidorSelecionado === "todos" ? "bar" : "line";
     const mostrarLegenda = false;
 
@@ -984,7 +1065,5 @@
 
   }
 
-  document.getElementById("filtroServidor").addEventListener("change",
-    atualizarGraficos);
 
 </script>
