@@ -37,5 +37,10 @@
 
     // coloca na tela
     // var data = 
-    document.getElementById("dataSistema").innerHTML = dataFormatada + horaFormatada
+    // coloca na tela
+    const dataSistema = document.getElementById("dataSistema");
+
+    if (dataSistema) {
+      dataSistema.innerHTML = dataFormatada + horaFormatada;
+}[]
   })

@@ -28,6 +28,7 @@ var servidoresRouter = require("./src/routes/servidores");
 var processosRouter = require("./src/routes/processos");
 var incidentesHistoricosRouter = require("./src/routes/incidentesHistoricos")
 var slaEmpresaRouter = require("./src/routes/slaEmpresasRouter")
+var analiseCargaRouter = require("./src/routes/analiseCarga");
 
 
 app.use(express.json());
@@ -49,6 +50,7 @@ app.use("/s3", s3Router);
 app.use("/sla", slaEmpresaRouter);
 app.use("/jira", jiraRouter);
 app.use("/analisePreditiva", analisePreditivaRouter);
+app.use("/analise-carga", analiseCargaRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
