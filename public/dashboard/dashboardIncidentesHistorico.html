@@ -297,12 +297,11 @@
             <div>
               <label for="filtroOrdenacao">Ordenar por:</label>
               <select name="" id="filtroOrdenacao">
-                <option value="" selected>Mais recentes</option>
-                <option value="">Maior quantidade</option>
-                <option value="">Menor quantidade</option>
-                <option value="">RAM</option>
-                <option value="">CPU</option>
-                <option value="">Disco</option>
+                <option value="maiorQtd" selected>Maior Quantidade de Incidentes</option>
+                <option value="menorQtd">Menor Quantidade de Incidentes</option>
+                <option value="ram">Mais Incidentes de RAM</option>
+                <option value="cpu">Mais Incidentes de CPU</option>
+                <option value="disco">Mais Incidentes de Disco</option>
               </select>
             </div>
             <button onclick="aplicarFiltroHeatmap()">Aplicar Filtro</button>
@@ -660,6 +659,22 @@ function renderizarTabelaIncidentes(issues) {
 
     limparHeatmap();
 
+    const ordenacao = document.getElementById("filtroOrdenacao").value;
+
+servidores.sort(function(a, b) {
+      const incA = dadosApi.incidentes[a];
+      const incB = dadosApi.incidentes[b];
+      if (!incA || !incB) return 0;
+      if (ordenacao === "maiorQtd") return incB.TotalIncidentes.total_mes - incA.TotalIncidentes.total_mes;
+      if (ordenacao === "maiorQtd") return incB.TotalIncidentes.total_mes - incA.TotalIncidentes.total_mes;
+      if (ordenacao === "menorQtd") return incA.TotalIncidentes.total_mes - incB.TotalIncidentes.total_mes;
+      if (ordenacao === "ram") return incB.Componentes.ram.length - incA.Componentes.ram.length;
+      if (ordenacao === "cpu") return incB.Componentes.cpu.length - incA.Componentes.cpu.length;
+      if (ordenacao === "disco") return incB.Componentes.disco.length - incA.Componentes.disco.length;
+      return 0;
+  });
+
+
     const mesSelecionado = Number(filtroMes.value);
     const anoSelecionado = Number(filtroAno.value);
 
@@ -750,6 +765,12 @@ function renderizarTabelaIncidentes(issues) {
 
     }
 
+      // if (servidores.length === 0) {
+      // const msg = document.createElement("div");                                                   
+      // msg.style.cssText = "padding: 20px; color: #888; grid-column: 1 / -1;";
+      // msg.innerText = "Nenhum dado disponível para este período.";
+      // gridIncidentes.appendChild(msg);}
+
     //eventos climaticos
 
     gridEventos.style.gridTemplateColumns =
@@ -790,11 +811,19 @@ function renderizarTabelaIncidentes(issues) {
   }
 
   //mudança dos filtros
-      async function aplicarFiltroHeatmap() {
-      await carregarDados();
-      servidores = Object.keys(dadosApi.incidentes);
+async function aplicarFiltroHeatmap() {
+      try {
+          await carregarDados();
+          if (dadosApi.incidentes) {
+              servidores = Object.keys(dadosApi.incidentes);
+          } else {
+              dadosApi.incidentes = {};
+          }
+      } catch (e) {
+          dadosApi = { incidentes: {}, metricas: {} };
+      }
       renderizarHeatmap();
-  }
+    }
 
   document.getElementById("filtroTabela").addEventListener("change",
   filtrarTabelaIncidentesRecentes);
@@ -983,17 +1012,12 @@ function renderizarTabelaIncidentes(issues) {
         responsive: true,
         maintainAspectRatio: false,
         indexAxis: tipo === "bar" ? "y" : "x",
-        scales: {
-          x: {
-            min: 0, max: 100, ticks: {
-              callback: function (v) {
-                return v +
-                  "%";
-              }
-            }
-          },
-          y: { grid: { display: false } }
-        },
+       scales: tipo === "bar" ? {
+          x: { min: 0, max: 100, ticks: { callback: v => v + "%" } },
+          y: { grid: { display: false } }} : {
+          x: { grid: { display: false } },
+          y: { min: 0, max: 100, ticks: { callback: v => v + "%" } }
+      },
         plugins: {
           legend: { display: mostrarLegenda }
         }
