@@ -367,15 +367,10 @@
               </select>
               <label>Servidor</label>
               <select id="filtroServidor">
-                <option value="todos">Todos os servidores</option>
-                <option value="Server-CL-01">Server-CL-01</option>
-                <option value="Server-MB-01">Server-MB-01</option>
-                <option value="Server-AD-01">Server-AD-01</option>
-                <option value="Server-SM-01">Server-SM-01</option>
               </select>
 
             </div>
-            <button onclick="">Aplicar Filtro</button>
+            <button onclick="aplicarFiltroGraficos()">Aplicar Filtro</button>
           </div>
 
           <div class="graficos-uso">
@@ -429,6 +424,9 @@
   // filtros
   const filtroMes = document.getElementById("filtroMes");
   const filtroAno = document.getElementById("filtroAno");
+  const filtroMesGraficos = document.getElementById("filtroMesGraficos");
+  const filtroAnoGraficos = document.getElementById("filtroAnoGraficos");
+
 
   const headerDias = document.getElementById("cabecalhoDias");
   const gridIncidentes = document.getElementById("gridIncidentes");
@@ -436,6 +434,7 @@
 
   //buscar dados no backend
    let dadosApi = null;
+   let dadosApiGraficos = null;
 
    async function carregarDados() {
     const empresa = "empresaX";
@@ -499,24 +498,16 @@ function calcularTempoAberto(tempoAbertura) {
   }
 
 
-// async function carregarTabelaIncidentes(){
-//   const {issues = []} = await
-//   fetch("/jira/todosIncidentesAbertos").then(r => r.json);
-//       console.log("issues:", issues);
-//       console.log("tbody:", document.getElementById("tabelaIncidentes"));
-//   const tbody = document.getElementById("tabelaIncidentes");
-//   tbody.innerHTML = issues.map(({key, fields}) => {
-//     const atribuido = !!fields.assignee && fields.assignee.displayName.toLowerCase() !== "atmos";
-//     const status = atribuido ? "Em Andamento" : "Não Atribuído";
-//     const classe = atribuido ? "status-analise" : "status-naoAtribuido";
-//     return `<tr>
-//       <td>${fields.labels?.[0] ?? "—"}</td>
-//               <td><span>${key}</span></td>
-//               <td>${calcularTempoAberto(fields.created)}</td>
-//               <td><span class="status ${classe}">${status}</span></td>
-//           </tr>`;
-//   }).join("") || '<tr><td colspan="4">Nenhum incidente aberto</td></tr>';
-// }
+    async function carregarDadosGraficos() {
+      const empresa = "empresaX";
+      const mes = document.getElementById("filtroMesGraficos").value;
+      const ano = document.getElementById("filtroAnoGraficos").value;
+      const mesFormatado = String(mes).padStart(2, '0');
+      const arquivo = `client_${mesFormatado}_${ano}.json`;
+      const resposta = await fetch(`/incidentesHistoricos/listar?empresa=${
+  empresa}&arquivo=${arquivo}`);
+      dadosApiGraficos = await resposta.json();
+  }
 
 let todosChamados = [];
 
@@ -564,32 +555,6 @@ function renderizarTabelaIncidentes(issues) {
 
       renderizarTabelaIncidentes(filtrados);
   }
-
-
-
-  // async function carregarTabelaIncidentes() {
-  //     const { issues = [] } = await
-  // fetch("/jira/todosIncidentesAbertos").then(r => r.json());
-  //     const tbody = document.getElementById("tabelaIncidentes");
-
-  //     tbody.innerHTML = issues.map(({ key, fields, self }) => {
-  //           const linkChamado = new URL(self).origin + '/browse/' + key;
-  //           const chaveStatus = fields.status.statusCategory.key;
-  // const status = chaveStatus === "done" ? "Resolvido"
-  //              : chaveStatus === "indeterminate" ? "Em Andamento"
-  //              : "Não atribuído";
-  //  const classe = chaveStatus === "done" ? "status-ok"
-  //              : chaveStatus === "indeterminate" ? "status-analise"
-  //              : "status-naoAtribuido";
-
-  //         return `<tr>
-  //             <td>${fields.summary.split(' - ')[0]}</td>
-  //             <td><a href="${linkChamado}" target="_blank">${key}</a></td>
-  //             <td>${calcularTempoAberto(fields.created)}</td>
-  //             <td><span class="status ${classe}">${status}</span></td>
-  //         </tr>`;
-  //     }).join("") || '<tr><td colspan="4">Nenhum incidente aberto</td></tr>';
-  // }
 
    async function carregarIncidentesSemResponsavel(equipe) {
       const { issues = [] } = await
@@ -643,8 +608,6 @@ function renderizarTabelaIncidentes(issues) {
           alert("Erro ao atribuir. Tente novamente.");
       }
   }
-
-
 
   let servidores = [];
 
@@ -826,8 +789,6 @@ function renderizarTabelaIncidentes(issues) {
 
   }
 
-  
-
   //mudança dos filtros
       async function aplicarFiltroHeatmap() {
       await carregarDados();
@@ -838,6 +799,32 @@ function renderizarTabelaIncidentes(issues) {
   document.getElementById("filtroTabela").addEventListener("change",
   filtrarTabelaIncidentesRecentes);
 
+    async function aplicarFiltroGraficos() {
+      const servidorAtual =
+  document.getElementById("filtroServidor").value;
+
+      await carregarDadosGraficos();
+      servidoresGraficos =
+  Object.keys(dadosApiGraficos.metricas);
+
+      servidoresGraficos.forEach(function(servidor, i) {
+          coresServidores[servidor] = paleta[i % paleta.length];
+      });
+
+      const selectServidor =
+  document.getElementById("filtroServidor");
+      selectServidor.innerHTML = '<option value="todos">Todos os servidores</option>' +
+          servidoresGraficos.map(s => `<option 
+  value="${s}">${s}</option>`).join("");
+
+      if (servidoresGraficos.includes(servidorAtual)) {
+          selectServidor.value = servidorAtual;
+      }
+
+      atualizarGraficos();
+  }
+
+
   //renderizar tela
 
   let graficoCpu, graficoRam, graficoDisco;
@@ -846,6 +833,11 @@ function renderizarTabelaIncidentes(issues) {
     
     servidores = Object.keys(dadosApi.incidentes);
     servidoresGraficos = Object.keys(dadosApi.metricas);
+    dadosApiGraficos = dadosApi;
+
+    document.getElementById("filtroServidor").innerHTML =
+      '<option value="todos">Todos os servidores</option>' +
+      servidoresGraficos.map(s => `<option value="${s}">${s}</option>`).join("");
 
     servidoresGraficos.forEach(function(servidor, i){
       coresServidores[servidor] = paleta[i % paleta.length];
@@ -896,9 +888,9 @@ function renderizarTabelaIncidentes(issues) {
 
   function obterPicosPorDia(metrica, servidorSelecionado) {
     const resultado = [];
-    const dadosServidor = dadosApi.metricas[servidorSelecionado];
-    const mes = Number(filtroMes.value);
-    const ano = Number(filtroAno.value);
+    const dadosServidor = dadosApiGraficos.metricas[servidorSelecionado];
+    const mes = Number(filtroMesGraficos.value);
+    const ano = Number(filtroAnoGraficos.value);
     const totalDias = new Date(ano, mes, 0).getDate();
 
       for (let dia = 1; dia <= totalDias; dia++) {
@@ -925,7 +917,7 @@ function renderizarTabelaIncidentes(issues) {
 
       for (let i = 0; i < servidoresGraficos.length; i++) {
         const servidor = servidoresGraficos[i];
-        const dadosServidor = dadosApi.metricas[servidor];
+        const dadosServidor = dadosApiGraficos.metricas[servidor];
 
         if (dadosServidor) {
           picos.push(dadosServidor.pico_mes[metrica] || 0);
@@ -1013,6 +1005,10 @@ function renderizarTabelaIncidentes(issues) {
   function atualizarGraficos() {
 
     const servidorSelecionado = document.getElementById("filtroServidor").value;
+          console.log("servidor:", servidorSelecionado);
+      console.log("datasets cpu:", montarDatasets("cpu",
+  servidorSelecionado));
+
     const tipo = servidorSelecionado === "todos" ? "bar" : "line";
     const mostrarLegenda = false;
 
@@ -1029,7 +1025,5 @@ function renderizarTabelaIncidentes(issues) {
 
   }
 
-  document.getElementById("filtroServidor").addEventListener("change",
-    atualizarGraficos);
 
 </script>
