@@ -44,51 +44,16 @@
         <li class="nav-category">
           <span>PRINCIPAL</span>
         </li>
-        <li class="nav-item nav-item-active area-contribuidor">
-          <a href="./dashboardAtmos.html">
-            <img src="../assets/images/pc.svg" class="icon" alt="">
-            <span>Home</span>
-          </a>
-        </li>
         <li class="nav-item nav-item-active area-gestor">
           <a href="./dashboardAtmosGerente.html">
             <img src="../assets/images/pc.svg" class="icon" alt="">
             <span>Home</span>
           </a>
         </li>
-        <li class="nav-item area-contribuidor">
-          <a href="./dashboardAlertas.html">
+        <li class="nav-item area-gestor">
+          <a href="./dashboardIncidentesHistorico.html">
             <img src="../assets/images/alert.svg" class="icon" alt="">
-            <span>Alertas</span>
-          </a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardAlertasGerente.html">
-            <img src="../assets/images/alert.svg" class="icon" alt="">
-            <span>Alertas</span>
-          </a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardRelatorios.html">
-            <img src="../assets/images/documentos.svg" class="icon" alt="">
-            <span>Relatorios</span>
-          </a>
-        </li>
-      </ul>
-      <ul>
-        <li class="nav-category">
-          <span>INFRAESTRUTURA</span>
-        </li>
-        <li class="nav-item">
-          <a href="./dashboardServidor.html">
-            <img src="../assets/images/server.svg" class="icon" alt="">
-            <span>Servidores</span>
-          </a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardEquipe.html">
-            <img src="../assets/images/user.svg" class="icon" alt="">
-            <span>Equipe</span>
+            <span>Incidentes</span>
           </a>
         </li>
       </ul>
@@ -545,18 +510,28 @@
       menos1.setMonth(menos1.getMonth() - 1);
       menos2.setMonth(menos2.getMonth() - 2);
 
-      const nomeArquivo1 =
+      let nomeArquivo1 =
         `client_${String(menos2.getMonth() + 1).padStart(2, '0')}_${menos2.getFullYear()}.json`;
 
-      const nomeArquivo2 =
+      let nomeArquivo2 =
         `client_${String(menos1.getMonth()).padStart(2, '0')}_${menos1.getFullYear()}.json`;
 
-      const nomeArquivo3 =
+      let nomeArquivo3 =
         `client_${String(atual.getMonth() + 1).padStart(2, '0')}_${atual.getFullYear()}.json`;
 
-      // console.log("a:", nomeArquivo1)
-      // console.log("b:", nomeArquivo2)
-      // console.log("c:", nomeArquivo3)
+      nomeArquivo1 =
+        `client_03_${menos2.getFullYear()}.json`;
+
+      nomeArquivo2 =
+        `client_04_${menos1.getFullYear()}.json`;
+
+      nomeArquivo3 =
+        `client_05_${atual.getFullYear()}.json`;
+        
+
+      console.log("a:", nomeArquivo1)
+      console.log("b:", nomeArquivo2)
+      console.log("c:", nomeArquivo3)
 
       const respostas = await Promise.all([
         fetch(`http://localhost:3333/incidentesHistoricos/listar?arquivo=${nomeArquivo1}&empresa=${empresa}`),
@@ -830,15 +805,23 @@
       "rgb(255, 88, 88)",
 
     ]
+      console.log(equipe[0])
     for (var i = 0; i < equipe.length; i++) {
       var cor = ""
-      if (equipe[i].qtdIncidentes * 100 / qtdChamados <= 25) {
+      var porcentagem = ""
+      if (equipe[i].qtdIncidentes == 0 ){
+        porcentagem = 0;
+      }else if(equipe[i].qtdIncidentes * 100 / qtdChamados <= 25 || equipe[i].qtdIncidentes <= 1 ) {
+        porcentagem = equipe[i].qtdIncidentes * 100 / qtdChamados;
         cor = listaCores[0]
       } else if (equipe[i].qtdIncidentes * 100 / qtdChamados <= 50) {
+        porcentagem = equipe[i].qtdIncidentes * 100 / qtdChamados;
         cor = listaCores[1]
       } else if (equipe[i].qtdIncidentes * 100 / qtdChamados <= 75) {
+        porcentagem = equipe[i].qtdIncidentes * 100 / qtdChamados;
         cor = listaCores[2]
       } else {
+        porcentagem = equipe[i].qtdIncidentes * 100 / qtdChamados;
         cor = listaCores[3]
       }
       lista += `
@@ -853,7 +836,7 @@
               </div>
               <div class="separacao">
                 <div class="barra">
-                  <div class="preenchimento" style="width: ${equipe[i].qtdIncidentes * 100 / qtdChamados}%; background-color: ${cor};"></div>
+                  <div class="preenchimento" style="width: ${porcentagem}%; background-color: ${cor};"></div>
                 </div>
               </div>
             </div>
@@ -868,7 +851,9 @@
   async function tempoMedio() {
     var dados = await buscarTempoResolucao();
     var sla = await buscarSla();
-    var incidentes = await dados.issues
+    
+    if(dados.issues.length != 0){
+      var incidentes = await dados.issues
     var tempoTotal = 0
 
     var cores = [
@@ -903,12 +888,17 @@
     }
     document.getElementById("kpi_tempo_medio_resolucao").innerHTML = mensagemTempo
     document.getElementById("kpi_tempo_medio_resolucao_ancora").innerHTML = ancora
+    }else{
+      document.getElementById("kpi_tempo_medio_resolucao").innerHTML = "--"
+      document.getElementById("kpi_tempo_medio_resolucao_ancora").innerHTML = "Sem tempo registrado "
+    }
   }
 
   function listarIncidentesSemResponsavel(incidentes) {
     // console.log(incidentes[0])
     var lista = ""
-    for (var i = 0; i < incidentes.length; i++) {
+    if(incidentes.length != 0){
+      for (var i = 0; i < incidentes.length; i++) {
       lista += `
              <div class="card-incidente">
               <div class="status"></div>
@@ -919,6 +909,16 @@
               <div class="tempo">
                 <p class="t-tempo-incidente">${incidentes[i].mensagemTempo}</p>
                 ${incidentes[i].etiqueta}
+              </div>
+            </div>
+            `
+    }
+    }else{
+       lista += `
+             <div class="card-incidente">
+              <div class="status"></div>
+              <div class="infos">
+                <p class="titulo">Sem Incidentes</p>
               </div>
             </div>
             `
