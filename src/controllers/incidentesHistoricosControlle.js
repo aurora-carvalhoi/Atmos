@@ -30,7 +30,7 @@ async function incidentesHistoricos(req, res) {
 
     const dados =
       await s3Service.buscarJson(
-        process.env.BUCKET_NAME,
+        process.env.bucket_name,
         key
       );
 
