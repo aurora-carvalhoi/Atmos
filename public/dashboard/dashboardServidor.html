@@ -15,7 +15,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
   <script src="../assets/javascript/erros.js"></script>
 </head>
-
+<script>
+  window.onload(sessionStorage.NOME_SERVIDOR = null)
+</script>
 <body>
   <!-- SIDEBAR -->
   <nav class="sidebar" id="siderbar">
@@ -446,6 +448,8 @@
 </script>
 
 <script>
+
+window.servidorSelecionado = 0
 function fecharModal(tipoModal) {
   const modal = document.getElementsByClassName("fundoModal")
   modal[tipoModal].style.display = 'none';
@@ -489,7 +493,7 @@ function cadastrarServidor() {
 }
 
 function redirecionar() {
-  mostrarErroDash("Funcionalidade em desenvolvimento.");
+  window.location.href("/dashboardRelatorios.html")
 }
 
 // Faixa de alertas toggle
@@ -608,16 +612,8 @@ btnVerMais.addEventListener('click', () => {
   btnVerMais.textContent = mostrandoMais ? 'Ver menos' : 'Ver mais';
 });
 
-function selecionarServidor(elementoLinha, idServidor) {
-  const todasLinhas = document.querySelectorAll('#tabela_lista_servidor tr')
-  todasLinhas.forEach(function (linha) {
-    linha.classList.remove('tr-selecionada')
-  })
-  elementoLinha.classList.add('tr-selecionada')
-  sessionStorage.setItem(
-    "servidorSelecionado",
-    idServidor
-  )
-  detalhesServidor(idServidor)
+function redirecionar() {
+  window.location.href =
+    `./dashboardAnalisePreditiva.html?id=${window.servidorSelecionado}`
 }
 </script>

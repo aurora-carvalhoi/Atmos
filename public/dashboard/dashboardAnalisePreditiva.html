@@ -196,7 +196,7 @@
 
           <div class="campo-servidor">
             <h1 class="campo-rotulo">Servidor:</h1>
-            <div class="campo-valor" id="nome-servidor">SRV-METEOROLOGIA-01</div>
+            <div class="campo-valor" id="nome_servidor">SRV-METEOROLOGIA-01</div>
           </div>
 
           <div class="campo-servidor">
@@ -338,6 +338,10 @@
 <script src="../assets/javascript/sessao.js"></script>
 
 <script>
+  const params = new URLSearchParams(window.location.search)
+  const idServidor = params.get("id")
+  console.log(idServidor)
+  nome_servidor.innerHTML = sessionStorage.NOME_SERVIDOR.toUpperCase()
   usuarionome.innerHTML = sessionStorage.NOME_USUARIO
   usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
 
