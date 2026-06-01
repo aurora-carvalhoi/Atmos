@@ -609,31 +609,9 @@ function renderizarTabelaIncidentes(issues) {
   }
 
   let servidores = [];
-
-  const eventosClimaticos = [
-
-    {
-      dia: 14,
-      mes: 5,
-      ano: 2026,
-      nome: "Tempestade"
-    },
-
-    {
-      dia: 22,
-      mes: 5,
-      ano: 2026,
-      nome: "Onda de calor"
-    },
-
-    {
-      dia: 12,
-      mes: 4,
-      ano: 2026,
-      nome: "Granizo"
-    }
-
-  ];
+ 
+  //eventos climáticos
+  let eventosClimaticos = [];
 
   //obter qtd de dias do mes
 
@@ -665,7 +643,6 @@ servidores.sort(function(a, b) {
       const incA = dadosApi.incidentes[a];
       const incB = dadosApi.incidentes[b];
       if (!incA || !incB) return 0;
-      if (ordenacao === "maiorQtd") return incB.TotalIncidentes.total_mes - incA.TotalIncidentes.total_mes;
       if (ordenacao === "maiorQtd") return incB.TotalIncidentes.total_mes - incA.TotalIncidentes.total_mes;
       if (ordenacao === "menorQtd") return incA.TotalIncidentes.total_mes - incB.TotalIncidentes.total_mes;
       if (ordenacao === "ram") return incB.Componentes.ram.length - incA.Componentes.ram.length;
@@ -810,6 +787,42 @@ servidores.sort(function(a, b) {
 
   }
 
+  async function carregarEventosClimaticos(mes, ano) {
+      const mesFormatado = String(mes).padStart(2, '0');
+      const totalDias = new Date(ano, mes, 0).getDate();
+      const dataInicio = `${ano}-${mesFormatado}-01`;
+      const dataFim = `${ano}-${mesFormatado}-${String(totalDias).padStart(2, '0')}`;
+
+      const url = `https://archive-api.open-meteo.com/v1/archive?latitude=-23.55&longitude=-46.63&start_date=${dataInicio}&end_date=${dataFim}&daily=weather_code,temperature_2m_max&timezone=America/Sao_Paulo`;
+
+      try {
+          const dados = await fetch(url).then(r => r.json());
+          eventosClimaticos = [];
+
+          dados.daily.time.forEach(function(data, i) {
+              const codigo = dados.daily.weather_code[i];
+              const tempMax = dados.daily.temperature_2m_max[i];
+              const [anoStr, mesStr, diaStr] = data.split('-');
+
+               let nome = null;
+               if (codigo >= 95)      nome = 'Tempestade';
+                else if (codigo >= 80) nome = 'Chuva Forte';
+                else if (codigo >= 61) nome = 'Chuva';
+                else if (codigo >= 51) nome = 'Garoa';
+                else if (tempMax >= 32) nome = 'Calor Intenso';
+
+              if (nome) eventosClimaticos.push({
+                  dia: Number(diaStr),
+                  mes: Number(mesStr),
+                  ano: Number(anoStr),
+                  nome
+              });
+          });
+      } catch (e) {
+          eventosClimaticos = [];
+      }
+  }
+
   //mudança dos filtros
 async function aplicarFiltroHeatmap() {
       try {
@@ -822,6 +835,8 @@ async function aplicarFiltroHeatmap() {
       } catch (e) {
           dadosApi = { incidentes: {}, metricas: {} };
       }
+
+      await carregarEventosClimaticos(Number(filtroMes.value), Number(filtroAno.value));
       renderizarHeatmap();
     }
 
@@ -872,7 +887,8 @@ async function aplicarFiltroHeatmap() {
       coresServidores[servidor] = paleta[i % paleta.length];
     });
 
-    renderizarHeatmap();
+     carregarEventosClimaticos(Number(filtroMes.value), Number(filtroAno.value)).then(function() {
+      renderizarHeatmap(); });
 
     graficoCpu = criarGrafico("graficoCpu", montarDatasets("cpu", "todos"), false, "bar");
     graficoRam = criarGrafico("graficoRam", montarDatasets("ram", "todos"), false, "bar");
