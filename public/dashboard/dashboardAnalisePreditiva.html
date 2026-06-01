@@ -196,7 +196,7 @@
 
           <div class="campo-servidor">
             <h1 class="campo-rotulo">Servidor:</h1>
-            <div class="campo-valor" id="nome_servidor">SRV-METEOROLOGIA-01</div>
+            <div class="campo-valor" id="nomeServidor">SRV-METEOROLOGIA-01</div>
           </div>
 
           <div class="campo-servidor">
@@ -338,10 +338,7 @@
 <script src="../assets/javascript/sessao.js"></script>
 
 <script>
-  const params = new URLSearchParams(window.location.search)
-  const idServidor = params.get("id")
-  console.log(idServidor)
-  nome_servidor.innerHTML = sessionStorage.NOME_SERVIDOR.toUpperCase()
+  nomeServidor.innerHTML = sessionStorage.NOME_SERVIDOR.toUpperCase()
   usuarionome.innerHTML = sessionStorage.NOME_USUARIO
   usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
 
@@ -367,6 +364,8 @@
 </script>
 
 <script>
+  const params = new URLSearchParams(window.location.search)
+  const idServidor = params.get("id")
 
   const RECOMENDACOES = {
 
@@ -579,26 +578,26 @@
 
     const pontosReais = [];
 
-    for (let i = 0; i < dados.grafico.length; i++) {
+    for (let i = 0; i < dados.hosts[idServidor].grafico.length; i++) {
 
       pontosReais.push({
 
-        x: dados.grafico[i].cpu,
+        x: dados.hosts[idServidor].grafico[i].cpu,
 
-        y: dados.grafico[i].temperatura
+        y: dados.hosts[idServidor].grafico[i].temperatura
       });
     }
 
 
     const pontosRegressao = [];
 
-    for (let i = 0; i < dados.regressao.length; i++) {
+    for (let i = 0; i < dados.hosts[idServidor].regressao.length; i++) {
 
       pontosRegressao.push({
 
-        x: dados.regressao[i].x,
+        x: dados.hosts[idServidor].regressao[i].x,
 
-        y: dados.regressao[i].y
+        y: dados.hosts[idServidor].regressao[i].y
       });
     }
 
@@ -656,19 +655,19 @@
 
 const pontos = [];
 
-for (let i = 0; i < dados.grafico.length; i++) {
+for (let i = 0; i < dados.hosts[idServidor].grafico.length; i++) {
 
   pontos.push({
-    timestamp: dados.grafico[i].timestamp,
-    atual: dados.grafico[i].temperatura,
+    timestamp: dados.hosts[idServidor].grafico[i].timestamp,
+    atual: dados.hosts[idServidor].grafico[i].temperatura,
     prevista: null
   });
 
 }
 
-for (let i = 0; i < dados.previsoes.length; i++) {
+for (let i = 0; i < dados.hosts[idServidor].previsoes.length; i++) {
 
-  const p = dados.previsoes[i];
+  const p = dados.hosts[idServidor].previsoes[i];
 
   let achou = false;
 
@@ -751,13 +750,13 @@ new Chart(
 );
 
     const ultimaAtual =
-      dados.grafico[
-        dados.grafico.length - 1
+      dados.hosts[idServidor].grafico[
+        dados.hosts[idServidor].grafico.length - 1
       ].temperatura;
 
     const ultimaPrevista =
-      dados.previsoes[
-        dados.previsoes.length - 1
+      dados.hosts[idServidor].previsoes[
+        dados.hosts[idServidor].previsoes.length - 1
       ].temperaturaPrevista;
 
     const variacaoPrevista =
@@ -858,8 +857,6 @@ else {
       const resposta = await fetch(`/analisepreditiva/listar?empresa=${empresa}`);
 
       const dados = await resposta.json();
-
-      console.log(dados);
 
       renderizar(dados);
 
