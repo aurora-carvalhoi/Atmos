@@ -778,84 +778,67 @@ new Chart(
         "icone-desvio"
       );
 
-if (status === "CRITICO" && variacaoPrevista <= 0) {
+if (k.status === "CRITICO" && variacaoPrevista <= 0) {
   blocoDesvio.className = "mini-interpretacao critico";
   iconeDesvio.textContent = "⚠";
   textoDesvio.innerHTML = `
     Temperatura crítica mantida.
-
     Sem tendência de resfriamento significativo.
   `;
-} else if (status === "ALERTA" && variacaoPrevista <= 0) {
+} else if (k.status === "ALERTA" && variacaoPrevista <= 0) {
   blocoDesvio.className = "mini-interpretacao alerta";
   iconeDesvio.textContent = "⚠";
   textoDesvio.innerHTML = `
     Temperatura em nível de alerta.
-    
     Sem tendência de resfriamento significativo.
   `;
-} else if(variacaoPrevista >= 10) {
-
-  blocoDesvio.className =
-    "mini-interpretacao critico";
-
+} else if (variacaoPrevista >= 10) {
+  blocoDesvio.className = "mini-interpretacao critico";
   iconeDesvio.textContent = "⚠";
-
   textoDesvio.innerHTML = `
     Forte tendência de aquecimento.
-
     A temperatura pode subir
     <strong>${variacaoPrevista.toFixed(1)}°C</strong>
     na próxima hora.
   `;
-
-}
-else if (variacaoPrevista >= 5) {
-
-  blocoDesvio.className =
-    "mini-interpretacao alerta";
-
+} else if (variacaoPrevista >= 5) {
+  blocoDesvio.className = "mini-interpretacao alerta";
   iconeDesvio.textContent = "⚠";
-
   textoDesvio.innerHTML = `
     Tendência de aquecimento.
-
     A temperatura pode subir
     <strong>${variacaoPrevista.toFixed(1)}°C</strong>
     na próxima hora.
   `;
-
-}
-
-else if (variacaoPrevista > 0) {
-
-  blocoDesvio.className =
-    "mini-interpretacao atencao";
-
+} else if (variacaoPrevista > 0) {
+  blocoDesvio.className = "mini-interpretacao atencao";
   iconeDesvio.textContent = "ℹ";
-
   textoDesvio.innerHTML = `
     Pequeno aumento previsto.
-
     A temperatura pode subir
     <strong>${variacaoPrevista.toFixed(1)}°C</strong>
     na próxima hora.
   `;
-
-}
-
-else {
-
-  blocoDesvio.className =
-    "mini-interpretacao normal";
-
-  iconeDesvio.textContent = "✔";
-
+} else if (k.status === "CRITICO") {
+  blocoDesvio.className = "mini-interpretacao critico";
+  iconeDesvio.textContent = "⚠";
   textoDesvio.innerHTML = `
-    Temperatura estável
-    ou em resfriamento.
+    Temperatura crítica.
+    Pequeno resfriamento previsto mas ainda em nível crítico.
   `;
-
+} else if (k.status === "ALERTA") {
+  blocoDesvio.className = "mini-interpretacao alerta";
+  iconeDesvio.textContent = "⚠";
+  textoDesvio.innerHTML = `
+    Temperatura em alerta.
+    Pequeno resfriamento previsto mas ainda em nível de alerta.
+  `;
+} else {
+  blocoDesvio.className = "mini-interpretacao normal";
+  iconeDesvio.textContent = "✔";
+  textoDesvio.innerHTML = `
+    Temperatura estável ou em resfriamento.
+  `;
 }
 
   }
