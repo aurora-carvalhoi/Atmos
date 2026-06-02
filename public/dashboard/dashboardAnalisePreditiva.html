@@ -443,6 +443,11 @@
     return "status-normal";
   }
 
+  function classeTemperatura(temp) {
+  if (temp >= 85) return "status-critico";
+  if (temp >= 70) return "status-alerta";
+  return "status-normal";
+}
 
   function renderizar(dados) {
 
@@ -463,11 +468,19 @@
       + k.status;
 
 
-
     document.getElementById(
       "cartao-temp-atual"
     ).className =
       "cartao-kpi " + classe;
+
+
+   document.getElementById(
+    "cartao-temp-atual"
+  ).className = "cartao-kpi " + classeTemperatura(k.temperaturaAtual);
+
+   document.getElementById(
+    "cartao-temp-prev"
+  ).className = "cartao-kpi " + classeTemperatura(k.temperaturaPrevista);
 
     document.getElementById(
       "valor-temp-atual"
