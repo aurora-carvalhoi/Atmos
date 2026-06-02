@@ -39,7 +39,7 @@
       </a>
     </div>
 
- <ul class="nav-links">
+    <ul class="nav-links">
       <ul>
         <li class="nav-category">
           <span>PRINCIPAL</span>
@@ -58,7 +58,7 @@
         </li>
       </ul>
     </ul>
-  
+
 
     <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
       <div class="img-user" id="usarioimagem">
@@ -162,33 +162,32 @@
         <p>Total de Incidentes</p>
         <H1 id="kpiTotal"></H1>
         <div class="informativo-kpi">
-          <p>Maio</p>
-          <p>2026</p>
+          <p id="kpiPeriodo"></p>
           <p>|</p>
-          <p>+2 do que no mês anterior</p>
+          <p id="kpiComparacao"></p>
         </div>
       </div>
       <div class="kpi">
         <p>Resolvidos</p>
         <H1 id="kpiResolvidos"></H1>
         <div class="informativo-kpi">
-          <p id="porcentagemResolvidos">--% resolvidos</p>
+          <p id="porcentagemResolvidos"></p>
           <p>|</p>
-          <P id="kpiTMR">TMR: --</P>
+          <P id="kpiTMR"></P>
         </div>
       </div>
       <div class="kpi">
         <p>Em andamento</p>
         <H1 id="kpiAndamento"></H1>
         <div class="informativo-kpi">
-          <p>0% do total</p>
+          <p id="porcentagemAndamento"></p>
         </div>
       </div>
       <div class="kpi">
         <p>Incidentes sem Responsável</p>
         <H1 id="kpiSemResponsavel"></H1>
         <div class="informativo-kpi">
-          <p>Último incidente há: 10 minutos</p>
+          <p id="ultimoIncidenteAberto"></p>
         </div>
       </div>
     </div>
@@ -208,7 +207,7 @@
             </div>
 
             <select id="filtroTabela" class="filtro-incidentes">
-              <option value="andamento" >
+              <option value="andamento">
                 Em Andamento
               </option>
               <option value="recentes" selected>
@@ -243,7 +242,7 @@
         <div class="atribuicao-funcionario">
           <h4>Incidentes Recentes Sem Responsável</h4>
           <div id="cardsAtribuicao">
-            </div>
+          </div>
         </div>
       </div>
 
@@ -355,7 +354,7 @@
             <div class="grafico-uso">
               <div class="titulo-grafico">
                 <h4>CPU (%)</h4>
-                <span>Estável →</span>
+                <span id="tendenciaCpu"></span>
               </div>
               <canvas id="graficoCpu"></canvas>
             </div>
@@ -363,7 +362,7 @@
             <div class="grafico-uso">
               <div class="titulo-grafico">
                 <h4>RAM (%)</h4>
-                <span class="alerta">+8% ao mês ↑</span>
+                <span id="tendenciaRam"></span>
               </div>
               <canvas id="graficoRam"></canvas>
             </div>
@@ -371,7 +370,7 @@
             <div class="grafico-uso">
               <div class="titulo-grafico">
                 <h4>Disco (%)</h4>
-                <span class="alerta">+4% ao mês ↑</span>
+                <span id="tendenciaDisco"></span>
               </div>
               <canvas id="graficoDisco"></canvas>
             </div>
@@ -393,9 +392,6 @@
 <script src="../assets/javascript/menu.js"></script>
 <script src="../assets/javascript/sessao.js"></script>
 
-<!-- clima tempo -->
-<script src="../assets/javascript/climaTempo.js"></script>
-
 <script>
 
   // filtros
@@ -410,23 +406,23 @@
   const gridEventos = document.getElementById("eventosGrid");
 
   //buscar dados no backend
-   let dadosApi = null;
-   let dadosApiGraficos = null;
+  let dadosApi = null;
+  let dadosApiGraficos = null;
 
-   async function carregarDados() {
+  async function carregarDados() {
     const empresa = "empresaX";
     const mes = filtroMes.value;
     const ano = filtroAno.value;
     const mesFormatado = String(mes).padStart(2, '0');
-    const arquivo      = `client_${mesFormatado}_${ano}.json`;
+    const arquivo = `client_${mesFormatado}_${ano}.json`;
 
-    const resposta = await 
-    fetch(`/incidentesHistoricos/listar?empresa=${empresa}&arquivo=${arquivo}`);
+    const resposta = await
+      fetch(`/incidentesHistoricos/listar?empresa=${empresa}&arquivo=${arquivo}`);
 
     dadosApi = await resposta.json()
-   }
+  }
 
-   async function carregarKpis(){
+  async function carregarKpis() {
     const [resResolvidos, resAndamento, resSemResp] = await Promise.all([
       fetch("/jira/buscarTempoResolucao"),
       fetch("/jira/distribuicaoPorContribuidor"),
@@ -437,123 +433,211 @@
     const andamento = await resAndamento.json();
     const semResp = await resSemResp.json();
 
-    const qtdResolvidos = resolvidos.issues.length;
-    const qtdAndamento = andamento.issues.length;
-    const qtdSemResp = semResp.issues.length;
+    const mes = new Date().getMonth() + 1;
+    const ano = new Date().getFullYear();
+
+
+    function filtrarPorMes(issues, campo = 'created') {
+      return issues.filter(function (issue) {
+        const data = new Date(issue.fields[campo]);
+        return data.getMonth() + 1 === mes && data.getFullYear() === ano;
+      });
+    }
+
+    const resolvidosDoMes = filtrarPorMes(resolvidos.issues, 'resolutiondate');
+
+
+    const qtdResolvidos = resolvidosDoMes.length;
+    const qtdAndamento = andamento.issues.length;   // sem filtro
+    const qtdSemResp = semResp.issues.length;     // sem filtro
     const qtdTotal = qtdResolvidos + qtdAndamento + qtdSemResp;
 
-    document.getElementById("kpiTotal").innerText = qtdTotal;
+
+
     document.getElementById("kpiResolvidos").innerText = qtdResolvidos;
     document.getElementById("kpiAndamento").innerText = qtdAndamento;
     document.getElementById("kpiSemResponsavel").innerText = qtdSemResp;
 
-    if(qtdResolvidos > 0){
+    const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    document.getElementById("kpiPeriodo").innerText =
+      `${meses[new Date().getMonth()]} ${new Date().getFullYear()}`;
+
+    const percResolvidos = qtdTotal > 0 ? Math.round(qtdResolvidos / qtdTotal *
+      100) : 0;
+    document.getElementById("porcentagemResolvidos").innerText =
+      `${percResolvidos}% resolvidos`;
+
+    const percAndamento = qtdTotal > 0 ? Math.round(qtdAndamento / qtdTotal * 100)
+      : 0;
+    document.getElementById("porcentagemAndamento").innerText = `${percAndamento}% do total`;
+
+    if (semResp.issues.length > 0) {
+      const maisRecente = semResp.issues.reduce(function (acc, issue) {
+        return new Date(issue.fields.created) > new Date(acc.fields.created) ?
+          issue : acc;
+      });
+      document.getElementById("ultimoIncidenteAberto").innerText =
+        `Último incidente há: ${calcularTempoAberto(maisRecente.fields.created)}`;
+    } else {
+      document.getElementById("ultimoIncidenteAberto").innerText = "Nenhum incidente aberto";
+    }
+
+
+
+    if (resolvidos.issues.length > 0) {
       let totalMinutos = 0;
 
-      resolvidos.issues.forEach(function(issue){
+      resolvidos.issues.forEach(function (issue) {
         const criado = new Date(issue.fields.created);
         const resolvido = new Date(issue.fields.resolutiondate);
         const qtdMinutos = (resolvido - criado) / 1000 / 60;
         totalMinutos += qtdMinutos;
       });
 
-      const mediaMinutos = Math.round(totalMinutos / qtdResolvidos);
+      const mediaMinutos = Math.round(totalMinutos / resolvidos.issues.length);
       const horas = Math.floor(mediaMinutos / 60);
       const minutos = mediaMinutos % 60;
 
-      document.getElementById("kpiTMR").innerText = 
-      `TMR: ${horas}h${String(minutos).padStart(2,'0')}min`
-    }}
-
-
-function calcularTempoAberto(tempoAbertura) {
-      const difTempo = Math.floor((new Date() - new Date(tempoAbertura)) /
-  60000);
-      if (difTempo < 60) return `${difTempo}min`;
-      if (difTempo < 1440) return `${Math.floor(difTempo / 60)}h`;
-      return `${Math.floor(difTempo / 1440)}d`;
+      document.getElementById("kpiTMR").innerText =
+        `TMR: ${horas}h${String(minutos).padStart(2, '0')}min`
+    }
   }
 
 
-    async function carregarDadosGraficos() {
-      const empresa = "empresaX";
-      const mes = document.getElementById("filtroMesGraficos").value;
-      const ano = document.getElementById("filtroAnoGraficos").value;
-      const mesFormatado = String(mes).padStart(2, '0');
-      const arquivo = `client_${mesFormatado}_${ano}.json`;
-      const resposta = await fetch(`/incidentesHistoricos/listar?empresa=${
-  empresa}&arquivo=${arquivo}`);
-      dadosApiGraficos = await resposta.json();
+  async function carregarTotalEComparacao() {
+    const mes = new Date().getMonth() + 1;
+    const ano = new Date().getFullYear();
+    const mesFormatado = String(mes).padStart(2, '0');
+
+    try {
+      const respostaAtual = await fetch(
+        `/incidentesHistoricos/listar?empresa=empresaX&arquivo=client_${mesFormatado}_${ano}.json`
+      );
+      const dadosMesAtual = await respostaAtual.json();
+      const totalAtual = Object.values(dadosMesAtual.incidentes)
+        .reduce((soma, servidor) => soma + servidor.TotalIncidentes.total_mes,
+          0);
+
+      document.getElementById("kpiTotal").innerText = totalAtual;
+
+      const mesPrev = mes === 1 ? 12 : mes - 1;
+      const anoPrev = mes === 1 ? ano - 1 : ano;
+      const mesPrevFmt = String(mesPrev).padStart(2, '0');
+
+      const respostaAnterior = await fetch(
+        `/incidentesHistoricos/listar?empresa=empresaX&arquivo=client_${mesPrevFmt}_${anoPrev}.json`
+      );
+      const dadosMesAnterior = await respostaAnterior.json();
+      const totalAnterior = Object.values(dadosMesAnterior.incidentes).reduce((soma, servidor) => soma + servidor.TotalIncidentes.total_mes, 0);
+
+      const diff = totalAtual - totalAnterior;
+      document.getElementById("kpiComparacao").innerText =
+        diff >= 0 ? `+${diff} do que no mês anterior` : `${diff} do que no mês anterior`;
+
+    } catch {
+      document.getElementById("kpiComparacao").innerText = "Sem dados";
+      document.getElementById("kpiTotal").innerText = 0;
+      document.getElementById("kpiComparacao").innerText = "Sem dados";
+
+    }
   }
 
-let todosChamados = [];
 
-function renderizarTabelaIncidentes(issues) {
-      const tbody = document.getElementById("tabelaIncidentes");
 
-      tbody.innerHTML = issues.map(({ key, fields, self }) => {
-          const chaveStatus = fields.status.statusCategory.key;
-          const status = chaveStatus === "done" ? "Resolvido"
-                       : chaveStatus === "indeterminate" ? "Em Andamento"
-                       : "Não atribuído";
-          const classe = chaveStatus === "done" ? "status-ok"
-                       : chaveStatus === "indeterminate" ? "status-analise"
-                       : "status-naoAtribuido";
-          const browseUrl = new URL(self).origin + '/browse/' + key;
-          return `<tr>
+
+
+
+  function calcularTempoAberto(tempoAbertura) {
+    const difTempo = Math.floor((new Date() - new Date(tempoAbertura)) /
+      60000);
+    if (difTempo < 60) return `${difTempo}min`;
+    if (difTempo < 1440) return `${Math.floor(difTempo / 60)}h`;
+    return `${Math.floor(difTempo / 1440)}d`;
+  }
+
+
+  async function carregarDadosGraficos() {
+    const empresa = "empresaX";
+    const mes = document.getElementById("filtroMesGraficos").value;
+    const ano = document.getElementById("filtroAnoGraficos").value;
+    const mesFormatado = String(mes).padStart(2, '0');
+    const arquivo = `client_${mesFormatado}_${ano}.json`;
+    const resposta = await fetch(`/incidentesHistoricos/listar?empresa=${empresa}&arquivo=${arquivo}`);
+    dadosApiGraficos = await resposta.json();
+  }
+
+  let todosChamados = [];
+
+  function renderizarTabelaIncidentes(issues) {
+    const tbody = document.getElementById("tabelaIncidentes");
+
+    tbody.innerHTML = issues.map(({ key, fields, self }) => {
+      const chaveStatus = fields.status.statusCategory.key;
+      const status = chaveStatus === "done" ? "Resolvido"
+        : chaveStatus === "indeterminate" ? "Em Andamento"
+          : "Não atribuído";
+      const classe = chaveStatus === "done" ? "status-ok"
+        : chaveStatus === "indeterminate" ? "status-analise"
+          : "status-naoAtribuido";
+      const browseUrl = new URL(self).origin + '/browse/' + key;
+      return `<tr>
               <td>${fields.summary.split(' - ')[0]}</td>
               <td><a href="${browseUrl}" target="_blank">${key}</a></td>
               <td>${calcularTempoAberto(fields.created)}</td>
               <td><span class="status ${classe}">${status}</span></td>
           </tr>`;
-      }).join("") || '<tr><td colspan="4">Nenhum incidente encontrado</td></tr>';
+    }).join("") || '<tr><td colspan="4">Nenhum incidente encontrado</td></tr>';
   }
 
-    async function carregarTabelaIncidentes() {
-      const { issues = [] } = await
-  fetch("/jira/todosIncidentesAbertos").then(r => r.json());
-      todosChamados = issues;
-      filtrarTabelaIncidentesRecentes();
+  async function carregarTabelaIncidentes() {
+    const { issues = [] } = await
+      fetch("/jira/todosIncidentesAbertos").then(r => r.json());
+    todosChamados = issues;
+    filtrarTabelaIncidentesRecentes();
   }
 
   function filtrarTabelaIncidentesRecentes() {
-      const filtro = document.getElementById("filtroTabela").value;
+    const filtro = document.getElementById("filtroTabela").value;
 
-      const filtrados = todosChamados.filter(({ fields }) => {
-          const chave = fields.status.statusCategory.key;
-          const semResponsavel = !fields.assignee ||
-  fields.assignee.displayName.toLowerCase() === "atmos";
-          const slaRisco = (new Date() - new Date(fields.created)) / 3600000 > 12;
-          if (filtro === "andamento") return chave === "indeterminate";
-          if (filtro === "sla") return slaRisco;
-          if (filtro === "semResponsavel") return semResponsavel;
-          return true; 
-      });
+    const filtrados = todosChamados.filter(({ fields }) => {
+      const chave = fields.status.statusCategory.key;
+      const semResponsavel = !fields.assignee ||
+        fields.assignee.displayName.toLowerCase() === "atmos";
+      const slaRisco = (new Date() - new Date(fields.created)) / 3600000 > 12;
+      if (filtro === "andamento") return chave === "indeterminate";
+      if (filtro === "sla") return slaRisco;
+      if (filtro === "semResponsavel") return semResponsavel;
+      return true;
+    });
 
-      renderizarTabelaIncidentes(filtrados);
+    renderizarTabelaIncidentes(filtrados);
   }
 
-   async function carregarIncidentesSemResponsavel(equipe) {
-      const { issues = [] } = await
-  fetch("/jira/chamadosSemAtribuicao").then(r => r.json());
-      const container = document.getElementById("cardsAtribuicao");
+  async function carregarIncidentesSemResponsavel(equipe) {
+    const { issues = [] } = await
+      fetch("/jira/chamadosSemAtribuicao").then(r => r.json());
+    const container = document.getElementById("cardsAtribuicao");
 
-      container.innerHTML = issues.map(({ key, fields }) => {
-          const servidor = fields.summary.split(' - ')[0];
-          const componente = fields.labels.find(l => l.includes(':')) ??
-  "—";
-          const aberto = calcularTempoAberto(fields.created);
-          const opcoes = equipe.map(u =>
-              `<option value="${u.accountId}">${u.displayName}</option>`
-          ).join("");
+    container.innerHTML = issues.map(({ key, fields }) => {
+      const servidor = fields.summary.split(' - ')[0];
+      const aberto = calcularTempoAberto(fields.created);
+      const texto = fields.description?.content?.[0]?.content?.[0]?.text || "";
+      const linhas = texto.split('\n');
+      const componente = linhas.find(l => l.startsWith('Componente:')) || "";
+      const valor = linhas.find(l => l.startsWith('Valor:')) || "";
+      const descricao = `${componente} | ${valor}`;
+      const opcoes = equipe.map(u =>
+        `<option value="${u.accountId}">${u.displayName}</option>`
+      ).join("");
 
-          return `<div class="card-atribuicao" id="card-${key}">
+      return `<div class="card-atribuicao" id="card-${key}">
               <h4>${servidor}</h4>
-              <div class="descricao-incidente">
-                  <p>${componente}</p>
-                  <p>|</p>
+                <div class="descricao-incidente">
+                  <p>${descricao}</p>
                   <p>Aberto há ${aberto}</p>
-              </div>
+                </div>
+
               <div class="seletor-atribuicao">
                   <select class="select-atribuicao" id="select-${key}">
                       <option value="" selected disabled>Atribuir Funcionário</option>
@@ -562,32 +646,32 @@ function renderizarTabelaIncidentes(issues) {
                   <button onclick="atribuirFuncionario('${key}')">Atribuir</button>
               </div>
           </div>`;
-      }).join("") || `<div class="card-atribuicao card-atribuicao-verde">
+    }).join("") || `<div class="card-atribuicao card-atribuicao-verde">
           <h4>Nenhum incidente sem responsável</h4>
       </div>`;
   }
 
   async function atribuirFuncionario(issueKey) {
-      const accountId =
-  document.getElementById(`select-${issueKey}`).value;
-      if (!accountId) return alert("Selecione um funcionário.");
+    const accountId =
+      document.getElementById(`select-${issueKey}`).value;
+    if (!accountId) return alert("Selecione um funcionário.");
 
-      const res = await fetch(`/jira/atribuirResponsavel/${issueKey}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ accountId })
-      });
+    const res = await fetch(`/jira/atribuirResponsavel/${issueKey}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ accountId })
+    });
 
-      if (res.ok) {
-          document.getElementById(`card-${issueKey}`).remove();
-          carregarTabelaIncidentes();
-      } else {
-          alert("Erro ao atribuir. Tente novamente.");
-      }
+    if (res.ok) {
+      document.getElementById(`card-${issueKey}`).remove();
+      carregarTabelaIncidentes();
+    } else {
+      alert("Erro ao atribuir. Tente novamente.");
+    }
   }
 
   let servidores = [];
- 
+
   //eventos climáticos
   let eventosClimaticos = [];
 
@@ -617,7 +701,7 @@ function renderizarTabelaIncidentes(issues) {
 
     const ordenacao = document.getElementById("filtroOrdenacao").value;
 
-servidores.sort(function(a, b) {
+    servidores.sort(function (a, b) {
       const incA = dadosApi.incidentes[a];
       const incB = dadosApi.incidentes[b];
       if (!incA || !incB) return 0;
@@ -627,7 +711,7 @@ servidores.sort(function(a, b) {
       if (ordenacao === "cpu") return incB.Componentes.cpu.length - incA.Componentes.cpu.length;
       if (ordenacao === "disco") return incB.Componentes.disco.length - incA.Componentes.disco.length;
       return 0;
-  });
+    });
 
 
     const mesSelecionado = Number(filtroMes.value);
@@ -696,7 +780,7 @@ servidores.sort(function(a, b) {
 
         celula.classList.add("bloco-incidente");
 
-        const dataFormatada = `${anoSelecionado}-${String(mesSelecionado).padStart(2,'0')}-${String(dia).padStart(2,'0')}`
+        const dataFormatada = `${anoSelecionado}-${String(mesSelecionado).padStart(2, '0')}-${String(dia).padStart(2, '0')}`
         const servidorAtual = dadosApi.incidentes[servidores[i]];
         const qtdIncidentes = servidorAtual ? (servidorAtual.TotalIncidentes.por_dia[dataFormatada] || 0) : 0;
 
@@ -707,9 +791,9 @@ servidores.sort(function(a, b) {
 
         if (qtdIncidentes > 0) {
           const componentes = Object.keys(servidorAtual.Componentes)
-          .filter(c => servidorAtual.Componentes[c].includes(dataFormatada)).join(", ");
+            .filter(c => servidorAtual.Componentes[c].includes(dataFormatada)).join(", ");
           celula.title = `${qtdIncidentes} incidente(s): ${componentes}`;
-          }
+        }
 
 
         linhaServidor.appendChild(celula);
@@ -719,12 +803,6 @@ servidores.sort(function(a, b) {
       gridIncidentes.appendChild(linhaServidor);
 
     }
-
-      // if (servidores.length === 0) {
-      // const msg = document.createElement("div");                                                   
-      // msg.style.cssText = "padding: 20px; color: #888; grid-column: 1 / -1;";
-      // msg.innerText = "Nenhum dado disponível para este período.";
-      // gridIncidentes.appendChild(msg);}
 
     //eventos climaticos
 
@@ -766,84 +844,97 @@ servidores.sort(function(a, b) {
   }
 
   async function carregarEventosClimaticos(mes, ano) {
-      const mesFormatado = String(mes).padStart(2, '0');
-      const totalDias = new Date(ano, mes, 0).getDate();
-      const dataInicio = `${ano}-${mesFormatado}-01`;
-      const dataFim = `${ano}-${mesFormatado}-${String(totalDias).padStart(2, '0')}`;
+    const mesFormatado = String(mes).padStart(2, '0');
+    const totalDias = new Date(ano, mes, 0).getDate();
+    const dataInicio = `${ano}-${mesFormatado}-01`;
+    const dataFim = `${ano}-${mesFormatado}-${String(totalDias).padStart(2, '0')}`;
 
-      const url = `https://archive-api.open-meteo.com/v1/archive?latitude=-23.55&longitude=-46.63&start_date=${dataInicio}&end_date=${dataFim}&daily=weather_code,temperature_2m_max&timezone=America/Sao_Paulo`;
+    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=-23.55&longitude=-46.63&start_date=${dataInicio}&end_date=${dataFim}&daily=weather_code,temperature_2m_max&timezone=America/Sao_Paulo`;
 
-      try {
-          const dados = await fetch(url).then(r => r.json());
-          eventosClimaticos = [];
+    try {
+      const dados = await fetch(url).then(r => r.json());
+      eventosClimaticos = [];
 
-          dados.daily.time.forEach(function(data, i) {
-              const codigo = dados.daily.weather_code[i];
-              const tempMax = dados.daily.temperature_2m_max[i];
-              const [anoStr, mesStr, diaStr] = data.split('-');
+      dados.daily.time.forEach(function (data, i) {
+        const codigo = dados.daily.weather_code[i];
+        const tempMax = dados.daily.temperature_2m_max[i];
+        const [anoStr, mesStr, diaStr] = data.split('-');
 
-               let nome = null;
-               if (codigo >= 95)      nome = 'Tempestade';
-                else if (codigo >= 80) nome = 'Chuva Forte';
-                else if (codigo >= 61) nome = 'Chuva';
-                else if (codigo >= 51) nome = 'Garoa';
-                else if (tempMax >= 32) nome = 'Calor Intenso';
+        let nome = null;
+        if (codigo >= 95) nome = 'Tempestade';
+        else if (codigo >= 80) nome = 'Chuva Forte';
+        else if (codigo >= 61) nome = 'Chuva';
+        else if (tempMax >= 32) nome = 'Calor Intenso';
 
-              if (nome) eventosClimaticos.push({
-                  dia: Number(diaStr),
-                  mes: Number(mesStr),
-                  ano: Number(anoStr),
-                  nome
-              });
-          });
-      } catch (e) {
-          eventosClimaticos = [];
-      }
+        if (nome) eventosClimaticos.push({
+          dia: Number(diaStr),
+          mes: Number(mesStr),
+          ano: Number(anoStr),
+          nome
+        });
+      });
+    } catch (e) {
+      eventosClimaticos = [];
+    }
   }
 
   //mudança dos filtros
-async function aplicarFiltroHeatmap() {
-      try {
-          await carregarDados();
-          if (dadosApi.incidentes) {
-              servidores = Object.keys(dadosApi.incidentes);
-          } else {
-              dadosApi.incidentes = {};
-          }
-      } catch (e) {
-          dadosApi = { incidentes: {}, metricas: {} };
+  async function aplicarFiltroHeatmap() {
+    try {
+      await carregarDados();
+      if (dadosApi.incidentes) {
+        servidores = Object.keys(dadosApi.incidentes);
+      } else {
+        dadosApi.incidentes = {};
       }
-
-      await carregarEventosClimaticos(Number(filtroMes.value), Number(filtroAno.value));
-      renderizarHeatmap();
+    } catch (e) {
+      dadosApi = { incidentes: {}, metricas: {} };
     }
 
+    await carregarEventosClimaticos(Number(filtroMes.value), Number(filtroAno.value));
+    renderizarHeatmap();
+  }
+
   document.getElementById("filtroTabela").addEventListener("change",
-  filtrarTabelaIncidentesRecentes);
+    filtrarTabelaIncidentesRecentes);
 
-    async function aplicarFiltroGraficos() {
-      const servidorAtual =
-  document.getElementById("filtroServidor").value;
+  async function aplicarFiltroGraficos() {
+    const servidorAtual =
+      document.getElementById("filtroServidor").value;
 
-      await carregarDadosGraficos();
-      servidoresGraficos =
-  Object.keys(dadosApiGraficos.metricas);
+    await carregarDadosGraficos();
+    servidoresGraficos =
+      Object.keys(dadosApiGraficos.metricas);
 
-      servidoresGraficos.forEach(function(servidor, i) {
-          coresServidores[servidor] = paleta[i % paleta.length];
-      });
+    const areaGraficos = document.querySelector(".area-graficos");
 
-      const selectServidor =
-  document.getElementById("filtroServidor");
-      selectServidor.innerHTML = '<option value="todos">Todos os servidores</option>' +
-          servidoresGraficos.map(s => `<option 
+    if (servidoresGraficos.length === 0) {
+      areaGraficos.innerHTML = '<p style="text-align:center; color:#888; padding: 40px 0">Nenhum dado para o mês selecionado</p>';
+      return;
+    }
+
+    // se tinha mensagem de erro antes e agora tem dados, restaura os gráficos
+    if (!document.getElementById("graficoCpu")) {
+      location.reload(); // caso mais simples: reload pra restaurar os canvas
+    }
+
+
+    servidoresGraficos.forEach(function (servidor, i) {
+      coresServidores[servidor] = paleta[i % paleta.length];
+    });
+
+    const selectServidor =
+      document.getElementById("filtroServidor");
+    selectServidor.innerHTML = '<option value="todos">Todos os servidores</option>' +
+      servidoresGraficos.map(s => `<option 
   value="${s}">${s}</option>`).join("");
 
-      if (servidoresGraficos.includes(servidorAtual)) {
-          selectServidor.value = servidorAtual;
-      }
+    if (servidoresGraficos.includes(servidorAtual)) {
+      selectServidor.value = servidorAtual;
+    }
 
-      atualizarGraficos();
+    atualizarGraficos();
+    atualizarTendencias();
   }
 
 
@@ -851,8 +942,8 @@ async function aplicarFiltroHeatmap() {
 
   let graficoCpu, graficoRam, graficoDisco;
 
-   carregarDados().then(function() {
-    
+  carregarDados().then(function () {
+
     servidores = Object.keys(dadosApi.incidentes);
     servidoresGraficos = Object.keys(dadosApi.metricas);
     dadosApiGraficos = dadosApi;
@@ -861,24 +952,28 @@ async function aplicarFiltroHeatmap() {
       '<option value="todos">Todos os servidores</option>' +
       servidoresGraficos.map(s => `<option value="${s}">${s}</option>`).join("");
 
-    servidoresGraficos.forEach(function(servidor, i){
+    servidoresGraficos.forEach(function (servidor, i) {
       coresServidores[servidor] = paleta[i % paleta.length];
     });
 
-     carregarEventosClimaticos(Number(filtroMes.value), Number(filtroAno.value)).then(function() {
-      renderizarHeatmap(); });
+    carregarEventosClimaticos(Number(filtroMes.value), Number(filtroAno.value)).then(function () {
+      renderizarHeatmap();
+    });
 
     graficoCpu = criarGrafico("graficoCpu", montarDatasets("cpu", "todos"), false, "bar");
     graficoRam = criarGrafico("graficoRam", montarDatasets("ram", "todos"), false, "bar");
     graficoDisco = criarGrafico("graficoDisco", montarDatasets("disco", "todos"), false, "bar");
 
+    atualizarTendencias();
+
     carregarKpis();
+    carregarTotalEComparacao()
   });
-  
+
   carregarTabelaIncidentes();
 
-   fetch("/jira/equipe").then(r => r.json()).then(function(equipe) {
-      carregarIncidentesSemResponsavel(equipe);
+  fetch("/jira/equipe").then(r => r.json()).then(function (equipe) {
+    carregarIncidentesSemResponsavel(equipe);
   });
 
 
@@ -896,13 +991,13 @@ async function aplicarFiltroHeatmap() {
     { linha: "#9B59B6", fundo: "rgba(155,89,182,0.1)" },
     { linha: "#E67E22", fundo: "rgba(230,126,34,0.1)" }
   ];
-  
+
   let servidoresGraficos = dadosApi ? Object.keys(dadosApi.metricas) : [];
 
   let coresServidores = {};
 
-  servidoresGraficos.forEach(function(servidor, i) {
-  coresServidores[servidor] = paleta[i % paleta.length];
+  servidoresGraficos.forEach(function (servidor, i) {
+    coresServidores[servidor] = paleta[i % paleta.length];
   });
 
 
@@ -916,10 +1011,10 @@ async function aplicarFiltroHeatmap() {
     const ano = Number(filtroAnoGraficos.value);
     const totalDias = new Date(ano, mes, 0).getDate();
 
-      for (let dia = 1; dia <= totalDias; dia++) {
+    for (let dia = 1; dia <= totalDias; dia++) {
       const data_str =
-      `${ano}-${String(mes).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
-      
+        `${ano}-${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
+
       const pico = dadosServidor && dadosServidor.dias[data_str]
         ? dadosServidor.dias[data_str][metrica + "_pico"]
         : 0;
@@ -952,10 +1047,10 @@ async function aplicarFiltroHeatmap() {
       return [{
         label: metrica.toUpperCase(),
         data: picos,
-        backgroundColor: servidoresGraficos.map(function(servidor) {
+        backgroundColor: servidoresGraficos.map(function (servidor) {
           return coresServidores[servidor].fundo;
         }),
-        borderColor: servidoresGraficos.map(function(servidor) {
+        borderColor: servidoresGraficos.map(function (servidor) {
           return coresServidores[servidor].linha;
         }),
         borderWidth: 2
@@ -976,7 +1071,7 @@ async function aplicarFiltroHeatmap() {
       },
       {
         label: "Limite",
-        data: Array(31).fill(limites[metrica]),
+        data: Array(new Date(Number(filtroAnoGraficos.value), Number(filtroMesGraficos.value), 0).getDate()).fill(limites[metrica]),
         borderColor: "#D92629",
         borderDash: [6, 3],
         borderWidth: 1.5,
@@ -986,6 +1081,59 @@ async function aplicarFiltroHeatmap() {
     ];
 
   }
+
+  function calcularTendencia(metrica) {
+    if (!dadosApiGraficos || !dadosApiGraficos.metricas) return {
+      texto: "--",
+      alerta: false
+    };
+
+    const mes = Number(filtroMesGraficos.value);
+    const ano = Number(filtroAnoGraficos.value);
+    const totalDias = new Date(ano, mes, 0).getDate();
+    const meioMes = Math.floor(totalDias / 2);
+
+    let somaPrimeira = 0, countPrimeira = 0;
+    let somaSegunda = 0, countSegunda = 0;
+
+    servidoresGraficos.forEach(function (servidor) {
+      const dadosServidores = dadosApiGraficos.metricas[servidor];
+      if (!dadosServidores) return;
+      for (let dia = 1; dia <= totalDias; dia++) {
+        const data_str =
+          `${ano}-${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
+        const pico = dadosServidores.dias[data_str] ? dadosServidores.dias[data_str][metrica + "_pico"] :
+          0;
+        if (!pico) continue;
+        if (dia <= meioMes) { somaPrimeira += pico; countPrimeira++; }
+        else { somaSegunda += pico; countSegunda++; }
+      }
+    });
+
+    const mediaPrimeira = countPrimeira > 0 ? somaPrimeira / countPrimeira : 0;
+    const mediaSegunda = countSegunda > 0 ? somaSegunda / countSegunda : 0;
+
+    if (mediaPrimeira === 0) return { texto: "Sem dados", alerta: false };
+
+    const perc = Math.round(((mediaSegunda - mediaPrimeira) / mediaPrimeira) *
+      100);
+    if (Math.abs(perc) < 3) return { texto: "Estável →", alerta: false };
+    if (perc > 0) return { texto: `+${perc}% ao mês ↑`, alerta: true };
+    return { texto: `${Math.abs(perc)}% ao mês ↓`, alerta: false };
+  }
+
+  function atualizarTendencias() {
+    ["cpu", "ram", "disco"].forEach(function (metrica) {
+      const tendencia = calcularTendencia(metrica);
+      const spanTendencia = document.getElementById(
+        `tendencia${metrica.charAt(0).toUpperCase()}${metrica.slice(1)}`
+      );
+      if (!spanTendencia) return;
+      spanTendencia.textContent = tendencia.texto;
+      spanTendencia.className = tendencia.alerta ? "alerta" : "";
+    });
+  }
+
 
 
   function criarGrafico(idCanvas, datasets, mostrarLegenda, tipo) {
@@ -1006,12 +1154,13 @@ async function aplicarFiltroHeatmap() {
         responsive: true,
         maintainAspectRatio: false,
         indexAxis: tipo === "bar" ? "y" : "x",
-       scales: tipo === "bar" ? {
+        scales: tipo === "bar" ? {
           x: { min: 0, max: 100, ticks: { callback: v => v + "%" } },
-          y: { grid: { display: false } }} : {
+          y: { grid: { display: false } }
+        } : {
           x: { grid: { display: false } },
           y: { min: 0, max: 100, ticks: { callback: v => v + "%" } }
-      },
+        },
         plugins: {
           legend: { display: mostrarLegenda }
         }
@@ -1023,9 +1172,9 @@ async function aplicarFiltroHeatmap() {
   function atualizarGraficos() {
 
     const servidorSelecionado = document.getElementById("filtroServidor").value;
-          console.log("servidor:", servidorSelecionado);
-      console.log("datasets cpu:", montarDatasets("cpu",
-  servidorSelecionado));
+    console.log("servidor:", servidorSelecionado);
+    console.log("datasets cpu:", montarDatasets("cpu",
+      servidorSelecionado));
 
     const tipo = servidorSelecionado === "todos" ? "bar" : "line";
     const mostrarLegenda = false;

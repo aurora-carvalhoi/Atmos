@@ -605,6 +605,7 @@ body {
 
   .descricao-incidente {
     display: flex;
+    flex-direction: column;
     font-size: 14px;
     color: #474747;
     gap: 4px;

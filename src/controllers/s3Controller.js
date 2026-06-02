@@ -8,7 +8,7 @@ async function carregarJSON() {
   try {
     cacheJSON = await buscarJson(
       process.env.bucket_name,
-      "client/Json_s3.json"
+      "client/empresaX/client.json"
     );
     console.log("JSON carregado com sucesso");
   } catch (erro) {
