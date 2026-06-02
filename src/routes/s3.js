@@ -10,4 +10,9 @@ router.get(
   s3Controller.buscarDados
 );
 
+router.get(
+  "/servidores",
+  s3Controller.listarServidores
+);
+
 module.exports = router;

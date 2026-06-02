@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const { buscarJson } = require("../services/s3Services");
+const { buscarJson, listarChaves } = require("../services/s3Services");
 
 var cacheJSON = null;
 
@@ -24,10 +24,47 @@ function buscarDados(req, res) {
   res.json(cacheJSON);
 }
 
+async function listarServidores(req, res) {
+  try {
+    var chaves = await listarChaves(process.env.bucket_name);
+    var hostnames = [];
+    var servidores = [];
+
+    for (var i = 0; i < chaves.length; i++) {
+      var partes = chaves[i].split("/");
+      var indiceServidor = partes.indexOf("servidor");
+
+      if (indiceServidor >= 0 && partes[indiceServidor + 1]) {
+        var hostname = partes[indiceServidor + 1];
+
+        if (!hostnames.includes(hostname)) {
+          hostnames.push(hostname);
+          servidores.push({
+            idServidor: servidores.length + 1,
+            hostname: hostname
+          });
+        }
+      }
+    }
+
+    res.json({
+      hosts: servidores
+    });
+  } catch (erro) {
+    console.error("Erro ao listar servidores no S3", erro);
+    res.status(500).json({
+      erro: "Erro ao listar servidores no S3"
+    });
+  }
+}
+
 carregarJSON();
 
 setInterval(() => {
   carregarJSON();
 }, 20 * 60 * 1000);
 
-module.exports = {buscarDados};
+module.exports = {
+  buscarDados,
+  listarServidores
+};

@@ -1,6 +1,7 @@
 const {
   S3Client,
-  GetObjectCommand
+  GetObjectCommand,
+  ListObjectsV2Command
 } = require("@aws-sdk/client-s3");
 
 const client = new S3Client({
@@ -35,6 +36,30 @@ async function buscarJson(bucket, key) {
   return JSON.parse(jsonString);
 }
 
+async function listarChaves(bucket) {
+  var chaves = [];
+  var continuationToken = undefined;
+
+  do {
+    var command = new ListObjectsV2Command({
+      Bucket: bucket,
+      ContinuationToken: continuationToken
+    });
+
+    var response = await client.send(command);
+    var arquivos = response.Contents || [];
+
+    for (var i = 0; i < arquivos.length; i++) {
+      chaves.push(arquivos[i].Key);
+    }
+
+    continuationToken = response.NextContinuationToken;
+  } while (continuationToken);
+
+  return chaves;
+}
+
 module.exports = {
-  buscarJson
+  buscarJson,
+  listarChaves
 };

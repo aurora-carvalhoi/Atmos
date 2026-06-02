@@ -274,6 +274,7 @@
   let processoSelecionado = null;
   let graficoProcesso = null;
   let ordenacaoAtual = "alfabetica";
+  const PERCENTIL_ANOMALIA = 90;
 
   window.onload = async function () {
 
@@ -443,18 +444,76 @@
     document.querySelector("#nomeProcesso")
       .innerHTML = nome;
 
-    document.querySelector("#div_container_kpi_1 .div_conteudo_kpi")
-      .innerHTML = formatarNumero(subprocessos);
+    atualizarKPIComPercentil(
+      "#div_container_kpi_1",
+      subprocessos,
+      "subprocessos"
+    );
 
-    document.querySelector("#div_container_kpi_2 .div_conteudo_kpi")
-      .innerHTML = formatarNumero(cpu);
+    atualizarKPIComPercentil(
+      "#div_container_kpi_2",
+      cpu,
+      "cpu"
+    );
 
-    document.querySelector("#div_container_kpi_3 .div_conteudo_kpi")
-      .innerHTML = formatarNumero(ram);
+    atualizarKPIComPercentil(
+      "#div_container_kpi_3",
+      ram,
+      "ram"
+    );
 
-    document.querySelector("#div_container_kpi_4 .div_conteudo_kpi")
-      .innerHTML = formatarNumero(disco);
+    atualizarKPIComPercentil(
+      "#div_container_kpi_4",
+      disco,
+      "ioDisco"
+    );
 
+  }
+
+  function atualizarKPIComPercentil(seletorContainer, valor, nomeMetrica) {
+    const container = document.querySelector(seletorContainer);
+    const conteudo = container?.querySelector(".div_conteudo_kpi");
+
+    if (!container || !conteudo) {
+      return;
+    }
+
+    const percentil = calcularPercentilEntreProcessos(valor, nomeMetrica);
+    const ehAnomalia = percentil >= PERCENTIL_ANOMALIA;
+
+    conteudo.innerHTML = formatarNumero(valor);
+    conteudo.classList.remove(
+      "kpi_azul",
+      "kpi_verde",
+      "kpi_rosa",
+      "kpi_cinza",
+      "kpi_bom",
+      "kpi_anomalia"
+    );
+    conteudo.classList.add(ehAnomalia ? "kpi_anomalia" : "kpi_bom");
+
+    container.title = `Percentil ${formatarNumero(percentil)} entre os processos`;
+  }
+
+  function calcularPercentilEntreProcessos(valor, nomeMetrica) {
+    const processos = Array.isArray(dados?.processos)
+      ? dados.processos
+      : [];
+
+    const valores = processos
+      .map((processo) => Number(obterValorMetrica(processo, nomeMetrica)))
+      .filter((numero) => Number.isFinite(numero))
+      .sort((a, b) => a - b);
+
+    const numero = Number(valor);
+
+    if (!Number.isFinite(numero) || valores.length == 0) {
+      return 0;
+    }
+
+    const posicao = valores.filter((item) => item <= numero).length;
+
+    return Number(((posicao / valores.length) * 100).toFixed(2));
   }
 
   function atualizarGrafico(processo) {

@@ -610,6 +610,14 @@ body.menu_fechado {
   color: #b5b5b5;
 }
 
+.kpi_bom {
+  color: #5fca8a97;
+}
+
+.kpi_anomalia {
+  color: #ec767692;
+}
+
 .div_unidadeMedida {
   position: absolute;
   right: clamp(10px, 1.4vw, 18px);

@@ -234,7 +234,7 @@
          <!-- Botões de ação com hierarquia -->
         <div class="bloco-botoes-acoes">
           <div class="botoes">
-            <button class="acao acao-primaria" onclick="redirecionar()">Análise de Carga</button>
+            <button class="acao acao-primaria" onclick="redirecionarAnaliseCarga()">Análise de Carga</button>
             <button class="acao acao-primaria" onclick="redirecionarAnalisePreditiva()">Análise do Servidor</button>
             <button class="acao acao-secundaria" onclick="redirecionarProcessos()">Processos</button>
             <button class="acao acao-secundaria" onclick="redirecionar()">Gerar Relatório</button>
@@ -620,5 +620,10 @@ function redirecionarAnalisePreditiva() {
 function redirecionarProcessos(){
   window.location.href =
    `./dashboardProcessos.html?server=${window.sessionStorage.NOME_SERVIDOR}`
+}
+
+function redirecionarAnaliseCarga(){
+  window.location.href =
+   `./dashboardAnaliseCarga.html`
 }
 </script>
