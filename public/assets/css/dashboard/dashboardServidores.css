@@ -27,7 +27,7 @@ html, body {
   padding: 10px 20px;
   flex-shrink: 0;
   gap: 12px;
-  margin-bottom: 0;
+  margin-bottom: -10px;
 }
 
 .dash-header-left { display: flex; flex-direction: column; gap: 2px; }
@@ -276,7 +276,7 @@ html, body {
 }
 
 .kpi-srv-label {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   color: #3a3a5c;
   text-transform: uppercase;
@@ -285,14 +285,14 @@ html, body {
 }
 
 .kpi-srv-valor {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 800;
   color: #1a1a2e;
   margin-left: auto;
 }
 
 .kpi-threshold-hint {
-  font-size: 9px;
+  font-size: 12px;
   color: #9ca3af;
   font-weight: 500;
   white-space: nowrap;
@@ -306,7 +306,7 @@ html, body {
   margin-left: auto;
 }
 .disco-total-inline {
-  font-size: 10px;
+  font-size: 12px;
   color: #6b7280;
   font-weight: 500;
 }
@@ -359,7 +359,7 @@ html, body {
 }
 
 .mini-valor {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 800;
   color: #1a1a2e;
 }
@@ -380,7 +380,8 @@ html, body {
 .mini-trend.flat { color: #6b7280; }
 
 .mini-threshold {
-  font-size: 9px;
+  font-weight: 600;
+  font-size: 14px;
   color: #9ca3af;
   font-weight: 500;
 }
@@ -399,6 +400,11 @@ html, body {
   overflow: hidden;
 }
 
+
+#modal_detalhe_nome_servidor {
+  font-size: 15px;
+}
+
 .grafico-header {
   display: flex;
   align-items: center;
@@ -407,7 +413,7 @@ html, body {
 }
 
 .grafico-titulo {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--color-blue);
 }
@@ -555,7 +561,7 @@ html, body {
 }
 
 .kpi-label {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--color-opaque);
   font-weight: 600;
   text-transform: uppercase;
@@ -720,8 +726,14 @@ td {
 }
 
 tbody tr:last-child td { border-bottom: none; }
-.nome-servidor { font-weight: 600; }
-.servidor-id { color: #9aa0a6; margin-left: 0.3rem; font-size: 0.68rem; }
+.nome-servidor { 
+  font-weight: 600;
+ }
+.servidor-id {
+   color: #9aa0a6;
+    margin-left: 0.3rem;
+     font-size: 0.8rem; 
+  }
 
 .container-barra { display: flex; align-items: center; gap: 4px; justify-content: center; }
 
@@ -905,6 +917,7 @@ input:focus { outline: none; }
     align-items: flex-start;
     gap: 10px;
     padding: 12px;
+
   }
 
   .dash-header-right {
@@ -973,6 +986,8 @@ input:focus { outline: none; }
 
   .kpi-card {
     width: 50%;
+    justify-content: center;
+    align-content: center;
   }
 
   /* GRÁFICO */

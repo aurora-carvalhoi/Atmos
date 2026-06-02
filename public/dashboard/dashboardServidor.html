@@ -93,7 +93,7 @@
   <main class="dash-main">
 
     <!-- HEADER -->
-    <header class="dash-header">
+<!--     <header class="dash-header">
       <div class="dash-header-left">
         <ul class="breadcrumb">
           <li><a href="#">Infraestrutura</a></li>
@@ -110,7 +110,7 @@
           NOVO SERVIDOR
         </button>
       </div>
-    </header>
+    </header> -->
 
     <!-- FAIXA DE ALERTAS ATIVOS — sempre visível, topo do conteúdo -->
 <!--<div class="faixa-alertas" id="faixaAlertas">
@@ -235,8 +235,8 @@
         <div class="bloco-botoes-acoes">
           <div class="botoes">
             <button class="acao acao-primaria" onclick="redirecionar()">Análise de Carga</button>
-            <button class="acao acao-primaria" onclick="redirecionar()">Análise do Servidor</button>
-            <button class="acao acao-secundaria" onclick="redirecionar()">Processos</button>
+            <button class="acao acao-primaria" onclick="redirecionarAnalisePreditiva()">Análise do Servidor</button>
+            <button class="acao acao-secundaria" onclick="redirecionarProcessos()">Processos</button>
             <button class="acao acao-secundaria" onclick="redirecionar()">Gerar Relatório</button>
           </div>
         </div>
@@ -612,8 +612,13 @@ btnVerMais.addEventListener('click', () => {
   btnVerMais.textContent = mostrandoMais ? 'Ver menos' : 'Ver mais';
 });
 
-function redirecionar() {
+function redirecionarAnalisePreditiva() {
   window.location.href =
-    `./dashboardAnalisePreditiva.html?id=${window.servidorSelecionado}`
+    `./dashboardAnalisePreditiva.html?id=${window.servidorSelecionado}&server=${window.sessionStorage.NOME_SERVIDOR}`
+} 
+
+function redirecionarProcessos(){
+  window.location.href =
+   `./dashboardProcessos.html?server=${window.sessionStorage.NOME_SERVIDOR}`
 }
 </script>

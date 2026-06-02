@@ -29,7 +29,7 @@ async function buscarAnalisePreditiva(req, res) {
       });
     }
 
-     const key = `client/${empresa}.json`;
+     const key = `dados_csv/2.json`;
 
     console.log("Buscando arquivo:", key);
 
