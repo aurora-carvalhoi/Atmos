@@ -281,7 +281,7 @@
             Múltiplos incidentes recorrentes nos últimos mês
           </span>
           <div class="lista" id="lista_servidores_atencao">
-
+            
 
           </div>
         </div>
@@ -534,9 +534,9 @@
       console.log("c:", nomeArquivo3)
 
       const respostas = await Promise.all([
-        fetch(`http://localhost:3333/incidentesHistoricos/listar?arquivo=${nomeArquivo1}&empresa=${empresa}`),
-        fetch(`http://localhost:3333/incidentesHistoricos/listar?arquivo=${nomeArquivo2}&empresa=${empresa}`),
-        fetch(`http://localhost:3333/incidentesHistoricos/listar?arquivo=${nomeArquivo3}&empresa=${empresa}`)
+        fetch(`/incidentesHistoricos/listar?arquivo=${nomeArquivo1}&empresa=${empresa}`),
+        fetch(`/incidentesHistoricos/listar?arquivo=${nomeArquivo2}&empresa=${empresa}`),
+        fetch(`/incidentesHistoricos/listar?arquivo=${nomeArquivo3}&empresa=${empresa}`)
       ]);
 
       const dados = await Promise.all(
@@ -707,26 +707,41 @@
       Object.keys(servidoresAcompanhamento).length;
 
     var htmlReincidentes = "";
-    for (var i = 0; i < listaReincidentes.length; i++) {
-
-      var reincidente =
-        listaReincidentes[i];
-      htmlReincidentes += `
-          <div class="card-serv-recorrente">
-            <div class="identificador">
-              <div class="faixa"></div>
+    
+    if(listaReincidentes.length != 0){
+       for (var i = 0; i < listaReincidentes.length; i++) {
+        var reincidente =
+          listaReincidentes[i];
+        htmlReincidentes += `
+            <div class="card-serv-recorrente">
+              <div class="identificador">
+                <div class="faixa"></div>
+                <div>
+                  <p class="titulo">${reincidente.servidor}</p>
+                  <p class="desc">Componente: ${reincidente.componente} • Último em ${reincidente.ultimaData}</p>
+                </div>
+              </div>
               <div>
-                <p class="titulo">${reincidente.servidor}</p>
-                <p class="desc">Componente: ${reincidente.componente} • Último em ${reincidente.ultimaData}</p>
+                <p class="reincidencias">${reincidente.quantidade}x incidentes</p>
               </div>
             </div>
-            <div>
-              <p class="reincidencias">${reincidente.quantidade}x incidentes</p>
+      `;
+      }
+    }else{
+      htmlReincidentes += `
+            <div class="card-serv-recorrente">
+              <div class="identificador">
+                <div class="faixa"></div>
+                <div>
+                  <p class="titulo">Nenhum encontrado</p>
+                </div>
+              </div>
+              <div>
+              </div>
             </div>
-          </div>
-    `;
-
+      `;
     }
+   
 
 
     var sla = await buscarSla();

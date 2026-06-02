@@ -83,12 +83,14 @@ body {
         display: flex;
         flex: 1;
         flex-direction: column;
+        justify-content: space-between;
         gap: 8px;
         position: relative;
         background: #fff;
         box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.07);
         border-radius: 16px;
         padding: 24px;
+        height: 125px;
         overflow: hidden;
     }
 
@@ -114,6 +116,9 @@ body {
     .d-kpi .indicador {
         font-weight: 600;
         font-size: 35px;
+    }
+    .d-kpi #kpi_tempo_medio_resolucao{
+        font-size: 30px;
     }
 
     .d-kpi .descricao {

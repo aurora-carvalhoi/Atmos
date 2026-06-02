@@ -255,7 +255,7 @@
               <select name="" id="filtroMes">
                 <option value="1">Janeiro</option>
                 <option value="2">Fevereiro</option>
-                <option value="3" selected>Março</option>
+                <option value="3">Março</option>
                 <option value="4">Abril</option>
                 <option value="5">Maio</option>
                 <option value="6">Junho</option>
@@ -267,8 +267,7 @@
                 <option value="12">Dezembro</option>
               </select>
               <select name="" id="filtroAno">
-                <option value="2026" selected>2026</option>
-                <option value="2025">2025</option>
+                <option value="2026">2026</option>
               </select>
             </div>
             <div>
@@ -326,7 +325,7 @@
               <select name="" id="filtroMesGraficos">
                 <option value="1">Janeiro</option>
                 <option value="2">Fevereiro</option>
-                <option selected value="3">Março</option>
+                <option value="3">Março</option>
                 <option value="4">Abril</option>
                 <option value="5">Maio</option>
                 <option value="6">Junho</option>
@@ -338,15 +337,17 @@
                 <option value="12">Dezembro</option>
               </select>
               <select name="" id="filtroAnoGraficos">
-                <option value="2026" selected>2026</option>
-                <option value="2025">2025</option>
+                <option value="2026">2026</option>
               </select>
               <label>Servidor</label>
               <select id="filtroServidor">
               </select>
-
             </div>
             <button onclick="aplicarFiltroGraficos()">Aplicar Filtro</button>
+            <button onclick="gerarRelatorio()">Exportar PDF</button>
+          </div>
+          <div id="avisoSemDados" style="display:none; text-align:center; color:#888; padding: 20px 0">
+            Nenhum dado para o mês selecionado
           </div>
 
           <div class="graficos-uso">
@@ -391,21 +392,33 @@
 <script src="../assets/javascript/datetime.js"></script>
 <script src="../assets/javascript/menu.js"></script>
 <script src="../assets/javascript/sessao.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 
-  // filtros
+  //Filtros da página
   const filtroMes = document.getElementById("filtroMes");
   const filtroAno = document.getElementById("filtroAno");
   const filtroMesGraficos = document.getElementById("filtroMesGraficos");
   const filtroAnoGraficos = document.getElementById("filtroAnoGraficos");
 
-
+  //Variáveis para manipulações do heatmap
   const headerDias = document.getElementById("cabecalhoDias");
   const gridIncidentes = document.getElementById("gridIncidentes");
   const gridEventos = document.getElementById("eventosGrid");
 
-  //buscar dados no backend
+  const ultimoMes = new Date().getMonth();
+  const anoAtual = new Date().getFullYear();
+
+  document.getElementById("filtroMes").value = ultimoMes;
+  document.getElementById("filtroAno").value = anoAtual;
+  document.getElementById("filtroMesGraficos").value = ultimoMes;
+  document.getElementById("filtroAnoGraficos").value = anoAtual;
+
+  /*
+  Aqui estamos buscando os dados no bucket. Essa função se refere ao heatmap,
+   mas terá uma função com .then depois para fazer os outros carregamentos
+  */
   let dadosApi = null;
   let dadosApiGraficos = null;
 
@@ -421,6 +434,8 @@
 
     dadosApi = await resposta.json()
   }
+
+  //Aqui as kpis são carregadas
 
   async function carregarKpis() {
     const [resResolvidos, resAndamento, resSemResp] = await Promise.all([
@@ -446,13 +461,10 @@
 
     const resolvidosDoMes = filtrarPorMes(resolvidos.issues, 'resolutiondate');
 
-
     const qtdResolvidos = resolvidosDoMes.length;
-    const qtdAndamento = andamento.issues.length;   // sem filtro
-    const qtdSemResp = semResp.issues.length;     // sem filtro
+    const qtdAndamento = andamento.issues.length;
+    const qtdSemResp = semResp.issues.length;
     const qtdTotal = qtdResolvidos + qtdAndamento + qtdSemResp;
-
-
 
     document.getElementById("kpiResolvidos").innerText = qtdResolvidos;
     document.getElementById("kpiAndamento").innerText = qtdAndamento;
@@ -463,29 +475,23 @@
     document.getElementById("kpiPeriodo").innerText =
       `${meses[new Date().getMonth()]} ${new Date().getFullYear()}`;
 
-    const percResolvidos = qtdTotal > 0 ? Math.round(qtdResolvidos / qtdTotal *
-      100) : 0;
-    document.getElementById("porcentagemResolvidos").innerText =
-      `${percResolvidos}% resolvidos`;
+    const porcentagemResolvidos = qtdTotal > 0 ? Math.round(qtdResolvidos / qtdTotal * 100) : 0;
+    document.getElementById("porcentagemResolvidos").innerText = `${porcentagemResolvidos}% resolvidos`;
 
-    const percAndamento = qtdTotal > 0 ? Math.round(qtdAndamento / qtdTotal * 100)
-      : 0;
-    document.getElementById("porcentagemAndamento").innerText = `${percAndamento}% do total`;
+    const porcentagemAndamento = qtdTotal > 0 ? Math.round(qtdAndamento / qtdTotal * 100) : 0;
+    document.getElementById("porcentagemAndamento").innerText = `${porcentagemAndamento}% do total`;
 
     if (semResp.issues.length > 0) {
       const maisRecente = semResp.issues.reduce(function (acc, issue) {
-        return new Date(issue.fields.created) > new Date(acc.fields.created) ?
-          issue : acc;
+        return new Date(issue.fields.created) > new Date(acc.fields.created) ? issue : acc;
       });
-      document.getElementById("ultimoIncidenteAberto").innerText =
-        `Último incidente há: ${calcularTempoAberto(maisRecente.fields.created)}`;
+      document.getElementById("ultimoIncidenteAberto").innerText = `Último incidente há: ${calcularTempoAberto(maisRecente.fields.created)}`;
     } else {
       document.getElementById("ultimoIncidenteAberto").innerText = "Nenhum incidente aberto";
     }
 
-
-
     if (resolvidos.issues.length > 0) {
+
       let totalMinutos = 0;
 
       resolvidos.issues.forEach(function (issue) {
@@ -499,12 +505,11 @@
       const horas = Math.floor(mediaMinutos / 60);
       const minutos = mediaMinutos % 60;
 
-      document.getElementById("kpiTMR").innerText =
-        `TMR: ${horas}h${String(minutos).padStart(2, '0')}min`
+      document.getElementById("kpiTMR").innerText = `TMR: ${horas}h${String(minutos).padStart(2, '0')}min`
     }
   }
 
-
+  //Aqui é a função que calcula o total da kpi de total de incidentes + a info comparativa com o mês anterior
   async function carregarTotalEComparacao() {
     const mes = new Date().getMonth() + 1;
     const ano = new Date().getFullYear();
@@ -515,9 +520,7 @@
         `/incidentesHistoricos/listar?empresa=empresaX&arquivo=client_${mesFormatado}_${ano}.json`
       );
       const dadosMesAtual = await respostaAtual.json();
-      const totalAtual = Object.values(dadosMesAtual.incidentes)
-        .reduce((soma, servidor) => soma + servidor.TotalIncidentes.total_mes,
-          0);
+      const totalAtual = Object.values(dadosMesAtual.incidentes).reduce((soma, servidor) => soma + servidor.TotalIncidentes.total_mes, 0);
 
       document.getElementById("kpiTotal").innerText = totalAtual;
 
@@ -532,8 +535,7 @@
       const totalAnterior = Object.values(dadosMesAnterior.incidentes).reduce((soma, servidor) => soma + servidor.TotalIncidentes.total_mes, 0);
 
       const diff = totalAtual - totalAnterior;
-      document.getElementById("kpiComparacao").innerText =
-        diff >= 0 ? `+${diff} do que no mês anterior` : `${diff} do que no mês anterior`;
+      document.getElementById("kpiComparacao").innerText = diff >= 0 ? `+${diff} do que no mês anterior` : `${diff} do que no mês anterior`;
 
     } catch {
       document.getElementById("kpiComparacao").innerText = "Sem dados";
@@ -543,20 +545,15 @@
     }
   }
 
-
-
-
-
-
+  //Aqui calculamos há quanto tempo os chamados foram abertos, assim conseguimos povoar a tabela
   function calcularTempoAberto(tempoAbertura) {
-    const difTempo = Math.floor((new Date() - new Date(tempoAbertura)) /
-      60000);
+    const difTempo = Math.floor((new Date() - new Date(tempoAbertura)) / 60000);
     if (difTempo < 60) return `${difTempo}min`;
     if (difTempo < 1440) return `${Math.floor(difTempo / 60)}h`;
     return `${Math.floor(difTempo / 1440)}d`;
   }
 
-
+  //Aqui temos a função que cria variáveis para manipulação dos gráficos com chart.js
   async function carregarDadosGraficos() {
     const empresa = "empresaX";
     const mes = document.getElementById("filtroMesGraficos").value;
@@ -567,6 +564,7 @@
     dadosApiGraficos = await resposta.json();
   }
 
+  //Aqui começamos a criar a tabela de gestão de incidentes recentes
   let todosChamados = [];
 
   function renderizarTabelaIncidentes(issues) {
@@ -574,12 +572,8 @@
 
     tbody.innerHTML = issues.map(({ key, fields, self }) => {
       const chaveStatus = fields.status.statusCategory.key;
-      const status = chaveStatus === "done" ? "Resolvido"
-        : chaveStatus === "indeterminate" ? "Em Andamento"
-          : "Não atribuído";
-      const classe = chaveStatus === "done" ? "status-ok"
-        : chaveStatus === "indeterminate" ? "status-analise"
-          : "status-naoAtribuido";
+      const status = chaveStatus === "done" ? "Resolvido" : chaveStatus === "indeterminate" ? "Em Andamento" : "Não atribuído";
+      const classe = chaveStatus === "done" ? "status-ok" : chaveStatus === "indeterminate" ? "status-analise" : "status-naoAtribuido";
       const browseUrl = new URL(self).origin + '/browse/' + key;
       return `<tr>
               <td>${fields.summary.split(' - ')[0]}</td>
@@ -590,6 +584,7 @@
     }).join("") || '<tr><td colspan="4">Nenhum incidente encontrado</td></tr>';
   }
 
+  //Aqui a gente carrega a tabela e faz o chamado no jira pra identificar os incidentes em aberto e identificamos o filtro
   async function carregarTabelaIncidentes() {
     const { issues = [] } = await
       fetch("/jira/todosIncidentesAbertos").then(r => r.json());
@@ -597,6 +592,7 @@
     filtrarTabelaIncidentesRecentes();
   }
 
+  //aqui temos o filtro da tabela de incidentes recentes
   function filtrarTabelaIncidentesRecentes() {
     const filtro = document.getElementById("filtroTabela").value;
 
@@ -614,6 +610,11 @@
     renderizarTabelaIncidentes(filtrados);
   }
 
+
+  //Aqui temos a função que gera os cards indicando os chamados que ainda não tem um responsável atribuído
+  //Os cards são gerados dinamicamente com javascript
+  //As descrições nos cards permitem que o gestor consiga analisar rapidamente o incidente sem muitos detalhes
+  //e decidir qual funcionário irá alocar para resolver.
   async function carregarIncidentesSemResponsavel(equipe) {
     const { issues = [] } = await
       fetch("/jira/chamadosSemAtribuicao").then(r => r.json());
@@ -651,6 +652,8 @@
       </div>`;
   }
 
+
+  //Aqui temos nossa função que permite com que atribuamos um funcionário a um chamado direto pela dashboard
   async function atribuirFuncionario(issueKey) {
     const accountId =
       document.getElementById(`select-${issueKey}`).value;
@@ -671,32 +674,19 @@
   }
 
   let servidores = [];
-
-  //eventos climáticos
   let eventosClimaticos = [];
 
-  //obter qtd de dias do mes
-
   function obterDiasDoMes(mes, ano) {
-
     return new Date(ano, mes, 0).getDate();
-
   }
 
-  //limpar o heatmap toda vez que mudar o filtro pra nao ficar acumulando
-
   function limparHeatmap() {
-
     headerDias.innerHTML = "";
     gridIncidentes.innerHTML = "";
     gridEventos.innerHTML = "";
-
   }
 
-  //renderizar o heatmap
-
   function renderizarHeatmap() {
-
     limparHeatmap();
 
     const ordenacao = document.getElementById("filtroOrdenacao").value;
@@ -713,70 +703,45 @@
       return 0;
     });
 
-
     const mesSelecionado = Number(filtroMes.value);
     const anoSelecionado = Number(filtroAno.value);
 
-    const totalDias =
-      obterDiasDoMes(mesSelecionado, anoSelecionado);
+    const totalDias = obterDiasDoMes(mesSelecionado, anoSelecionado);
 
     //grid dinamico de acordo com total de dias do mes/ano
+    const templateColunas = `120px repeat(${totalDias}, 24px)`;
 
-    const templateColunas =
-      `120px repeat(${totalDias}, 24px)`;
-
-    headerDias.style.gridTemplateColumns =
-      templateColunas;
+    headerDias.style.gridTemplateColumns = templateColunas;
 
     //cabeçalho
-
-    const espacoVazio =
-      document.createElement("div");
-
+    const espacoVazio = document.createElement("div");
     espacoVazio.classList.add("header-vazio");
-
     headerDias.appendChild(espacoVazio);
 
     for (let dia = 1; dia <= totalDias; dia++) {
-
-      const diaHeader =
-        document.createElement("div");
-
+      const diaHeader = document.createElement("div");
       diaHeader.classList.add("dia-header");
-
       diaHeader.innerText = dia;
-
       headerDias.appendChild(diaHeader);
-
     }
 
     //linha dos servidores
 
     for (let i = 0; i < servidores.length; i++) {
 
-      const linhaServidor =
-        document.createElement("div");
-
+      const linhaServidor = document.createElement("div");
       linhaServidor.classList.add("linha-servidor");
-
-      linhaServidor.style.gridTemplateColumns =
-        templateColunas;
-
-      const nomeServidor =
-        document.createElement("div");
-
+      linhaServidor.style.gridTemplateColumns = templateColunas;
+      const nomeServidor = document.createElement("div");
       nomeServidor.classList.add("nome-servidor");
-
       nomeServidor.innerText = servidores[i];
-
       linhaServidor.appendChild(nomeServidor);
 
       //quadradinhos do heatmap
 
       for (let dia = 1; dia <= totalDias; dia++) {
 
-        const celula =
-          document.createElement("div");
+        const celula = document.createElement("div");
 
         celula.classList.add("bloco-incidente");
 
@@ -784,7 +749,7 @@
         const servidorAtual = dadosApi.incidentes[servidores[i]];
         const qtdIncidentes = servidorAtual ? (servidorAtual.TotalIncidentes.por_dia[dataFormatada] || 0) : 0;
 
-        if (qtdIncidentes === 0) celula.classList.add("vazio"); // vazio
+        if (qtdIncidentes === 0) celula.classList.add("vazio");
         else if (qtdIncidentes === 1) celula.classList.add("nivel-1");
         else if (qtdIncidentes <= 3) celula.classList.add("nivel-2");
         else celula.classList.add("nivel-3");
@@ -795,9 +760,7 @@
           celula.title = `${qtdIncidentes} incidente(s): ${componentes}`;
         }
 
-
         linhaServidor.appendChild(celula);
-
       }
 
       gridIncidentes.appendChild(linhaServidor);
@@ -805,42 +768,29 @@
     }
 
     //eventos climaticos
-
-    gridEventos.style.gridTemplateColumns =
-      `repeat(${totalDias}, 24px)`;
+    gridEventos.style.gridTemplateColumns = `repeat(${totalDias}, 24px)`;
 
     for (let dia = 1; dia <= totalDias; dia++) {
 
-      const eventoDia =
-        document.createElement("div");
-
+      const eventoDia = document.createElement("div");
       eventoDia.classList.add("evento-item");
 
-      const evento =
-        eventosClimaticos.find(item =>
-
-          item.dia === dia &&
-          item.mes === mesSelecionado &&
-          item.ano === anoSelecionado
-
-        );
+      const evento = eventosClimaticos.find(item =>
+        item.dia === dia &&
+        item.mes === mesSelecionado &&
+        item.ano === anoSelecionado
+      );
 
       if (evento) {
-
         eventoDia.innerHTML = `
         <div class="evento-linha"></div>
-
         <div class="evento-texto">
           ${evento.nome}
         </div>
       `;
-
       }
-
       gridEventos.appendChild(eventoDia);
-
     }
-
   }
 
   async function carregarEventosClimaticos(mes, ano) {
@@ -864,7 +814,7 @@
         if (codigo >= 95) nome = 'Tempestade';
         else if (codigo >= 80) nome = 'Chuva Forte';
         else if (codigo >= 61) nome = 'Chuva';
-        else if (tempMax >= 32) nome = 'Calor Intenso';
+        else if (tempMax >= 29) nome = 'Calor Intenso';
 
         if (nome) eventosClimaticos.push({
           dia: Number(diaStr),
@@ -895,55 +845,48 @@
     renderizarHeatmap();
   }
 
-  document.getElementById("filtroTabela").addEventListener("change",
-    filtrarTabelaIncidentesRecentes);
+  document.getElementById("filtroTabela").addEventListener("change", filtrarTabelaIncidentesRecentes);
 
   async function aplicarFiltroGraficos() {
-    const servidorAtual =
-      document.getElementById("filtroServidor").value;
+    const servidorAtual = document.getElementById("filtroServidor").value;
 
-    await carregarDadosGraficos();
-    servidoresGraficos =
-      Object.keys(dadosApiGraficos.metricas);
+    try {
+      await carregarDadosGraficos();
+      if (!dadosApiGraficos?.metricas ||
+        Object.keys(dadosApiGraficos.metricas).length === 0) {
+        document.getElementById("avisoSemDados").style.display = "block";
+        document.querySelector(".graficos-uso").style.display = "none";
+        return;
+      }
 
-    const areaGraficos = document.querySelector(".area-graficos");
+      document.getElementById("avisoSemDados").style.display = "none";
+      document.querySelector(".graficos-uso").style.display = "block";
 
-    if (servidoresGraficos.length === 0) {
-      areaGraficos.innerHTML = '<p style="text-align:center; color:#888; padding: 40px 0">Nenhum dado para o mês selecionado</p>';
-      return;
+      servidoresGraficos = Object.keys(dadosApiGraficos.metricas);
+      servidoresGraficos.forEach(function (servidor, i) {
+        coresServidores[servidor] = paleta[i % paleta.length];
+      });
+
+      const selectServidor = document.getElementById("filtroServidor");
+      selectServidor.innerHTML = '<option value="todos">Todos os servidores</option>' +
+        servidoresGraficos.map(s => `<option value="${s}">${s}</option>`).join("");
+
+      if (servidoresGraficos.includes(servidorAtual)) {
+        selectServidor.value = servidorAtual;
+      }
+
+      atualizarGraficos();
+      atualizarTendencias();
+
+    } catch {
+      document.querySelector(".area-graficos").innerHTML =
+        '<p style="text-align:center; color:#888; padding: 40px 0">Nenhum dado para o mês selecionado</p>';
     }
-
-    // se tinha mensagem de erro antes e agora tem dados, restaura os gráficos
-    if (!document.getElementById("graficoCpu")) {
-      location.reload(); // caso mais simples: reload pra restaurar os canvas
-    }
-
-
-    servidoresGraficos.forEach(function (servidor, i) {
-      coresServidores[servidor] = paleta[i % paleta.length];
-    });
-
-    const selectServidor =
-      document.getElementById("filtroServidor");
-    selectServidor.innerHTML = '<option value="todos">Todos os servidores</option>' +
-      servidoresGraficos.map(s => `<option 
-  value="${s}">${s}</option>`).join("");
-
-    if (servidoresGraficos.includes(servidorAtual)) {
-      selectServidor.value = servidorAtual;
-    }
-
-    atualizarGraficos();
-    atualizarTendencias();
   }
-
-
-  //renderizar tela
 
   let graficoCpu, graficoRam, graficoDisco;
 
   carregarDados().then(function () {
-
     servidores = Object.keys(dadosApi.incidentes);
     servidoresGraficos = Object.keys(dadosApi.metricas);
     dadosApiGraficos = dadosApi;
@@ -965,7 +908,6 @@
     graficoDisco = criarGrafico("graficoDisco", montarDatasets("disco", "todos"), false, "bar");
 
     atualizarTendencias();
-
     carregarKpis();
     carregarTotalEComparacao()
   });
@@ -975,7 +917,6 @@
   fetch("/jira/equipe").then(r => r.json()).then(function (equipe) {
     carregarIncidentesSemResponsavel(equipe);
   });
-
 
   const diasMes = [];
 
@@ -1015,15 +956,10 @@
       const data_str =
         `${ano}-${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
 
-      const pico = dadosServidor && dadosServidor.dias[data_str]
-        ? dadosServidor.dias[data_str][metrica + "_pico"]
-        : 0;
+      const pico = dadosServidor && dadosServidor.dias[data_str] ? dadosServidor.dias[data_str][metrica + "_pico"] : 0;
       resultado.push(pico || 0);
     }
-
     return resultado;
-
-
   }
 
 
@@ -1102,8 +1038,7 @@
       for (let dia = 1; dia <= totalDias; dia++) {
         const data_str =
           `${ano}-${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
-        const pico = dadosServidores.dias[data_str] ? dadosServidores.dias[data_str][metrica + "_pico"] :
-          0;
+        const pico = dadosServidores.dias[data_str] ? dadosServidores.dias[data_str][metrica + "_pico"] : 0;
         if (!pico) continue;
         if (dia <= meioMes) { somaPrimeira += pico; countPrimeira++; }
         else { somaSegunda += pico; countSegunda++; }
@@ -1115,8 +1050,7 @@
 
     if (mediaPrimeira === 0) return { texto: "Sem dados", alerta: false };
 
-    const perc = Math.round(((mediaSegunda - mediaPrimeira) / mediaPrimeira) *
-      100);
+    const perc = Math.round(((mediaSegunda - mediaPrimeira) / mediaPrimeira) * 100);
     if (Math.abs(perc) < 3) return { texto: "Estável →", alerta: false };
     if (perc > 0) return { texto: `+${perc}% ao mês ↑`, alerta: true };
     return { texto: `${Math.abs(perc)}% ao mês ↓`, alerta: false };
@@ -1139,10 +1073,6 @@
   function criarGrafico(idCanvas, datasets, mostrarLegenda, tipo) {
 
     const canvas = document.getElementById(idCanvas);
-
-    const eixoX = tipo === "bar"
-      ? { data: servidoresGraficos }
-      : { labels: diasMes };
 
     return new Chart(canvas, {
       type: tipo || "line",
@@ -1172,9 +1102,6 @@
   function atualizarGraficos() {
 
     const servidorSelecionado = document.getElementById("filtroServidor").value;
-    console.log("servidor:", servidorSelecionado);
-    console.log("datasets cpu:", montarDatasets("cpu",
-      servidorSelecionado));
 
     const tipo = servidorSelecionado === "todos" ? "bar" : "line";
     const mostrarLegenda = false;
@@ -1183,14 +1110,166 @@
     graficoRam.destroy();
     graficoDisco.destroy();
 
-    graficoCpu = criarGrafico("graficoCpu", montarDatasets("cpu",
-      servidorSelecionado), mostrarLegenda, tipo);
-    graficoRam = criarGrafico("graficoRam", montarDatasets("ram",
-      servidorSelecionado), mostrarLegenda, tipo);
-    graficoDisco = criarGrafico("graficoDisco", montarDatasets("disco",
-      servidorSelecionado), mostrarLegenda, tipo);
+    graficoCpu = criarGrafico("graficoCpu", montarDatasets("cpu", servidorSelecionado), mostrarLegenda, tipo);
+    graficoRam = criarGrafico("graficoRam", montarDatasets("ram", servidorSelecionado), mostrarLegenda, tipo);
+    graficoDisco = criarGrafico("graficoDisco", montarDatasets("disco", servidorSelecionado), mostrarLegenda, tipo);
 
   }
 
+  function gerarRelatorio() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    const mes = Number(filtroMesGraficos.value);
+    const ano = Number(filtroAnoGraficos.value);
+    const nomeMes = meses[mes - 1];
+    const hoje = new Date().toLocaleDateString('pt-BR');
+
+    let y = 20;
+    const margem = 15;
+
+    function titulo(texto) {
+      doc.setFontSize(14); doc.setFont(undefined, 'bold');
+      const linhas = doc.splitTextToSize(texto, 180);
+      doc.text(linhas, margem, y);
+      y += linhas.length * 8;
+    }
+    function subtitulo(texto) {
+      doc.setFontSize(11); doc.setFont(undefined, 'bold');
+      const linhas = doc.splitTextToSize(texto, 180);
+      doc.text(linhas, margem, y);
+      y += linhas.length * 6;
+    }
+    function linha(texto) {
+      doc.setFontSize(10); doc.setFont(undefined, 'normal');
+      const linhas = doc.splitTextToSize(texto, 180);
+      doc.text(linhas, margem, y);
+      y += linhas.length * 5;
+    }
+
+    function separador() {
+      doc.setDrawColor(200);
+      doc.line(margem, y, margem + 180, y); y += 6;
+    }
+    function novaPaginaSeNecessario() {
+      if (y > 270) { doc.addPage(); y = 20; }
+    }
+
+    // CABEÇALHO
+    doc.setFillColor(56, 121, 252);
+    doc.rect(0, 0, 210, 30, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(18); doc.setFont(undefined, 'bold');
+    doc.text("ATMOS — Relatório de Incidentes", margem, 15);
+    doc.setFontSize(11); doc.setFont(undefined, 'normal');
+    doc.text(`Relatório do mês de ${nomeMes} de ${ano}  |  Gerado em: ${hoje}`, margem, 23);
+    doc.setTextColor(0, 0, 0);
+    y = 42;
+
+    titulo("1. Resumo Executivo");
+    separador();
+    const comparacao = document.getElementById("kpiComparacao")?.innerText || "";
+    linha(`Total de Incidentes: ${document.getElementById("kpiTotal").innerText} ${comparacao}`);
+    linha(`Resolvidos: ${document.getElementById("kpiResolvidos").innerText} (${document.getElementById("porcentagemResolvidos").innerText})`);
+    linha(`Em Andamento: ${document.getElementById("kpiAndamento").innerText}`);
+    linha(`Sem Responsável: ${document.getElementById("kpiSemResponsavel").innerText}`);
+    linha(document.getElementById("kpiTMR").innerText);
+    y += 6;
+
+    novaPaginaSeNecessario();
+    titulo("2. Incidentes por Servidor");
+    separador();
+
+    if (dadosApi?.incidentes) {
+      Object.entries(dadosApi.incidentes)
+        .sort((a, b) => b[1].TotalIncidentes.total_mes - a[1].TotalIncidentes.total_mes)
+        .forEach(([servidor, dados]) => {
+          novaPaginaSeNecessario();
+          subtitulo(`${servidor} — ${dados.TotalIncidentes.total_mes} incidente(s)`);
+          linha(`  CPU: ${dados.Componentes.cpu.length}  |  RAM: ${dados.Componentes.ram.length} | Disco: ${dados.Componentes.disco.length}`);
+          y += 2;
+        });
+    } else {
+      linha("Sem dados para o período selecionado.");
+    }
+    y += 4;
+
+    novaPaginaSeNecessario();
+    titulo("3. Picos de Uso por Servidor");
+    separador();
+
+    if (dadosApiGraficos?.metricas) {
+      Object.entries(dadosApiGraficos.metricas).forEach(([servidor, dados]) => {
+        novaPaginaSeNecessario();
+        subtitulo(servidor);
+        linha(`  CPU: ${dados.pico_mes.cpu}%  |  RAM: ${dados.pico_mes.ram}%  | Disco: ${dados.pico_mes.disco}%`);
+        y += 2;
+      });
+    } else {
+      linha("Sem dados para o período selecionado.");
+    }
+    y += 4;
+
+    novaPaginaSeNecessario();
+    titulo("4. Gestão de Incidentes");
+    separador();
+
+    if (todosChamados.length > 0) {
+      todosChamados.forEach(({ key, fields }) => {
+        novaPaginaSeNecessario();
+        const chaveStatus = fields.status.statusCategory.key;
+        const status = chaveStatus === "done" ? "Resolvido" : chaveStatus === "indeterminate" ? "Em Andamento" : "Aberto";
+        const responsavel = fields.assignee?.displayName || "Sem responsável";
+        const servidor = fields.summary.split(' - ')[0];
+        linha(`[${key}] ${servidor}`);
+        linha(`  Status: ${status}  |  Responsável: ${responsavel}`);
+        y += 2;
+      });
+    } else {
+      linha("Nenhum incidente encontrado.");
+    }
+
+    // 5. ANÁLISE AUTOMÁTICA
+    novaPaginaSeNecessario();
+    titulo("5. Análise do Período");
+    separador();
+
+    if (dadosApi?.incidentes) {
+      const entradas = Object.entries(dadosApi.incidentes);
+
+      const maisProblematico = entradas.reduce((a, b) =>
+        b[1].TotalIncidentes.total_mes > a[1].TotalIncidentes.total_mes ? b : a);
+      const menosProblematico = entradas.reduce((a, b) =>
+        b[1].TotalIncidentes.total_mes < a[1].TotalIncidentes.total_mes ? b : a);
+
+      const totalCpu = entradas.reduce((s, [, d]) => s +
+        d.Componentes.cpu.length, 0);
+      const totalRam = entradas.reduce((s, [, d]) => s +
+        d.Componentes.ram.length, 0);
+      const totalDisco = entradas.reduce((s, [, d]) => s +
+        d.Componentes.disco.length, 0);
+      const componenteMaisCritico = totalCpu >= totalRam && totalCpu >= totalDisco ? "CPU" : totalRam >= totalDisco ? "RAM" : "Disco";
+
+      linha(`Servidor com mais incidentes: ${maisProblematico[0]} (${maisProblematico[1].TotalIncidentes.total_mes} ocorrências)`);
+      linha(`Servidor com menos incidentes: ${menosProblematico[0]}(${menosProblematico[1].TotalIncidentes.total_mes} ocorrências)`);
+      linha(`Componente mais crítico no período: ${componenteMaisCritico} (CPU: ${totalCpu} | RAM: ${totalRam} | Disco: ${totalDisco})`);
+    } else {
+      linha("Sem dados suficientes para análise.");
+    }
+
+
+    // RODAPÉ EM TODAS AS PÁGINAS
+    const totalPaginas = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= totalPaginas; i++) {
+      doc.setPage(i);
+      doc.setFontSize(9); doc.setTextColor(150);
+      doc.text(`ATMOS  |  ${nomeMes} ${ano}  |  Página ${i} de ${totalPaginas}`,
+        margem, 290);
+    }
+
+    doc.save(`relatorio_atmos_${String(mes).padStart(2, '0')}_${ano}.pdf`);
+  }
 
 </script>
