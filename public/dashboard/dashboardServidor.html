@@ -236,7 +236,7 @@
           <div class="botoes">
             <button class="acao acao-primaria" onclick="redirecionar()">Análise de Carga</button>
             <button class="acao acao-primaria" onclick="redirecionar()">Análise do Servidor</button>
-            <button class="acao acao-secundaria" onclick="redirecionar()">Processos</button>
+            <button class="acao acao-secundaria" onclick="redirecionarProcessos()">Processos</button>
             <button class="acao acao-secundaria" onclick="redirecionar()">Gerar Relatório</button>
           </div>
         </div>
@@ -615,5 +615,10 @@ btnVerMais.addEventListener('click', () => {
 function redirecionar() {
   window.location.href =
     `./dashboardAnalisePreditiva.html?id=${window.servidorSelecionado}`
+} 
+
+function redirecionarProcessos(){
+  window.location.href =
+   `./dashboardProcessos.html?server=${window.sessionStorage.NOME_SERVIDOR}`
 }
 </script>
