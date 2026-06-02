@@ -849,11 +849,12 @@ else {
     try {
 
       const empresa = sessionStorage.FKEMPRESA;
+      const nomeEmpresa = sessionStorage.getItem('RAZAO_SOCIAL');
 
       // const servidor =
       //   sessionStorage.SERVIDOR;
 
-      const resposta = await fetch(`/analisepreditiva/listar?empresa=${empresa}`);
+      const resposta = await fetch(`/analisepreditiva/listar?empresa=${empresa}&nomeEmpresa=${nomeEmpresa}`);
 
       const dados = await resposta.json();
 

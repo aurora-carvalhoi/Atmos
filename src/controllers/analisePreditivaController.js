@@ -22,6 +22,7 @@ const s3 = new S3Client({
 async function buscarAnalisePreditiva(req, res) {
   try {
     const empresa = req.query.empresa;
+    const nomeEmpresa = req.query.nomeEmpresa;
 
     if (!empresa) {
       return res.status(400).json({
@@ -29,7 +30,7 @@ async function buscarAnalisePreditiva(req, res) {
       });
     }
 
-     const key = `dados_csv/2.json`;
+     const key = `client/${nomeEmpresa}/${empresa}.json`;
 
     console.log("Buscando arquivo:", key);
 

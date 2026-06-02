@@ -471,8 +471,7 @@ async function carregarServidores() {
   var selectServidor = document.getElementById("selectServidorAnalise");
 
   try {
-    var resposta = await fetch("/s3/servidores");
-    var dadosS3 = await resposta.json();
+    var dadosS3 = await buscarDadosServidoresEmpresa();
     var servidores = obterServidoresDoS3(dadosS3);
 
     selectServidor.innerHTML = "";
@@ -491,7 +490,7 @@ async function carregarServidores() {
 
       option.value = servidor.idServidor;
       option.innerHTML = servidor.hostname;
-      option.setAttribute("data-status", "Ativo");
+      option.setAttribute("data-status", servidor.statusServidor || "Ativo");
       option.setAttribute("data-hostname", servidor.hostname);
 
       selectServidor.appendChild(option);
@@ -518,6 +517,22 @@ async function carregarServidores() {
   }
 }
 
+async function buscarDadosServidoresEmpresa() {
+  var empresa = sessionStorage.getItem("RAZAO_SOCIAL");
+  var resposta = null;
+
+  if (empresa) {
+    resposta = await fetch("/s3/dados/" + encodeURIComponent(empresa));
+
+    if (resposta.ok) {
+      return resposta.json();
+    }
+  }
+
+  resposta = await fetch("/s3/servidores");
+  return resposta.json();
+}
+
 function obterServidoresDoS3(dadosS3) {
   var servidores = [];
   hostnamesServidores = [];
@@ -533,8 +548,9 @@ function obterServidoresDoS3(dadosS3) {
       hostnamesServidores.push(host.hostname);
 
       servidores.push({
-        idServidor: i + 1,
-        hostname: host.hostname
+        idServidor: host.idServidor || host.servidor_id || i + 1,
+        hostname: host.hostname,
+        statusServidor: host.statusServidor || host.status || "Ativo"
       });
     }
   }
