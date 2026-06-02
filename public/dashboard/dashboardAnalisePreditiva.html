@@ -778,7 +778,23 @@ new Chart(
         "icone-desvio"
       );
 
-  if (variacaoPrevista >= 10) {
+if (status === "CRITICO" && variacaoPrevista <= 0) {
+  blocoDesvio.className = "mini-interpretacao critico";
+  iconeDesvio.textContent = "⚠";
+  textoDesvio.innerHTML = `
+    Temperatura crítica mantida.
+
+    Sem tendência de resfriamento significativo.
+  `;
+} else if (status === "ALERTA" && variacaoPrevista <= 0) {
+  blocoDesvio.className = "mini-interpretacao alerta";
+  iconeDesvio.textContent = "⚠";
+  textoDesvio.innerHTML = `
+    Temperatura em nível de alerta.
+    
+    Sem tendência de resfriamento significativo.
+  `;
+} else if(variacaoPrevista >= 10) {
 
   blocoDesvio.className =
     "mini-interpretacao critico";
@@ -794,7 +810,6 @@ new Chart(
   `;
 
 }
-
 else if (variacaoPrevista >= 5) {
 
   blocoDesvio.className =
