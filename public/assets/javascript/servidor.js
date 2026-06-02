@@ -1,5 +1,6 @@
 async function buscarClient() {
-  const res = await fetch("/s3/dados");
+  var empresa = sessionStorage.getItem("RAZAO_SOCIAL")
+  const res = await fetch(`/s3/dados/${empresa}`);
   const data = await res.json();
   return data;
 }

@@ -316,6 +316,13 @@
 <script src="../assets/javascript/sessao.js"></script>
 
 <script>
+async function buscarClient() {
+  var empresa = sessionStorage.getItem("RAZAO_SOCIAL")
+  const res = await fetch(`/s3/dados/${empresa}`);
+  const data = await res.json();
+  return data;
+}
+
   Chart.defaults.font.family = "Barlow";
   Chart.defaults.color = "#4e4e4e";
 

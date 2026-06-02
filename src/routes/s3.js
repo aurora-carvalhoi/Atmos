@@ -6,8 +6,8 @@ const s3Controller =
   require("../controllers/s3Controller");
 
 router.get(
-  "/dados",
-  s3Controller.buscarDados
+  "/dados/:empresa",
+  s3Controller.carregarJSON
 );
 
 module.exports = router;

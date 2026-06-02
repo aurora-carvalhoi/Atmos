@@ -4,19 +4,21 @@ const { buscarJson } = require("../services/s3Services");
 
 var cacheJSON = null;
 
-async function carregarJSON() {
+async function carregarJSON(req, res) {
   try {
-    cacheJSON = await buscarJson(
+    const nome_empresa = req.params.empresa;
+      cacheJSON = await buscarJson(
       process.env.bucket_name,
-      "client/empresaX/client.json"
+      `client/${nome_empresa}/client.json`
     );
+    res.json(cacheJSON);
     console.log("JSON carregado com sucesso");
   } catch (erro) {
     console.error("Erro", erro);
   }
 }
 
-function buscarDados(req, res) {
+function buscarDados() {
   if (!cacheJSON) {
     return res.status(503).json({
     });
@@ -24,10 +26,10 @@ function buscarDados(req, res) {
   res.json(cacheJSON);
 }
 
-carregarJSON();
+// carregarJSON();
 
 setInterval(() => {
   carregarJSON();
 }, 20 * 60 * 1000);
 
-module.exports = {buscarDados};
+module.exports = {buscarDados, carregarJSON};
