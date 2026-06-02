@@ -366,7 +366,7 @@
 <script>
   const params = new URLSearchParams(window.location.search)
   const idServidor = params.get("id")
-
+  const server = params.get('server');
   const RECOMENDACOES = {
 
     ALERTA: [
@@ -446,7 +446,7 @@
 
   function renderizar(dados) {
 
-    const k = dados.kpis;
+    const k = dados.hosts[idServidor].kpis;
 
     const classe = classeStatus(k.status);
 
@@ -459,8 +459,8 @@
     emblemaStatus.textContent = rotulo;
 
     emblemaStatus.className =
-      "campo-status emblema-status-" +
-      k.status.toLowerCase();
+      "campo-status emblema-status-" 
+      + k.status;
 
 
 
@@ -577,7 +577,7 @@
 
 
     const pontosReais = [];
-
+    console.log(dados)
     for (let i = 0; i < dados.hosts[idServidor].grafico.length; i++) {
 
       pontosReais.push({
@@ -848,8 +848,7 @@ else {
 
     try {
 
-      const empresa =
-        sessionStorage.FKEMPRESA;
+      const empresa = sessionStorage.FKEMPRESA;
 
       // const servidor =
       //   sessionStorage.SERVIDOR;
