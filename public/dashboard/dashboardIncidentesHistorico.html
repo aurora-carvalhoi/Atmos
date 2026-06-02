@@ -396,6 +396,8 @@
 
 <script>
 
+  const nomeEmpresa = sessionStorage.getItem("RAZAO_SOCIAL");
+
   //Filtros da página
   const filtroMes = document.getElementById("filtroMes");
   const filtroAno = document.getElementById("filtroAno");
@@ -423,14 +425,14 @@
   let dadosApiGraficos = null;
 
   async function carregarDados() {
-    const empresa = "empresaX";
+    const empresa = nomeEmpresa;
     const mes = filtroMes.value;
     const ano = filtroAno.value;
     const mesFormatado = String(mes).padStart(2, '0');
     const arquivo = `client_${mesFormatado}_${ano}.json`;
 
     const resposta = await
-      fetch(`/incidentesHistoricos/listar?empresa=${empresa}&arquivo=${arquivo}`);
+      fetch(`/incidentesHistoricos/listar?empresa=${encodeURIComponent(empresa)}&arquivo=${arquivo}`);
 
     dadosApi = await resposta.json()
   }
@@ -517,7 +519,7 @@
 
     try {
       const respostaAtual = await fetch(
-        `/incidentesHistoricos/listar?empresa=empresaX&arquivo=client_${mesFormatado}_${ano}.json`
+        `/incidentesHistoricos/listar?empresa=${encodeURIComponent(empresa)}&arquivo=client_${mesFormatado}_${ano}.json`
       );
       const dadosMesAtual = await respostaAtual.json();
       const totalAtual = Object.values(dadosMesAtual.incidentes).reduce((soma, servidor) => soma + servidor.TotalIncidentes.total_mes, 0);
@@ -529,7 +531,7 @@
       const mesPrevFmt = String(mesPrev).padStart(2, '0');
 
       const respostaAnterior = await fetch(
-        `/incidentesHistoricos/listar?empresa=empresaX&arquivo=client_${mesPrevFmt}_${anoPrev}.json`
+        `/incidentesHistoricos/listar?empresa=${encodeURIComponent(empresa)}&arquivo=client_${mesPrevFmt}_${anoPrev}.json`
       );
       const dadosMesAnterior = await respostaAnterior.json();
       const totalAnterior = Object.values(dadosMesAnterior.incidentes).reduce((soma, servidor) => soma + servidor.TotalIncidentes.total_mes, 0);
@@ -555,12 +557,12 @@
 
   //Aqui temos a função que cria variáveis para manipulação dos gráficos com chart.js
   async function carregarDadosGraficos() {
-    const empresa = "empresaX";
+    const empresa = nomeEmpresa;
     const mes = document.getElementById("filtroMesGraficos").value;
     const ano = document.getElementById("filtroAnoGraficos").value;
     const mesFormatado = String(mes).padStart(2, '0');
     const arquivo = `client_${mesFormatado}_${ano}.json`;
-    const resposta = await fetch(`/incidentesHistoricos/listar?empresa=${empresa}&arquivo=${arquivo}`);
+    const resposta = await fetch(`/incidentesHistoricos/listar?empresa=${encodeURIComponent(empresa)}&arquivo=${arquivo}`);
     dadosApiGraficos = await resposta.json();
   }
 

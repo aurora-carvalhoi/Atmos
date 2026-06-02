@@ -391,6 +391,8 @@
 <script src="../assets/javascript/climaTempo.js   "></script>
 
 <script>
+   const empresa = sessionStorage.RAZAO_SOCIAL;
+  
   // db
   function buscarSla() {
     fkEmpresa = sessionStorage.FKEMPRESA
@@ -498,9 +500,6 @@
   // s3
   async function buscarIncidentes() {
     try {
-
-      const empresa = "empresaX";
-
       const hoje = new Date();
 
       const atual = new Date(hoje);
@@ -592,7 +591,7 @@
     }
   }
   async function buscarClientS3() {
-    const res = await fetch('/s3/dados')
+    const res = await fetch(`/s3/dados/${empresa}`);
     const dataClient = await res.json()
     const totalRegistros = dataClient.resumo.total_registros
     const hostsAtivos = dataClient.resumo.hosts_ativos

@@ -11,6 +11,11 @@ router.get(
 );
 
 router.get(
+  "/dados/:empresa",
+  s3Controller.carregarJSON
+);
+
+router.get(
   "/servidores",
   s3Controller.listarServidores
 );
