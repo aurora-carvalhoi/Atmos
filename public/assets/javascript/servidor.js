@@ -1,30 +1,57 @@
 async function buscarClient() {
-  var empresa = sessionStorage.getItem("RAZAO_SOCIAL")
-  const res = await fetch(`/s3/dados/${empresa}`);
-  const data = await res.json();
-  return data;
+  var empresa = sessionStorage.getItem("RAZAO_SOCIAL");
+  var fkEmpresa = sessionStorage.FKEMPRESA;
+  var nomeEmpresa = sessionStorage.getItem("RAZAO_SOCIAL");
+
+  var resClient = await fetch(`/s3/dados/${empresa}`);
+  var dataClient = await resClient.json();
+
+  var dataTemp = { hosts: [] };
+  try {
+    var resTemp = await fetch(`/analisepreditiva/listar?empresa=${fkEmpresa}&nomeEmpresa=${nomeEmpresa}`);
+    if (resTemp.ok) {
+      dataTemp = await resTemp.json();
+    }
+  } catch (erro) {
+    console.error("Erro ao buscar análise preditiva:", erro);
+  }
+
+  return { dataClient: dataClient, dataTemp: dataTemp };
 }
-const dataClient = await buscarClient();
+
+var resultado = await buscarClient();
+var dataClient = resultado.dataClient;
+var dataTemp = resultado.dataTemp;
+
 console.log(dataClient);
 console.log(dataClient.empresas);
 
-const totalRegistros = dataClient.resumo.total_registros;
-const hostsAtivos = dataClient.resumo.hosts_ativos;
-const indiceUltimaLeitura = totalRegistros / hostsAtivos - 1;
+var mapTemperatura = {};
+for (var i = 0; i < dataTemp.hosts.length; i++) {
+  var host = dataTemp.hosts[i];
+  var grafico = host.grafico;
+  if (grafico && grafico.length > 0) {
+    mapTemperatura[host.host_id] = grafico[grafico.length - 1].temperatura;
+  }
+}
 
-const classesPorStatus = [
+var totalRegistros = dataClient.resumo.total_registros;
+var hostsAtivos = dataClient.resumo.hosts_ativos;
+var indiceUltimaLeitura = totalRegistros / hostsAtivos - 1;
+
+var classesPorStatus = [
   "etiqueta-verde",
   "etiqueta-amarela",
   "etiqueta-vermelha",
 ];
-const textosPorStatus = ["Oper.", "Aten.", "Crit."];
-const coresPorNivel = ["#3879fc", "#f59e0b", "#dc2626"];
+var textosPorStatus = ["Oper.", "Aten.", "Crit."];
+var coresPorNivel = ["#3879fc", "#f59e0b", "#dc2626"];
 
-const LIMITES_ALERTA = {
+var LIMITES_ALERTA = {
   cpu: { atencao: 80, critico: 90 },
   ram: { atencao: 75, critico: 90 },
   disco: { atencao: 85, critico: 95 },
-  temp: { atencao: 85, critico: 95 },
+  temp: { atencao: 70, critico: 85 },
 };
 
 function nivelBarra(valor, tipo) {
@@ -103,7 +130,7 @@ function listarServidor() {
     }
   }
 
-  const tabelaBody = document.getElementById("tabela_lista_servidor");
+  var tabelaBody = document.getElementById("tabela_lista_servidor");
   if (tabelaBody) {
     tabelaBody.innerHTML = linhasCriticos + linhasAtencao + linhasOperando;
   }
@@ -111,7 +138,7 @@ function listarServidor() {
 
 // Gráfico
 function criarGraficos() {
-  const canvasGrafico = document.getElementById("perfomaInfra");
+  var canvasGrafico = document.getElementById("perfomaInfra");
   if (!canvasGrafico) {
     return;
   }
@@ -185,7 +212,10 @@ function criarGraficos() {
           position: "left",
           min: 0,
           max: 100,
-          ticks: { font: { size: 9 }, callback: (v) => v + "%" },
+          ticks: {
+            font: { size: 9 },
+            callback: function (v) { return v + "%"; }
+          },
           grid: { color: "#f0f0f0" },
         },
         yProcessos: {
@@ -199,7 +229,7 @@ function criarGraficos() {
   });
 }
 
-// ── Detalhe do servidor selecionado
+// Detalhe do servidor selecionado
 function exibirDetalhesServidor(idServidor) {
   var servidor = dataClient.hosts[idServidor];
   var metricas = servidor.metricas;
@@ -213,8 +243,8 @@ function exibirDetalhesServidor(idServidor) {
   var nivelDisco = nivelBarra(valorDisco, "disco");
 
   // Header
-  const elNomeServidor = document.getElementById("modal_detalhe_nome_servidor");
-  const elIndicador = document.getElementById("modal_cabecalho_indicador");
+  var elNomeServidor = document.getElementById("modal_detalhe_nome_servidor");
+  var elIndicador = document.getElementById("modal_cabecalho_indicador");
   if (elNomeServidor) {
     elNomeServidor.innerText = servidor.hostname;
   }
@@ -223,9 +253,9 @@ function exibirDetalhesServidor(idServidor) {
   }
 
   // Valores dos KPIs
-  const elValorCpu = document.getElementById("modal_detalhe_uso_cpu");
-  const elValorRam = document.getElementById("modal_detalhe_uso_ram");
-  const elValorDisco = document.getElementById("modal_detalhe_uso_disco");
+  var elValorCpu = document.getElementById("modal_detalhe_uso_cpu");
+  var elValorRam = document.getElementById("modal_detalhe_uso_ram");
+  var elValorDisco = document.getElementById("modal_detalhe_uso_disco");
   if (elValorCpu) {
     elValorCpu.innerText = valorCpu + "%";
   }
@@ -237,11 +267,9 @@ function exibirDetalhesServidor(idServidor) {
   }
 
   // Barras de progresso dos KPIs
-  const elBarraCpu = document.getElementById("modal_detalhe_preenchimento_cpu");
-  const elBarraRam = document.getElementById("modal_detalhe_preenchimento_ram");
-  const elBarraDisco = document.getElementById(
-    "modal_detalhe_preenchimento_disco",
-  );
+  var elBarraCpu = document.getElementById("modal_detalhe_preenchimento_cpu");
+  var elBarraRam = document.getElementById("modal_detalhe_preenchimento_ram");
+  var elBarraDisco = document.getElementById("modal_detalhe_preenchimento_disco");
 
   if (elBarraCpu) {
     elBarraCpu.style.width = valorCpu + "%";
@@ -258,7 +286,7 @@ function exibirDetalhesServidor(idServidor) {
 
   // Coloração dos cards por nível
   function atualizarEstadoCard(idCard, nivel) {
-    const card = document.getElementById(idCard);
+    var card = document.getElementById(idCard);
     if (!card) {
       return;
     }
@@ -275,26 +303,25 @@ function exibirDetalhesServidor(idServidor) {
   atualizarEstadoCard("card_disco", nivelDisco);
 
   // Métricas secundárias
-  const elProcessos = document.getElementById("modal_info_processos");
-  const elTemperatura = document.getElementById("modal_info_temperatura");
-  const elDiscoTotal = document.getElementById("modal_info_disco");
-  const elConexoesTcp = document.getElementById("modal_info_conexao_tcp");
+  var elProcessos = document.getElementById("modal_info_processos");
+  var elTemperatura = document.getElementById("modal_info_temperatura");
+  var elDiscoTotal = document.getElementById("modal_info_disco");
+  var elConexoesTcp = document.getElementById("modal_info_conexao_tcp");
 
-  const quantidadeProcessosAtual = metricas.processos[indiceUltimaLeitura];
+  var quantidadeProcessosAtual = metricas.processos[indiceUltimaLeitura];
   var quantidadeProcessosAnterior;
   if (indiceUltimaLeitura > 0) {
     quantidadeProcessosAnterior = metricas.processos[indiceUltimaLeitura - 1];
   } else {
     quantidadeProcessosAnterior = quantidadeProcessosAtual;
   }
-  const variacaoProcessos =
-    quantidadeProcessosAtual - quantidadeProcessosAnterior;
+  var variacaoProcessos = quantidadeProcessosAtual - quantidadeProcessosAnterior;
   if (elProcessos) {
     elProcessos.innerText = quantidadeProcessosAtual;
   }
 
-  //tendência dos processos
-  const elTendenciaProcessos = document.getElementById("trend_processos");
+  // Tendência dos processos
+  var elTendenciaProcessos = document.getElementById("trend_processos");
   if (elTendenciaProcessos) {
     if (variacaoProcessos > 0) {
       elTendenciaProcessos.textContent = "+" + variacaoProcessos;
@@ -308,14 +335,41 @@ function exibirDetalhesServidor(idServidor) {
     }
   }
 
+  // Temperatura — vem do JSON de análise preditiva, cruzado pelo host_id
   if (elTemperatura) {
-    elTemperatura.innerHTML = "30 °C";
-    const elDotTemperatura = document.getElementById("dot_temperatura");
-    if (elDotTemperatura) {
-      elDotTemperatura.className = "mini-status-dot verde";
-      elDotTemperatura.title = "Normal (≤85°C)";
+    var tempAtual = mapTemperatura[servidor.host_id];
+    if (tempAtual == undefined) {
+      tempAtual = null;
+    }
+
+    if (tempAtual != null) {
+      elTemperatura.innerHTML = tempAtual + " °C";
+    } else {
+      elTemperatura.innerHTML = "N/D";
+    }
+
+    var nivelTemp = 0;
+    if (tempAtual != null) {
+      nivelTemp = nivelBarra(tempAtual, "temp");
+    }
+
+    atualizarEstadoCard("card_temperatura", nivelTemp);
+
+    var elDotTemperatura = document.getElementById("dot_temperatura");
+    if (elDotTemperatura && tempAtual != null) {
+      if (nivelTemp == 2) {
+        elDotTemperatura.className = "mini-status-dot vermelho";
+        elDotTemperatura.title = "Crítico (>85°C)";
+      } else if (nivelTemp == 1) {
+        elDotTemperatura.className = "mini-status-dot amarelo";
+        elDotTemperatura.title = "Atenção (>70°C)";
+      } else {
+        elDotTemperatura.className = "mini-status-dot verde";
+        elDotTemperatura.title = "Normal (≤70°C)";
+      }
     }
   }
+
   if (elDiscoTotal) {
     elDiscoTotal.innerText = metricas.disco_total[indiceUltimaLeitura] + " Gb";
   }
@@ -325,7 +379,7 @@ function exibirDetalhesServidor(idServidor) {
 }
 
 function exibirGraficos(idServidor) {
-  const servidor = dataClient.hosts[idServidor];
+  var servidor = dataClient.hosts[idServidor];
   var rotulosEixoX = [];
 
   for (var i = 0; i <= indiceUltimaLeitura; i++) {
@@ -353,20 +407,21 @@ function detalhesServidor(idServidor) {
 function selecionarServidor(elementoLinha, idServidor) {
   window.servidorSelecionado = idServidor;
   sessionStorage.NOME_SERVIDOR = dataClient.hosts[idServidor].hostname;
-  const todasLinhas = document.querySelectorAll("#tabela_lista_servidor tr");
-  todasLinhas.forEach(function (linha) {
-    linha.classList.remove("tr-selecionada");
-  });
+  var todasLinhas = document.querySelectorAll("#tabela_lista_servidor tr");
+  for (var i = 0; i < todasLinhas.length; i++) {
+    todasLinhas[i].classList.remove("tr-selecionada");
+  }
   elementoLinha.classList.add("tr-selecionada");
   detalhesServidor(idServidor);
 }
+
 function removerServidor(idServidor) {
   var servidor = dataClient.hosts[idServidor];
   var modalRemocao = document.getElementById("modalRemoverServidor");
   if (modalRemocao) {
     modalRemocao.style.display = "flex";
   }
-  const elTituloRemocao = document.getElementById("modal_remover_servidor");
+  var elTituloRemocao = document.getElementById("modal_remover_servidor");
   if (elTituloRemocao) {
     elTituloRemocao.innerText =
       "Remover Servidor: " + servidor.hostname + " - #" + servidor.host_id;

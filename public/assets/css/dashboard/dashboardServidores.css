@@ -250,6 +250,14 @@ html, body {
   gap: 8px;
 }
 
+.info-mini-card {
+  background: var(--color-white-blue);
+  border: 1px solid #e8ecf4;
+  border-radius: 7px;
+  padding: 8px 12px;
+  transition: border-color 0.3s;
+}
+
 .kpi-servidor-card {
   background: var(--color-white-blue);
   border: 1px solid #e8ecf4;
@@ -264,6 +272,15 @@ html, body {
   background: #fffbeb;
 }
 .kpi-servidor-card.estado-critico {
+  border-color: #fca5a5;
+  background: #fff5f5;
+}
+
+.info-mini-card.estado-atencao {
+  border-color: #fcd34d;
+  background: #fffbeb;
+}
+.info-mini-card.estado-critico {
   border-color: #fca5a5;
   background: #fff5f5;
 }
