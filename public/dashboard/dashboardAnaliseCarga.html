@@ -32,62 +32,27 @@
 
     <ul class="nav-links">
       <ul>
-        <li class="nav-category">
-          <span>PRINCIPAL</span>
-        </li>
-        <li class="nav-item area-contribuidor">
-          <a href="./dashboardAtmos.html">
-            <img src="../assets/images/pc.svg" class="icon" alt="">
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardAtmosGerente.html">
-            <img src="../assets/images/pc.svg" class="icon" alt="">
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="nav-item nav-item-active">
-          <a href="./dashboardAnaliseCarga.html">
-            <img src="../assets/images/clima.svg" class="icon" alt="">
-            <span>Análise</span>
-          </a>
-        </li>
-        <li class="nav-item area-contribuidor">
-          <a href="./dashboardAlertas.html">
-            <img src="../assets/images/alert.svg" class="icon" alt="">
-            <span>Alertas</span>
-          </a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardAlertasGerente.html">
-            <img src="../assets/images/alert.svg" class="icon" alt="">
-            <span>Alertas</span>
-          </a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardRelatorios.html">
-            <img src="../assets/images/documentos.svg" class="icon" alt="">
-            <span>Relatorios</span>
-          </a>
-        </li>
-      </ul>
-      <ul>
-        <li class="nav-category">
-          <span>INFRAESTRUTURA</span>
-        </li>
-        <li class="nav-item">
-          <a href="./dashboardServidor.html">
-            <img src="../assets/images/server.svg" class="icon" alt="">
-            <span>Servidores</span>
-          </a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardEquipe.html">
-            <img src="../assets/images/user.svg" class="icon" alt="">
-            <span>Eq    uipe</span>
-          </a>
-        </li>
+        <ul>
+          <li class="nav-category"><span>PRINCIPAL</span></li>
+          <li class="nav-item">
+            <a href="./dashboardServidor.html"><img src="../assets/images/server.svg" class="icon"
+                alt=""><span>Hub</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="./dashboardAnalisePreditiva.html"><img src="../assets/images/lupa.svg" class="icon"
+                alt=""><span>Análise</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="./dashboardProcessos.html"><img src="../assets/images/documentos.svg" class="icon"
+                alt=""><span>Processos</span></a>
+          </li>
+          <li class="nav-item nav-item-active">
+            <a href="./dashboardAnaliseCarga.html"><img src="../assets/images/clima.svg" class="icon"
+                alt=""><span>Carga</span></a>
+          </li>
+        </ul>
+        <ul>
+        </ul>
       </ul>
     </ul>
 
@@ -191,7 +156,8 @@
       <div class="tela">
         <div>
           <h1>Análise de Carga Sob Eventos Climáticos</h1>
-          <span>Correlação entre requisições, períodos críticos e eventos climáticos que pressionam a infraestrutura.</span>
+          <span>Correlação entre requisições, períodos críticos e eventos climáticos que pressionam a
+            infraestrutura.</span>
         </div>
         <div class="grade-servidor servidor-cabecalho-analise">
           <div class="campo-servidor">
@@ -311,496 +277,495 @@
 
   </main>
 
-<script src="../assets/javascript/datetime.js"></script>
-<script src="../assets/javascript/menu.js"></script>
-<script src="../assets/javascript/sessao.js"></script>
+  <script src="../assets/javascript/datetime.js"></script>
+  <script src="../assets/javascript/menu.js"></script>
+  <script src="../assets/javascript/sessao.js"></script>
 
-<script>
-  Chart.defaults.font.family = "Barlow";
-  Chart.defaults.color = "#4e4e4e";
+  <script>
+    Chart.defaults.font.family = "Barlow";
+    Chart.defaults.color = "#4e4e4e";
 
-var diasSemana = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"];
-var horasHeatmap = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22];
+    var diasSemana = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"];
+    var horasHeatmap = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22];
 
-var servidorSelecionadoAnalise = sessionStorage.getItem("servidorSelecionado") || "";
-var hostnamesServidores = [];
-var graficoRequisicoes = null;
-var graficoEventos = null;
+    var servidorSelecionadoAnalise = sessionStorage.getItem("servidorSelecionado") || "";
+    var hostnamesServidores = [];
+    var graficoRequisicoes = null;
+    var graficoEventos = null;
 
-window.onload = async function () {
-  criarGraficos();
-  await carregarServidores();
-}
+    window.onload = async function () {
+      criarGraficos();
+      await carregarServidores();
+    }
 
-function criarGraficos() {
-  criarGraficoRequisicoes();
-  criarGraficoEventos();
-}
+    function criarGraficos() {
+      criarGraficoRequisicoes();
+      criarGraficoEventos();
+    }
 
-function criarGraficoRequisicoes() {
-  var canvas = document.getElementById("graficoRequisicoes");
+    function criarGraficoRequisicoes() {
+      var canvas = document.getElementById("graficoRequisicoes");
 
-  graficoRequisicoes = new Chart(canvas, {
-    type: "line",
-    data: {
-      labels: [],
-      datasets: [
-        {
-          label: "Requisições por minuto",
-          data: [],
-          borderColor: "#3879FC",
-          backgroundColor: "rgba(56, 121, 252, 0.12)",
-          fill: true,
-          tension: 0.35,
-          pointRadius: 3,
-          pointBackgroundColor: "#004AAD"
-        },
-        {
-          label: "Faixa operacional esperada",
-          data: [],
-          borderColor: "#8A8F98",
-          borderDash: [6, 6],
-          fill: false,
-          tension: 0.35,
-          pointRadius: 0
-        },
-        {
-          label: "Pico associado ao evento climatico",
-          data: [],
-          borderColor: "#D77706",
-          backgroundColor: "#D77706",
-          pointRadius: 7,
-          pointHoverRadius: 9,
-          showLine: false
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              return context.dataset.label + ": " + formatarNumero(context.raw) + " req/min";
+      graficoRequisicoes = new Chart(canvas, {
+        type: "line",
+        data: {
+          labels: [],
+          datasets: [
+            {
+              label: "Requisições por minuto",
+              data: [],
+              borderColor: "#3879FC",
+              backgroundColor: "rgba(56, 121, 252, 0.12)",
+              fill: true,
+              tension: 0.35,
+              pointRadius: 3,
+              pointBackgroundColor: "#004AAD"
+            },
+            {
+              label: "Faixa operacional esperada",
+              data: [],
+              borderColor: "#8A8F98",
+              borderDash: [6, 6],
+              fill: false,
+              tension: 0.35,
+              pointRadius: 0
+            },
+            {
+              label: "Pico associado ao evento climatico",
+              data: [],
+              borderColor: "#D77706",
+              backgroundColor: "#D77706",
+              pointRadius: 7,
+              pointHoverRadius: 9,
+              showLine: false
             }
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 20000,
-          ticks: {
-            callback: function (valor) {
-              return valor >= 1000 ? valor / 1000 + "k" : valor;
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  return context.dataset.label + ": " + formatarNumero(context.raw) + " req/min";
+                }
+              }
             }
           },
-          grid: {
-            color: "#ececec"
-          }
-        },
-        x: {
-          grid: {
-            color: "#f1f1f1"
-          }
-        }
-      }
-    }
-  });
-}
-
-function criarGraficoEventos() {
-  var canvas = document.getElementById("graficoEventos");
-
-  graficoEventos = new Chart(canvas, {
-    type: "bar",
-    data: {
-      labels: [],
-      datasets: [
-        {
-          data: [],
-          backgroundColor: ["#D92629", "#3879FC", "#004AAD", "#D77706"],
-          borderRadius: 5
-        }
-      ]
-    },
-    options: {
-      indexAxis: "y",
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              return formatarNumero(context.raw) + " req/min";
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 20000,
+              ticks: {
+                callback: function (valor) {
+                  return valor >= 1000 ? valor / 1000 + "k" : valor;
+                }
+              },
+              grid: {
+                color: "#ececec"
+              }
+            },
+            x: {
+              grid: {
+                color: "#f1f1f1"
+              }
             }
           }
         }
-      },
-      scales: {
-        x: {
-          beginAtZero: true,
-          max: 18000,
-          ticks: {
-            callback: function (valor) {
-              return valor >= 1000 ? valor / 1000 + "k" : valor;
-            }
-          },
-          grid: {
-            color: "#ececec"
-          }
-        },
-        y: {
-          grid: {
-            display: false
-          }
-        }
-      }
-    }
-  });
-}
-
-async function carregarServidores() {
-  var selectServidor = document.getElementById("selectServidorAnalise");
-
-  try {
-    var dadosS3 = await buscarDadosServidoresEmpresa();
-    var servidores = obterServidoresDoS3(dadosS3);
-
-    selectServidor.innerHTML = "";
-
-    if (!servidores || servidores.length == 0) {
-      selectServidor.innerHTML = "<option value=''>Nenhum servidor encontrado</option>";
-      atualizarStatusServidor("--");
-      atualizarTexto("ultimaAtualizacao", "Ultima atualizacao: nenhum servidor cadastrado");
-      atualizarTexto("identificadorPicoGrafico", "Pico associado: selecione um servidor real");
-      return;
-    }
-
-    for (var i = 0; i < servidores.length; i++) {
-      var servidor = servidores[i];
-      var option = document.createElement("option");
-
-      option.value = servidor.idServidor;
-      option.innerHTML = servidor.hostname;
-      option.setAttribute("data-status", servidor.statusServidor || "Ativo");
-      option.setAttribute("data-hostname", servidor.hostname);
-
-      selectServidor.appendChild(option);
-    }
-
-    selecionarServidorInicial(servidores);
-    selectServidor.value = servidorSelecionadoAnalise;
-    atualizarStatusDoSelect();
-
-    selectServidor.onchange = function () {
-      servidorSelecionadoAnalise = selectServidor.value;
-      sessionStorage.setItem("servidorSelecionado", servidorSelecionadoAnalise);
-      salvarHostnameSelecionado();
-      atualizarStatusDoSelect();
-      carregarDashboardAnaliseCarga();
-    }
-
-    salvarHostnameSelecionado();
-    await carregarDashboardAnaliseCarga();
-  } catch (erro) {
-    console.error("Erro ao carregar servidores:", erro);
-    atualizarStatusServidor("--");
-    atualizarTexto("ultimaAtualizacao", "Ultima atualizacao: erro ao buscar servidores");
-  }
-}
-
-async function buscarDadosServidoresEmpresa() {
-  var empresa = sessionStorage.getItem("RAZAO_SOCIAL");
-  var resposta = null;
-
-  if (empresa) {
-    resposta = await fetch("/s3/dados/" + encodeURIComponent(empresa));
-
-    if (resposta.ok) {
-      return resposta.json();
-    }
-  }
-
-  resposta = await fetch("/s3/servidores");
-  return resposta.json();
-}
-
-function obterServidoresDoS3(dadosS3) {
-  var servidores = [];
-  hostnamesServidores = [];
-
-  if (!dadosS3 || !dadosS3.hosts) {
-    return servidores;
-  }
-
-  for (var i = 0; i < dadosS3.hosts.length; i++) {
-    var host = dadosS3.hosts[i];
-
-    if (host && host.hostname) {
-      hostnamesServidores.push(host.hostname);
-
-      servidores.push({
-        idServidor: host.idServidor || host.servidor_id || i + 1,
-        hostname: host.hostname,
-        statusServidor: host.statusServidor || host.status || "Ativo"
       });
     }
-  }
 
-  sessionStorage.setItem("HOSTNAMES_SERVIDORES", JSON.stringify(hostnamesServidores));
+    function criarGraficoEventos() {
+      var canvas = document.getElementById("graficoEventos");
 
-  return servidores;
-}
-
-function selecionarServidorInicial(servidores) {
-  var servidorExiste = false;
-
-  for (var i = 0; i < servidores.length; i++) {
-    if (String(servidores[i].idServidor) == String(servidorSelecionadoAnalise)) {
-      servidorExiste = true;
+      graficoEventos = new Chart(canvas, {
+        type: "bar",
+        data: {
+          labels: [],
+          datasets: [
+            {
+              data: [],
+              backgroundColor: ["#D92629", "#3879FC", "#004AAD", "#D77706"],
+              borderRadius: 5
+            }
+          ]
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  return formatarNumero(context.raw) + " req/min";
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              max: 18000,
+              ticks: {
+                callback: function (valor) {
+                  return valor >= 1000 ? valor / 1000 + "k" : valor;
+                }
+              },
+              grid: {
+                color: "#ececec"
+              }
+            },
+            y: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
     }
-  }
 
-  if (!servidorSelecionadoAnalise || !servidorExiste) {
-    servidorSelecionadoAnalise = servidores[0].idServidor;
-    sessionStorage.setItem("servidorSelecionado", servidorSelecionadoAnalise);
-  }
-}
+    async function carregarServidores() {
+      var selectServidor = document.getElementById("selectServidorAnalise");
 
-function salvarHostnameSelecionado() {
-  var selectServidor = document.getElementById("selectServidorAnalise");
-  var optionSelecionada = selectServidor.options[selectServidor.selectedIndex];
+      try {
+        var dadosS3 = await buscarDadosServidoresEmpresa();
+        var servidores = obterServidoresDoS3(dadosS3);
 
-  if (optionSelecionada) {
-    sessionStorage.NOME_SERVIDOR = optionSelecionada.getAttribute("data-hostname") || optionSelecionada.innerHTML;
-  }
-}
+        selectServidor.innerHTML = "";
 
-function atualizarStatusDoSelect() {
-  var selectServidor = document.getElementById("selectServidorAnalise");
-  var optionSelecionada = selectServidor.options[selectServidor.selectedIndex];
-  var status = "Ativo";
+        if (!servidores || servidores.length == 0) {
+          selectServidor.innerHTML = "<option value=''>Nenhum servidor encontrado</option>";
+          atualizarStatusServidor("--");
+          atualizarTexto("ultimaAtualizacao", "Ultima atualizacao: nenhum servidor cadastrado");
+          atualizarTexto("identificadorPicoGrafico", "Pico associado: selecione um servidor real");
+          return;
+        }
 
-  if (optionSelecionada) {
-    status = optionSelecionada.getAttribute("data-status") || "Ativo";
-  }
+        for (var i = 0; i < servidores.length; i++) {
+          var servidor = servidores[i];
+          var option = document.createElement("option");
 
-  atualizarStatusServidor(status);
-}
+          option.value = servidor.idServidor;
+          option.innerHTML = servidor.hostname;
+          option.setAttribute("data-status", servidor.statusServidor || "Ativo");
+          option.setAttribute("data-hostname", servidor.hostname);
 
-function atualizarStatusServidor(status) {
-  var emblemaStatus = document.getElementById("emblema-status");
-  var statusTela = status || "Ativo";
-  var statusClasse = statusTela.toLowerCase();
+          selectServidor.appendChild(option);
+        }
 
-  emblemaStatus.innerHTML = statusTela;
-  emblemaStatus.className = "campo-status emblema-status-" + statusClasse;
-}
+        selecionarServidorInicial(servidores);
+        selectServidor.value = servidorSelecionadoAnalise;
+        atualizarStatusDoSelect();
 
-async function carregarDashboardAnaliseCarga() {
-  if (!servidorSelecionadoAnalise) {
-    return;
-  }
+        selectServidor.onchange = function () {
+          servidorSelecionadoAnalise = selectServidor.value;
+          sessionStorage.setItem("servidorSelecionado", servidorSelecionadoAnalise);
+          salvarHostnameSelecionado();
+          atualizarStatusDoSelect();
+          carregarDashboardAnaliseCarga();
+        }
 
-  try {
-    renderizarHeatmap([]);
-
-    await carregarKpis();
-    await carregarGraficoRequisicoes();
-    await carregarGraficoEventos();
-    await carregarHeatmap();
-  } catch (erro) {
-    console.error("Erro ao carregar dashboard de analise de carga:", erro);
-    atualizarTexto("ultimaAtualizacao", "Ultima atualizacao: erro ao buscar dados");
-  }
-}
-
-async function carregarKpis() {
-  var resposta = await fetch("/analise-carga/kpis?servidorId=" + servidorSelecionadoAnalise);
-  var dados = await resposta.json();
-
-  atualizarTexto("ultimaAtualizacao", "Ultima atualizacao: " + dados.ultimaAtualizacao);
-  atualizarTexto("kpiRisco", dados.riscoOperacionalAtual);
-  aplicarClasseKpi("kpiRisco", dados.riscoOperacionalNivel);
-
-  atualizarTexto(
-    "kpiCrescimento",
-    "Crescimento de " + dados.crescimento24h + "% nas ultimas 24h | CPU media: " + dados.cpuMedia + "%"
-  );
-
-  atualizarTexto("kpiMaiorPico", formatarNumero(dados.maiorPicoRequisicoes));
-  aplicarClasseKpi("kpiMaiorPico", dados.maiorPicoNivel);
-  atualizarTexto("kpiMaiorPicoDetalhe", dados.maiorPicoDetalhe);
-
-  atualizarTexto("kpiEventoPressao", dados.eventoMaiorPressao);
-  aplicarClasseKpi("kpiEventoPressao", dados.eventoMaiorPressaoNivel);
-  atualizarTexto("kpiEventoPressaoDetalhe", dados.eventoMaiorPressaoPercentual + "% em relacao a faixa esperada");
-
-  atualizarTexto("kpiHorarioCritico", dados.horarioCritico);
-  aplicarClasseKpi("kpiTendencia", dados.tendenciaNivel);
-
-  var setaTendencia = "↓";
-  if (dados.tendenciaOperacional >= 0) {
-    setaTendencia = "↑";
-  }
-
-  atualizarTexto("kpiTendencia", setaTendencia + " " + Math.abs(dados.tendenciaOperacional) + "%");
-}
-
-async function carregarGraficoRequisicoes() {
-  var resposta = await fetch("/analise-carga/requisicoes-tempo?servidorId=" + servidorSelecionadoAnalise);
-  var dados = await resposta.json();
-
-  if (!dados.requisicoes || dados.requisicoes.length == 0) {
-    limparGraficoRequisicoes();
-    atualizarTexto("identificadorPicoGrafico", "Pico associado: sem dados para este servidor");
-    return;
-  }
-
-  var maiorPico = dados.requisicoes[0];
-  var indicePico = 0;
-
-  for (var i = 0; i < dados.requisicoes.length; i++) {
-    if (dados.requisicoes[i] > maiorPico) {
-      maiorPico = dados.requisicoes[i];
-      indicePico = i;
+        salvarHostnameSelecionado();
+        await carregarDashboardAnaliseCarga();
+      } catch (erro) {
+        console.error("Erro ao carregar servidores:", erro);
+        atualizarStatusServidor("--");
+        atualizarTexto("ultimaAtualizacao", "Ultima atualizacao: erro ao buscar servidores");
+      }
     }
-  }
 
-  var eventoPico = dados.eventosPico[indicePico] || "Sem evento relevante";
-  var pontosPico = [];
+    async function buscarDadosServidoresEmpresa() {
+      var empresa = sessionStorage.getItem("RAZAO_SOCIAL");
+      var resposta = null;
 
-  for (var j = 0; j < dados.requisicoes.length; j++) {
-    if (j == indicePico) {
-      pontosPico.push(dados.requisicoes[j]);
-    } else {
-      pontosPico.push(null);
-    }
-  }
+      if (empresa) {
+        resposta = await fetch("/s3/dados/" + encodeURIComponent(empresa));
 
-  graficoRequisicoes.data.labels = dados.labels;
-  graficoRequisicoes.data.datasets[0].data = dados.requisicoes;
-  graficoRequisicoes.data.datasets[1].data = dados.faixaEsperada;
-  graficoRequisicoes.data.datasets[2].data = pontosPico;
-  graficoRequisicoes.data.datasets[2].label = "Pico: " + eventoPico;
-  graficoRequisicoes.update();
-
-  atualizarTexto(
-    "identificadorPicoGrafico",
-    "Pico associado: " + eventoPico + " (" + formatarNumero(maiorPico) + " req/min em " + (dados.labels[indicePico] || "--") + ")"
-  );
-}
-
-function limparGraficoRequisicoes() {
-  graficoRequisicoes.data.labels = [];
-  graficoRequisicoes.data.datasets[0].data = [];
-  graficoRequisicoes.data.datasets[1].data = [];
-  graficoRequisicoes.data.datasets[2].data = [];
-  graficoRequisicoes.update();
-}
-
-async function carregarGraficoEventos() {
-  var resposta = await fetch("/analise-carga/eventos-acessos?servidorId=" + servidorSelecionadoAnalise);
-  var dados = await resposta.json();
-
-  graficoEventos.data.labels = dados.labels || [];
-  graficoEventos.data.datasets[0].data = dados.valores || [];
-  graficoEventos.update();
-}
-
-async function carregarHeatmap() {
-  var resposta = await fetch("/analise-carga/heatmap?servidorId=" + servidorSelecionadoAnalise);
-  var dados = await resposta.json();
-
-  renderizarHeatmap(dados);
-}
-
-function renderizarHeatmap(dados) {
-  var grid = document.getElementById("heatmapGrid");
-  grid.innerHTML = "";
-
-  for (var dia = 0; dia < diasSemana.length; dia++) {
-    var labelDia = document.createElement("span");
-    labelDia.innerHTML = diasSemana[dia];
-    grid.appendChild(labelDia);
-
-    for (var hora = 0; hora < horasHeatmap.length; hora++) {
-      var horaAtual = horasHeatmap[hora];
-      var item = buscarItemHeatmap(dados, dia, horaAtual);
-      var celula = document.createElement("i");
-
-      if (item) {
-        celula.className = item.classe;
-        celula.title = diasSemana[dia] + " " + formatarHora(horaAtual) + "h: " + formatarNumero(item.requisicoesMedias) + " req/min";
-      } else {
-        celula.className = "n1";
-        celula.title = diasSemana[dia] + " " + formatarHora(horaAtual) + "h: sem dados";
+        if (resposta.ok) {
+          return resposta.json();
+        }
       }
 
-      grid.appendChild(celula);
+      resposta = await fetch("/s3/servidores");
+      return resposta.json();
     }
-  }
-}
 
-function buscarItemHeatmap(dados, diaSemana, horaBloco) {
-  for (var i = 0; i < dados.length; i++) {
-    if (dados[i].diaSemana == diaSemana && dados[i].horaBloco == horaBloco) {
-      return dados[i];
+    function obterServidoresDoS3(dadosS3) {
+      var servidores = [];
+      hostnamesServidores = [];
+
+      if (!dadosS3 || !dadosS3.hosts) {
+        return servidores;
+      }
+
+      for (var i = 0; i < dadosS3.hosts.length; i++) {
+        var host = dadosS3.hosts[i];
+
+        if (host && host.hostname) {
+          hostnamesServidores.push(host.hostname);
+
+          servidores.push({
+            idServidor: host.idServidor || host.servidor_id || i + 1,
+            hostname: host.hostname,
+            statusServidor: host.statusServidor || host.status || "Ativo"
+          });
+        }
+      }
+
+      sessionStorage.setItem("HOSTNAMES_SERVIDORES", JSON.stringify(hostnamesServidores));
+
+      return servidores;
     }
-  }
 
-  return null;
-}
+    function selecionarServidorInicial(servidores) {
+      var servidorExiste = false;
 
-function atualizarTexto(id, texto) {
-  var elemento = document.getElementById(id);
+      for (var i = 0; i < servidores.length; i++) {
+        if (String(servidores[i].idServidor) == String(servidorSelecionadoAnalise)) {
+          servidorExiste = true;
+        }
+      }
 
-  if (elemento) {
-    elemento.innerHTML = texto;
-  }
-}
+      if (!servidorSelecionadoAnalise || !servidorExiste) {
+        servidorSelecionadoAnalise = servidores[0].idServidor;
+        sessionStorage.setItem("servidorSelecionado", servidorSelecionadoAnalise);
+      }
+    }
 
-function aplicarClasseKpi(id, nivel) {
-  var elemento = document.getElementById(id);
+    function salvarHostnameSelecionado() {
+      var selectServidor = document.getElementById("selectServidorAnalise");
+      var optionSelecionada = selectServidor.options[selectServidor.selectedIndex];
 
-  if (!elemento) {
-    return;
-  }
+      if (optionSelecionada) {
+        sessionStorage.NOME_SERVIDOR = optionSelecionada.getAttribute("data-hostname") || optionSelecionada.innerHTML;
+      }
+    }
 
-  elemento.classList.remove("kpi-status-baixo");
-  elemento.classList.remove("kpi-status-moderado");
-  elemento.classList.remove("kpi-status-alto");
-  elemento.classList.remove("kpi-status-critico");
-  elemento.classList.remove("kpi-status-sem-dados");
+    function atualizarStatusDoSelect() {
+      var selectServidor = document.getElementById("selectServidorAnalise");
+      var optionSelecionada = selectServidor.options[selectServidor.selectedIndex];
+      var status = "Ativo";
 
-  if (!nivel) {
-    nivel = "sem-dados";
-  }
+      if (optionSelecionada) {
+        status = optionSelecionada.getAttribute("data-status") || "Ativo";
+      }
 
-  elemento.classList.add("kpi-status-" + nivel.toString().toLowerCase());
-}
+      atualizarStatusServidor(status);
+    }
 
-function formatarNumero(valor) {
-  return Number(valor || 0).toLocaleString("pt-BR");
-}
+    function atualizarStatusServidor(status) {
+      var emblemaStatus = document.getElementById("emblema-status");
+      var statusTela = status || "Ativo";
+      var statusClasse = statusTela.toLowerCase();
 
-function formatarHora(hora) {
-  if (hora < 10) {
-    return "0" + hora;
-  }
+      emblemaStatus.innerHTML = statusTela;
+      emblemaStatus.className = "campo-status emblema-status-" + statusClasse;
+    }
 
-  return String(hora);
-}
-</script>
+    async function carregarDashboardAnaliseCarga() {
+      if (!servidorSelecionadoAnalise) {
+        return;
+      }
+
+      try {
+        renderizarHeatmap([]);
+
+        await carregarKpis();
+        await carregarGraficoRequisicoes();
+        await carregarGraficoEventos();
+        await carregarHeatmap();
+      } catch (erro) {
+        console.error("Erro ao carregar dashboard de analise de carga:", erro);
+        atualizarTexto("ultimaAtualizacao", "Ultima atualizacao: erro ao buscar dados");
+      }
+    }
+
+    async function carregarKpis() {
+      var resposta = await fetch("/analise-carga/kpis?servidorId=" + servidorSelecionadoAnalise);
+      var dados = await resposta.json();
+
+      atualizarTexto("ultimaAtualizacao", "Ultima atualizacao: " + dados.ultimaAtualizacao);
+      atualizarTexto("kpiRisco", dados.riscoOperacionalAtual);
+      aplicarClasseKpi("kpiRisco", dados.riscoOperacionalNivel);
+
+      atualizarTexto(
+        "kpiCrescimento",
+        "Crescimento de " + dados.crescimento24h + "% nas ultimas 24h | CPU media: " + dados.cpuMedia + "%"
+      );
+
+      atualizarTexto("kpiMaiorPico", formatarNumero(dados.maiorPicoRequisicoes));
+      aplicarClasseKpi("kpiMaiorPico", dados.maiorPicoNivel);
+      atualizarTexto("kpiMaiorPicoDetalhe", dados.maiorPicoDetalhe);
+
+      atualizarTexto("kpiEventoPressao", dados.eventoMaiorPressao);
+      aplicarClasseKpi("kpiEventoPressao", dados.eventoMaiorPressaoNivel);
+      atualizarTexto("kpiEventoPressaoDetalhe", dados.eventoMaiorPressaoPercentual + "% em relacao a faixa esperada");
+
+      atualizarTexto("kpiHorarioCritico", dados.horarioCritico);
+      aplicarClasseKpi("kpiTendencia", dados.tendenciaNivel);
+
+      var setaTendencia = "↓";
+      if (dados.tendenciaOperacional >= 0) {
+        setaTendencia = "↑";
+      }
+
+      atualizarTexto("kpiTendencia", setaTendencia + " " + Math.abs(dados.tendenciaOperacional) + "%");
+    }
+
+    async function carregarGraficoRequisicoes() {
+      var resposta = await fetch("/analise-carga/requisicoes-tempo?servidorId=" + servidorSelecionadoAnalise);
+      var dados = await resposta.json();
+
+      if (!dados.requisicoes || dados.requisicoes.length == 0) {
+        limparGraficoRequisicoes();
+        atualizarTexto("identificadorPicoGrafico", "Pico associado: sem dados para este servidor");
+        return;
+      }
+
+      var maiorPico = dados.requisicoes[0];
+      var indicePico = 0;
+
+      for (var i = 0; i < dados.requisicoes.length; i++) {
+        if (dados.requisicoes[i] > maiorPico) {
+          maiorPico = dados.requisicoes[i];
+          indicePico = i;
+        }
+      }
+
+      var eventoPico = dados.eventosPico[indicePico] || "Sem evento relevante";
+      var pontosPico = [];
+
+      for (var j = 0; j < dados.requisicoes.length; j++) {
+        if (j == indicePico) {
+          pontosPico.push(dados.requisicoes[j]);
+        } else {
+          pontosPico.push(null);
+        }
+      }
+
+      graficoRequisicoes.data.labels = dados.labels;
+      graficoRequisicoes.data.datasets[0].data = dados.requisicoes;
+      graficoRequisicoes.data.datasets[1].data = dados.faixaEsperada;
+      graficoRequisicoes.data.datasets[2].data = pontosPico;
+      graficoRequisicoes.data.datasets[2].label = "Pico: " + eventoPico;
+      graficoRequisicoes.update();
+
+      atualizarTexto(
+        "identificadorPicoGrafico",
+        "Pico associado: " + eventoPico + " (" + formatarNumero(maiorPico) + " req/min em " + (dados.labels[indicePico] || "--") + ")"
+      );
+    }
+
+    function limparGraficoRequisicoes() {
+      graficoRequisicoes.data.labels = [];
+      graficoRequisicoes.data.datasets[0].data = [];
+      graficoRequisicoes.data.datasets[1].data = [];
+      graficoRequisicoes.data.datasets[2].data = [];
+      graficoRequisicoes.update();
+    }
+
+    async function carregarGraficoEventos() {
+      var resposta = await fetch("/analise-carga/eventos-acessos?servidorId=" + servidorSelecionadoAnalise);
+      var dados = await resposta.json();
+
+      graficoEventos.data.labels = dados.labels || [];
+      graficoEventos.data.datasets[0].data = dados.valores || [];
+      graficoEventos.update();
+    }
+
+    async function carregarHeatmap() {
+      var resposta = await fetch("/analise-carga/heatmap?servidorId=" + servidorSelecionadoAnalise);
+      var dados = await resposta.json();
+
+      renderizarHeatmap(dados);
+    }
+
+    function renderizarHeatmap(dados) {
+      var grid = document.getElementById("heatmapGrid");
+      grid.innerHTML = "";
+
+      for (var dia = 0; dia < diasSemana.length; dia++) {
+        var labelDia = document.createElement("span");
+        labelDia.innerHTML = diasSemana[dia];
+        grid.appendChild(labelDia);
+
+        for (var hora = 0; hora < horasHeatmap.length; hora++) {
+          var horaAtual = horasHeatmap[hora];
+          var item = buscarItemHeatmap(dados, dia, horaAtual);
+          var celula = document.createElement("i");
+
+          if (item) {
+            celula.className = item.classe;
+            celula.title = diasSemana[dia] + " " + formatarHora(horaAtual) + "h: " + formatarNumero(item.requisicoesMedias) + " req/min";
+          } else {
+            celula.className = "n1";
+            celula.title = diasSemana[dia] + " " + formatarHora(horaAtual) + "h: sem dados";
+          }
+
+          grid.appendChild(celula);
+        }
+      }
+    }
+
+    function buscarItemHeatmap(dados, diaSemana, horaBloco) {
+      for (var i = 0; i < dados.length; i++) {
+        if (dados[i].diaSemana == diaSemana && dados[i].horaBloco == horaBloco) {
+          return dados[i];
+        }
+      }
+
+      return null;
+    }
+
+    function atualizarTexto(id, texto) {
+      var elemento = document.getElementById(id);
+
+      if (elemento) {
+        elemento.innerHTML = texto;
+      }
+    }
+
+    function aplicarClasseKpi(id, nivel) {
+      var elemento = document.getElementById(id);
+
+      if (!elemento) {
+        return;
+      }
+
+      elemento.classList.remove("kpi-status-baixo");
+      elemento.classList.remove("kpi-status-moderado");
+      elemento.classList.remove("kpi-status-alto");
+      elemento.classList.remove("kpi-status-critico");
+      elemento.classList.remove("kpi-status-sem-dados");
+
+      if (!nivel) {
+        nivel = "sem-dados";
+      }
+
+      elemento.classList.add("kpi-status-" + nivel.toString().toLowerCase());
+    }
+
+    function formatarNumero(valor) {
+      return Number(valor || 0).toLocaleString("pt-BR");
+    }
+
+    function formatarHora(hora) {
+      if (hora < 10) {
+        return "0" + hora;
+      }
+
+      return String(hora);
+    }
+  </script>
 </body>
 
 </html>
-

@@ -38,50 +38,27 @@
 
     <ul class="nav-links">
       <ul>
-        <li class="nav-category">
-          <span>PRINCIPAL</span>
-        </li>
-        <li class="nav-item area-contribuidor">
-          <a href="./dashboardAtmos.html">
-            <img src="../assets/images/pc.svg" class="icon" alt="">
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardAtmosGerente.html">
-            <img src="../assets/images/pc.svg" class="icon" alt="">
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="nav-item nav-item-active">
-          <a href="./dashboardAlertas.html">
-            <img src="../assets/images/alert.svg" class="icon" alt="">
-            <span>Alertas</span>
-          </a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardRelatorios.html">
-            <img src="../assets/images/documentos.svg" class="icon" alt="">
-            <span>Relatorios</span>
-          </a>
-        </li>
-      </ul>
-      <ul>
-        <li class="nav-category">
-          <span>INFRAESTRUTURA</span>
-        </li>
-        <li class="nav-item">
-          <a href="./dashboardServidor.html">
-            <img src="../assets/images/server.svg" class="icon" alt="">
-            <span>Servidores</span>
-          </a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardEquipe.html">
-            <img src="../assets/images/user.svg" class="icon" alt="">
-            <span>Equipe</span>
-          </a>
-        </li>
+        <ul>
+          <li class="nav-category"><span>PRINCIPAL</span></li>
+          <li class="nav-item">
+            <a href="./dashboardServidor.html"><img src="../assets/images/server.svg" class="icon"
+                alt=""><span>Hub</span></a>
+          </li>
+          <li class="nav-item nav-item-active">
+            <a href="./dashboardAnalisePreditiva.html"><img src="../assets/images/lupa.svg" class="icon"
+                alt=""><span>Análise</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="./dashboardProcessos.html"><img src="../assets/images/documentos.svg" class="icon"
+                alt=""><span>Processos</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="./dashboardAnaliseCarga.html"><img src="../assets/images/clima.svg" class="icon"
+                alt=""><span>Carga</span></a>
+          </li>
+        </ul>
+        <ul>
+        </ul>
       </ul>
     </ul>
 
@@ -100,49 +77,22 @@
       <div class="menu-container" id="menu-mobile">
         <ul>
           <ul>
-            <li class="nav-category">
-              <span>PRINCIPAL</span>
-            </li>
-            <li class="nav-item area-contribuidor">
-              <a href="./dashboardAtmos.html">
-                <img src="../assets/images/pc.svg" class="icon" alt="">
-                <span>Home</span>
-              </a>
-            </li>
-            <li class="nav-item area-gestor">
-              <a href="./dashboardAtmosGerente.html">
-                <img src="../assets/images/pc.svg" class="icon" alt="">
-                <span>Home</span>
-              </a>
+            <li class="nav-category"><span>PRINCIPAL</span></li>
+            <li class="nav-item">
+              <a href="./dashboardServidor.html"><img src="../assets/images/server.svg" class="icon"
+                  alt=""><span>Hub</span></a>
             </li>
             <li class="nav-item nav-item-active">
-              <a href="./dashboardAlertas.html">
-                <img src="../assets/images/alert.svg" class="icon" alt="">
-                <span>Alertas</span>
-              </a>
-            </li>
-            <li class="nav-item area-gestor">
-              <a href="./dashboardRelatorios.html">
-                <img src="../assets/images/documentos.svg" class="icon" alt="">
-                <span>Relatorios</span>
-              </a>
-            </li>
-          </ul>
-          <ul>
-            <li class="nav-category">
-              <span>INFRAESTRUTURA</span>
+              <a href="./dashboardAnalisePreditiva.html"><img src="../assets/images/lupa.svg" class="icon"
+                  alt=""><span>Análise</span></a>
             </li>
             <li class="nav-item">
-              <a href="./dashboardServidor.html">
-                <img src="../assets/images/server.svg" class="icon" alt="">
-                <span>Servidores</span>
-              </a>
+              <a href="./dashboardProcessos.html"><img src="../assets/images/documentos.svg" class="icon"
+                  alt=""><span>Processos</span></a>
             </li>
-            <li class="nav-item area-gestor">
-              <a href="./dashboardEquipe.html">
-                <img src="../assets/images/user.svg" class="icon" alt="">
-                <span>Equipe</span>
-              </a>
+            <li class="nav-item">
+              <a href="./dashboardAnaliseCarga.html"><img src="../assets/images/clima.svg" class="icon"
+                  alt=""><span>Carga</span></a>
             </li>
           </ul>
           <ul>
@@ -279,8 +229,8 @@
           </div>
 
           <div class="secao-subtitulo">
-          Comparação entre a temperatura monitorada a cada 10 minutos
-           e a temperatura prevista para 1 hora à frente.
+            Comparação entre a temperatura monitorada a cada 10 minutos
+            e a temperatura prevista para 1 hora à frente.
           </div>
 
           <div class="grafico-wrapper">
@@ -444,10 +394,10 @@
   }
 
   function classeTemperatura(temp) {
-  if (temp >= 85) return "status-critico";
-  if (temp >= 70) return "status-alerta";
-  return "status-normal";
-}
+    if (temp >= 85) return "status-critico";
+    if (temp >= 70) return "status-alerta";
+    return "status-normal";
+  }
 
   function renderizar(dados) {
 
@@ -464,7 +414,7 @@
     emblemaStatus.textContent = rotulo;
 
     emblemaStatus.className =
-      "campo-status emblema-status-" 
+      "campo-status emblema-status-"
       + k.status;
 
 
@@ -474,13 +424,13 @@
       "cartao-kpi " + classe;
 
 
-   document.getElementById(
-    "cartao-temp-atual"
-  ).className = "cartao-kpi " + classeTemperatura(k.temperaturaAtual);
+    document.getElementById(
+      "cartao-temp-atual"
+    ).className = "cartao-kpi " + classeTemperatura(k.temperaturaAtual);
 
-   document.getElementById(
-    "cartao-temp-prev"
-  ).className = "cartao-kpi " + classeTemperatura(k.temperaturaPrevista);
+    document.getElementById(
+      "cartao-temp-prev"
+    ).className = "cartao-kpi " + classeTemperatura(k.temperaturaPrevista);
 
     document.getElementById(
       "valor-temp-atual"
@@ -664,103 +614,103 @@
         }
       }
     );
-    
 
-const pontos = [];
 
-for (let i = 0; i < dados.hosts[idServidor].grafico.length; i++) {
+    const pontos = [];
 
-  pontos.push({
-    timestamp: dados.hosts[idServidor].grafico[i].timestamp,
-    atual: dados.hosts[idServidor].grafico[i].temperatura,
-    prevista: null
-  });
+    for (let i = 0; i < dados.hosts[idServidor].grafico.length; i++) {
 
-}
-
-for (let i = 0; i < dados.hosts[idServidor].previsoes.length; i++) {
-
-  const p = dados.hosts[idServidor].previsoes[i];
-
-  let achou = false;
-
-  for (let j = 0; j < pontos.length; j++) {
-
-    if (pontos[j].timestamp === p.timestamp) {
-
-      pontos[j].prevista = p.temperaturaPrevista;
-      achou = true;
-      break;
+      pontos.push({
+        timestamp: dados.hosts[idServidor].grafico[i].timestamp,
+        atual: dados.hosts[idServidor].grafico[i].temperatura,
+        prevista: null
+      });
 
     }
 
-  }
+    for (let i = 0; i < dados.hosts[idServidor].previsoes.length; i++) {
 
-  if (!achou) {
+      const p = dados.hosts[idServidor].previsoes[i];
 
-    pontos.push({
-      timestamp: p.timestamp,
-      atual: null,
-      prevista: p.temperaturaPrevista
-    });
+      let achou = false;
 
-  }
-}
+      for (let j = 0; j < pontos.length; j++) {
 
-pontos.sort(function (a, b) {
-  return a.timestamp.localeCompare(b.timestamp);
-});
+        if (pontos[j].timestamp === p.timestamp) {
 
-const labels = [];
-const temperaturasAtuais = [];
-const temperaturasPrevistas = [];
+          pontos[j].prevista = p.temperaturaPrevista;
+          achou = true;
+          break;
 
-for (let i = 0; i < pontos.length; i++) {
-
-  labels.push(pontos[i].timestamp);
-
-  temperaturasAtuais.push(pontos[i].atual);
-  temperaturasPrevistas.push(pontos[i].prevista);
-
-}
-
-new Chart(
-  document.getElementById("graficoComparacao"),
-  {
-    type: "line",
-
-    data: {
-      labels: labels,
-
-      datasets: [
-
-        {
-          label: "Temperatura Atual",
-          data: temperaturasAtuais,
-          borderColor: "#DC2626",
-          backgroundColor: "#DC2626",
-          tension: 0.3,
-          spanGaps: true
-        },
-
-        {
-          label: "Temperatura Prevista",
-          data: temperaturasPrevistas,
-          borderColor: "#2563EB",
-          borderDash: [6, 6],
-          tension: 0.3,
-          spanGaps: true
         }
 
-      ]
-    },
+      }
 
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
+      if (!achou) {
+
+        pontos.push({
+          timestamp: p.timestamp,
+          atual: null,
+          prevista: p.temperaturaPrevista
+        });
+
+      }
     }
-  }
-);
+
+    pontos.sort(function (a, b) {
+      return a.timestamp.localeCompare(b.timestamp);
+    });
+
+    const labels = [];
+    const temperaturasAtuais = [];
+    const temperaturasPrevistas = [];
+
+    for (let i = 0; i < pontos.length; i++) {
+
+      labels.push(pontos[i].timestamp);
+
+      temperaturasAtuais.push(pontos[i].atual);
+      temperaturasPrevistas.push(pontos[i].prevista);
+
+    }
+
+    new Chart(
+      document.getElementById("graficoComparacao"),
+      {
+        type: "line",
+
+        data: {
+          labels: labels,
+
+          datasets: [
+
+            {
+              label: "Temperatura Atual",
+              data: temperaturasAtuais,
+              borderColor: "#DC2626",
+              backgroundColor: "#DC2626",
+              tension: 0.3,
+              spanGaps: true
+            },
+
+            {
+              label: "Temperatura Prevista",
+              data: temperaturasPrevistas,
+              borderColor: "#2563EB",
+              borderDash: [6, 6],
+              tension: 0.3,
+              spanGaps: true
+            }
+
+          ]
+        },
+
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      }
+    );
 
     const ultimaAtual =
       dados.hosts[idServidor].grafico[
@@ -791,68 +741,68 @@ new Chart(
         "icone-desvio"
       );
 
-if (k.status === "CRITICO" && variacaoPrevista <= 0) {
-  blocoDesvio.className = "mini-interpretacao critico";
-  iconeDesvio.textContent = "⚠";
-  textoDesvio.innerHTML = `
+    if (k.status === "CRITICO" && variacaoPrevista <= 0) {
+      blocoDesvio.className = "mini-interpretacao critico";
+      iconeDesvio.textContent = "⚠";
+      textoDesvio.innerHTML = `
     Temperatura crítica mantida.
     Sem tendência de resfriamento significativo.
   `;
-} else if (k.status === "ALERTA" && variacaoPrevista <= 0) {
-  blocoDesvio.className = "mini-interpretacao alerta";
-  iconeDesvio.textContent = "⚠";
-  textoDesvio.innerHTML = `
+    } else if (k.status === "ALERTA" && variacaoPrevista <= 0) {
+      blocoDesvio.className = "mini-interpretacao alerta";
+      iconeDesvio.textContent = "⚠";
+      textoDesvio.innerHTML = `
     Temperatura em nível de alerta.
     Sem tendência de resfriamento significativo.
   `;
-} else if (variacaoPrevista >= 10) {
-  blocoDesvio.className = "mini-interpretacao critico";
-  iconeDesvio.textContent = "⚠";
-  textoDesvio.innerHTML = `
+    } else if (variacaoPrevista >= 10) {
+      blocoDesvio.className = "mini-interpretacao critico";
+      iconeDesvio.textContent = "⚠";
+      textoDesvio.innerHTML = `
     Forte tendência de aquecimento.
     A temperatura pode subir
     <strong>${variacaoPrevista.toFixed(1)}°C</strong>
     na próxima hora.
   `;
-} else if (variacaoPrevista >= 5) {
-  blocoDesvio.className = "mini-interpretacao alerta";
-  iconeDesvio.textContent = "⚠";
-  textoDesvio.innerHTML = `
+    } else if (variacaoPrevista >= 5) {
+      blocoDesvio.className = "mini-interpretacao alerta";
+      iconeDesvio.textContent = "⚠";
+      textoDesvio.innerHTML = `
     Tendência de aquecimento.
     A temperatura pode subir
     <strong>${variacaoPrevista.toFixed(1)}°C</strong>
     na próxima hora.
   `;
-} else if (variacaoPrevista > 0) {
-  blocoDesvio.className = "mini-interpretacao atencao";
-  iconeDesvio.textContent = "ℹ";
-  textoDesvio.innerHTML = `
+    } else if (variacaoPrevista > 0) {
+      blocoDesvio.className = "mini-interpretacao atencao";
+      iconeDesvio.textContent = "ℹ";
+      textoDesvio.innerHTML = `
     Pequeno aumento previsto.
     A temperatura pode subir
     <strong>${variacaoPrevista.toFixed(1)}°C</strong>
     na próxima hora.
   `;
-} else if (k.status === "CRITICO") {
-  blocoDesvio.className = "mini-interpretacao critico";
-  iconeDesvio.textContent = "⚠";
-  textoDesvio.innerHTML = `
+    } else if (k.status === "CRITICO") {
+      blocoDesvio.className = "mini-interpretacao critico";
+      iconeDesvio.textContent = "⚠";
+      textoDesvio.innerHTML = `
     Temperatura crítica.
     Pequeno resfriamento previsto mas ainda em nível crítico.
   `;
-} else if (k.status === "ALERTA") {
-  blocoDesvio.className = "mini-interpretacao alerta";
-  iconeDesvio.textContent = "⚠";
-  textoDesvio.innerHTML = `
+    } else if (k.status === "ALERTA") {
+      blocoDesvio.className = "mini-interpretacao alerta";
+      iconeDesvio.textContent = "⚠";
+      textoDesvio.innerHTML = `
     Temperatura em alerta.
     Pequeno resfriamento previsto mas ainda em nível de alerta.
   `;
-} else {
-  blocoDesvio.className = "mini-interpretacao normal";
-  iconeDesvio.textContent = "✔";
-  textoDesvio.innerHTML = `
+    } else {
+      blocoDesvio.className = "mini-interpretacao normal";
+      iconeDesvio.textContent = "✔";
+      textoDesvio.innerHTML = `
     Temperatura estável ou em resfriamento.
   `;
-}
+    }
 
   }
   async function carregarDados() {

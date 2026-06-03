@@ -12,12 +12,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
   <script src="../assets/javascript/erros.js"></script>
 </head>
 <script>
   window.onload(sessionStorage.NOME_SERVIDOR = null)
 </script>
+
 <body>
   <!-- SIDEBAR -->
   <nav class="sidebar" id="siderbar">
@@ -30,29 +33,21 @@
     <ul class="nav-links">
       <ul>
         <li class="nav-category"><span>PRINCIPAL</span></li>
-        <li class="nav-item area-contribuidor">
-          <a href="./dashboardAtmos.html"><img src="../assets/images/pc.svg" class="icon" alt=""><span>Home</span></a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardAtmosGerente.html"><img src="../assets/images/pc.svg" class="icon" alt=""><span>Home</span></a>
-        </li>
-        <li class="nav-item area-contribuidor">
-          <a href="./dashboardAlertas.html"><img src="../assets/images/alert.svg" class="icon" alt=""><span>Alertas</span></a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardAlertasGerente.html"><img src="../assets/images/alert.svg" class="icon" alt=""><span>Alertas</span></a>
-        </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardRelatorios.html"><img src="../assets/images/documentos.svg" class="icon" alt=""><span>Relatórios</span></a>
-        </li>
-      </ul>
-      <ul>
-        <li class="nav-category"><span>INFRAESTRUTURA</span></li>
         <li class="nav-item nav-item-active">
-          <a href="./dashboardServidor.html"><img src="../assets/images/server.svg" class="icon" alt=""><span>Servidores</span></a>
+          <a href="./dashboardServidor.html"><img src="../assets/images/server.svg" class="icon"
+              alt=""><span>Hub</span></a>
         </li>
-        <li class="nav-item area-gestor">
-          <a href="./dashboardEquipe.html"><img src="../assets/images/user.svg" class="icon" alt=""><span>Equipe</span></a>
+        <li class="nav-item">
+          <a href="./dashboardAnalisePreditiva.html"><img src="../assets/images/lupa.svg" class="icon"
+              alt=""><span>Análise</span></a>
+        </li>
+        <li class="nav-item">
+          <a href="./dashboardProcessos.html"><img src="../assets/images/documentos.svg" class="icon"
+              alt=""><span>Processos</span></a>
+        </li>
+        <li class="nav-item">
+          <a href="./dashboardAnaliseCarga.html"><img src="../assets/images/clima.svg" class="icon"
+              alt=""><span>Carga</span></a>
         </li>
       </ul>
     </ul>
@@ -68,19 +63,26 @@
         <ul>
           <ul>
             <li class="nav-category"><span>PRINCIPAL</span></li>
-            <li class="nav-item area-contribuidor"><a href="./dashboardAtmos.html"><img src="../assets/images/pc.svg" class="icon" alt=""><span>Home</span></a></li>
-            <li class="nav-item area-gestor"><a href="./dashboardAtmosGerente.html"><img src="../assets/images/pc.svg" class="icon" alt=""><span>Home</span></a></li>
-            <li class="nav-item"><a href="./dashboardAlertas.html"><img src="../assets/images/alert.svg" class="icon" alt=""><span>Alertas</span></a></li>
-            <li class="nav-item area-gestor"><a href="./dashboardRelatorios.html"><img src="../assets/images/documentos.svg" class="icon" alt=""><span>Relatórios</span></a></li>
+            <li class="nav-item area-contribuidor"><a href="./dashboardAtmos.html"><img src="../assets/images/pc.svg"
+                  class="icon" alt=""><span>Home</span></a></li>
+            <li class="nav-item area-gestor"><a href="./dashboardAtmosGerente.html"><img src="../assets/images/pc.svg"
+                  class="icon" alt=""><span>Home</span></a></li>
+            <li class="nav-item"><a href="./dashboardAlertas.html"><img src="../assets/images/alert.svg" class="icon"
+                  alt=""><span>Alertas</span></a></li>
+            <li class="nav-item area-gestor"><a href="./dashboardRelatorios.html"><img
+                  src="../assets/images/documentos.svg" class="icon" alt=""><span>Relatórios</span></a></li>
           </ul>
           <ul>
             <li class="nav-category"><span>INFRAESTRUTURA</span></li>
-            <li class="nav-item nav-item-active"><a href="./dashboardServidor.html"><img src="../assets/images/server.svg" class="icon" alt=""><span>Servidores</span></a></li>
-            <li class="nav-item area-gestor"><a href="./dashboardEquipe.html"><img src="../assets/images/user.svg" class="icon" alt=""><span>Equipe</span></a></li>
+            <li class="nav-item nav-item-active"><a href="./dashboardServidor.html"><img
+                  src="../assets/images/server.svg" class="icon" alt=""><span>Servidores</span></a></li>
+            <li class="nav-item area-gestor"><a href="./dashboardEquipe.html"><img src="../assets/images/user.svg"
+                  class="icon" alt=""><span>Equipe</span></a></li>
           </ul>
           <ul>
             <li class="nav-category"><span>Usuário</span></li>
-            <li class="nav-item"><a href="./dashboardPerfil.html"><img src="../assets/images/user.svg" class="icon" alt=""><span>Perfil</span></a></li>
+            <li class="nav-item"><a href="./dashboardPerfil.html"><img src="../assets/images/user.svg" class="icon"
+                  alt=""><span>Perfil</span></a></li>
           </ul>
         </ul>
       </div>
@@ -93,7 +95,7 @@
   <main class="dash-main">
 
     <!-- HEADER -->
-<!--     <header class="dash-header">
+    <!--     <header class="dash-header">
       <div class="dash-header-left">
         <ul class="breadcrumb">
           <li><a href="#">Infraestrutura</a></li>
@@ -113,7 +115,7 @@
     </header> -->
 
     <!-- FAIXA DE ALERTAS ATIVOS — sempre visível, topo do conteúdo -->
-<!--<div class="faixa-alertas" id="faixaAlertas">
+    <!--<div class="faixa-alertas" id="faixaAlertas">
       <div class="faixa-alertas-left">
         <span class="faixa-alertas-icone">⚠</span>
         <span class="faixa-alertas-titulo">ALERTAS ATIVOS</span>
@@ -133,7 +135,7 @@
 
       <!-- COLUNA ESQUERDA: painel do servidor selecionado -->
       <div class="col-esquerda">
-        
+
 
         <!-- Cabeçalho do servidor -->
         <div class="bloco-servidor-header">
@@ -145,7 +147,7 @@
               <div>
                 <h2 id="modal_detalhe_nome_servidor">--</h2>
                 <span id="modal_cabecalho_indicador">Selecione um servidor na lista</span>
-                
+
               </div>
             </div>
             <div class="status-badge">
@@ -215,7 +217,7 @@
               </div>
               <span class="mini-threshold">ativos agora</span>
             </div>
-<!--             <div class="info-mini-card">
+            <!--             <div class="info-mini-card">
               <span class="mini-label">Conexão TCP</span>
               <div class="mini-valor-row">
                 <span class="mini-valor" id="modal_info_conexao_tcp">--</span>
@@ -229,17 +231,17 @@
               </div>
               <span class="mini-threshold">desde último boot</span>
             </div> -->
-            
+
           </div>
-         <!-- Botões de ação com hierarquia -->
-        <div class="bloco-botoes-acoes">
-          <div class="botoes">
-            <button class="acao acao-primaria" onclick="redirecionarAnaliseCarga()">Análise de Carga</button>
-            <button class="acao acao-primaria" onclick="redirecionarAnalisePreditiva()">Análise do Servidor</button>
-            <button class="acao acao-secundaria" onclick="redirecionarProcessos()">Processos</button>
-            <button class="acao acao-secundaria" onclick="redirecionar()">Gerar Relatório</button>
+          <!-- Botões de ação com hierarquia -->
+          <div class="bloco-botoes-acoes">
+            <div class="botoes">
+              <button class="acao acao-primaria" onclick="redirecionarAnaliseCarga()">Análise de Carga</button>
+              <button class="acao acao-primaria" onclick="redirecionarAnalisePreditiva()">Análise do Servidor</button>
+              <button class="acao acao-secundaria" onclick="redirecionarProcessos()">Processos</button>
+              <button class="acao acao-secundaria" onclick="redirecionar()">Gerar Relatório</button>
+            </div>
           </div>
-        </div>
         </div>
 
         <!-- Gráfico unificado-->
@@ -249,8 +251,10 @@
             <div class="grafico-toggles">
               <button class="toggle-metrica ativo" data-metrica="ram" onclick="toggleMetrica('ram', this)">RAM</button>
               <button class="toggle-metrica ativo" data-metrica="cpu" onclick="toggleMetrica('cpu', this)">CPU</button>
-              <button class="toggle-metrica ativo" data-metrica="disco" onclick="toggleMetrica('disco', this)">Disco</button>
-              <button class="toggle-metrica ativo" data-metrica="processos" onclick="toggleMetrica('processos', this)">Processos</button>
+              <button class="toggle-metrica ativo" data-metrica="disco"
+                onclick="toggleMetrica('disco', this)">Disco</button>
+              <button class="toggle-metrica ativo" data-metrica="processos"
+                onclick="toggleMetrica('processos', this)">Processos</button>
             </div>
           </div>
           <div class="grafico-wrapper-unico">
@@ -259,7 +263,7 @@
         </div>
 
         <!-- Botões de ação com hierarquia !-->
-<!--         <div class="bloco-botoes-acoes">
+        <!--         <div class="bloco-botoes-acoes">
           <div class="botoes">
             <button class="acao acao-primaria" onclick="redirecionar()">Análise de Carga</button>
             <button class="acao acao-primaria" onclick="redirecionar()">Análise do Servidor</button>
@@ -288,31 +292,31 @@
               </div>
             </div>
             <div class="kpi-card kpi-card-critico">
-            <div class="kpi-icon kpi-icon-red" id="kpiCriticosIcon">0</div>                      
-            <div class="kpi-info">
-              <span class="kpi-label">Críticos</span>
-              <p class="kpi-valor">
-                <span id="kpiCriticosValor" style="color:#dc2626">0</span>
-                <span class="kpi-de-total">/<span id="kpiTotalServidores">0</span></span>
-              </p>        
-              <button class="btn-filtro-kpi" onclick="filtrarStatus('Critico')">
-                ↗ Ver críticos
-              </button>
+              <div class="kpi-icon kpi-icon-red" id="kpiCriticosIcon">0</div>
+              <div class="kpi-info">
+                <span class="kpi-label">Críticos</span>
+                <p class="kpi-valor">
+                  <span id="kpiCriticosValor" style="color:#dc2626">0</span>
+                  <span class="kpi-de-total">/<span id="kpiTotalServidores">0</span></span>
+                </p>
+                <button class="btn-filtro-kpi" onclick="filtrarStatus('Critico')">
+                  ↗ Ver críticos
+                </button>
+              </div>
             </div>
-          </div>  
-          <div class="kpi-card kpi-card-alerta">
-            <div class="kpi-icon kpi-icon-yellow" id="kpiAlertasIcon">0</div> 
-            <div class="kpi-info">
-              <span class="kpi-label">Alertas</span>   
-              <p class="kpi-valor">
-                <span id="kpiAlertasValor" style="color:#d97706">0</span>
-                <span class="kpi-de-total">/<span id="kpiTotalServidores2">0</span></span>
-              </p>          
-              <button class="btn-filtro-kpi" onclick="filtrarStatus('Atencao')">
-                ↗ Ver alertas
-              </button>
+            <div class="kpi-card kpi-card-alerta">
+              <div class="kpi-icon kpi-icon-yellow" id="kpiAlertasIcon">0</div>
+              <div class="kpi-info">
+                <span class="kpi-label">Alertas</span>
+                <p class="kpi-valor">
+                  <span id="kpiAlertasValor" style="color:#d97706">0</span>
+                  <span class="kpi-de-total">/<span id="kpiTotalServidores2">0</span></span>
+                </p>
+                <button class="btn-filtro-kpi" onclick="filtrarStatus('Atencao')">
+                  ↗ Ver alertas
+                </button>
+              </div>
             </div>
-          </div>
           </div>
         </div>
         <!-- Lista de Servidores -->
@@ -321,12 +325,12 @@
             <h4>Lista de Servidores</h4>
             <div class="filtros-inline">
               <input type="text" id="input_busca_por_nome" placeholder="Buscar por nome ou ID...">
-                <select name="filtroStatus" id="filtroStatus">
-                  <option value="">Status</option>
-                  <option value="Operando">Operando</option>
-                  <option value="Atencao">Atenção</option>
-                  <option value="Critico">Crítico</option>
-                </select>
+              <select name="filtroStatus" id="filtroStatus">
+                <option value="">Status</option>
+                <option value="Operando">Operando</option>
+                <option value="Atencao">Atenção</option>
+                <option value="Critico">Crítico</option>
+              </select>
               <select name="filtroSistema" id="filtroSistema">
                 <option value="">Sistema</option>
                 <option value="Ubuntu">Ubuntu</option>
@@ -380,15 +384,19 @@
         <div class="infosCad">
           <h3>Informações Gerais</h3>
           <div class="inputs">
-            <label class="w-50"><span>Nome de identificação</span><input id="input_nome_identificacao" type="text" placeholder="SERV-PROD-02"></label>
-            <label class="w-50"><span>Número de identificação</span><input id="input_numero_identificacao" type="number" placeholder="002032"></label>
+            <label class="w-50"><span>Nome de identificação</span><input id="input_nome_identificacao" type="text"
+                placeholder="SERV-PROD-02"></label>
+            <label class="w-50"><span>Número de identificação</span><input id="input_numero_identificacao" type="number"
+                placeholder="002032"></label>
           </div>
         </div>
         <div class="infosCad">
           <h3>Detalhes Técnicos</h3>
           <div class="inputs">
-            <label class="w-50"><span>Sistema Operacional</span><input id="input_sistema_operacional" type="text" placeholder="Ubuntu 22.04"></label>
-            <label class="w-50"><span>Endereço de IPV4</span><input id="input_endereco_ipv4" type="text" placeholder="10.0.1.10"></label>
+            <label class="w-50"><span>Sistema Operacional</span><input id="input_sistema_operacional" type="text"
+                placeholder="Ubuntu 22.04"></label>
+            <label class="w-50"><span>Endereço de IPV4</span><input id="input_endereco_ipv4" type="text"
+                placeholder="10.0.1.10"></label>
           </div>
         </div>
         <div class="acoesModal">
@@ -410,7 +418,8 @@
       </header>
       <div class="conteudo-remover">
         <p>Tem certeza de que deseja remover este servidor?</p>
-        <p>Essa ação é permanente e não poderá ser desfeita. Todos os dados relacionados serão excluídos definitivamente.</p>
+        <p>Essa ação é permanente e não poderá ser desfeita. Todos os dados relacionados serão excluídos
+          definitivamente.</p>
         <p>Se tiver certeza, confirme em "Remover". Caso contrário, cancele para evitar perda de informações.</p>
         <div class="acoesModal">
           <button class="btn-branco" onclick="fecharModal(1)">Cancelar</button>
@@ -429,7 +438,8 @@
 <script src="../assets/javascript/sessao.js"></script>
 
 <script type="module">
-  import {listarServidor,criarGraficos,buscarServidorPorNome,detalhesServidor
+  import {
+    listarServidor, criarGraficos, buscarServidorPorNome, detalhesServidor
   } from "../assets/javascript/servidor.js"
 
   async function iniciarDashboard() {
@@ -449,181 +459,181 @@
 
 <script>
 
-window.servidorSelecionado = 0
-function fecharModal(tipoModal) {
-  const modal = document.getElementsByClassName("fundoModal")
-  modal[tipoModal].style.display = 'none';
-}
-function adicionarServidor() {
-  document.getElementById("modalAdicionarServidor").style.display = 'flex'
-}
-function cancerCadServidor() {
-  input_nome_identificacao.value = ''
-  input_numero_identificacao.value = ''
-  input_sistema_operacional.value = ''
-  input_endereco_ipv4.value = ''
-  fecharModal(0)
-}
-function cadastrarServidor() {
-  var servidorNomeVar = input_nome_identificacao.value.trim()
-  var servidorIdentificacaoVar = input_numero_identificacao.value.trim()
-  var servidorIpVar = input_endereco_ipv4.value.trim()
-  var servidorSoVar = input_sistema_operacional.value.trim()
-  var idEmpresaVar = sessionStorage.FKEMPRESA;
-  var servidorStatusVar = 'Ativo'
-  if (!servidorNomeVar || !servidorIdentificacaoVar || !servidorIpVar || !servidorSoVar) {
-    mostrarErroDash("Preencha todos os campos CORRETAMENTE para finalizar o cadastro do servidor!")
-    return;
+  window.servidorSelecionado = 0
+  function fecharModal(tipoModal) {
+    const modal = document.getElementsByClassName("fundoModal")
+    modal[tipoModal].style.display = 'none';
   }
-  fetch("/servidores/cadastrarServidor", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ servidorNome: servidorNomeVar, servidorIdentificacao: servidorIdentificacaoVar, servidorIp: servidorIpVar, servidorSo: servidorSoVar, idEmpresaServer: idEmpresaVar, servidorStatus: servidorStatusVar })
-  }).then(function (resposta) {
-    if (resposta.ok) {
-      cancerCadServidor();
-      mostrarSucessoDash("Servidor cadastrado com sucesso!")
-      setTimeout(function () { window.location.reload() }, 2500);
+  function adicionarServidor() {
+    document.getElementById("modalAdicionarServidor").style.display = 'flex'
+  }
+  function cancerCadServidor() {
+    input_nome_identificacao.value = ''
+    input_numero_identificacao.value = ''
+    input_sistema_operacional.value = ''
+    input_endereco_ipv4.value = ''
+    fecharModal(0)
+  }
+  function cadastrarServidor() {
+    var servidorNomeVar = input_nome_identificacao.value.trim()
+    var servidorIdentificacaoVar = input_numero_identificacao.value.trim()
+    var servidorIpVar = input_endereco_ipv4.value.trim()
+    var servidorSoVar = input_sistema_operacional.value.trim()
+    var idEmpresaVar = sessionStorage.FKEMPRESA;
+    var servidorStatusVar = 'Ativo'
+    if (!servidorNomeVar || !servidorIdentificacaoVar || !servidorIpVar || !servidorSoVar) {
+      mostrarErroDash("Preencha todos os campos CORRETAMENTE para finalizar o cadastro do servidor!")
+      return;
+    }
+    fetch("/servidores/cadastrarServidor", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ servidorNome: servidorNomeVar, servidorIdentificacao: servidorIdentificacaoVar, servidorIp: servidorIpVar, servidorSo: servidorSoVar, idEmpresaServer: idEmpresaVar, servidorStatus: servidorStatusVar })
+    }).then(function (resposta) {
+      if (resposta.ok) {
+        cancerCadServidor();
+        mostrarSucessoDash("Servidor cadastrado com sucesso!")
+        setTimeout(function () { window.location.reload() }, 2500);
+      } else {
+        mostrarErroDash("Erro ao cadastrar servidor!")
+        throw "Erro de cadastro de servidor";
+      }
+    }).catch(function (resposta) { console.log('#Erro: ' + resposta); })
+    return false;
+  }
+
+  function redirecionar() {
+    window.location.href("/dashboardRelatorios.html")
+  }
+
+  // Faixa de alertas toggle
+  function toggleFaixaAlertas() {
+    const lista = document.getElementById('faixaAlertasLista')
+    const btn = document.getElementById('faixaAlertasToggle')
+    const faixa = document.getElementById('faixaAlertas')
+    if (lista.classList.contains('collapsed')) {
+      lista.classList.remove('collapsed')
+      btn.textContent = '▲ Ocultar'
+      faixa.classList.remove('faixa-collapsed')
     } else {
-      mostrarErroDash("Erro ao cadastrar servidor!")
-      throw "Erro de cadastro de servidor";
+      lista.classList.add('collapsed')
+      btn.textContent = '▼ Mostrar'
+      faixa.classList.add('faixa-collapsed')
     }
-  }).catch(function (resposta) { console.log('#Erro: ' + resposta); })
-  return false;
-}
-
-function redirecionar() {
-  window.location.href("/dashboardRelatorios.html")
-}
-
-// Faixa de alertas toggle
-function toggleFaixaAlertas() {
-  const lista = document.getElementById('faixaAlertasLista')
-  const btn = document.getElementById('faixaAlertasToggle')
-  const faixa = document.getElementById('faixaAlertas')
-  if (lista.classList.contains('collapsed')) {
-    lista.classList.remove('collapsed')
-    btn.textContent = '▲ Ocultar'
-    faixa.classList.remove('faixa-collapsed')
-  } else {
-    lista.classList.add('collapsed')
-    btn.textContent = '▼ Mostrar'
-    faixa.classList.add('faixa-collapsed')
   }
-}
 
-function toggleMetrica(metrica, btn) {
-  const chart = Chart.getChart('perfomaInfra')
-  if (!chart) return
-  const mapaMetrica = { ram: 0, cpu: 1, disco: 2, processos: 3 }
-  const idx = mapaMetrica[metrica]
-  if (idx == undefined) return
-  const ds = chart.data.datasets[idx]
-  ds.hidden = !ds.hidden
-  btn.classList.toggle('ativo')
-  chart.update()
-}
+  function toggleMetrica(metrica, btn) {
+    const chart = Chart.getChart('perfomaInfra')
+    if (!chart) return
+    const mapaMetrica = { ram: 0, cpu: 1, disco: 2, processos: 3 }
+    const idx = mapaMetrica[metrica]
+    if (idx == undefined) return
+    const ds = chart.data.datasets[idx]
+    ds.hidden = !ds.hidden
+    btn.classList.toggle('ativo')
+    chart.update()
+  }
 
-const selectStatus = document.getElementById('filtroStatus')
+  const selectStatus = document.getElementById('filtroStatus')
 
-selectStatus.addEventListener('change', function () {
-  filtrarStatus(this.value)
-})
+  selectStatus.addEventListener('change', function () {
+    filtrarStatus(this.value)
+  })
 
-function filtrarStatus(status) {
-  const todasLinhas = document.querySelectorAll('#tabela_lista_servidor tr')
-  todasLinhas.forEach(function(linha) {
-    if (!status) {
-      linha.style.display = ''
-      return
-    }
-    const etiqueta = linha.querySelector('.etiqueta-bold')
-    if (!etiqueta) {
-      return
-    }
-    const textoEtiqueta = etiqueta.className
-    let visivel = false
-    if (
-      status == 'Critico' &&
-      textoEtiqueta.includes('etiqueta-vermelha')
-    ) {
-      visivel = true
-    }
-    if (
-      status == 'Atencao' &&
-      (
-        textoEtiqueta.includes('etiqueta-amarela') ||
+  function filtrarStatus(status) {
+    const todasLinhas = document.querySelectorAll('#tabela_lista_servidor tr')
+    todasLinhas.forEach(function (linha) {
+      if (!status) {
+        linha.style.display = ''
+        return
+      }
+      const etiqueta = linha.querySelector('.etiqueta-bold')
+      if (!etiqueta) {
+        return
+      }
+      const textoEtiqueta = etiqueta.className
+      let visivel = false
+      if (
+        status == 'Critico' &&
         textoEtiqueta.includes('etiqueta-vermelha')
-      )
-    ) {
-      visivel = true
-    }
-    if (
-      status == 'Operando' &&
-      textoEtiqueta.includes('etiqueta-verde')
-    ) {
-      visivel = true
-    }
-    linha.style.display = visivel ? '' : 'none'
-  })
-}
+      ) {
+        visivel = true
+      }
+      if (
+        status == 'Atencao' &&
+        (
+          textoEtiqueta.includes('etiqueta-amarela') ||
+          textoEtiqueta.includes('etiqueta-vermelha')
+        )
+      ) {
+        visivel = true
+      }
+      if (
+        status == 'Operando' &&
+        textoEtiqueta.includes('etiqueta-verde')
+      ) {
+        visivel = true
+      }
+      linha.style.display = visivel ? '' : 'none'
+    })
+  }
 
-function atualizarKpis() {
+  function atualizarKpis() {
 
-  const linhas = document.querySelectorAll('#tabela_lista_servidor tr')
+    const linhas = document.querySelectorAll('#tabela_lista_servidor tr')
 
-  let criticos = 0
-  let alertas = 0
-  let total = 0
+    let criticos = 0
+    let alertas = 0
+    let total = 0
 
-  linhas.forEach(function(linha) {
-    const etiqueta = linha.querySelector('.etiqueta-bold')
-    if (!etiqueta) {
-      return
-    }
-    total++
+    linhas.forEach(function (linha) {
+      const etiqueta = linha.querySelector('.etiqueta-bold')
+      if (!etiqueta) {
+        return
+      }
+      total++
 
-    const classes = etiqueta.className
-    if (classes.includes('etiqueta-vermelha')) {
-      criticos++
-      alertas++
-    }
-    else if (classes.includes('etiqueta-amarela')) {
-      alertas++
-    }
-  })
+      const classes = etiqueta.className
+      if (classes.includes('etiqueta-vermelha')) {
+        criticos++
+        alertas++
+      }
+      else if (classes.includes('etiqueta-amarela')) {
+        alertas++
+      }
+    })
 
-  document.getElementById('kpiCriticosIcon').textContent = criticos
-  document.getElementById('kpiCriticosValor').textContent = criticos
+    document.getElementById('kpiCriticosIcon').textContent = criticos
+    document.getElementById('kpiCriticosValor').textContent = criticos
 
-  document.getElementById('kpiAlertasIcon').textContent = alertas
-  document.getElementById('kpiAlertasValor').textContent = alertas
+    document.getElementById('kpiAlertasIcon').textContent = alertas
+    document.getElementById('kpiAlertasValor').textContent = alertas
 
-  document.getElementById('kpiTotalServidores').textContent = total
-  document.getElementById('kpiTotalServidores2').textContent = total
-}
+    document.getElementById('kpiTotalServidores').textContent = total
+    document.getElementById('kpiTotalServidores2').textContent = total
+  }
 
-const btnVerMais = document.getElementById('btnVerMais');
-const tabela = document.getElementById('tabelaServidores');
-let mostrandoMais = false;
-btnVerMais.addEventListener('click', () => {
-  mostrandoMais = !mostrandoMais;
-  tabela.classList.toggle('ocultar-extra');
-  btnVerMais.textContent = mostrandoMais ? 'Ver menos' : 'Ver mais';
-});
+  const btnVerMais = document.getElementById('btnVerMais');
+  const tabela = document.getElementById('tabelaServidores');
+  let mostrandoMais = false;
+  btnVerMais.addEventListener('click', () => {
+    mostrandoMais = !mostrandoMais;
+    tabela.classList.toggle('ocultar-extra');
+    btnVerMais.textContent = mostrandoMais ? 'Ver menos' : 'Ver mais';
+  });
 
-function redirecionarAnalisePreditiva() {
-  window.location.href =
-    `./dashboardAnalisePreditiva.html?id=${window.servidorSelecionado}&server=${window.sessionStorage.NOME_SERVIDOR}`
-} 
+  function redirecionarAnalisePreditiva() {
+    window.location.href =
+      `./dashboardAnalisePreditiva.html?id=${window.servidorSelecionado}&server=${window.sessionStorage.NOME_SERVIDOR}`
+  }
 
-function redirecionarProcessos(){
-  window.location.href =
-   `./dashboardProcessos.html?server=${window.sessionStorage.NOME_SERVIDOR}`
-}
+  function redirecionarProcessos() {
+    window.location.href =
+      `./dashboardProcessos.html?server=${window.sessionStorage.NOME_SERVIDOR}`
+  }
 
-function redirecionarAnaliseCarga(){
-  window.location.href =
-   `./dashboardAnaliseCarga.html`
-}
+  function redirecionarAnaliseCarga() {
+    window.location.href =
+      `./dashboardAnaliseCarga.html`
+  }
 </script>
